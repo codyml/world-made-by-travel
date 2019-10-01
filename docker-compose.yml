@@ -1,0 +1,28 @@
+version: '3.7'
+services:
+
+  db:
+    image: mysql:5.7
+    environment:
+     - MYSQL_ROOT_PASSWORD=root
+     - MYSQL_DATABASE=wordpress
+     - MYSQL_USER=wordpress
+     - MYSQL_PASSWORD=wordpress
+    volumes:
+     - ./dev-env/db-mysql:/var/lib/mysql
+
+  wp:
+    image: wordpress:5.2.3
+    environment:
+     - WORDPRESS_DB_HOST=db
+     - WORDPRESS_DB_USER=wordpress
+     - WORDPRESS_DB_PASSWORD=wordpress
+    depends_on:
+     - db
+    ports:
+     - "12345:80"
+    volumes:
+     - ./dev-env/wp-wordpress:/var/www/html
+     - ./dev-env/wp-plugins:/var/www/html/wp-content/plugins
+     - ./dev-env/wp-uploads:/var/www/html/wp-content/uploads
+     - ./wmt-custom-theme:/var/www/html/wp-content/themes/wmt-custom-theme
