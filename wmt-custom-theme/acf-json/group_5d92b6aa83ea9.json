@@ -1,0 +1,282 @@
+{
+    "key": "group_5d92b6aa83ea9",
+    "title": "Post Type: Sections",
+    "fields": [
+        {
+            "key": "field_5d92b6cf0a47f",
+            "label": "Author",
+            "name": "author",
+            "type": "text",
+            "instructions": "Enter the author line for the section.  To add a link to an author, put the author's slug in square brackets.  Author slugs can be found on the Author's Edit page.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "Example: Co-edited with [rachel-midura]",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5d92be0b0a480",
+            "label": "Main Content Markdown",
+            "name": "markdown",
+            "type": "file",
+            "instructions": "Upload a Markdown file (.md) containing the main content of this Section.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "library": "uploadedTo",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": ".md"
+        },
+        {
+            "key": "field_5d92be9c0a481",
+            "label": "Main Content Downloadable?",
+            "name": "downloadable",
+            "type": "true_false",
+            "instructions": "Select whether the main content of this section can be downloaded as a PDF.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5d92bec00a482",
+            "label": "Main Content PDF",
+            "name": "pdf",
+            "type": "file",
+            "instructions": "Upload the downloadable PDF (.pdf) for the section's main content.",
+            "required": 1,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d92be9c0a481",
+                        "operator": "==",
+                        "value": "1"
+                    }
+                ]
+            ],
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "library": "uploadedTo",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": ".pdf"
+        },
+        {
+            "key": "field_5d92bf5c3f3af",
+            "label": "Figures",
+            "name": "figures",
+            "type": "repeater",
+            "instructions": "Add the figures referenced in the main content Markdown file.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_5d92bf893f3b0",
+                    "label": "Identifier",
+                    "name": "identifier",
+                    "type": "text",
+                    "instructions": "Enter the figure's identifier as referenced by the main content Markdown file.  For example, if the Markdown file references this figure as {figure-4}, enter \"figure-4\" in this field.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "figure-4",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5d92c0193f3b1",
+                    "label": "Figure Type",
+                    "name": "type",
+                    "type": "radio",
+                    "instructions": "Select the type of this figure's content.  For images such as JPGs and SVGs, select \"Image.\"  For charts and other content written in Markdown, select \"Markdown.\"",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "choices": {
+                        "image": "Image",
+                        "markdown": "Markdown"
+                    },
+                    "allow_null": 0,
+                    "other_choice": 0,
+                    "default_value": "",
+                    "layout": "horizontal",
+                    "return_format": "value",
+                    "save_other_choice": 0
+                },
+                {
+                    "key": "field_5d92c0a73f3b2",
+                    "label": "Figure Image",
+                    "name": "image",
+                    "type": "image",
+                    "instructions": "Upload the image file.",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5d92c0193f3b1",
+                                "operator": "==",
+                                "value": "image"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "url",
+                    "preview_size": "medium",
+                    "library": "uploadedTo",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": ""
+                },
+                {
+                    "key": "field_5d92c0f43f3b3",
+                    "label": "Figure Markdown",
+                    "name": "markdown",
+                    "type": "file",
+                    "instructions": "Upload the Markdown file.",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5d92c0193f3b1",
+                                "operator": "==",
+                                "value": "markdown"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "url",
+                    "library": "uploadedTo",
+                    "min_size": "",
+                    "max_size": "",
+                    "mime_types": ".md"
+                },
+                {
+                    "key": "field_5d92c1403f3b4",
+                    "label": "Figure Downloadable?",
+                    "name": "downloadable",
+                    "type": "true_false",
+                    "instructions": "Select whether this figure can be downloaded.  If it's an image, the image file will be directly downloaded.  If it's a Markdown file, a linked PDF will be downloaded.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_5d92c1a23f3b5",
+                    "label": "Figure PDF",
+                    "name": "pdf",
+                    "type": "file",
+                    "instructions": "Upload the downloadable PDF (.pdf) for the figure.",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5d92c0193f3b1",
+                                "operator": "==",
+                                "value": "markdown"
+                            },
+                            {
+                                "field": "field_5d92c1403f3b4",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "url",
+                    "library": "uploadedTo",
+                    "min_size": "",
+                    "max_size": "",
+                    "mime_types": ".pdf"
+                }
+            ]
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "wmt_section"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1569899000
+}
