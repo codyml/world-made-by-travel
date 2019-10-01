@@ -1,0 +1,200 @@
+{
+    "key": "group_5d93bef90773e",
+    "title": "Options: Cover",
+    "fields": [
+        {
+            "key": "field_5d93bf02884fc",
+            "label": "Cover Title",
+            "name": "title",
+            "type": "text",
+            "instructions": "Enter the title for the cover of the book.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5d93bf76884fd",
+            "label": "Cover Subtitle",
+            "name": "subtitle",
+            "type": "text",
+            "instructions": "Enter the subtitle for the cover of the book.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5d93bf99884fe",
+            "label": "Cover Author",
+            "name": "author",
+            "type": "text",
+            "instructions": "Enter the author for the cover of the book.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5d93bfc7884ff",
+            "label": "Cover Content Markdown",
+            "name": "markdown",
+            "type": "file",
+            "instructions": "Upload a Markdown (.md) file containing the text content of the book cover.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "library": "uploadedTo",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": ".md"
+        },
+        {
+            "key": "field_5d93c0538402f",
+            "label": "Background Image",
+            "name": "background_image",
+            "type": "image",
+            "instructions": "Upload the background image for the cover.  This image will also be used in the desktop sidebar and tablet and mobile headers.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "preview_size": "medium",
+            "library": "uploadedTo",
+            "min_width": 3000,
+            "min_height": 2000,
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": ""
+        },
+        {
+            "key": "field_5d93c18b84030",
+            "label": "Background Image Attribution",
+            "name": "background_image_attribution",
+            "type": "textarea",
+            "instructions": "Enter the attribution for the background image.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "maxlength": "",
+            "rows": "",
+            "new_lines": ""
+        },
+        {
+            "key": "field_5d93c1dd84031",
+            "label": "Copyright",
+            "name": "copyright",
+            "type": "wysiwyg",
+            "instructions": "Enter the copyright information for the book.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_5d93c23184032",
+            "label": "Identification & Numbers",
+            "name": "numbers",
+            "type": "wysiwyg",
+            "instructions": "Enter the book numbers or other identifying information.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_5d93c25084033",
+            "label": "Credits",
+            "name": "credits",
+            "type": "wysiwyg",
+            "instructions": "Enter the book credits.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-cover"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1569964696
+}

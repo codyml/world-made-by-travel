@@ -1,0 +1,186 @@
+{
+    "key": "group_5d93c2c55a719",
+    "title": "Options: Table of Contents",
+    "fields": [
+        {
+            "key": "field_5d93c2d4dac1d",
+            "label": "Book Instructions",
+            "name": "instructions",
+            "type": "wysiwyg",
+            "instructions": "Enter instructions for using the book that will appear at the top of the Table of Contents when expanded.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "tabs": "all",
+            "toolbar": "full",
+            "media_upload": 1,
+            "delay": 0
+        },
+        {
+            "key": "field_5d93c44aa650b",
+            "label": "Table of Contents",
+            "name": "table_of_contents",
+            "type": "flexible_content",
+            "instructions": "Organize the book sections into the desired order and groups here.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layouts": {
+                "layout_5d93c458a8995": {
+                    "key": "layout_5d93c458a8995",
+                    "name": "section",
+                    "label": "Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5d93c491a650c",
+                            "label": "Section",
+                            "name": "section",
+                            "type": "post_object",
+                            "instructions": "Select a section to be at the top level of the Table of Contents.",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "post_type": [
+                                "wmt_section"
+                            ],
+                            "taxonomy": "",
+                            "allow_null": 0,
+                            "multiple": 0,
+                            "return_format": "object",
+                            "ui": 1
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_5d93c501d58fe": {
+                    "key": "layout_5d93c501d58fe",
+                    "name": "section_group",
+                    "label": "Section Group",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_5d93c508d58ff",
+                            "label": "Group Title",
+                            "name": "title",
+                            "type": "text",
+                            "instructions": "Enter the title of this Section Group.",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "33",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5d93c56ad5900",
+                            "label": "Group Author",
+                            "name": "author",
+                            "type": "text",
+                            "instructions": "Enter the author line to this Section Group.  To add a link to an author, put the author's slug in square brackets. An author's slug can be found on the Author's Edit page.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "33",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "Co-edited with [sample-author]",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5d93c5afd5901",
+                            "label": "Group Slug",
+                            "name": "slug",
+                            "type": "text",
+                            "instructions": "Enter the URL slug for this section group.  Slugs must be in all-lowercase and can only contain letters and hyphens.",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "33",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "sample-section-group",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5d93c5f8d5902",
+                            "label": "Group Sections",
+                            "name": "sections",
+                            "type": "relationship",
+                            "instructions": "Add and order the sections that will be inside this group.",
+                            "required": 1,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "post_type": [
+                                "wmt_section"
+                            ],
+                            "taxonomy": "",
+                            "filters": [
+                                "search"
+                            ],
+                            "elements": "",
+                            "min": 1,
+                            "max": "",
+                            "return_format": "object"
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                }
+            },
+            "button_label": "Add Section or Section Group",
+            "min": 1,
+            "max": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-table-of-contents"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1569965849
+}

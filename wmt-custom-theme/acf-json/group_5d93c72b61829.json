@@ -1,0 +1,132 @@
+{
+    "key": "group_5d93c72b61829",
+    "title": "Options: Book Settings",
+    "fields": [
+        {
+            "key": "field_5d93c73062e90",
+            "label": "Explorer Base URL",
+            "name": "explorer_base_url",
+            "type": "url",
+            "instructions": "Enter the base URL of the Grand Tour Explorer instance that will be embedded inside this instance of the book.  The Explorer instance must be configured to support being embedded by this instance of the book.  Do not include the trailing slash.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_5d93c7b062e91",
+            "label": "Book Citation Base URL",
+            "name": "book_citation_base_url",
+            "type": "url",
+            "instructions": "Enter the base URL of the book that should be used by the citation-building engine to create citation URLs.  Clickable book links will use the configured URL of the WordPress installation, but if citations should use a different URL (e.g. a DOI), enter it here.  If not entered, the WordPress installation will be used.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": ""
+        },
+        {
+            "key": "field_5d93c8f262e92",
+            "label": "Print View Introduction Content Markdown",
+            "name": "print_view_introduction_content_markdown",
+            "type": "file",
+            "instructions": "Upload the Markdown (.md) file whose contents will appear at the beginning of each print view.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "url",
+            "library": "uploadedTo",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": ".md"
+        },
+        {
+            "key": "field_5d93c9a062e93",
+            "label": "Enable \"Print\" Margin Link",
+            "name": "enable_print_margin_link",
+            "type": "true_false",
+            "instructions": "Enable this option to add a \"Print\" margin link to all items that can be downloaded.  This link will open the printable view and trigger the browser's Print command, from which point the user can create a PDF of the entity.  This option should be left disabled except when creating new PDFs of updated content.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5d93ca6462e94",
+            "label": "Highlight Invalid Links",
+            "name": "highlight_invalid_links",
+            "type": "true_false",
+            "instructions": "If enabled, this option will identify broken book and Explorer links and highlight them in red for easy identification.  If disabled, broken links will instead be converted into normal text.  This option should be left disabled except to aid with content administration.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
+        },
+        {
+            "key": "field_5d93cbdc62e95",
+            "label": "Maintenance Mode",
+            "name": "maintenance_mode",
+            "type": "true_false",
+            "instructions": "Enable Maintenance Mode to disable access to A World Made By Travel unless the visitor is logged into the WordPress admin panel.  This mode should be left off for normal production use, except for during content administration.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "On",
+            "ui_off_text": "Off"
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "options_page",
+                "operator": "==",
+                "value": "acf-options-book-settings"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "seamless",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": 1,
+    "description": "",
+    "modified": 1569967206
+}

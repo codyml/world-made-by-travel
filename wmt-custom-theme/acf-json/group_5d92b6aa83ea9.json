@@ -7,7 +7,7 @@
             "label": "Author",
             "name": "author",
             "type": "text",
-            "instructions": "Enter the author line for the section.  To add a link to an author, put the author's slug in square brackets.  Author slugs can be found on the Author's Edit page.",
+            "instructions": "Enter the author line for the section.  To add a link to an author, put the author's slug in square brackets.  An author's slug can be found on the Author's Edit page.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -16,7 +16,7 @@
                 "id": ""
             },
             "default_value": "",
-            "placeholder": "Example: Co-edited with [rachel-midura]",
+            "placeholder": "Co-edited with [example-author]",
             "prepend": "",
             "append": "",
             "maxlength": ""
@@ -103,7 +103,7 @@
             "min": 0,
             "max": 0,
             "layout": "table",
-            "button_label": "",
+            "button_label": "Add Figure",
             "sub_fields": [
                 {
                     "key": "field_5d92bf893f3b0",
@@ -259,6 +259,130 @@
                     "mime_types": ".pdf"
                 }
             ]
+        },
+        {
+            "key": "field_5d93b85f442c2",
+            "label": "Blocks",
+            "name": "blocks",
+            "type": "repeater",
+            "instructions": "Add additional blocks that will appear below the Main Content block but above the Footnotes block.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "Add Block",
+            "sub_fields": [
+                {
+                    "key": "field_5d93b922442c3",
+                    "label": "Block Title",
+                    "name": "title",
+                    "type": "text",
+                    "instructions": "Enter the title of the block.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5d93b937442c4",
+                    "label": "Block Author",
+                    "name": "author",
+                    "type": "text",
+                    "instructions": "Enter the author line for the block.  To add a link to an author, put the author's slug in square brackets.  An author's slug can be found on the Author's Edit page.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "placeholder": "By [example-author]",
+                    "prepend": "",
+                    "append": "",
+                    "maxlength": ""
+                },
+                {
+                    "key": "field_5d93b9db442c7",
+                    "label": "Block Markdown",
+                    "name": "markdown",
+                    "type": "file",
+                    "instructions": "Upload a Markdown file (.md) containing the content of this block.",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "url",
+                    "library": "uploadedTo",
+                    "min_size": "",
+                    "max_size": "",
+                    "mime_types": ".md"
+                },
+                {
+                    "key": "field_5d93b97d442c5",
+                    "label": "Block Downloadable?",
+                    "name": "block_downloadable",
+                    "type": "true_false",
+                    "instructions": "Select whether this block can be downloaded as a PDF.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
+                {
+                    "key": "field_5d93b99f442c6",
+                    "label": "Block PDF",
+                    "name": "pdf",
+                    "type": "file",
+                    "instructions": "Upload the downloadable PDF (.pdf) for the section's main content.",
+                    "required": 1,
+                    "conditional_logic": [
+                        [
+                            {
+                                "field": "field_5d93b97d442c5",
+                                "operator": "==",
+                                "value": "1"
+                            }
+                        ]
+                    ],
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "url",
+                    "library": "uploadedTo",
+                    "min_size": "",
+                    "max_size": "",
+                    "mime_types": ".pdf"
+                }
+            ]
         }
     ],
     "location": [
@@ -278,5 +402,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1569899000
+    "modified": 1569962592
 }
