@@ -40,14 +40,6 @@ register_post_type(
 	)
 );
 
-// Makes sure the Slug metabox is visible.
-add_action(
-	'admin_init',
-	function() {
-		update_user_meta( get_current_user_id(), 'metaboxhidden_' . AUTHOR_POST_TYPE, array() );
-	}
-);
-
 // Sections CPT.
 register_post_type(
 	SECTION_POST_TYPE,
@@ -81,12 +73,4 @@ register_post_type(
 		'menu_position' => '31.1',
 		'menu_icon'     => 'dashicons-media-document',
 	)
-);
-
-// Makes sure the Slug metabox is visible.
-add_action(
-	'admin_init',
-	function() {
-		update_user_meta( get_current_user_id(), 'metaboxhidden_' . SECTION_POST_TYPE, array() );
-	}
 );

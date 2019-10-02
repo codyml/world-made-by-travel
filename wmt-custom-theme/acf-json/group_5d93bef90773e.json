@@ -1,6 +1,6 @@
 {
     "key": "group_5d93bef90773e",
-    "title": "Options: Cover",
+    "title": "Cover Settings",
     "fields": [
         {
             "key": "field_5d93bf02884fc",
@@ -72,7 +72,7 @@
                 "class": "",
                 "id": ""
             },
-            "return_format": "url",
+            "return_format": "id",
             "library": "uploadedTo",
             "min_size": "",
             "max_size": "",
@@ -91,7 +91,7 @@
                 "class": "",
                 "id": ""
             },
-            "return_format": "url",
+            "return_format": "id",
             "preview_size": "medium",
             "library": "uploadedTo",
             "min_width": 3000,
@@ -163,8 +163,8 @@
             "key": "field_5d93c25084033",
             "label": "Credits",
             "name": "credits",
-            "type": "wysiwyg",
-            "instructions": "Enter the book credits.",
+            "type": "repeater",
+            "instructions": "Add book credits here.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -172,11 +172,56 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0
+            "collapsed": "",
+            "min": 0,
+            "max": 0,
+            "layout": "table",
+            "button_label": "",
+            "sub_fields": [
+                {
+                    "key": "field_5d93f86587640",
+                    "label": "Credit Text",
+                    "name": "text",
+                    "type": "wysiwyg",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "tabs": "all",
+                    "toolbar": "full",
+                    "media_upload": 1,
+                    "delay": 0
+                },
+                {
+                    "key": "field_5d93f89087641",
+                    "label": "Credit Image",
+                    "name": "image",
+                    "type": "image",
+                    "instructions": "",
+                    "required": 1,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "return_format": "id",
+                    "preview_size": "medium",
+                    "library": "uploadedTo",
+                    "min_width": "",
+                    "min_height": "",
+                    "min_size": "",
+                    "max_width": "",
+                    "max_height": "",
+                    "max_size": "",
+                    "mime_types": ""
+                }
+            ]
         }
     ],
     "location": [
@@ -190,11 +235,11 @@
     ],
     "menu_order": 0,
     "position": "normal",
-    "style": "seamless",
+    "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1569964696
+    "modified": 1569978553
 }

@@ -22,6 +22,7 @@ services:
     ports:
      - "12345:80"
     volumes:
+     - ./dev-rsc/uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
      - ./dev-env/wp-wordpress:/var/www/html
      - ./dev-env/wp-plugins:/var/www/html/wp-content/plugins
      - ./dev-env/wp-uploads:/var/www/html/wp-content/uploads

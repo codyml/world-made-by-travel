@@ -1,26 +1,7 @@
 {
     "key": "group_5d93c2c55a719",
-    "title": "Options: Table of Contents",
+    "title": "Table of Contents Settings",
     "fields": [
-        {
-            "key": "field_5d93c2d4dac1d",
-            "label": "Book Instructions",
-            "name": "instructions",
-            "type": "wysiwyg",
-            "instructions": "Enter instructions for using the book that will appear at the top of the Table of Contents when expanded.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "tabs": "all",
-            "toolbar": "full",
-            "media_upload": 1,
-            "delay": 0
-        },
         {
             "key": "field_5d93c44aa650b",
             "label": "Table of Contents",
@@ -60,7 +41,7 @@
                             "taxonomy": "",
                             "allow_null": 0,
                             "multiple": 0,
-                            "return_format": "object",
+                            "return_format": "id",
                             "ui": 1
                         }
                     ],
@@ -82,7 +63,7 @@
                             "required": 1,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "33",
+                                "width": "",
                                 "class": "",
                                 "id": ""
                             },
@@ -101,7 +82,7 @@
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "33",
+                                "width": "50",
                                 "class": "",
                                 "id": ""
                             },
@@ -120,7 +101,7 @@
                             "required": 1,
                             "conditional_logic": 0,
                             "wrapper": {
-                                "width": "33",
+                                "width": "50",
                                 "class": "",
                                 "id": ""
                             },
@@ -153,7 +134,7 @@
                             "elements": "",
                             "min": 1,
                             "max": "",
-                            "return_format": "object"
+                            "return_format": "id"
                         }
                     ],
                     "min": "",
@@ -182,5 +163,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1569965849
+    "modified": 1569978690
 }

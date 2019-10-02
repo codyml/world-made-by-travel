@@ -1,7 +1,45 @@
 {
     "key": "group_5d93c72b61829",
-    "title": "Options: Book Settings",
+    "title": "Book Settings",
     "fields": [
+        {
+            "key": "field_5d93c2d4dac1d",
+            "label": "Book Instructions Markdown",
+            "name": "instructions_markdown",
+            "type": "file",
+            "instructions": "Upload a Markdown file (.md) containing instructions for using the book that will appear at the top of the Table of Contents when expanded.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "library": "uploadedTo",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": ".md"
+        },
+        {
+            "key": "field_5d93c8f262e92",
+            "label": "Print View Introduction Markdown",
+            "name": "print_view_introduction_markdown",
+            "type": "file",
+            "instructions": "Upload the Markdown (.md) file containing the introduction content that will appear at the beginning of each print view.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "id",
+            "library": "uploadedTo",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": ".md"
+        },
         {
             "key": "field_5d93c73062e90",
             "label": "Explorer Base URL",
@@ -35,25 +73,6 @@
             "placeholder": ""
         },
         {
-            "key": "field_5d93c8f262e92",
-            "label": "Print View Introduction Content Markdown",
-            "name": "print_view_introduction_content_markdown",
-            "type": "file",
-            "instructions": "Upload the Markdown (.md) file whose contents will appear at the beginning of each print view.",
-            "required": 1,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "return_format": "url",
-            "library": "uploadedTo",
-            "min_size": "",
-            "max_size": "",
-            "mime_types": ".md"
-        },
-        {
             "key": "field_5d93c9a062e93",
             "label": "Enable \"Print\" Margin Link",
             "name": "enable_print_margin_link",
@@ -74,10 +93,10 @@
         },
         {
             "key": "field_5d93ca6462e94",
-            "label": "Highlight Invalid Links",
-            "name": "highlight_invalid_links",
+            "label": "Highlight Invalid Links and Figures",
+            "name": "highlight_invalid_links_and_figures",
             "type": "true_false",
-            "instructions": "If enabled, this option will identify broken book and Explorer links and highlight them in red for easy identification.  If disabled, broken links will instead be converted into normal text.  This option should be left disabled except to aid with content administration.",
+            "instructions": "If enabled, this option will identify broken book links, Explorer links, and figures and highlight them in red for easy identification.  If disabled, broken links and figures will instead be converted into normal text.  This option should be left disabled except to aid with content administration.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -122,11 +141,11 @@
     ],
     "menu_order": 0,
     "position": "normal",
-    "style": "seamless",
+    "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1569967206
+    "modified": 1569979633
 }

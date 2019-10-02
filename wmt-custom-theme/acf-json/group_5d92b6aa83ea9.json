@@ -1,6 +1,6 @@
 {
     "key": "group_5d92b6aa83ea9",
-    "title": "Post Type: Sections",
+    "title": "Section Settings",
     "fields": [
         {
             "key": "field_5d92b6cf0a47f",
@@ -28,13 +28,21 @@
             "type": "file",
             "instructions": "Upload a Markdown file (.md) containing the main content of this Section.",
             "required": 1,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d93f0c24c757",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "return_format": "url",
+            "return_format": "id",
             "library": "uploadedTo",
             "min_size": "",
             "max_size": "",
@@ -47,7 +55,15 @@
             "type": "true_false",
             "instructions": "Select whether the main content of this section can be downloaded as a PDF.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d93f0c24c757",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -72,6 +88,11 @@
                         "field": "field_5d92be9c0a481",
                         "operator": "==",
                         "value": "1"
+                    },
+                    {
+                        "field": "field_5d93f0c24c757",
+                        "operator": "!=",
+                        "value": "1"
                     }
                 ]
             ],
@@ -80,7 +101,7 @@
                 "class": "",
                 "id": ""
             },
-            "return_format": "url",
+            "return_format": "id",
             "library": "uploadedTo",
             "min_size": "",
             "max_size": "",
@@ -93,7 +114,15 @@
             "type": "repeater",
             "instructions": "Add the figures referenced in the main content Markdown file.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d93f0c24c757",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -169,7 +198,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "return_format": "url",
+                    "return_format": "id",
                     "preview_size": "medium",
                     "library": "uploadedTo",
                     "min_width": "",
@@ -201,7 +230,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "return_format": "url",
+                    "return_format": "id",
                     "library": "uploadedTo",
                     "min_size": "",
                     "max_size": "",
@@ -252,7 +281,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "return_format": "url",
+                    "return_format": "id",
                     "library": "uploadedTo",
                     "min_size": "",
                     "max_size": "",
@@ -267,7 +296,15 @@
             "type": "repeater",
             "instructions": "Add additional blocks that will appear below the Main Content block but above the Footnotes block.",
             "required": 0,
-            "conditional_logic": 0,
+            "conditional_logic": [
+                [
+                    {
+                        "field": "field_5d93f0c24c757",
+                        "operator": "!=",
+                        "value": "1"
+                    }
+                ]
+            ],
             "wrapper": {
                 "width": "",
                 "class": "",
@@ -279,6 +316,25 @@
             "layout": "table",
             "button_label": "Add Block",
             "sub_fields": [
+                {
+                    "key": "field_5d940c18c654e",
+                    "label": "Below Footnotes?",
+                    "name": "below_footnotes",
+                    "type": "true_false",
+                    "instructions": "Select if this block should appear above or below the automatically-generated Footnotes block.",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "",
+                        "class": "",
+                        "id": ""
+                    },
+                    "message": "",
+                    "default_value": 0,
+                    "ui": 1,
+                    "ui_on_text": "",
+                    "ui_off_text": ""
+                },
                 {
                     "key": "field_5d93b922442c3",
                     "label": "Block Title",
@@ -330,7 +386,7 @@
                         "class": "",
                         "id": ""
                     },
-                    "return_format": "url",
+                    "return_format": "id",
                     "library": "uploadedTo",
                     "min_size": "",
                     "max_size": "",
@@ -376,13 +432,32 @@
                         "class": "",
                         "id": ""
                     },
-                    "return_format": "url",
+                    "return_format": "id",
                     "library": "uploadedTo",
                     "min_size": "",
                     "max_size": "",
                     "mime_types": ".pdf"
                 }
             ]
+        },
+        {
+            "key": "field_5d93f0c24c757",
+            "label": "Explorer Link",
+            "name": "explorer_link",
+            "type": "true_false",
+            "instructions": "If enabled, this section will be a link to open the Grand Tour Explorer.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "",
+            "ui_off_text": ""
         }
     ],
     "location": [
@@ -396,11 +471,11 @@
     ],
     "menu_order": 0,
     "position": "normal",
-    "style": "seamless",
+    "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1569962592
+    "modified": 1569983579
 }

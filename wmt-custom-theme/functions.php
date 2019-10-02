@@ -17,3 +17,6 @@ require_once 'inc/custom-post-types.php';
 
 // Removes unused admin screens and adds new admin screens.
 require_once 'inc/admin-screens.php';
+
+// Configures upload of attachments.
+require_once 'inc/attachments.php';

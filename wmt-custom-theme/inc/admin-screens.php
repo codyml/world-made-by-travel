@@ -1,7 +1,7 @@
 <?php
 /**
- * Removes unused admin pages from the menu and adds ACF Options
- * pages for additional settings.
+ * Removes unused admin pages from the menu, adds ACF Options pages
+ * for additional settings and performs other tweaks.
  *
  * @package WMT
  */
@@ -47,3 +47,25 @@ if ( function_exists( 'acf_add_options_page' ) ) {
 	);
 
 }
+
+// Makes sure the "Slug" metabox is visible for Authors and Sections.
+add_action(
+	'admin_init',
+	function() {
+		update_user_meta( get_current_user_id(), 'metaboxhidden_' . SECTION_POST_TYPE, array() );
+		update_user_meta( get_current_user_id(), 'metaboxhidden_' . AUTHOR_POST_TYPE, array() );
+	}
+);
+
+// Makes the text field in the "Slug" metabox larger.
+add_action(
+	'admin_enqueue_scripts',
+	function() {
+		wp_enqueue_style(
+			'slug-field-100-percent',
+			get_template_directory_uri() . '/inc/slug-size.css',
+			array(),
+			1
+		);
+	}
+);

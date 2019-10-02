@@ -1,13 +1,13 @@
 {
     "key": "group_5d92b2210b34a",
-    "title": "Post Type: Authors",
+    "title": "Author Settings",
     "fields": [
         {
             "key": "field_5d92b25428097",
-            "label": "Biography",
-            "name": "biography",
-            "type": "textarea",
-            "instructions": "",
+            "label": "Biography Markdown",
+            "name": "markdown",
+            "type": "file",
+            "instructions": "Upload a Markdown file (.md) containing the author's biography.",
             "required": 1,
             "conditional_logic": 0,
             "wrapper": {
@@ -15,11 +15,11 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "placeholder": "",
-            "maxlength": "",
-            "rows": "",
-            "new_lines": ""
+            "return_format": "id",
+            "library": "uploadedTo",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": ".md"
         }
     ],
     "location": [
@@ -33,11 +33,11 @@
     ],
     "menu_order": 0,
     "position": "normal",
-    "style": "seamless",
+    "style": "default",
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1569895081
+    "modified": 1569975090
 }
