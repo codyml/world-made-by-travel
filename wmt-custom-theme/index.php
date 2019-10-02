@@ -14,7 +14,7 @@
 </head>
 <body <?php body_class(); ?>>
 	<?php wp_body_open(); ?>
-	<div>This is static content from WordPress.</div>
+	<div id="App"></div>
 	<?php wp_footer(); ?>
 </body>
 </html>

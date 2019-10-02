@@ -1,2 +1,4 @@
 dev-env
 .DS_Store
+node_modules
+wmt-custom-theme/static

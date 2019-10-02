@@ -20,3 +20,6 @@ require_once 'inc/admin-screens.php';
 
 // Configures upload of attachments.
 require_once 'inc/attachments.php';
+
+// Enqueues the JavaScript bundle created by Webpack.
+require_once 'inc/static.php';
