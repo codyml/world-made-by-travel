@@ -22,27 +22,33 @@ if ( function_exists( 'acf_add_options_page' ) ) {
 	// Adds Cover page.
 	acf_add_options_page(
 		array(
-			'page_title' => 'Cover',
-			'position'   => '32.1',
-			'icon_url'   => 'dashicons-format-image',
+			'page_title'      => 'Cover',
+			'position'        => '32.1',
+			'icon_url'        => 'dashicons-format-image',
+			'update_button'   => 'Update Cover Settings',
+			'updated_message' => 'Cover settings updated',
 		)
 	);
 
 	// Adds Table of Contents page.
 	acf_add_options_page(
 		array(
-			'page_title' => 'Table of Contents',
-			'position'   => '33.1',
-			'icon_url'   => 'dashicons-list-view',
+			'page_title'      => 'Table of Contents',
+			'position'        => '33.1',
+			'icon_url'        => 'dashicons-list-view',
+			'update_button'   => 'Update Table of Contents Settings',
+			'updated_message' => 'Table of Contents settings updated',
 		)
 	);
 
 	// Adds page for other book settings.
 	acf_add_options_page(
 		array(
-			'page_title' => 'Book Settings',
-			'position'   => '34.1',
-			'icon_url'   => 'dashicons-book',
+			'page_title'      => 'Book Config',
+			'position'        => '34.1',
+			'icon_url'        => 'dashicons-book',
+			'update_button'   => 'Update Book Settings',
+			'updated_message' => 'Book settings updated',
 		)
 	);
 

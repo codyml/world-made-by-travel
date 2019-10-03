@@ -5,6 +5,8 @@
  * @package WMT
  */
 
+$admin_bar_class = is_admin_bar_showing() ? 'admin-bar-showing' : '';
+
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -14,7 +16,7 @@
 </head>
 <body <?php body_class(); ?>>
 	<?php wp_body_open(); ?>
-	<div id="App"></div>
+	<main id="App" class="<?php echo esc_attr( $admin_bar_class ); ?>"></main>
 	<?php wp_footer(); ?>
 </body>
 </html>

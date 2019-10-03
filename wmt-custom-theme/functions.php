@@ -8,6 +8,7 @@
 // Defines constants used in the site.
 define( 'SECTION_POST_TYPE', 'wmt_section' );
 define( 'AUTHOR_POST_TYPE', 'wmt_author' );
+define( 'REST_API_NAMESPACE', 'wmt' );
 
 // Configures WordPress to be a headless CMS for a single-page application.
 require_once 'inc/headless.php';
@@ -23,3 +24,6 @@ require_once 'inc/attachments.php';
 
 // Enqueues the JavaScript bundle created by Webpack.
 require_once 'inc/static.php';
+
+// Registers REST endpoints used by the front-end app.
+require_once 'inc/rest.php';

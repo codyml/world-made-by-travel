@@ -1,6 +1,6 @@
 {
     "key": "group_5d93c72b61829",
-    "title": "Book Settings",
+    "title": "Book Config Settings",
     "fields": [
         {
             "key": "field_5d93c2d4dac1d",
@@ -109,25 +109,6 @@
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
-        },
-        {
-            "key": "field_5d93cbdc62e95",
-            "label": "Maintenance Mode",
-            "name": "maintenance_mode",
-            "type": "true_false",
-            "instructions": "Enable Maintenance Mode to disable access to A World Made By Travel unless the visitor is logged into the WordPress admin panel.  This mode should be left off for normal production use, except for during content administration.",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "On",
-            "ui_off_text": "Off"
         }
     ],
     "location": [
@@ -135,7 +116,7 @@
             {
                 "param": "options_page",
                 "operator": "==",
-                "value": "acf-options-book-settings"
+                "value": "acf-options-book-config"
             }
         ]
     ],
@@ -147,5 +128,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1569979633
+    "modified": 1570056707
 }
