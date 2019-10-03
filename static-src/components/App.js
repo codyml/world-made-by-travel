@@ -1,71 +1,38 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
 import styled, { createGlobalStyle } from 'styled-components';
 
+import { bookContentReceived } from '../actions';
+import LoadingMessage from './LoadingMessage';
 import Book from './Book';
 import Explorer from './Explorer';
 import Modal from './Modal';
 
 export default function App() {
-  const [bookContent, setBookContent] = useState(null);
-  const [explorerOpen, setExplorerOpen] = useState(false);
-  const [explorerUrl, setExplorerUrl] = useState('/');
-  const [modalContent, setModalContent] = useState(null);
+  const [contentLoaded, setContentLoaded] = useState(false);
+  const dispatch = useDispatch();
 
   //  Fetches book-wide content
   useEffect(() => {
     const fetchBookContent = async () => {
       const response = await fetch('/wp-json/wmt/book-content');
       if (response.ok) {
-        const {
-          config,
-          authors,
-          tableOfContents,
-        } = await response.json();
-        setBookContent({
-          config,
-          authors,
-          tableOfContents,
-        });
+        const { config, authors, tableOfContents } = await response.json();
+        dispatch(bookContentReceived(config, authors, tableOfContents));
+        setContentLoaded(true);
       }
     };
 
     fetchBookContent();
-  }, []);
+  }, [dispatch]);
 
   return (
     <StyledApp>
-
-      {/* Global styles */}
       <GlobalStyle />
-
-      {/* Loading message */}
-      <StyledLoadingMessage className={bookContent ? '' : 'loading'}>
-        Loading...
-      </StyledLoadingMessage>
-
-      {/* Book */}
-      { bookContent ? (
-        <Book
-          content={bookContent.tableOfContents}
-          setExplorerOpen={setExplorerOpen}
-          setExplorerUrl={setExplorerUrl}
-          openModal={(content) => setModalContent(content)}
-        />
-      ) : null }
-
-      {/* Explorer */}
-      <Explorer
-        isOpen={explorerOpen}
-        url={explorerUrl}
-        setExplorerUrl={setExplorerUrl}
-      />
-
-      {/* Modal */}
-      <Modal
-        content={modalContent}
-        close={() => setModalContent()}
-      />
-
+      <LoadingMessage contentLoaded={contentLoaded} />
+      { contentLoaded ? <Book /> : null }
+      <Explorer />
+      <Modal />
     </StyledApp>
   );
 }
@@ -81,6 +48,8 @@ const StyledApp = styled.div`
   position: relative;
   width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
 
   .admin-bar-showing & {
     height: calc(100vh - 32px);
@@ -88,24 +57,5 @@ const StyledApp = styled.div`
     @media screen and (max-width: 782px) {
       height: calc(100vh - 46px);
     }
-  }
-`;
-
-const StyledLoadingMessage = styled.div`
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #fff;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.25s, visibility 0s 0.25s;
-
-  &.loading {
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0s, visibility 0s;
   }
 `;
