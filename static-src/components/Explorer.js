@@ -1,29 +1,32 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
-export default function Explorer({ isOpen, url, setUrl }) {
+import { SET_EXPLORER_URL } from '../constants';
+import { DURATIONS } from '../styles';
+
+export default function Explorer() {
+  const explorerOpen = useSelector((state) => state.explorerOpen);
+  const explorerUrl = useSelector((state) => state.explorerUrl);
+  const dispatch = useDispatch();
+
+  const setExplorerUrl = (url) => dispatch({ type: SET_EXPLORER_URL, explorerUrl: url });
+
   return (
-    <StyledExplorer isOpen={isOpen}>
-      <div>{ isOpen ? 'open' : 'closed' }</div>
-      <div>{ url }</div>
-      <button type="button" onClick={() => setUrl('/#/entries/114')}>Set URL to /#/entries/114</button>
+    <StyledExplorer explorerOpen={explorerOpen}>
+      <div>{ explorerOpen ? 'open' : 'closed' }</div>
+      <div>{ explorerUrl }</div>
+      <button type="button" onClick={() => setExplorerUrl('/#/entries/114')}>Set URL to /#/entries/114</button>
     </StyledExplorer>
   );
 }
-
-Explorer.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  url: PropTypes.string.isRequired,
-  setUrl: PropTypes.func.isRequired,
-};
 
 const StyledExplorer = styled.div`
   width: 100%;
   height: 0%;
   background-color: #fdf;
-  transition: height 0.25s;
-  ${({ isOpen }) => (isOpen ? `
+  transition: height ${DURATIONS.slide}ms;
+  ${({ explorerOpen }) => (explorerOpen ? `
     height: 50%;
   ` : null)}
 `;

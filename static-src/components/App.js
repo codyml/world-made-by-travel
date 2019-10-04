@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
 
-import { bookContentReceived } from '../actions';
+import { BOOK_CONTENT_RECEIVED } from '../constants';
 import LoadingMessage from './LoadingMessage';
-import Book from './Book';
+import CoverView from './CoverView';
+import ReaderView from './ReaderView';
 import Explorer from './Explorer';
 import Modal from './Modal';
 
@@ -18,7 +20,13 @@ export default function App() {
       const response = await fetch('/wp-json/wmt/book-content');
       if (response.ok) {
         const { config, authors, tableOfContents } = await response.json();
-        dispatch(bookContentReceived(config, authors, tableOfContents));
+        dispatch({
+          type: BOOK_CONTENT_RECEIVED,
+          config,
+          authors,
+          tableOfContents,
+        });
+
         setContentLoaded(true);
       }
     };
@@ -30,9 +38,14 @@ export default function App() {
     <StyledApp>
       <GlobalStyle />
       <LoadingMessage contentLoaded={contentLoaded} />
-      { contentLoaded ? <Book /> : null }
-      <Explorer />
-      <Modal />
+      { contentLoaded ? (
+        <BrowserRouter>
+          <CoverView />
+          <ReaderView />
+          <Explorer />
+          <Modal />
+        </BrowserRouter>
+      ) : null }
     </StyledApp>
   );
 }
@@ -42,6 +55,10 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     font-size: 16px;
   }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
 `;
 
 const StyledApp = styled.div`
@@ -50,6 +67,7 @@ const StyledApp = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
 
   .admin-bar-showing & {
     height: calc(100vh - 32px);

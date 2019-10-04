@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
+import { DURATIONS } from '../styles';
+
 export default function LoadingMessage({ contentLoaded }) {
   return (
     <StyledLoadingMessage contentLoaded={contentLoaded}>
@@ -28,6 +30,6 @@ const StyledLoadingMessage = styled.div`
   ${({ contentLoaded }) => (contentLoaded ? `
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.15s, visibility 0s 0.15s;
+    transition: opacity ${DURATIONS.fade}ms, visibility 0s ${DURATIONS.fade}ms;
   ` : null)}
 `;
