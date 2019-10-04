@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import SectionContent from '../SectionContent';
-import { DURATIONS } from '../../styles';
+import { DURATION } from '../../styles';
 
 /*
 * Custom hook that handles transitioning between different sections
@@ -54,7 +54,7 @@ const StyledTransitioningSectionContent = styled.div`
   top: 0;
   left: ${({ sectionIndex }) => sectionIndex * -110}%;
   width: 100%;
-  transition: left ${DURATIONS.slide}ms;
+  transition: left ${DURATION.slide}ms;
   display: flex;
 `;
 

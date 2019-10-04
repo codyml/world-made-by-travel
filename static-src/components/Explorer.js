@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 
 import { SET_EXPLORER_URL } from '../constants';
-import { DURATIONS } from '../styles';
+import { DURATION } from '../styles';
 
 export default function Explorer() {
   const explorerOpen = useSelector((state) => state.explorerOpen);
@@ -27,7 +27,7 @@ const StyledExplorer = styled.div`
   width: 100%;
   height: ${({ explorerOpen }) => (explorerOpen ? '50%' : '0%')};
   background-color: #fdf;
-  transition: height ${DURATIONS.slide}ms;
+  transition: height ${DURATION.slide}ms;
   overflow: hidden;
 `;
 

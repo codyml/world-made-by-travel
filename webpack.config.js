@@ -10,6 +10,7 @@ module.exports = {
   output: {
     filename: 'script.js',
     path: path.resolve(__dirname, 'wmt-custom-theme/static'),
+    publicPath: '/wp-content/themes/wmt-custom-theme/static/',
   },
 
   module: {
@@ -18,6 +19,10 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
+      },
+      {
+        test: /\.otf$/,
+        loader: 'file-loader',
       },
     ],
   },

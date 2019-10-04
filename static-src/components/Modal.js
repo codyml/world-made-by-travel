@@ -13,7 +13,7 @@ import {
   CITATION_MODAL,
 } from '../constants';
 
-import { DURATIONS, Z_INDICES } from '../styles';
+import { DURATION, Z_INDEX } from '../styles';
 
 export default function Modal() {
   const modalContent = useSelector((state) => state.modalContent);
@@ -62,14 +62,14 @@ const StyledModal = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: ${Z_INDICES.modal};
+  z-index: ${Z_INDEX.modal};
   background-color: #ffd;
   visibility: hidden;
   opacity: 0;
-  transition: opacity ${DURATIONS.fade}ms, visibility 0s ${DURATIONS.fade}ms;
+  transition: opacity ${DURATION.fade}ms, visibility 0s ${DURATION.fade}ms;
   ${({ modalOpen }) => (modalOpen ? `
     visibility: visible;
     opacity: 1;
-    transition: opacity ${DURATIONS.fade}ms, visibility 0s;
+    transition: opacity ${DURATION.fade}ms, visibility 0s;
   ` : null)}
 `;

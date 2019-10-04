@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import useRouting from './useRouting';
 import useTransitioningSectionContent from './useTransitioningSectionContent';
 import TableOfContents from '../TableOfContents';
-import { DURATIONS } from '../../styles';
+import { DURATION } from '../../styles';
 
 
 /*
@@ -63,7 +63,7 @@ const StyledContentViewport = styled.div`
 const StyledTableOfContentsContainer = styled.div`
   position: absolute;
   background-color: #ccc;
-  transition: width ${DURATIONS.slide}ms, height ${DURATIONS.slide}ms, top ${DURATIONS.slide}ms, right ${DURATIONS.slide}ms;
+  transition: width ${DURATION.slide}ms, height ${DURATION.slide}ms, top ${DURATION.slide}ms, right ${DURATION.slide}ms;
   ${({ expanded }) => (expanded ? `
     width: 100%;
     height: 100%;
