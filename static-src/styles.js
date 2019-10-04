@@ -1,6 +1,6 @@
 export const DURATIONS = {
-  fade: 1000,
-  slide: 5000,
+  fade: 250,
+  slide: 500,
 };
 
 export const Z_INDICES = {

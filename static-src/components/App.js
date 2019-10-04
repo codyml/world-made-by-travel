@@ -56,7 +56,9 @@ const GlobalStyle = createGlobalStyle`
     font-size: 16px;
   }
 
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     box-sizing: border-box;
   }
 `;

@@ -3,9 +3,8 @@ import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
 import useRouting from './useRouting';
-import useSectionTransitions from './useSectionTransitions';
+import useTransitioningSectionContent from './useTransitioningSectionContent';
 import TableOfContents from '../TableOfContents';
-import SectionContent from '../SectionContent';
 import { DURATIONS } from '../../styles';
 
 
@@ -21,21 +20,22 @@ export default function ReaderView() {
     redirectTo,
   } = useRouting();
 
-  //  Handles transitioning between reader view "pages".
-  const SectionTransitionContainer = useSectionTransitions(tableOfContentsExpanded, sectionSlug);
+  //  Handles transitioning between section content views.
+  const TransitioningSectionContent = useTransitioningSectionContent();
 
   return (
     <StyledReaderView>
       <StyledContentViewport>
 
+        {/* Table of contents */}
         <StyledTableOfContentsContainer expanded={tableOfContentsExpanded}>
           <TableOfContents expanded={tableOfContentsExpanded} />
         </StyledTableOfContentsContainer>
 
-        <SectionTransitionContainer>
-          { (slug) => <SectionContent slug={slug} /> }
-        </SectionTransitionContainer>
+        {/* Section content */}
+        <TransitioningSectionContent slug={sectionSlug} />
 
+        {/* Redirect */}
         { redirectTo ? <Redirect to={redirectTo} /> : null }
 
       </StyledContentViewport>
@@ -51,6 +51,7 @@ const StyledReaderView = styled.div`
   display: flex;
   justify-content: flex-end;
   align-items: stretch;
+  overflow: hidden;
 `;
 
 const StyledContentViewport = styled.div`

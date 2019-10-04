@@ -14,19 +14,23 @@ export default function Explorer() {
 
   return (
     <StyledExplorer explorerOpen={explorerOpen}>
-      <div>{ explorerOpen ? 'open' : 'closed' }</div>
-      <div>{ explorerUrl }</div>
-      <button type="button" onClick={() => setExplorerUrl('/#/entries/114')}>Set URL to /#/entries/114</button>
+      <StyledExplorerInner>
+        <div>{ explorerOpen ? 'open' : 'closed' }</div>
+        <div>{ explorerUrl }</div>
+        <button type="button" onClick={() => setExplorerUrl('/#/entries/114')}>Set URL to /#/entries/114</button>
+      </StyledExplorerInner>
     </StyledExplorer>
   );
 }
 
 const StyledExplorer = styled.div`
   width: 100%;
-  height: 0%;
+  height: ${({ explorerOpen }) => (explorerOpen ? '50%' : '0%')};
   background-color: #fdf;
   transition: height ${DURATIONS.slide}ms;
-  ${({ explorerOpen }) => (explorerOpen ? `
-    height: 50%;
-  ` : null)}
+  overflow: hidden;
+`;
+
+const StyledExplorerInner = styled.div`
+  height: 50%;
 `;

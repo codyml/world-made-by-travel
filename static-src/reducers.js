@@ -63,7 +63,7 @@ const sectionMetaBySlug = (state = null, action) => {
                 path: `/${next.slug}/${section.slug}`,
 
                 // Calculate the section's order
-                index: Object.keys(accum).length + 1 + index,
+                index: Object.keys(accum).length + index,
               },
             })),
           );
@@ -75,7 +75,7 @@ const sectionMetaBySlug = (state = null, action) => {
               [next.slug]: {
                 ...next,
                 path: `/${next.slug}`,
-                index: Object.keys(accum).length + 1,
+                index: Object.keys(accum).length,
               },
             },
           );
