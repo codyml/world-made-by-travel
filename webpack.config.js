@@ -23,6 +23,10 @@ module.exports = {
       {
         test: /\.otf$/,
         loader: 'file-loader',
+        options: {
+          name: '[folder]/[name].[ext]',
+          outputPath: 'fonts',
+        },
       },
     ],
   },

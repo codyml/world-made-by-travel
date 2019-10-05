@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { createGlobalStyle } from 'styled-components';
 
 const fontFaces = [
@@ -34,38 +34,18 @@ const fontFaces = [
   { family: 'Source Serif Pro', weight: 900, style: 'italic' },
 ];
 
+fontFaces.forEach(
+  ({ family, weight, style }) => import(/* webpackMode: "eager" */`./${family}/${weight}-${style}.otf`),
+);
 
-/*
-* Custom hook that returns a global style component for including
-* imported fonts and an indicator value of whether the fonts have
-* been loaded.
-*/
-
-export default function useFonts() {
-  const [fontFacesSrc, setFontFacesSrc] = useState([]);
-  useEffect(() => {
-    Promise.all(
-      fontFaces.map(
-        ({ family, weight, style }) => import(`./${family}/${weight}-${style}.otf`),
-      ),
-    ).then(
-      (importedModules) => setFontFacesSrc(importedModules.map(
-        (importedModule) => importedModule.default,
-      )),
-    );
-  }, []);
-
-  const Fonts = createGlobalStyle`
-    ${fontFacesSrc.reduce((accum, fontFaceSrc, index) => `
-      ${accum}
-      @font-face {
-        font-family: ${fontFaces[index].family};
-        font-weight: ${fontFaces[index].weight};
-        font-style: ${fontFaces[index].style};
-        src: url(${fontFaceSrc});
-      }
-    `, '')}
-  `;
-
-  return [Fonts, !!fontFacesSrc.length];
-}
+export default createGlobalStyle`
+  ${fontFaces.reduce((accum, { family, weight, style }) => `
+    ${accum}
+    @font-face {
+      font-family: "${family}";
+      font-weight: ${weight};
+      font-style: ${style};
+      src: url("/wp-content/themes/wmt-custom-theme/static/fonts/${family}/${weight}-${style}.otf");
+    }
+  `, '')}
+`;

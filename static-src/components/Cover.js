@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useRouteMatch, Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { DURATION, Z_INDEX } from '../styles';
+import { DURATION, Z_INDEX, CONTAINER_PADDING } from '../styles';
 import { EXPANDED_TOC_PATH } from '../constants';
 
 /*
@@ -43,4 +43,5 @@ const StyledCover = styled.div`
     opacity: 1;
     transition: opacity ${DURATION.fade}ms, visibility 0s;
   ` : null)}
+  ${CONTAINER_PADDING}
 `;

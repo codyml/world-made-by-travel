@@ -13,7 +13,7 @@ export const BrowserSizeContext = React.createContext();
 */
 
 export const DURATION = { // ms
-  fade: 250,
+  fade: 350,
   loadingFadeDelay: 500,
   slide: 500,
 };
@@ -43,19 +43,25 @@ export const BREAKPOINT_MIN_WIDTH = { // px
   desktop: MAX_CONTENT_SIZE.desktop + 2 * MIN_SIDE_PADDING.desktop,
 };
 
-export const CONTAINER_PADDING = `
-  padding: 0 ${MIN_SIDE_PADDING.mobile}px;
-
-  @media (min-width: ${BREAKPOINT_MIN_WIDTH.tablet}px) {
-    padding: 0 calc((100% - ${MAX_CONTENT_SIZE.tablet}px) / 2);
-  }
-
-  @media (min-width: ${BREAKPOINT_MIN_WIDTH.desktop}px) {
-    padding: 0 calc((100% - ${MAX_CONTENT_SIZE.desktop}px) / 2);
+export const atSize = (size, styles) => `
+  @media (min-width: ${BREAKPOINT_MIN_WIDTH[size]}px) {
+    ${styles}
   }
 `;
 
-export const column = (n) => `${100 * (n / 12)}%`;
+export const CONTAINER_PADDING = `
+  padding: 0 ${MIN_SIDE_PADDING.mobile}px;
+
+  ${atSize('tablet', `
+    padding: 0 calc((100% - ${MAX_CONTENT_SIZE.tablet}px) / 2);
+  `)}
+
+  ${atSize('desktop', `
+    padding: 0 calc((100% - ${MAX_CONTENT_SIZE.desktop}px) / 2);
+  `)}
+`;
+
+export const columns = (n) => `${100 * (n / 12)}%`;
 
 export const FONTS = {
   display: '"Crimson", serif',

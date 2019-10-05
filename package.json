@@ -4,8 +4,8 @@
   "description": "Single-page JavaScript application for \"A World Made by Travel\" by Giovanna Ceserani.",
   "main": "static-src/index.js",
   "scripts": {
-    "dev-watch": "rm -rf imaginedsf-custom-theme/static && webpack --watch --mode=development --devtool=source-map",
-    "prod-build": "rm -rf imaginedsf-custom-theme/static && webpack --mode=production",
+    "dev-watch": "rm -rf wmt-custom-theme/static && webpack --watch --mode=development --devtool=source-map",
+    "prod-build": "rm -rf wmt-custom-theme/static && webpack --mode=production",
     "lint:js": "eslint webpack.config.js static-src",
     "lint:css": "stylelint 'static-src/**/*.js'"
   },
@@ -25,9 +25,7 @@
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.6",
     "babel-polyfill": "^6.26.0",
-    "classnames": "^2.2.6",
     "file-loader": "^4.2.0",
-    "normalize.css": "^8.0.1",
     "prop-types": "^15.7.2",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",

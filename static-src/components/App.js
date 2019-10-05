@@ -9,16 +9,12 @@ import CoverView from './Cover';
 import ReaderView from './ReaderView';
 import Explorer from './Explorer';
 import Modal from './Modal';
-import { GlobalStyles, BrowserSizeContext, BREAKPOINT_MIN_WIDTH } from '../styles';
-import useFonts from '../fonts';
+import { BrowserSizeContext, BREAKPOINT_MIN_WIDTH } from '../styles';
 
 export default function App() {
   const [contentLoaded, setContentLoaded] = useState(false);
   const [browserSize, setBrowserSize] = useState('mobile');
   const dispatch = useDispatch();
-
-  //  Asynchronously loads fonts for the site
-  const [Fonts, fontsLoaded] = useFonts();
 
   //  Fetches book-wide content
   useEffect(() => {
@@ -33,7 +29,7 @@ export default function App() {
           tableOfContents,
         });
 
-        setContentLoaded(true);
+        setTimeout(() => setContentLoaded(true), 1000);
       }
     };
 
@@ -60,14 +56,9 @@ export default function App() {
 
   return (
     <BrowserSizeContext.Provider value={browserSize}>
-      <Fonts />
-      <GlobalStyles />
       <StyledApp>
-        <LoadingMessage
-          fontsLoaded={fontsLoaded}
-          contentLoaded={contentLoaded}
-        />
-        { fontsLoaded && contentLoaded ? (
+        <LoadingMessage contentLoaded={contentLoaded} />
+        { contentLoaded ? (
           <BrowserRouter>
             <CoverView />
             <ReaderView />
@@ -86,7 +77,7 @@ const StyledApp = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   background-color: #eee;
   background-clip: content-box;
 

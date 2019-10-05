@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
+import MobileHeader from '../MobileHeader';
+import TabletHeader from '../TabletHeader';
+import Sidebar from '../Sidebar';
+import TableOfContents from '../TableOfContents';
 import useRouting from './useRouting';
 import useTransitioningSectionContent from './useTransitioningSectionContent';
-import TableOfContents from '../TableOfContents';
-import { DURATION } from '../../styles';
+import {
+  DURATION,
+  CONTAINER_PADDING,
+  BrowserSizeContext,
+  columns,
+  atSize,
+} from '../../styles';
 
 
 /*
@@ -14,6 +23,7 @@ import { DURATION } from '../../styles';
 */
 
 export default function ReaderView() {
+  const browserSize = useContext(BrowserSizeContext);
   const {
     tableOfContentsExpanded,
     sectionSlug,
@@ -25,6 +35,31 @@ export default function ReaderView() {
 
   return (
     <StyledReaderView>
+
+      {/* Redirect */}
+      {redirectTo ? <Redirect to={redirectTo} /> : null}
+
+      {/* Mobile header */}
+      { browserSize === 'mobile' ? (
+        <StyledHeaderContainer>
+          <MobileHeader />
+        </StyledHeaderContainer>
+      ) : null }
+
+      {/* Tablet header */}
+      { browserSize === 'tablet' ? (
+        <StyledHeaderContainer>
+          <TabletHeader />
+        </StyledHeaderContainer>
+      ) : null }
+
+      {/* Desktop sidebar */}
+      { browserSize === 'desktop' ? (
+        <StyledSidebarContainer>
+          <Sidebar />
+        </StyledSidebarContainer>
+      ) : null }
+
       <StyledContentViewport>
 
         {/* Table of contents */}
@@ -35,9 +70,6 @@ export default function ReaderView() {
         {/* Section content */}
         <TransitioningSectionContent slug={sectionSlug} />
 
-        {/* Redirect */}
-        { redirectTo ? <Redirect to={redirectTo} /> : null }
-
       </StyledContentViewport>
     </StyledReaderView>
   );
@@ -46,17 +78,28 @@ export default function ReaderView() {
 const StyledReaderView = styled.div`
   position: relative;
   flex-grow: 1;
-  width: 600px;
   background-color: #eee;
   display: flex;
-  justify-content: flex-end;
+  flex-direction: column;
   align-items: stretch;
   overflow: hidden;
+  ${CONTAINER_PADDING}
+  ${atSize('desktop', `
+    flex-direction: row;
+  `)}
+`;
+
+const StyledHeaderContainer = styled.div`
+  margin: 0 calc((100% - 100vw) / 2);
+`;
+
+const StyledSidebarContainer = styled.div`
+  width: ${columns(4)};
 `;
 
 const StyledContentViewport = styled.div`
   position: relative;
-  width: 75%;
+  flex-grow: 1;
   background-color: #ddd;
 `;
 
