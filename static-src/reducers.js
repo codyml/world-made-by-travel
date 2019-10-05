@@ -8,6 +8,7 @@ import {
   SET_SCROLL_POSITION,
   SET_EXPLORER_OPEN,
   SET_EXPLORER_URL,
+  SET_MODAL_OPEN,
   SET_MODAL_CONTENT,
   REQUESTED,
 } from './constants';
@@ -178,20 +179,41 @@ const explorerUrl = (state = '/', action) => {
   }
 };
 
+const modalOpen = (state = false, action) => {
+  switch (action.type) {
+    case SET_MODAL_OPEN:
+      return action.modalOpen;
+
+    case SET_MODAL_CONTENT:
+      return true;
+
+    default:
+      return state;
+  }
+};
+
 const modalContent = (state = null, action) => {
   switch (action.type) {
-    case SET_MODAL_CONTENT:
+    case SET_MODAL_CONTENT: {
+      const {
+        modalType,
+        authorSlug,
+        sectionSlug,
+        paragraphNumber,
+        figureNumber,
+      } = action;
       if (action.modalType) {
         return {
-          modalType: action.modalType,
-          authorSlug: action.authorSlug,
-          sectionSlug: action.sectionSlug,
-          paragraphIndex: action.paragraphIndex,
-          figureIndex: action.figureIndex,
+          modalType,
+          authorSlug,
+          sectionSlug,
+          paragraphNumber,
+          figureNumber,
         };
       }
 
       return null;
+    }
 
     default:
       return state;
@@ -209,5 +231,6 @@ export default combineReducers({
   currentSectionScrollPosition,
   explorerOpen,
   explorerUrl,
+  modalOpen,
   modalContent,
 });

@@ -19,30 +19,35 @@ export default function useTransitioningSectionContent() {
     const sectionMetas = Object.values(sectionMetaBySlug);
     sectionMetas.sort((a, b) => a.index - b.index);
 
-    const TransitioningSectionContent = ({ slug }) => {
-      const sectionIndex = slug ? sectionMetaBySlug[slug].index + 1 : 0;
+    const TransitioningSectionContent = ({ sectionSlug }) => {
+      const activeSectionIndex = sectionSlug ? sectionMetaBySlug[sectionSlug].index + 1 : 0;
+
       return (
-        <StyledTransitioningSectionContent sectionIndex={sectionIndex}>
-          {/* Placeholder for Table of Contents */}
-          <StyledSectionContent />
+        <StyledTransitioningSectionContent activeSectionIndex={activeSectionIndex}>
+          <StyledSectionContentContainer>
+            <SectionContent
+              isTableOfContents
+              isActive={!sectionSlug}
+            />
+          </StyledSectionContentContainer>
           { sectionMetas.map((sectionMeta) => (
-            <StyledSectionContent key={sectionMeta.slug}>
+            <StyledSectionContentContainer key={sectionMeta.slug}>
               <SectionContent
-                slug={sectionMeta.slug}
-                active={sectionMeta.slug === slug}
+                sectionSlug={sectionMeta.slug}
+                isActive={sectionMeta.slug === sectionSlug}
               />
-            </StyledSectionContent>
+            </StyledSectionContentContainer>
           )) }
         </StyledTransitioningSectionContent>
       );
     };
 
     TransitioningSectionContent.propTypes = {
-      slug: PropTypes.string,
+      sectionSlug: PropTypes.string,
     };
 
     TransitioningSectionContent.defaultProps = {
-      slug: null,
+      sectionSlug: null,
     };
 
     return TransitioningSectionContent;
@@ -52,13 +57,13 @@ export default function useTransitioningSectionContent() {
 const StyledTransitioningSectionContent = styled.div`
   position: absolute;
   top: 0;
-  left: ${({ sectionIndex }) => sectionIndex * -110}%;
+  left: ${({ activeSectionIndex }) => activeSectionIndex * -110}%;
   width: 100%;
   transition: left ${DURATION.slide}ms;
   display: flex;
 `;
 
-const StyledSectionContent = styled.div`
+const StyledSectionContentContainer = styled.div`
   width: 100%;
   margin-right: 10%;
   flex-shrink: 0;

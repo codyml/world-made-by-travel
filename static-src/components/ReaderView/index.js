@@ -5,15 +5,14 @@ import styled from 'styled-components';
 import MobileHeader from '../MobileHeader';
 import TabletHeader from '../TabletHeader';
 import Sidebar from '../Sidebar';
-import TableOfContents from '../TableOfContents';
 import useRouting from './useRouting';
 import useTransitioningSectionContent from './useTransitioningSectionContent';
 import {
-  DURATION,
   CONTAINER_PADDING,
   BrowserSizeContext,
-  columns,
   atSize,
+  SIDEBAR_WIDTH,
+  GUTTER_WIDTH,
 } from '../../styles';
 
 
@@ -24,11 +23,7 @@ import {
 
 export default function ReaderView() {
   const browserSize = useContext(BrowserSizeContext);
-  const {
-    tableOfContentsExpanded,
-    sectionSlug,
-    redirectTo,
-  } = useRouting();
+  const { sectionSlug, redirectTo } = useRouting();
 
   //  Handles transitioning between section content views.
   const TransitioningSectionContent = useTransitioningSectionContent();
@@ -62,13 +57,8 @@ export default function ReaderView() {
 
       <StyledContentViewport>
 
-        {/* Table of contents */}
-        <StyledTableOfContentsContainer expanded={tableOfContentsExpanded}>
-          <TableOfContents expanded={tableOfContentsExpanded} />
-        </StyledTableOfContentsContainer>
-
         {/* Section content */}
-        <TransitioningSectionContent slug={sectionSlug} />
+        <TransitioningSectionContent sectionSlug={sectionSlug} />
 
       </StyledContentViewport>
     </StyledReaderView>
@@ -84,7 +74,7 @@ const StyledReaderView = styled.div`
   align-items: stretch;
   overflow: hidden;
   ${CONTAINER_PADDING}
-  ${atSize('desktop', `
+  ${atSize.desktop(`
     flex-direction: row;
   `)}
 `;
@@ -94,28 +84,12 @@ const StyledHeaderContainer = styled.div`
 `;
 
 const StyledSidebarContainer = styled.div`
-  width: ${columns(4)};
+  width: ${SIDEBAR_WIDTH}px;
+  margin-right: ${GUTTER_WIDTH}px;
 `;
 
 const StyledContentViewport = styled.div`
   position: relative;
   flex-grow: 1;
   background-color: #ddd;
-`;
-
-const StyledTableOfContentsContainer = styled.div`
-  position: absolute;
-  background-color: #ccc;
-  transition: width ${DURATION.slide}ms, height ${DURATION.slide}ms, top ${DURATION.slide}ms, right ${DURATION.slide}ms;
-  ${({ expanded }) => (expanded ? `
-    width: 100%;
-    height: 100%;
-    top: 0;
-    right: 0;
-  ` : `
-    width: 33%;
-    height: 200px;
-    top: 200px;
-    right: 100%;
-  `)}
 `;

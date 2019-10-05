@@ -6,6 +6,7 @@ export const SET_CURRENT_SECTION = 'SET_CURRENT_SECTION';
 export const SET_SCROLL_POSITION = 'SET_SCROLL_POSITION';
 export const SET_EXPLORER_OPEN = 'SET_EXPLORER_OPEN';
 export const SET_EXPLORER_URL = 'SET_EXPLORER_URL';
+export const SET_MODAL_OPEN = 'SET_MODAL_OPEN';
 export const SET_MODAL_CONTENT = 'SET_MODAL_CONTENT';
 
 //  Constant indicating that section content has been requested.
