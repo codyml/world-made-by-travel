@@ -1,5 +1,6 @@
 import React from 'react';
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
+import normalizeCss from 'normalize.css';
 
 /*
 * Context for sharing current browser size bewteen components.
@@ -43,7 +44,7 @@ export const MAX_CONTENT_SIZE = { // px
 export const MIN_SIDE_PADDING = { // px
   mobile: 18,
   tablet: 36,
-  desktop: 24,
+  desktop: 72,
 };
 
 export const BREAKPOINT_MIN_WIDTH = { // px
@@ -74,6 +75,19 @@ export const CONTAINER_PADDING = `
   `)}
 `;
 
+export const StyledFadingOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: ${({ visible }) => (visible ? 1 : 0)};
+  visibility: ${({ visible }) => (visible ? 'visible' : 'hidden')};
+  transition-property: opacity, visibility;
+  transition-duration: ${DURATION.fade}ms, 0s;
+  transition-delay: ${({ visible }) => (visible ? '0s, 0s' : `0s, ${DURATION.fade}ms`)};
+`;
+
 
 /*
 * Font & color constants.
@@ -93,8 +107,10 @@ const COLORS = {
     light: '#d7cac6',
   },
   unburntCaramel: {
-    dark: '#806533',
+    dark: '#594216',
+    darkMid: '#806533',
     mid: '#bf9e60',
+    midMidLight: '#e9be8f',
     midLight: '#ede5d5',
     light: '#f7f4ed',
   },
@@ -114,24 +130,88 @@ const COLORS = {
 export const THEME_COLORS = {
   coverTitle: COLORS.absentLavender.mid,
   coverSubtitle: COLORS.unburntCaramel.midLight,
+  coverAuthor: COLORS.unburntCaramel.midMidLight,
+  coverPublicationInformationBackground: COLORS.unburntCaramel.dark,
 };
 
+
+/*
+* Reusable text style components.
+*/
+
+export const StyledBookTitle = styled.div`
+  font-family: ${FONTS.display};
+  font-weight: bold;
+  font-size: 1.5em;
+  letter-spacing: -0.01em;
+`;
+
+export const StyledSectionAuthor = styled.div`
+  font-family: ${FONTS.serif};
+  font-style: italic;
+`;
+
+export const StyledBookContent = styled.div`
+  font-family: ${FONTS.serif};
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+
+  hr {
+    border: 0;
+    border-top: 1px solid #777;
+    margin: 1.5em 0;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+`;
+
+
+/*
+* Other misc reusable components.
+*/
+
+export const Triangle = styled.div`
+  width: 0.5em;
+  height: 0.45em;
+  position: relative;
+
+  ::before {
+    content: '▴';
+    display: block;
+    line-height: 0;
+    font-size: 1.4em;
+    position: absolute;
+    top: 0.1em;
+    left: -0.09em;
+  }
+`;
 
 /*
 * Global styles for the app.
 */
 
 export const GlobalStyles = createGlobalStyle`
+  @import url("${normalizeCss}");
+
+  html {
+    font-size: 12px; /* 1 rem */
+  }
+
   body {
-    margin: 0;
-    font-size: 16px;
     font-family: ${FONTS.sans};
-    font-weight: lighter;
+    color: #333;
   }
 
   *,
   *::before,
   *::after {
     box-sizing: border-box;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: inherit;
   }
 `;

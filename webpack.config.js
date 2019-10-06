@@ -28,6 +28,14 @@ module.exports = {
           outputPath: 'fonts',
         },
       },
+      {
+        test: /\.css$/,
+        loader: 'file-loader',
+        options: {
+          name: '[name].[ext]',
+          outputPath: 'css',
+        },
+      },
     ],
   },
 };

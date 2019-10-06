@@ -196,13 +196,11 @@ add_action(
 			array(
 				'methods'  => 'GET',
 				'callback' => function( WP_REST_Request $request ) {
-					remove_filter( 'acf_the_content', 'wpautop' );
 					$response = array(
 						'authors'         => wmt_get_authors_for_rest(),
 						'config'          => wmt_get_config_for_rest(),
 						'tableOfContents' => wmt_get_table_of_contents_for_rest(),
 					);
-					add_filter( 'acf_the_content', 'wpautop' );
 					return $response;
 				},
 			)
