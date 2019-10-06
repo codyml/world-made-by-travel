@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -12,8 +12,13 @@ import Modal from './Modal';
 import { BrowserSizeContext, BREAKPOINT_MIN_WIDTH } from '../styles';
 
 export default function App() {
-  const [contentLoaded, setContentLoaded] = useState(false);
+  const [bookContentLoaded, setBookContentLoaded] = useState(false);
+  const [backgroundImageLoaded, setBackgroundImageLoaded] = useState(false);
   const [browserSize, setBrowserSize] = useState('mobile');
+  const backgroundImageUrl = useSelector((state) => (
+    state.config && state.config.backgroundImageUrl
+  ));
+
   const dispatch = useDispatch();
 
   //  Fetches book-wide content
@@ -29,12 +34,20 @@ export default function App() {
           tableOfContents,
         });
 
-        setTimeout(() => setContentLoaded(true), 1000);
+        setBookContentLoaded(true);
       }
     };
 
     fetchBookContent();
   }, [dispatch]);
+
+  useEffect(() => {
+    if (backgroundImageUrl) {
+      const backgroundImage = new Image();
+      backgroundImage.addEventListener('load', () => setBackgroundImageLoaded(true));
+      backgroundImage.src = backgroundImageUrl;
+    }
+  }, [backgroundImageUrl]);
 
   //  Updates context on browser size change.
   useEffect(() => {
@@ -54,6 +67,7 @@ export default function App() {
     return () => window.removeEventListener('resize', handleResizeChange);
   }, []);
 
+  const contentLoaded = bookContentLoaded && backgroundImageLoaded;
   return (
     <BrowserSizeContext.Provider value={browserSize}>
       <StyledApp>

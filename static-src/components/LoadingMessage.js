@@ -13,6 +13,7 @@ export default function LoadingMessage({ contentLoaded }) {
   const [textVisible, setTextVisible] = useState(false);
   useEffect(() => setTextVisible(true), []);
 
+
   return (
     <StyledLoadingMessage visible={!contentLoaded}>
       <StyledText visible={textVisible}>Loading...</StyledText>

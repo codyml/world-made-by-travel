@@ -15,7 +15,7 @@ export const BrowserSizeContext = React.createContext();
 
 export const DURATION = { // ms
   fade: 350,
-  loadingFadeDelay: 500,
+  loadingFadeDelay: 0,
   slide: 500,
 };
 
@@ -217,5 +217,9 @@ export const GlobalStyles = createGlobalStyle`
   a {
     color: inherit;
     text-decoration: inherit;
+  }
+
+  strong {
+    font-weight: bold;
   }
 `;

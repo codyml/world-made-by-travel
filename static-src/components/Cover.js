@@ -132,7 +132,8 @@ const StyledCover = styled(StyledFadingOverlay)`
   z-index: ${Z_INDEX.cover};
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("${(props) => props.backgroundImageUrl}");
+    url(${(props) => props.backgroundImageUrl}),
+    linear-gradient(white, white);
   background-size: auto 115.8%;
   background-position: 35.37% 22.22%;
   background-repeat: no-repeat;
@@ -140,6 +141,41 @@ const StyledCover = styled(StyledFadingOverlay)`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+
+  @media only screen and (max-height: 450px) {
+    background-size: cover;
+  }
+
+  ${atSize.tablet(`
+    @media only screen and (max-height: 670px) {
+      background-size: cover;
+    }
+  `)}
+
+  ${atSize.desktop(`
+    background-size: auto 145%;
+    background-position: center;
+
+    @media only screen and (max-height: 605px) {
+      background-size: cover;
+    }
+
+    @media only screen and (min-width: 1200px) and (max-height: 705px) {
+      background-size: cover;
+    }
+
+    @media only screen and (min-width: 1400px) and (max-height: 805px) {
+      background-size: cover;
+    }
+
+    @media only screen and (min-width: 1600px) and (max-height: 905px) {
+      background-size: cover;
+    }
+
+    @media only screen and (min-width: 1800px) {
+      background-size: cover;
+    }
+  `)}
 `;
 
 const StyledCoverContent = styled.div`
@@ -154,6 +190,12 @@ const StyledCoverContent = styled.div`
     padding-top: 6em;
     padding-bottom: 1.5em;
   `)}
+
+  ${atSize.desktop(`
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-bottom: 1.75rem;
+  `)}
 `;
 
 const StyledBookInformation = styled.div`
@@ -164,6 +206,10 @@ const StyledBookInformation = styled.div`
     margin-bottom: 1rem;
     text-align: right;
     font-size: 1.25em;
+  `)}
+
+  ${atSize.desktop(`
+    order: 2;
   `)}
 `;
 
@@ -221,6 +267,12 @@ const StyledContent = styled(StyledBookContent)`
     font-size: 1.25em;
     padding-bottom: 0;
   `)}
+
+  ${atSize.desktop(`
+    order: 1;
+    width: 50%;
+    flex-basis: 100%;
+  `)}
 `;
 
 const StyledImageAttribution = styled(HTMLContent)`
@@ -234,6 +286,10 @@ const StyledImageAttribution = styled(HTMLContent)`
     text-align: right;
     margin-top: 2em;
     font-size: 1.1em;
+  `)}
+
+  ${atSize.desktop(`
+    order: 3;
   `)}
 `;
 
@@ -272,6 +328,7 @@ const StyledCopyright = styled.div`
     margin: 0;
     height: auto;
     font-size: 1em;
+    cursor: default;
   `)}
 `;
 
@@ -371,6 +428,11 @@ const StyledPublicationInformationBar = styled.div`
       text-align: right;
     }
   }
+
+  ${atSize.desktop(`
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  `)}
 `;
 
 const StyledLeftColumn = styled.div`
