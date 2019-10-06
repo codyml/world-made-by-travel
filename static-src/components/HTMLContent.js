@@ -24,7 +24,11 @@ HTMLContent.defaultProps = {
 };
 
 const StyledHTMLContent = styled.div`
-  & > p:first-child:last-child {
-    margin: 0;
+  & > p:first-child {
+    margin-top: 0;
+  }
+
+  & > p:last-child {
+    margin-bottom: 0;
   }
 `;

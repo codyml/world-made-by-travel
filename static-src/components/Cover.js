@@ -18,6 +18,7 @@ import {
   StyledBookContent,
   DURATION,
   Triangle,
+  atSize,
 } from '../styles';
 
 /*
@@ -47,7 +48,11 @@ export default function Cover() {
     backgroundImageAttribution,
   } = useSelector((state) => state.config);
 
-  const toggleCopyrightCollapsed = () => setCopyrightCollapsed(!copyrightCollapsed);
+  const toggleCopyrightCollapsed = (
+    browserSize === 'mobile'
+      ? () => setCopyrightCollapsed(!copyrightCollapsed)
+      : null
+  );
 
   return (
     <StyledCover
@@ -56,51 +61,74 @@ export default function Cover() {
       onClick={() => setCopyrightCollapsed(true)}
     >
 
-      <StyledBookInformation>
-        <StyledTitle>{coverTitle}</StyledTitle>
-        <StyledSubtitle>{coverSubtitle}</StyledSubtitle>
-        <StyledAuthor>{coverAuthor}</StyledAuthor>
-        <StyledEnterButton to={enterPath}>Enter</StyledEnterButton>
-      </StyledBookInformation>
+      <StyledCoverContent>
 
-      <StyledContent>
-        <MarkdownContent>{coverContentMarkdown}</MarkdownContent>
-        {browserSize === 'mobile' ? (
+        <StyledBookInformation>
+          <StyledTitle>{coverTitle}</StyledTitle>
+          <StyledSubtitle>{coverSubtitle}</StyledSubtitle>
+          <StyledAuthor>{coverAuthor}</StyledAuthor>
+          <StyledEnterButton to={enterPath}>Enter</StyledEnterButton>
+        </StyledBookInformation>
+
+        <StyledContent>
+          <MarkdownContent>{coverContentMarkdown}</MarkdownContent>
+          {browserSize === 'mobile' ? (
+            <StyledImageAttribution>{backgroundImageAttribution}</StyledImageAttribution>
+          ) : null}
+        </StyledContent>
+
+        {browserSize !== 'mobile' ? (
           <StyledImageAttribution>{backgroundImageAttribution}</StyledImageAttribution>
         ) : null}
-      </StyledContent>
 
-      {browserSize !== 'mobile' ? (
-        <StyledImageAttribution>{backgroundImageAttribution}</StyledImageAttribution>
-      ) : null}
+      </StyledCoverContent>
 
-      <StyledPublicationInformation
-        onClick={(e) => e.stopPropagation()}
-        collapsed={copyrightCollapsed}
-      >
-        <StyledCopyright onClick={toggleCopyrightCollapsed}>
-          <StyledTrigger><StyledTriangle collapsed={copyrightCollapsed} /></StyledTrigger>
-          <StyledStrong>Publication Information</StyledStrong>
-          <HTMLContent>{coverCopyright}</HTMLContent>
-        </StyledCopyright>
-        <StyledNumbers>{coverNumbers}</StyledNumbers>
-        <StyledCredits>
-          {coverCredits.map((credit, index) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <StyledCredit href={credit.link} key={index}>
-              <StyledCreditText>{credit.text}</StyledCreditText>
-              <StyledCreditImage src={credit.image} />
-            </StyledCredit>
-          ))}
-        </StyledCredits>
-      </StyledPublicationInformation>
+      {browserSize === 'mobile' ? (
+        <StyledPublicationInformationSlider
+          onClick={(e) => e.stopPropagation()}
+          collapsed={copyrightCollapsed}
+        >
+          <StyledCopyright onClick={toggleCopyrightCollapsed}>
+            <StyledTrigger><StyledTriangle collapsed={copyrightCollapsed} /></StyledTrigger>
+            <StyledStrong>Publication Information</StyledStrong>
+            <HTMLContent>{coverCopyright}</HTMLContent>
+          </StyledCopyright>
+          <StyledNumbers>{coverNumbers}</StyledNumbers>
+          <StyledCredits>
+            {coverCredits.map((credit, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <StyledCredit href={credit.link} key={index}>
+                <StyledCreditText>{credit.text}</StyledCreditText>
+                <StyledCreditImage src={credit.image} />
+              </StyledCredit>
+            ))}
+          </StyledCredits>
+        </StyledPublicationInformationSlider>
+      ) : (
+        <StyledPublicationInformationBar>
+          <StyledLeftColumn>
+            <StyledCopyright>
+              <HTMLContent>{coverCopyright}</HTMLContent>
+            </StyledCopyright>
+            <StyledNumbers>{coverNumbers}</StyledNumbers>
+          </StyledLeftColumn>
+          <StyledCredits>
+            {coverCredits.map((credit, index) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <StyledCredit href={credit.link} key={index}>
+                <StyledCreditText>{credit.text}</StyledCreditText>
+                <StyledCreditImage src={credit.image} />
+              </StyledCredit>
+            ))}
+          </StyledCredits>
+        </StyledPublicationInformationBar>
+      ) }
 
     </StyledCover>
   );
 }
 
 const StyledCover = styled(StyledFadingOverlay)`
-  ${CONTAINER_PADDING}
   z-index: ${Z_INDEX.cover};
   background-image:
     linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
@@ -108,17 +136,35 @@ const StyledCover = styled(StyledFadingOverlay)`
   background-size: auto 115.8%;
   background-position: 35.37% 22.22%;
   background-repeat: no-repeat;
-  padding-top: 1.5em;
-  padding-bottom: 5em;
   color: white;
   display: flex;
   flex-direction: column;
   overflow: hidden;
 `;
 
+const StyledCoverContent = styled.div`
+  ${CONTAINER_PADDING}
+  padding-top: 1.5em;
+  padding-bottom: 5em;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  ${atSize.tablet(`
+    padding-top: 6em;
+    padding-bottom: 1.5em;
+  `)}
+`;
+
 const StyledBookInformation = styled.div`
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 1em 0;
+  ${atSize.tablet(`
+    margin: 0;
+    margin-bottom: 1rem;
+    text-align: right;
+    font-size: 1.25em;
+  `)}
 `;
 
 const StyledTitle = styled(StyledBookTitle)`
@@ -133,12 +179,18 @@ const StyledSubtitle = styled.div`
   font-style: italic;
   font-size: 1.2em;
   color: ${THEME_COLORS.coverSubtitle};
+  ${atSize.tablet(`
+    font-size: 1.5em;
+  `)}
 `;
 
 const StyledAuthor = styled(StyledSectionAuthor)`
   font-size: 1.25em;
   color: ${THEME_COLORS.coverAuthor};
   margin: 1.65em 0;
+  ${atSize.tablet(`
+    margin-top: 0.75em;
+  `)}
 `;
 
 const StyledEnterButton = styled(Link)`
@@ -163,15 +215,29 @@ const StyledContent = styled(StyledBookContent)`
   hr {
     border-top: 1px solid #bbb;
   }
+
+  ${atSize.tablet(`
+    width: 75%;
+    font-size: 1.25em;
+    padding-bottom: 0;
+  `)}
 `;
 
 const StyledImageAttribution = styled(HTMLContent)`
+  font-weight: 300;
+
   p {
     margin: 0.25em 0;
   }
+
+  ${atSize.tablet(`
+    text-align: right;
+    margin-top: 2em;
+    font-size: 1.1em;
+  `)}
 `;
 
-const StyledPublicationInformation = styled.div`
+const StyledPublicationInformationSlider = styled.div`
   ${CONTAINER_PADDING}
   position: absolute;
   top: 100%;
@@ -200,6 +266,13 @@ const StyledCopyright = styled.div`
   padding: 1.5em 0;
   border-bottom: 1px solid #bbb;
   margin-bottom: 1.5em;
+  ${atSize.tablet(`
+    padding: 0;
+    border: none;
+    margin: 0;
+    height: auto;
+    font-size: 1em;
+  `)}
 `;
 
 const StyledTrigger = styled.div`
@@ -245,16 +318,63 @@ const StyledNumbers = styled(HTMLContent)`
 const StyledCredits = styled.div`
   margin: 1em 0;
   line-height: 1.5;
+  ${atSize.tablet(`
+    margin: 0;
+  `)}
 `;
 
 const StyledCredit = styled.a`
   display: flex;
   align-items: center;
   margin: 0.75em 0;
+  ${atSize.tablet(`
+    justify-content: flex-end;
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  `)}
 `;
 
 const StyledCreditText = styled(HTMLContent)``;
 const StyledCreditImage = styled.img`
   width: 3em;
   margin-left: 1em;
+`;
+
+const StyledPublicationInformationBar = styled.div`
+  ${CONTAINER_PADDING}
+  background-color: ${THEME_COLORS.coverPublicationInformationBackground};
+  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  font-family: ${FONTS.serif};
+  font-size: 1.15em;
+
+  & > * {
+    max-width: 50%;
+
+    &:nth-child(2n + 1) {
+      padding-right: 1em;
+      text-align: left;
+    }
+
+    &:nth-child(2n) {
+      padding-left: 1em;
+      text-align: right;
+    }
+  }
+`;
+
+const StyledLeftColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;

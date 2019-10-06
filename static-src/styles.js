@@ -64,14 +64,17 @@ export const atSize = Object.assign({}, ...['mobile', 'tablet', 'desktop'].map((
 })));
 
 export const CONTAINER_PADDING = `
-  padding: 0 ${MIN_SIDE_PADDING.mobile}px;
+  padding-left: ${MIN_SIDE_PADDING.mobile}px;
+  padding-right: ${MIN_SIDE_PADDING.mobile}px;
 
   ${atSize.tablet(`
-    padding: 0 calc((100% - ${MAX_CONTENT_SIZE.tablet}px) / 2);
+    padding-left: calc((100% - ${MAX_CONTENT_SIZE.tablet}px) / 2);
+    padding-right: calc((100% - ${MAX_CONTENT_SIZE.tablet}px) / 2);
   `)}
 
   ${atSize.desktop(`
-    padding: 0 calc((100% - ${MAX_CONTENT_SIZE.desktop}px) / 2);
+    padding-left: calc((100% - ${MAX_CONTENT_SIZE.desktop}px) / 2);
+    padding-right: calc((100% - ${MAX_CONTENT_SIZE.desktop}px) / 2);
   `)}
 `;
 
@@ -201,6 +204,7 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     font-family: ${FONTS.sans};
+    font-weight: 300;
     color: #333;
   }
 
