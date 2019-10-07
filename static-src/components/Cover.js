@@ -87,7 +87,7 @@ export default function Cover() {
           collapsed={copyrightCollapsed}
         >
           <StyledCopyright onClick={toggleCopyrightCollapsed}>
-            <StyledTrigger><StyledTriangle collapsed={copyrightCollapsed} /></StyledTrigger>
+            <StyledTab><StyledTriangle collapsed={copyrightCollapsed} /></StyledTab>
             <StyledStrong>Publication Information</StyledStrong>
             <HTMLContent>{coverCopyright}</HTMLContent>
           </StyledCopyright>
@@ -330,7 +330,7 @@ const StyledCopyright = styled.div`
   `)}
 `;
 
-const StyledTrigger = styled.div`
+const StyledTab = styled.div`
   position: absolute;
   top: -1.5rem;
   left: 50%;

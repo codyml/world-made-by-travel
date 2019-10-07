@@ -38,7 +38,7 @@ export default function MobileHeader() {
 
 const StyledMobileHeader = styled.div`
   ${CONTAINER_PADDING}
-  height: 72px;
+  height: 6em;
   background-image: url(${(props) => props.backgroundImageUrl});
   background-size: cover;
   background-position: center;

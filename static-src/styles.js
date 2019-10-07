@@ -134,6 +134,9 @@ export const THEME_COLORS = {
   readerViewTitle: COLORS.rustedChocolate.mid,
   mobileMenuBackground: COLORS.rustedChocolate.mid,
   authorLink: COLORS.unburntCaramel.darkMid,
+  uiHr: COLORS.rustedChocolate.light,
+  tableOfContentsHeader: COLORS.rustedChocolate.mid,
+  explorerButton: COLORS.nonexistentBlue.dark,
 };
 
 
