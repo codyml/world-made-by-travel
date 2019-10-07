@@ -8,6 +8,11 @@ export const SET_EXPLORER_OPEN = 'SET_EXPLORER_OPEN';
 export const SET_EXPLORER_URL = 'SET_EXPLORER_URL';
 export const SET_MODAL_OPEN = 'SET_MODAL_OPEN';
 export const SET_MODAL_CONTENT = 'SET_MODAL_CONTENT';
+export const PREPARE_TRANSITION = 'PREPARE_TRANSITION';
+export const ENABLE_TRANSITION_CSS = 'ENABLE_TRANSITION_CSS';
+export const START_TRANSITION = 'START_TRANSITION';
+export const FINISH_TRANSITION = 'FINISH_TRANSITION';
+
 
 //  Constant indicating that section content has been requested.
 export const REQUESTED = 'REQUESTED';
@@ -17,5 +22,17 @@ export const AUTHOR_MODAL = 'AUTHOR_MODAL';
 export const FIGURE_MODAL = 'FIGURE_MODAL';
 export const CITATION_MODAL = 'CITATION_MODAL';
 
-//  Table of Contents path
-export const EXPANDED_TOC_PATH = '/toc';
+//  Table of Contents
+export const EXPANDED_TOC = {
+  slug: 'toc',
+  path: '/toc',
+  title: 'Table of Contents',
+  index: -1,
+};
+
+//  Position constants
+export const POSITIONS = {
+  left: 'left',
+  center: 'center',
+  right: 'right',
+};

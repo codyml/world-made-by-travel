@@ -92,7 +92,6 @@ const StyledApp = styled.div`
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  background-color: #eee;
   background-clip: content-box;
 
   .admin-bar-showing & {

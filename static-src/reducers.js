@@ -11,6 +11,12 @@ import {
   SET_MODAL_OPEN,
   SET_MODAL_CONTENT,
   REQUESTED,
+  EXPANDED_TOC,
+  POSITIONS,
+  PREPARE_TRANSITION,
+  ENABLE_TRANSITION_CSS,
+  START_TRANSITION,
+  FINISH_TRANSITION,
 } from './constants';
 
 const config = (state = null, action) => {
@@ -133,7 +139,7 @@ const sectionContentBySlug = (state = null, action) => {
   }
 };
 
-const currentSectionSlug = (state = null, action) => {
+const currentSectionSlug = (state = EXPANDED_TOC.slug, action) => {
   switch (action.type) {
     case SET_CURRENT_SECTION:
       return action.sectionSlug;
@@ -220,6 +226,75 @@ const modalContent = (state = null, action) => {
   }
 };
 
+//  Transition state reducers
+const readerViewTransition = combineReducers({
+  slugsByPosition: (state = { [POSITIONS.center]: EXPANDED_TOC.slug }, action) => {
+    switch (action.type) {
+      case PREPARE_TRANSITION:
+        return {
+          [action.startPosition]: state[POSITIONS.center],
+          [POSITIONS.center]: action.nextSlug,
+        };
+
+      default:
+        return state;
+    }
+  },
+
+  currentPosition: (state = POSITIONS.center, action) => {
+    switch (action.type) {
+      case PREPARE_TRANSITION:
+        return action.startPosition;
+
+      case START_TRANSITION:
+        return POSITIONS.center;
+
+      default:
+        return state;
+    }
+  },
+
+  transitionPrepared: (state = false, action) => {
+    switch (action.type) {
+      case PREPARE_TRANSITION:
+        return true;
+
+      case FINISH_TRANSITION:
+        return false;
+
+      default:
+        return state;
+    }
+  },
+
+  transitionCssEnabled: (state = false, action) => {
+    switch (action.type) {
+      case ENABLE_TRANSITION_CSS:
+        return true;
+
+      case FINISH_TRANSITION:
+        return false;
+
+      default:
+        return state;
+    }
+  },
+
+  transitionStarted: (state = false, action) => {
+    switch (action.type) {
+      case START_TRANSITION:
+        return true;
+
+      case FINISH_TRANSITION:
+        return false;
+
+      default:
+        return state;
+    }
+  },
+});
+
+
 export default combineReducers({
   config,
   authors,
@@ -233,4 +308,5 @@ export default combineReducers({
   explorerUrl,
   modalOpen,
   modalContent,
+  readerViewTransition,
 });

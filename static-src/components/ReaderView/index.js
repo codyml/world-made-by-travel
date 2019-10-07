@@ -2,11 +2,11 @@ import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import styled from 'styled-components';
 
+import useRouting from './useRouting';
 import MobileHeader from '../MobileHeader';
 import TabletHeader from '../TabletHeader';
 import Sidebar from '../Sidebar';
-import useRouting from './useRouting';
-import useTransitioningSectionContent from './useTransitioningSectionContent';
+import TransitioningReaderViewContent from './TransitioningReaderViewContent';
 import {
   CONTAINER_PADDING,
   BrowserSizeContext,
@@ -23,10 +23,7 @@ import {
 
 export default function ReaderView() {
   const browserSize = useContext(BrowserSizeContext);
-  const { sectionSlug, redirectTo } = useRouting();
-
-  //  Handles transitioning between section content views.
-  const TransitioningSectionContent = useTransitioningSectionContent();
+  const redirectTo = useRouting();
 
   return (
     <StyledReaderView>
@@ -55,12 +52,11 @@ export default function ReaderView() {
         </StyledSidebarContainer>
       ) : null }
 
+      {/* Section content */}
       <StyledContentViewport>
-
-        {/* Section content */}
-        <TransitioningSectionContent sectionSlug={sectionSlug} />
-
+        <TransitioningReaderViewContent />
       </StyledContentViewport>
+
     </StyledReaderView>
   );
 }
@@ -68,7 +64,6 @@ export default function ReaderView() {
 const StyledReaderView = styled.div`
   position: relative;
   flex-grow: 1;
-  background-color: #eee;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -91,5 +86,4 @@ const StyledSidebarContainer = styled.div`
 const StyledContentViewport = styled.div`
   position: relative;
   flex-grow: 1;
-  background-color: #ddd;
 `;

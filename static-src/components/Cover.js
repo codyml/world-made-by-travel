@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import HTMLContent from './HTMLContent';
 import MarkdownContent from './MarkdownContent';
-import { EXPANDED_TOC_PATH } from '../constants';
+import { EXPANDED_TOC } from '../constants';
 import {
   Z_INDEX,
   CONTAINER_PADDING,
@@ -30,11 +30,10 @@ export default function Cover() {
   const [copyrightCollapsed, setCopyrightCollapsed] = useState(true);
   const coverOpen = useRouteMatch('/').isExact;
   const browserSize = useContext(BrowserSizeContext);
-  const enterPath = useSelector((state) => (
-    state.currentSectionSlug
-      ? state.sectionMetaBySlug[state.currentSectionSlug].path
-      : EXPANDED_TOC_PATH
-  ));
+  const enterPath = useSelector((state) => ({
+    [EXPANDED_TOC.slug]: EXPANDED_TOC,
+    ...state.sectionMetaBySlug,
+  })[state.currentSectionSlug].path);
 
   const {
     coverTitle,
@@ -325,7 +324,7 @@ const StyledCopyright = styled.div`
   ${atSize.tablet(`
     padding: 0;
     border: none;
-    margin: 0;
+    margin-bottom: 1em;
     height: auto;
     font-size: 1em;
     cursor: default;
@@ -377,6 +376,9 @@ const StyledCredits = styled.div`
   line-height: 1.5;
   ${atSize.tablet(`
     margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   `)}
 `;
 
@@ -386,6 +388,7 @@ const StyledCredit = styled.a`
   margin: 0.75em 0;
   ${atSize.tablet(`
     justify-content: flex-end;
+    align-items: flex-start;
 
     &:first-child {
       margin-top: 0;
@@ -417,6 +420,7 @@ const StyledPublicationInformationBar = styled.div`
 
   & > * {
     max-width: 50%;
+    line-height: 1.5;
 
     &:nth-child(2n + 1) {
       padding-right: 1em;

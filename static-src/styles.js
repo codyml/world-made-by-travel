@@ -16,7 +16,8 @@ export const BrowserSizeContext = React.createContext();
 export const DURATION = { // ms
   fade: 350,
   loadingFadeDelay: 0,
-  slide: 500,
+  slide: 350,
+  pageTransition: 600,
 };
 
 
@@ -78,6 +79,8 @@ export const CONTAINER_PADDING = `
   `)}
 `;
 
+export const PAGE_GUTTER = 36;
+
 export const StyledFadingOverlay = styled.div`
   position: absolute;
   top: 0;
@@ -105,8 +108,8 @@ export const FONTS = {
 const COLORS = {
   rustedChocolate: {
     dark: '#33201a',
-    darkMid: '#734c3f',
     mid: '#5e2c1b',
+    midLight: '#734c3f',
     light: '#d7cac6',
   },
   unburntCaramel: {
@@ -135,6 +138,7 @@ export const THEME_COLORS = {
   coverSubtitle: COLORS.unburntCaramel.midLight,
   coverAuthor: COLORS.unburntCaramel.midMidLight,
   coverPublicationInformationBackground: COLORS.unburntCaramel.dark,
+  readerViewTitle: COLORS.rustedChocolate.mid,
 };
 
 
@@ -147,6 +151,7 @@ export const StyledBookTitle = styled.div`
   font-weight: bold;
   font-size: 1.5em;
   letter-spacing: -0.01em;
+  color: ${THEME_COLORS.readerViewTitle};
 `;
 
 export const StyledSectionAuthor = styled.div`
@@ -189,6 +194,13 @@ export const Triangle = styled.div`
     top: 0.1em;
     left: -0.09em;
   }
+`;
+
+export const StyledPanel = styled.div`
+  display: block;
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.35);
 `;
 
 /*

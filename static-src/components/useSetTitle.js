@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { useRouteMatch } from 'react-router-dom';
 
 /*
@@ -6,17 +7,17 @@ import { useRouteMatch } from 'react-router-dom';
 * with.
 */
 
-const bookTitle = 'A World Made By Travel';
 export default function useSetTitle(titleElements, isActive) {
+  const { coverTitle } = useSelector((state) => state.config);
   const match = useRouteMatch('/');
   useEffect(() => {
     if (match.isExact) {
-      document.title = bookTitle;
+      document.title = coverTitle;
     } else if (isActive) {
       document.title = [
         ...titleElements,
-        bookTitle,
+        coverTitle,
       ].join(' | ');
     }
-  }, [match, titleElements, isActive]);
+  }, [coverTitle, match, titleElements, isActive]);
 }
