@@ -12,6 +12,8 @@ export const PREPARE_TRANSITION = 'PREPARE_TRANSITION';
 export const ENABLE_TRANSITION_CSS = 'ENABLE_TRANSITION_CSS';
 export const START_TRANSITION = 'START_TRANSITION';
 export const FINISH_TRANSITION = 'FINISH_TRANSITION';
+export const SET_MOBILE_MENU_OPEN = 'SET_MOBILE_MENU_OPEN';
+export const SET_BROWSER_SIZE = 'SET_BROWSER_SIZE';
 
 
 //  Constant indicating that section content has been requested.

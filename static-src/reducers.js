@@ -17,6 +17,8 @@ import {
   ENABLE_TRANSITION_CSS,
   START_TRANSITION,
   FINISH_TRANSITION,
+  SET_BROWSER_SIZE,
+  SET_MOBILE_MENU_OPEN,
 } from './constants';
 
 const config = (state = null, action) => {
@@ -29,7 +31,7 @@ const config = (state = null, action) => {
   }
 };
 
-const authors = (state = null, action) => {
+const authorsBySlug = (state = null, action) => {
   switch (action.type) {
     case BOOK_CONTENT_RECEIVED:
       //  Creates map of author slug to author
@@ -106,11 +108,12 @@ const sectionGroupMetaBySlug = (state = null, action) => {
         .map((sectionGroup) => ({
           [sectionGroup.slug]: {
             ...sectionGroup,
+            sections: sectionGroup.sections.map((item) => item.slug),
 
-            // Calculate the section's URL path.
+            //  Calculate the section's URL path.
             path: `/${sectionGroup.slug}`,
 
-            // Calculate the URL path that the section group redirects to
+            //  Calculate the URL path that the section group redirects to
             redirectPath: `/${sectionGroup.slug}/${sectionGroup.sections[0].slug}`,
           },
         })));
@@ -294,10 +297,33 @@ const readerViewTransition = combineReducers({
   },
 });
 
+const browserSize = (state = 'mobile', action) => {
+  switch (action.type) {
+    case SET_BROWSER_SIZE:
+      return action.browserSize;
+
+    default:
+      return state;
+  }
+};
+
+const mobileMenuOpen = (state = false, action) => {
+  switch (action.type) {
+    case SET_MOBILE_MENU_OPEN:
+      return action.mobileMenuOpen;
+
+    case SET_BROWSER_SIZE:
+      return false;
+
+    default:
+      return state;
+  }
+};
+
 
 export default combineReducers({
   config,
-  authors,
+  authorsBySlug,
   tableOfContents,
   sectionMetaBySlug,
   sectionGroupMetaBySlug,
@@ -309,4 +335,6 @@ export default combineReducers({
   modalOpen,
   modalContent,
   readerViewTransition,
+  browserSize,
+  mobileMenuOpen,
 });

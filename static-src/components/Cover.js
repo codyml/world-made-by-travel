@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouteMatch, Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -10,11 +10,10 @@ import {
   Z_INDEX,
   CONTAINER_PADDING,
   StyledFadingOverlay,
-  BrowserSizeContext,
   FONTS,
   THEME_COLORS,
   StyledBookTitle,
-  StyledSectionAuthor,
+  StyledBookAuthor,
   StyledBookContent,
   DURATION,
   Triangle,
@@ -29,7 +28,7 @@ import {
 export default function Cover() {
   const [copyrightCollapsed, setCopyrightCollapsed] = useState(true);
   const coverOpen = useRouteMatch('/').isExact;
-  const browserSize = useContext(BrowserSizeContext);
+  const browserSize = useSelector((state) => state.browserSize);
   const enterPath = useSelector((state) => ({
     [EXPANDED_TOC.slug]: EXPANDED_TOC,
     ...state.sectionMetaBySlug,
@@ -229,7 +228,7 @@ const StyledSubtitle = styled.div`
   `)}
 `;
 
-const StyledAuthor = styled(StyledSectionAuthor)`
+const StyledAuthor = styled(StyledBookAuthor)`
   font-size: 1.25em;
   color: ${THEME_COLORS.coverAuthor};
   margin: 1.65em 0;

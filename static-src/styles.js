@@ -1,13 +1,5 @@
-import React from 'react';
 import styled, { createGlobalStyle } from 'styled-components';
 import normalizeCss from 'normalize.css';
-
-/*
-* Context for sharing current browser size bewteen components.
-*/
-
-export const BrowserSizeContext = React.createContext();
-
 
 /*
 * Transition constants.
@@ -26,7 +18,8 @@ export const DURATION = { // ms
 */
 
 export const Z_INDEX = {
-  section: 100,
+  mobileMenu: 50,
+  readerView: 100,
   modal: 500,
   cover: 1000,
   loading: 1500,
@@ -139,6 +132,8 @@ export const THEME_COLORS = {
   coverAuthor: COLORS.unburntCaramel.midMidLight,
   coverPublicationInformationBackground: COLORS.unburntCaramel.dark,
   readerViewTitle: COLORS.rustedChocolate.mid,
+  mobileMenuBackground: COLORS.rustedChocolate.mid,
+  authorLink: COLORS.unburntCaramel.darkMid,
 };
 
 
@@ -154,7 +149,7 @@ export const StyledBookTitle = styled.div`
   color: ${THEME_COLORS.readerViewTitle};
 `;
 
-export const StyledSectionAuthor = styled.div`
+export const StyledBookAuthor = styled.div`
   font-family: ${FONTS.serif};
   font-style: italic;
 `;
@@ -229,6 +224,12 @@ export const GlobalStyles = createGlobalStyle`
   a {
     color: inherit;
     text-decoration: inherit;
+    opacity: 1;
+    transition: opacity 150ms;
+
+    :hover {
+      opacity: 0.9;
+    }
   }
 
   strong {

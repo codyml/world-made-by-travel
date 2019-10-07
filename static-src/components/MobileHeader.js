@@ -1,20 +1,28 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { StyledBookTitle, StyledPanel, CONTAINER_PADDING } from '../styles';
 import mobileCloseImg from '../images/mobile-close.png';
 import mobileHamburgerImg from '../images/mobile-hamburger.png';
+import { SET_MOBILE_MENU_OPEN } from '../constants';
 
 export default function MobileHeader() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuOpen = useSelector((state) => state.mobileMenuOpen);
   const {
     backgroundImageUrl,
     coverTitle,
   } = useSelector((state) => state.config);
 
-  const toggleMobileMenuOpen = () => setMobileMenuOpen(!mobileMenuOpen);
+  const dispatch = useDispatch();
+  const toggleMobileMenuOpen = (event) => {
+    event.stopPropagation();
+    dispatch({
+      type: SET_MOBILE_MENU_OPEN,
+      mobileMenuOpen: !mobileMenuOpen,
+    });
+  };
 
   return (
     <StyledMobileHeader
@@ -38,6 +46,7 @@ const StyledMobileHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 1;
 `;
 
 const StyledTitlePanel = styled(StyledPanel)`
