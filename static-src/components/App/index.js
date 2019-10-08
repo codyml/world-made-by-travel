@@ -1,7 +1,5 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import styled from 'styled-components';
 
 import useLoadContent from './useLoadContent';
 import useBrowserSize from './useBrowserSize';
@@ -12,14 +10,15 @@ import Explorer from '../Explorer';
 import Modal from '../Modal';
 import MobileMenu from '../MobileMenu';
 
+import styles from '../../styles/App.module.css';
+
 export default function App() {
   useBrowserSize();
   const contentLoaded = useLoadContent();
-  const mobileMenuOpen = useSelector((state) => state.mobileMenuOpen);
 
   return (
-    <StyledApp mobileMenuOpen={mobileMenuOpen}>
-      <LoadingMessage contentLoaded={contentLoaded} />
+    <div className={styles.App}>
+      <LoadingMessage visible={!contentLoaded} />
       { contentLoaded ? (
         <BrowserRouter>
           <CoverView />
@@ -29,24 +28,6 @@ export default function App() {
           <MobileMenu />
         </BrowserRouter>
       ) : null }
-    </StyledApp>
+    </div>
   );
 }
-
-const StyledApp = styled.div`
-  position: relative;
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  background-clip: content-box;
-
-  .admin-bar-showing & {
-    height: calc(100vh - 32px);
-
-    @media screen and (max-width: 782px) {
-      height: calc(100vh - 46px);
-    }
-  }
-`;

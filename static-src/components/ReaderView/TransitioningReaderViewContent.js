@@ -1,9 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components';
+import classNames from 'classnames/bind';
 
-import ReaderViewContent from '../ReaderViewContent';
-import { DURATION, PAGE_GUTTER } from '../../styles';
+import ReaderViewContent from './ReaderViewContent';
 import {
   EXPANDED_TOC,
   POSITIONS,
@@ -13,13 +12,12 @@ import {
   ENABLE_TRANSITION_CSS,
 } from '../../constants';
 
-const POSITION_OFFSETS = {
-  [POSITIONS.left]: 0,
-  [POSITIONS.center]: 1,
-  [POSITIONS.right]: 2,
-};
+import styles from '../../styles/TransitioningReaderViewContent.module.css';
+
+const cx = classNames.bind(styles);
 
 export default function TransitioningReaderViewContent() {
+  const canvasRef = useRef();
   const nextSlug = useSelector((state) => state.currentSectionSlug);
   const sectionMetaBySlug = useSelector((state) => ({
     [EXPANDED_TOC.slug]: EXPANDED_TOC,
@@ -62,65 +60,49 @@ export default function TransitioningReaderViewContent() {
   }, [dispatch, transitionCssEnabled, transitionPrepared]);
 
   //  If transition prepared and CSS enabled but not already started,
-  //  start transition and schedule transition finish
+  //  start transition.
   useEffect(() => {
     if (transitionPrepared && transitionCssEnabled && !transitionStarted) {
       dispatch({ type: START_TRANSITION });
-      setTimeout(() => {
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            dispatch({ type: FINISH_TRANSITION });
-          });
-        });
-      }, DURATION.pageTransition);
     }
   }, [dispatch, transitionCssEnabled, transitionPrepared, transitionStarted]);
 
+  //  Listen for transition end.
+  useEffect(() => {
+    const { current: canvas } = canvasRef;
+    const handleTransitionEnd = (event) => {
+      if (event.propertyName === 'right') {
+        dispatch({ type: FINISH_TRANSITION });
+      }
+    };
+
+    canvas.addEventListener('transitionend', handleTransitionEnd);
+    return () => canvas.removeEventListener('transitionend', handleTransitionEnd);
+  }, [dispatch]);
+
   return (
-    <StyledTransitioningReaderViewContent>
-      <StyledReaderViewContentCanvas
-        transitionCssEnabled={transitionCssEnabled}
-        currentPageOffset={POSITION_OFFSETS[currentPosition]}
+    <div className={styles.TransitioningReaderViewContent}>
+      <div
+        className={cx(styles.canvas, { transitionCssEnabled })}
+        data-current-position={currentPosition}
+        ref={canvasRef}
       >
         {[POSITIONS.left, POSITIONS.center, POSITIONS.right].map(
           (position) => (slugsByPosition[position] ? (
-            <StyledReaderViewContent
+            <ReaderViewContent
+              className={cx(styles.content, {
+                active: (
+                  position === POSITIONS.center && (!transitionPrepared || transitionStarted)
+                ),
+              })}
               key={slugsByPosition[position]}
-              pageOffset={POSITION_OFFSETS[position]}
+              data-position={position}
               contentSlug={slugsByPosition[position]}
-              isActive={position === POSITIONS.center && (!transitionPrepared || transitionStarted)}
+              isActive={position === POSITIONS.center}
             />
           ) : null),
         )}
-      </StyledReaderViewContentCanvas>
-    </StyledTransitioningReaderViewContent>
+      </div>
+    </div>
   );
 }
-
-const StyledTransitioningReaderViewContent = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-`;
-
-const StyledReaderViewContentCanvas = React.memo(styled.div`
-  position: absolute;
-  top: 0;
-  right: ${(p) => `calc(${p.currentPageOffset * 100}% + ${p.currentPageOffset * PAGE_GUTTER}px)`};
-  width: 100%;
-  height: 100%;
-  transition: ${(p) => (p.transitionCssEnabled ? `right ${DURATION.pageTransition}ms` : 'none')};
-`);
-
-const StyledReaderViewContent = styled(ReaderViewContent)`
-  position: absolute;
-  top: 0;
-  left: ${(p) => `calc(${p.pageOffset * 100}% + ${p.pageOffset * PAGE_GUTTER}px)`};
-  width: 100%;
-  height: 100%;
-  transform: scale(${(p) => (p.isActive ? 1 : 0.95)});
-  opacity: ${(p) => (p.isActive ? 1 : 0)};
-  transition: transform ${DURATION.fade}ms, opacity ${DURATION.fade}ms;
-`;

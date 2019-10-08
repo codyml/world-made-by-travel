@@ -1,9 +1,8 @@
 import React, { useMemo, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components';
 
 import { SET_MODAL_CONTENT, AUTHOR_MODAL } from '../constants';
-import { FONTS, THEME_COLORS } from '../styles';
+import { bookAuthor, authorLink } from '../styles/typography.module.css';
 
 
 /*
@@ -11,7 +10,7 @@ import { FONTS, THEME_COLORS } from '../styles';
 * links that open the respective author modal.
 */
 
-export default function useAuthorLinks(authorString) {
+export default function useAuthorLinks(authorString, authorLinkStyle) {
   const authorsBySlug = useSelector((state) => state.authorsBySlug);
   const dispatch = useDispatch();
   const openAuthorModal = useCallback((authorSlug) => dispatch({
@@ -21,38 +20,26 @@ export default function useAuthorLinks(authorString) {
   }), [dispatch]);
 
   return useMemo(() => (authorString ? (
-    <StyledAuthorText>
+    <div className={bookAuthor}>
       {authorString.split(/\[([\w-]+)\]/g).map((segment, index) => {
         const isAuthorSlug = index % 2 === 1;
 
         if (isAuthorSlug && authorsBySlug[segment]) {
           return (
-            <StyledAuthorLink
+            <span
+              className={authorLinkStyle || authorLink}
               // eslint-disable-next-line react/no-array-index-key
               key={`${index}-${segment}`}
               onClick={() => openAuthorModal(segment)}
             >
               {authorsBySlug[segment].name}
-            </StyledAuthorLink>
+            </span>
           );
         }
 
         // eslint-disable-next-line react/no-array-index-key
         return <span key={`${index}-${segment}`}>{segment}</span>;
       })}
-    </StyledAuthorText>
-  ) : null), [authorString, authorsBySlug, openAuthorModal]);
+    </div>
+  ) : null), [authorLinkStyle, authorString, authorsBySlug, openAuthorModal]);
 }
-
-const StyledAuthorText = styled.div`
-  font-family: ${FONTS.serif};
-  font-style: italic;
-`;
-
-export const StyledAuthorLink = styled.a`
-  color: ${THEME_COLORS.authorLink};
-
-  :hover {
-    text-decoration: underline;
-  }
-`;

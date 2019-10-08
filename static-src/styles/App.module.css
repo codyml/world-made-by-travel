@@ -1,0 +1,17 @@
+.App {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background-clip: content-box;
+}
+
+:global(.admin-bar-showing) .App {
+  height: calc(100vh - 32px);
+
+  @media screen and (max-width: 782px) {
+    height: calc(100vh - 46px);
+  }
+}

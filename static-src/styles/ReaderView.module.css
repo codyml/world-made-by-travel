@@ -1,0 +1,63 @@
+@import './transition.css';
+@import './z-index.css';
+@import './layout.css';
+@import './breakpoint.css';
+
+.ReaderView {
+  composes: container from './container.module.css';
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  overflow: hidden;
+  right: 0;
+  transition: right var(--transition-duration-slide);
+  z-index: var(--z-index-reader-view);
+  background-color: white;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    z-index: 1;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-duration-fade), visibility 0s var(--transition-duration-fade);
+  }
+
+  @media (--breakpoint-query-desktop) {
+    flex-direction: row;
+  }
+}
+
+.mobileMenuOpen {
+  right: calc(100% - 6em);
+
+  &::before {
+    opacity: 0.5;
+    visibility: visible;
+    transition: opacity var(--transition-duration-fade), visibility 0s 0s;
+  }
+}
+
+.header {
+  margin: 0 calc((100% - 100vw) / 2);
+  z-index: 1;
+}
+
+.sidebar {
+  width: var(--layout-width-sidebar);
+  margin-right: var(--layout-width-gutter);
+}
+
+.content {
+  position: relative;
+  flex-grow: 1;
+}

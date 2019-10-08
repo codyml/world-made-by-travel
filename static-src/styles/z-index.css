@@ -1,0 +1,11 @@
+/*
+* Z-indices.
+*/
+
+:root {
+  --z-index-mobile-menu: 50;
+  --z-index-reader-view: 100;
+  --z-index-modal: 500;
+  --z-index-cover: 1000;
+  --z-index-loading: 1500;
+}

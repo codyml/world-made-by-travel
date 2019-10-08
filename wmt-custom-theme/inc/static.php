@@ -1,6 +1,6 @@
 <?php
 /**
- * Enqueues the JS bundle created by Webpack.
+ * Enqueues the JS and CSS bundles created by Webpack.
  *
  * @package WMT
  */
@@ -15,6 +15,14 @@ add_action(
 			array(),
 			filemtime( get_stylesheet_directory() . $theme_script_path ),
 			true
+		);
+
+		$theme_styles_path = '/static/styles.css';
+		wp_enqueue_style(
+			'theme_styles',
+			get_template_directory_uri() . $theme_styles_path,
+			array(),
+			filemtime( get_stylesheet_directory() . $theme_styles_path )
 		);
 	}
 );

@@ -1,0 +1,22 @@
+/*
+* Layout & grid constants.
+*/
+
+:root {
+  --layout-width-page: 612px;
+  --layout-width-sidebar: 300px;
+  --layout-width-gutter: 12px;
+  --layout-width-page-gutter: 36px;
+}
+
+:root {
+  --layout-max-content-size-mobile: 0;
+  --layout-max-content-size-tablet: var(--layout-width-page);
+  --layout-max-content-size-desktop: calc(var(--layout-width-sidebar) + var(--layout-width-gutter) + var(--layout-width-page));
+}
+
+:root {
+  --layout-min-side-padding-mobile: 18px;
+  --layout-min-side-padding-tablet: 36px;
+  --layout-min-side-padding-desktop: 72px;
+}

@@ -1,0 +1,19 @@
+@import './breakpoint.css';
+
+.mobile,
+.tablet,
+.desktop {
+  display: none;
+}
+
+.mobile {
+  width: var(--breakpoint-mobile);
+}
+
+.tablet {
+  width: var(--breakpoint-tablet);
+}
+
+.desktop {
+  width: var(--breakpoint-desktop);
+}

@@ -1,0 +1,21 @@
+@import './z-index.css';
+
+.Modal {
+  composes: fading-overlay from './fading-overlay.module.css';
+  composes: container from './container.module.css';
+  z-index: var(--z-index-modal);
+  flex-direction: column;
+  background-color: #ffd;
+}
+
+.visible {
+  composes: visible from './fading-overlay.module.css';
+}
+
+.background {
+  flex-grow: 1;
+}
+
+.foreground {
+  display: block;
+}

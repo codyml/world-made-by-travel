@@ -1,13 +1,15 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components';
+import classNames from 'classnames/bind';
 
 import useModalContent from './useModalContent';
 import { SET_MODAL_OPEN } from '../../constants';
-import { Z_INDEX, CONTAINER_PADDING, StyledFadingOverlay } from '../../styles';
+import styles from '../../styles/Modal.module.css';
+
+const cx = classNames.bind(styles);
 
 export default function Modal() {
-  const modalOpen = useSelector((state) => state.modalOpen);
+  const visible = useSelector((state) => state.modalOpen);
   const modalContent = useSelector((state) => state.modalContent);
   const dispatch = useDispatch();
 
@@ -15,27 +17,14 @@ export default function Modal() {
   const closeModal = () => dispatch({ type: SET_MODAL_OPEN, modalOpen: false });
 
   return (
-    <StyledModal visible={modalOpen}>
-      <StyledModalBackground>
+    <div className={cx(styles.Modal, { visible })}>
+      <div className={styles.background}>
         <button type="button" onClick={closeModal}>Close Modal</button>
         { modalBackgroundContent }
-      </StyledModalBackground>
-      <StyledModalForeground>
+      </div>
+      <div className={styles.foreground}>
         { modalForegroundContent }
-      </StyledModalForeground>
-    </StyledModal>
+      </div>
+    </div>
   );
 }
-
-const StyledModal = styled(StyledFadingOverlay)`
-  ${CONTAINER_PADDING}
-  z-index: ${Z_INDEX.modal};
-  flex-direction: column;
-  background-color: #ffd;
-`;
-
-const StyledModalBackground = styled.div`
-  flex-grow: 1;
-`;
-
-const StyledModalForeground = styled.div``;

@@ -1,44 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import classNames from 'classnames/bind';
 
-import {
-  DURATION,
-  CONTAINER_PADDING,
-  Z_INDEX,
-  StyledFadingOverlay,
-} from '../styles';
+import styles from '../styles/LoadingMessage.module.css';
 
-export default function LoadingMessage({ contentLoaded }) {
+const cx = classNames.bind(styles);
+
+export default function LoadingMessage({ visible }) {
   const [textVisible, setTextVisible] = useState(false);
   useEffect(() => setTextVisible(true), []);
 
-
   return (
-    <StyledLoadingMessage visible={!contentLoaded}>
-      <StyledText visible={textVisible}>Loading...</StyledText>
-    </StyledLoadingMessage>
+    <div className={cx(styles.LoadingMessage, { visible })}>
+      <div className={cx(styles.text, { textVisible })}>
+        Loading...
+      </div>
+    </div>
   );
 }
 
 LoadingMessage.propTypes = {
-  contentLoaded: PropTypes.bool.isRequired,
+  visible: PropTypes.bool.isRequired,
 };
-
-const StyledLoadingMessage = styled(StyledFadingOverlay)`
-  ${CONTAINER_PADDING}
-  z-index: ${Z_INDEX.loading};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #fff;
-  transition-delay: ${DURATION.loadingFadeDelay}ms, ${DURATION.loadingFadeDelay + DURATION.fade}ms;
-`;
-
-const StyledText = styled.div`
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
-  transition: opacity ${DURATION.fade}ms;
-  font-size: 3em;
-  font-weight: 300;
-  color: #aaa;
-`;

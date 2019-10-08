@@ -1,0 +1,17 @@
+@import './transition.css';
+
+.Explorer {
+  composes: container from './container.module.css';
+  height: 0%;
+  background-color: #fdf;
+  transition: height var(--transition-duration-slide);
+  overflow: hidden;
+}
+
+.explorerOpen {
+  height: 50%;
+}
+
+.inner {
+  height: 50%;
+}

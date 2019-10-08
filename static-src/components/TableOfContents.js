@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
+import classNames from 'classnames/bind';
 
-import useAuthorLinks, { StyledAuthorLink } from './useAuthorLinks';
+import useAuthorLinks from './useAuthorLinks';
 import { SET_EXPLORER_OPEN, EXPANDED_TOC } from '../constants';
-import { FONTS, DURATION } from '../styles';
+import styles from '../styles/TableOfContents.module.css';
 
+const cx = classNames.bind(styles);
 
 /*
 * Component that renders the table of contents, both the small ones
@@ -19,7 +20,7 @@ export default function TableOfContents() {
   const tableOfContents = useSelector((state) => state.tableOfContents);
 
   return (
-    <StyledTableOfContents>
+    <div className={styles.TableOfContents}>
       {tableOfContents.map((slug) => (
         <TableOfContentsItem
           key={slug}
@@ -28,7 +29,7 @@ export default function TableOfContents() {
           slug={slug}
         />
       ))}
-    </StyledTableOfContents>
+    </div>
   );
 }
 
@@ -48,51 +49,45 @@ const TableOfContentsItem = ({ expanded, setExpanded, slug }) => {
     explorer_link: explorerLink,
   } = useSelector((state) => state.sectionMetaBySlug[slug] || state.sectionGroupMetaBySlug[slug]);
 
-  const linkedAuthor = useAuthorLinks(author);
+  const linkedAuthor = useAuthorLinks(author, styles.authorLink);
   const dispatch = useDispatch();
 
-  let titleAs;
-  let titleHref;
-  let titleTo;
-  let titleOnClick;
+  let TitleComponent;
+  let titleProps;
 
   if (explorerLink) {
     if (browserSize === 'mobile') {
-      titleAs = 'a';
-      titleHref = explorerBaseUrl;
+      TitleComponent = 'a';
+      titleProps = { href: explorerBaseUrl, target: 'explorer' };
     } else {
-      titleOnClick = () => dispatch({ type: SET_EXPLORER_OPEN, explorerOpen: true });
+      TitleComponent = 'span';
+      titleProps = { onClick: () => dispatch({ type: SET_EXPLORER_OPEN, explorerOpen: true }) };
     }
   } else if (sections && setExpanded) {
     if (expanded) {
-      titleAs = Link;
-      titleTo = EXPANDED_TOC.path;
+      TitleComponent = Link;
+      titleProps = { to: EXPANDED_TOC.path };
     } else {
-      titleOnClick = setExpanded;
+      TitleComponent = 'span';
+      titleProps = { onClick: setExpanded };
     }
   } else {
-    titleAs = Link;
-    titleTo = path;
+    TitleComponent = Link;
+    titleProps = { to: path };
   }
 
   return (
-    <StyledTableOfContentsItem>
-      <StyledTitle
-        as={titleAs}
-        href={titleHref}
-        target={titleHref ? 'explorer' : null}
-        to={titleTo}
-        onClick={titleOnClick}
-      >
+    <div className={styles.item}>
+      <TitleComponent className={styles.title} {...titleProps}>
         {title}
-      </StyledTitle>
-      {linkedAuthor ? <StyledAuthor>{linkedAuthor}</StyledAuthor> : null}
+      </TitleComponent>
+      {linkedAuthor ? <div className={styles.author}>{linkedAuthor}</div> : null}
       {sections ? (
-        <StyledChildren isExpanded={expanded}>
+        <div className={cx(styles.children, { expanded })}>
           {sections.map((childSlug) => <TableOfContentsItem key={childSlug} slug={childSlug} />)}
-        </StyledChildren>
+        </div>
       ) : null}
-    </StyledTableOfContentsItem>
+    </div>
   );
 };
 
@@ -106,47 +101,3 @@ TableOfContentsItem.defaultProps = {
   expanded: false,
   setExpanded: null,
 };
-
-const StyledTableOfContents = styled.div`
-  font-size: 1.15em;
-  font-family: ${FONTS.serif};
-  font-weight: 400;
-  line-height: 1.4;
-`;
-
-const StyledTableOfContentsItem = styled.div`
-  margin: 1em 0;
-`;
-
-const StyledTitle = styled.span``;
-const StyledAuthor = styled.div`
-  font-size: 0.9em;
-  margin-top: 0.15em;
-  font-weight: 300;
-
-  ${StyledAuthorLink} {
-    color: white;
-    font-weight: 400;
-  }
-`;
-
-const StyledChildren = styled.div`
-  max-height: ${(p) => (p.isExpanded ? '300px' : 0)};
-  overflow-y: scroll;
-  transition: max-height ${DURATION.slide}ms;
-  border-left: 1px solid rgba(255, 255, 255, 0.5);
-  padding-left: 1em;
-  margin: 0.75em 0;
-
-  ${StyledTableOfContentsItem} {
-    margin: 0.85em 0;
-
-    :first-child {
-      margin-top: 0.25em;
-    }
-
-    :last-child {
-      margin-bottom: 0.25em;
-    }
-  }
-`;

@@ -1,9 +1,9 @@
 {
-    "processors": [
-        "stylelint-processor-styled-components"
-    ],
     "extends": [
         "stylelint-config-standard",
-        "stylelint-config-styled-components"
-    ]
+        "stylelint-config-css-modules",
+    ],
+    "rules": {
+        "no-duplicate-selectors": null,
+    },
 }

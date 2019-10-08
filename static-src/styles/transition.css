@@ -1,0 +1,10 @@
+/*
+* Transition duration constants.
+*/
+
+:root {
+  --transition-duration-fade: 350ms;
+  --transition-duration-slide: 350ms;
+  --transition-duration-page-transition: 600ms;
+  --transition-delay-loading-fade: 500ms;
+}

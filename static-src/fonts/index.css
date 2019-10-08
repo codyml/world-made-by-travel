@@ -1,0 +1,209 @@
+@font-face {
+  font-family: 'Crimson';
+  font-weight: 400;
+  font-style: normal;
+  src: url(../fonts/crimson/400-normal.otf);
+}
+
+@font-face {
+  font-family: 'Crimson';
+  font-weight: 400;
+  font-style: italic;
+  src: url(../fonts/crimson/400-italic.otf);
+}
+
+@font-face {
+  font-family: 'Crimson';
+  font-weight: 600;
+  font-style: normal;
+  src: url(../fonts/crimson/600-normal.otf);
+}
+
+@font-face {
+  font-family: 'Crimson';
+  font-weight: 600;
+  font-style: italic;
+  src: url(../fonts/crimson/600-italic.otf);
+}
+
+@font-face {
+  font-family: 'Crimson';
+  font-weight: 700;
+  font-style: normal;
+  src: url(../fonts/crimson/700-normal.otf);
+}
+
+@font-face {
+  font-family: 'Crimson';
+  font-weight: 700;
+  font-style: italic;
+  src: url(../fonts/crimson/700-italic.otf);
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 200;
+  font-style: normal;
+  src: url(../fonts/source-sans-pro/200-normal.otf);
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 200;
+  font-style: italic;
+  src: url(../fonts/source-sans-pro/200-italic.otf);
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 300;
+  font-style: normal;
+  src: url(../fonts/source-sans-pro/300-normal.otf);
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 300;
+  font-style: italic;
+  src: url(../fonts/source-sans-pro/300-italic.otf);
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 400;
+  font-style: normal;
+  src: url(../fonts/source-sans-pro/400-normal.otf);
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 400;
+  font-style: italic;
+  src: url(../fonts/source-sans-pro/400-italic.otf);
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 600;
+  font-style: normal;
+  src: url(../fonts/source-sans-pro/600-normal.otf);
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 600;
+  font-style: italic;
+  src: url(../fonts/source-sans-pro/600-italic.otf);
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 700;
+  font-style: normal;
+  src: url(../fonts/source-sans-pro/700-normal.otf);
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 700;
+  font-style: italic;
+  src: url(../fonts/source-sans-pro/700-italic.otf);
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 900;
+  font-style: normal;
+  src: url(../fonts/source-sans-pro/900-normal.otf);
+}
+
+@font-face {
+  font-family: 'Source Sans Pro';
+  font-weight: 900;
+  font-style: italic;
+  src: url(../fonts/source-sans-pro/900-italic.otf);
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  font-weight: 200;
+  font-style: normal;
+  src: url(../fonts/source-serif-pro/200-normal.otf);
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  font-weight: 200;
+  font-style: italic;
+  src: url(../fonts/source-serif-pro/200-italic.otf);
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  font-weight: 300;
+  font-style: normal;
+  src: url(../fonts/source-serif-pro/300-normal.otf);
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  font-weight: 300;
+  font-style: italic;
+  src: url(../fonts/source-serif-pro/300-italic.otf);
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  font-weight: 400;
+  font-style: normal;
+  src: url(../fonts/source-serif-pro/400-normal.otf);
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  font-weight: 400;
+  font-style: italic;
+  src: url(../fonts/source-serif-pro/400-italic.otf);
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  font-weight: 600;
+  font-style: normal;
+  src: url(../fonts/source-serif-pro/600-normal.otf);
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  font-weight: 600;
+  font-style: italic;
+  src: url(../fonts/source-serif-pro/600-italic.otf);
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  font-weight: 700;
+  font-style: normal;
+  src: url(../fonts/source-serif-pro/700-normal.otf);
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  font-weight: 700;
+  font-style: italic;
+  src: url(../fonts/source-serif-pro/700-italic.otf);
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  font-weight: 900;
+  font-style: normal;
+  src: url(../fonts/source-serif-pro/900-normal.otf);
+}
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  font-weight: 900;
+  font-style: italic;
+  src: url(../fonts/source-serif-pro/900-italic.otf);
+}

@@ -1,0 +1,38 @@
+@import './font.css';
+
+/*
+* Global CSS styles.
+*/
+
+@import 'normalize.css';
+
+html {
+  font-size: 12px; /* 1 rem */
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  color: #333;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+  opacity: 1;
+  transition: opacity 150ms;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+strong {
+  font-weight: bold;
+}

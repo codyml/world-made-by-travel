@@ -1,15 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import classNames from 'classnames/bind';
+
+import styles from '../styles/HTMLContent.module.css';
 
 
 /*
 * Renders an HTML string.
 */
 
-export default function HTMLContent({ children, ...props }) {
+export default function HTMLContent({ className, children, ...props }) {
   return (
-    <StyledHTMLContent {...props} dangerouslySetInnerHTML={{ __html: children }} />
+    <div
+      className={classNames(className, styles.HTMLContent)}
+      //  eslint-disable-next-line react/no-danger
+      dangerouslySetInnerHTML={{ __html: children }}
+      {...props}
+    />
   );
 }
 
@@ -22,13 +29,3 @@ HTMLContent.defaultProps = {
   className: '',
   children: '',
 };
-
-const StyledHTMLContent = styled.div`
-  & > p:first-child {
-    margin-top: 0;
-  }
-
-  & > p:last-child {
-    margin-bottom: 0;
-  }
-`;

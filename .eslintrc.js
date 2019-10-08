@@ -25,5 +25,7 @@ module.exports = {
   rules: {
     'react/jsx-filename-extension': [1, { 'extensions': ['.js'] }],
     'react/jsx-props-no-spreading': [0],
+    'jsx-a11y/click-events-have-key-events': [0],
+    'jsx-a11y/no-static-element-interactions' : [0],
   },
 };

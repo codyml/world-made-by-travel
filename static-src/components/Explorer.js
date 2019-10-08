@@ -1,9 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import styled from 'styled-components';
+import classNames from 'classnames/bind';
 
 import { SET_EXPLORER_URL } from '../constants';
-import { DURATION, CONTAINER_PADDING } from '../styles';
+import styles from '../styles/Explorer.module.css';
+
+const cx = classNames.bind(styles);
 
 export default function Explorer() {
   const explorerOpen = useSelector((state) => state.explorerOpen);
@@ -13,24 +15,12 @@ export default function Explorer() {
   const setExplorerUrl = (url) => dispatch({ type: SET_EXPLORER_URL, explorerUrl: url });
 
   return (
-    <StyledExplorer explorerOpen={explorerOpen}>
-      <StyledExplorerInner>
+    <div className={cx(styles.Explorer, { explorerOpen })}>
+      <div className={styles.inner}>
         <div>{ explorerOpen ? 'open' : 'closed' }</div>
         <div>{ explorerUrl }</div>
         <button type="button" onClick={() => setExplorerUrl('/#/entries/114')}>Set URL to /#/entries/114</button>
-      </StyledExplorerInner>
-    </StyledExplorer>
+      </div>
+    </div>
   );
 }
-
-const StyledExplorer = styled.div`
-  height: ${({ explorerOpen }) => (explorerOpen ? '50%' : '0%')};
-  background-color: #fdf;
-  transition: height ${DURATION.slide}ms;
-  overflow: hidden;
-  ${CONTAINER_PADDING}
-`;
-
-const StyledExplorerInner = styled.div`
-  height: 50%;
-`;

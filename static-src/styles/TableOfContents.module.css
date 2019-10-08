@@ -1,0 +1,50 @@
+@import './font.css';
+@import './transition.css';
+
+.TableOfContents {
+  font-size: 1.15em;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.item {
+  margin: 1em 0;
+}
+
+.author {
+  composes: bookAuthor from './typography.module.css';
+  font-size: 0.9em;
+  margin-top: 0.15em;
+}
+
+.authorLink {
+  composes: authorLink from './typography.module.css';
+  color: white;
+  font-weight: 600;
+}
+
+.children {
+  max-height: 0;
+  overflow-y: scroll;
+  transition: max-height var(--transition-duration-slide);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  padding-left: 1em;
+  margin: 0.75em 0;
+
+  & .item {
+    margin: 0.85em 0;
+
+    &:first-child {
+      margin-top: 0.25em;
+    }
+
+    &:last-child {
+      margin-bottom: 0.25em;
+    }
+  }
+}
+
+.expanded {
+  max-height: 300px;
+}

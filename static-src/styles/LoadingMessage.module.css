@@ -1,0 +1,31 @@
+@import './transition.css';
+@import './z-index.css';
+
+.LoadingMessage {
+  composes: fading-overlay from './fading-overlay.module.css';
+  composes: container from './container.module.css';
+  z-index: var(--z-index-loading);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  transition-delay:
+    var(--transition-delay-loading-fade),
+    calc(var(--transition-delay-loading-fade) + var(--transition-duration-fade));
+}
+
+.visible {
+  composes: visible from './fading-overlay.module.css';
+}
+
+.text {
+  opacity: 0;
+  transition: opacity var(--transition-duration-fade);
+  font-size: 3em;
+  font-weight: 300;
+  color: #aaa;
+}
+
+.textVisible {
+  opacity: 1;
+}

@@ -1,0 +1,40 @@
+.MobileHeader {
+  composes: container from './container.module.css';
+  height: 6em;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+.titlePanel {
+  composes: panel from './ui.module.css';
+  height: 3em;
+  padding: 0 1em;
+  display: flex;
+  align-items: center;
+}
+
+.bookTitle {
+  composes: bookTitle from './typography.module.css';
+  position: relative;
+  top: 0.1em;
+}
+
+.menuTrigger {
+  composes: panel from './ui.module.css';
+  width: 3em;
+  height: 3em;
+  background-image: url(../images/mobile-hamburger.png);
+  background-repeat: no-repeat;
+  background-size: auto 1.2em;
+  background-position: center;
+  cursor: pointer;
+}
+
+.menuOpen {
+  background-image: url(../images/mobile-close.png);
+}

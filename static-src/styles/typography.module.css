@@ -1,0 +1,43 @@
+@import './font.css';
+@import './color.css';
+
+/*
+* Reusable typographic styles.
+*/
+
+.bookTitle {
+  font-family: var(--font-display);
+  font-weight: bold;
+  font-size: 1.5em;
+  letter-spacing: -0.01em;
+  color: var(--color-reader-view-title);
+}
+
+.bookAuthor {
+  font-family: var(--font-serif);
+  font-style: italic;
+}
+
+.authorLink {
+  color: var(--color-author-link);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.bookContent {
+  font-family: var(--font-serif);
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+
+  & hr {
+    border: 0;
+    border-top: 1px solid #777;
+    margin: 1.5em 0;
+  }
+
+  & a {
+    text-decoration: underline;
+  }
+}

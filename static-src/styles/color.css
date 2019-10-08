@@ -1,0 +1,49 @@
+/*
+* Colors.
+*/
+
+:root {
+  --color-rusted-chocolate-dark: #33201a;
+  --color-rusted-chocolate-mid: #5e2c1b;
+  --color-rusted-chocolate-mid-light: #734c3f;
+  --color-rusted-chocolate-light: #d7cac6;
+}
+
+:root {
+  --color-unburnt-caramel-dark: #594216;
+  --color-unburnt-caramel-dark-mid: #806533;
+  --color-unburnt-caramel-mid: #bf9e60;
+  --color-unburnt-caramel-mid-mid-light: #e9be8f;
+  --color-unburnt-caramel-mid-light: #ede5d5;
+  --color-unburnt-caramel-light: #f7f4ed;
+}
+
+:root {
+  --color-nonexistent-blue-dark: #405980;
+  --color-nonexistent-blue-mid: #99a9bf;
+  --color-nonexistent-blue-mid-light: #e5e9ef;
+  --color-nonexistent-blue-light: #f7f9fc;
+}
+
+:root {
+  --color-absent-lavender-dark: #675673;
+  --color-absent-lavender-mid: #aa7acc;
+  --color-absent-lavender-light: #e3cef2;
+}
+
+/*
+* Color theme values.
+*/
+
+:root {
+  --color-cover-title: var(--color-absent-lavender-mid);
+  --color-cover-subtitle: var(--color-unburnt-caramel-mid-light);
+  --color-cover-author: var(--color-unburnt-caramel-mid-mid-light);
+  --color-cover-publication-information-background: var(--color-unburnt-caramel-dark);
+  --color-reader-view-title: var(--color-rusted-chocolate-mid);
+  --color-mobile-menu-background: var(--color-rusted-chocolate-mid);
+  --color-author-link: var(--color-unburnt-caramel-dark-mid);
+  --color-ui-hr: var(--color-rusted-chocolate-light);
+  --color-table-of-contents-button: var(--color-rusted-chocolate-mid);
+  --color-explorer-button: var(--color-nonexistent-blue-dark);
+}

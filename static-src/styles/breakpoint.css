@@ -1,0 +1,19 @@
+@import "./layout.css";
+
+/*
+* Responsive breakpoints.
+*/
+
+:root {
+  --breakpoint-mobile: 0;
+  --breakpoint-tablet: calc(var(--layout-max-content-size-tablet) + 2 * var(--layout-min-side-padding-tablet));
+  --breakpoint-desktop: calc(var(--layout-max-content-size-desktop) + 2 * var(--layout-min-side-padding-desktop));
+}
+
+/*
+* Hard-coded because media queries don't allow custom properties.
+*/
+
+@custom-media --breakpoint-query-mobile (min-width: 0);
+@custom-media --breakpoint-query-tablet (min-width: 684px);
+@custom-media --breakpoint-query-desktop (min-width: 1068px);

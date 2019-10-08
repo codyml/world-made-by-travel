@@ -1,0 +1,27 @@
+/*
+* Misc reusable component styles.
+*/
+
+.triangle {
+  display: block;
+  width: 0.5em;
+  height: 0.45em;
+  position: relative;
+
+  &::before {
+    content: '▴';
+    display: block;
+    line-height: 0;
+    font-size: 1.4em;
+    position: absolute;
+    top: 0.1em;
+    left: -0.09em;
+  }
+}
+
+.panel {
+  display: block;
+  background-color: white;
+  border-radius: 2px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.35);
+}
