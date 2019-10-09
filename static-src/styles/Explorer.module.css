@@ -1,4 +1,5 @@
 @import './transition.css';
+@import './breakpoint.css';
 
 .Explorer {
   composes: container from './container.module.css';
@@ -9,7 +10,11 @@
 }
 
 .explorerOpen {
-  height: 50%;
+  height: calc(50% - 5.5em);
+
+  @media (--breakpoint-desktop) {
+    height: 50%;
+  }
 }
 
 .inner {

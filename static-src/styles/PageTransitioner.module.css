@@ -1,7 +1,7 @@
 @import './transition.css';
 @import './layout.css';
 
-.PageContainer {
+.PageTransitioner {
   position: absolute;
   top: 0;
   left: 0;

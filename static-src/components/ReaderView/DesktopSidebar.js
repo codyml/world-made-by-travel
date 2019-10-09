@@ -43,7 +43,7 @@ export default function DesktopSidebar() {
             <div className={style.bookAuthor}>{coverAuthor}</div>
           </Link>
         </div>
-        <div className={cx(style.panelInner, { collapsed: !onTableOfContents })}>
+        <div className={cx(style.instructions, { collapsed: !onTableOfContents })}>
           <MarkdownContent>{instructionsMarkdown}</MarkdownContent>
         </div>
       </div>

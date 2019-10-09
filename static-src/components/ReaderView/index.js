@@ -7,7 +7,7 @@ import useRouting from './useRouting';
 import MobileHeader from './MobileHeader';
 import TabletHeader from './TabletHeader';
 import DesktopSidebar from './DesktopSidebar';
-import PageContainer from './PageContainer';
+import PageTransitioner from './PageTransitioner';
 import { SET_MOBILE_MENU_OPEN } from '../../constants';
 import style from '../../styles/ReaderView.module.css';
 
@@ -60,7 +60,7 @@ export default function ReaderView() {
 
       {/* Section content */}
       <div className={style.content}>
-        <PageContainer />
+        <PageTransitioner />
       </div>
 
     </div>

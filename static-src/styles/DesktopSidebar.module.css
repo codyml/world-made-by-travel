@@ -112,6 +112,14 @@
   margin-top: 0.25em;
 }
 
+.instructions {
+  composes: panelInner;
+  font-size: 1.3em;
+  font-weight: 300;
+  line-height: 1.45;
+  text-align: center;
+}
+
 .tocPanel {
   composes: panel;
   opacity: 0;

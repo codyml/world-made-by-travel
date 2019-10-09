@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classNamesBind from 'classnames/bind';
 
-import Page from './Page';
+import SectionContent from '../SectionContent';
 import {
   EXPANDED_TOC,
   POSITIONS,
@@ -12,11 +12,11 @@ import {
   ENABLE_TRANSITION_CSS,
 } from '../../constants';
 
-import style from '../../styles/PageContainer.module.css';
+import style from '../../styles/PageTransitioner.module.css';
 
 const cx = classNamesBind.bind(style);
 
-export default function PageContainer() {
+export default function PageTransitioner() {
   const canvasRef = useRef();
   const nextSlug = useSelector((state) => state.currentSectionSlug);
   const sectionMetaBySlug = useSelector((state) => ({
@@ -81,7 +81,7 @@ export default function PageContainer() {
   }, [dispatch]);
 
   return (
-    <div className={style.PageContainer}>
+    <div className={style.PageTransitioner}>
       <div
         className={cx(style.canvas, { transitionCssEnabled })}
         data-current-position={currentPosition}
@@ -89,7 +89,7 @@ export default function PageContainer() {
       >
         {[POSITIONS.left, POSITIONS.center, POSITIONS.right].map(
           (position) => (slugsByPosition[position] ? (
-            <Page
+            <div
               className={cx(style.content, {
                 active: (
                   position === POSITIONS.center && (!transitionPrepared || transitionStarted)
@@ -97,9 +97,9 @@ export default function PageContainer() {
               })}
               key={slugsByPosition[position]}
               data-position={position}
-              contentSlug={slugsByPosition[position]}
-              isActive={position === POSITIONS.center}
-            />
+            >
+              <SectionContent sectionSlug={slugsByPosition[position]} />
+            </div>
           ) : null),
         )}
       </div>

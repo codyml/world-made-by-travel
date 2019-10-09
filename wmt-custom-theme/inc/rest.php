@@ -98,7 +98,7 @@ function wmt_get_section_content( $post ) {
 					),
 				);
 			},
-			get_field( 'figures', $post )
+			get_field( 'figures', $post ) ?: array(),
 		),
 
 		'blocks'   => array_map(
@@ -111,7 +111,7 @@ function wmt_get_section_content( $post ) {
 					'belowFootnotes' => $block['below_footnotes'],
 				);
 			},
-			get_field( 'blocks', $post )
+			get_field( 'blocks', $post ) ?: array(),
 		),
 	);
 }

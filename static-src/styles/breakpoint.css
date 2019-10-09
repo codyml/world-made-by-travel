@@ -14,6 +14,6 @@
 * Hard-coded because media queries don't allow custom properties.
 */
 
-@custom-media --breakpoint-query-mobile (min-width: 0);
-@custom-media --breakpoint-query-tablet (min-width: 684px);
-@custom-media --breakpoint-query-desktop (min-width: 1068px);
+@custom-media --breakpoint-mobile (min-width: 0);
+@custom-media --breakpoint-tablet (min-width: 684px);
+@custom-media --breakpoint-desktop (min-width: 1068px);

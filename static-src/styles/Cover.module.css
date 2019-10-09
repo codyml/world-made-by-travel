@@ -32,16 +32,16 @@
     background-size: cover;
   }
 
-  @media (--breakpoint-query-tablet) and (height < 670px) {
+  @media (--breakpoint-tablet) and (height < 670px) {
     background-size: cover;
   }
 
-  @media (--breakpoint-query-desktop) {
+  @media (--breakpoint-desktop) {
     background-size: auto 145%;
     background-position: center;
   }
 
-  @media (--breakpoint-query-desktop) and (
+  @media (--breakpoint-desktop) and (
     height < 605px
     or (width > 1200px and height < 705px)
     or (width > 1400px and height < 805px)
@@ -65,12 +65,12 @@
   flex-direction: column;
   min-height: 0;
 
-  @media (--breakpoint-query-tablet) {
+  @media (--breakpoint-tablet) {
     padding-top: 6em;
     padding-bottom: 1.5em;
   }
 
-  @media (--breakpoint-query-desktop) {
+  @media (--breakpoint-desktop) {
     flex-wrap: wrap;
     justify-content: space-between;
     padding-bottom: 1.75rem;
@@ -81,14 +81,14 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 1em 0;
 
-  @media (--breakpoint-query-tablet) {
+  @media (--breakpoint-tablet) {
     margin: 0;
     margin-bottom: 1rem;
     text-align: right;
     font-size: 1.25em;
   }
 
-  @media (--breakpoint-query-desktop) {
+  @media (--breakpoint-desktop) {
     order: 2;
   }
 }
@@ -107,7 +107,7 @@
   font-size: 1.2em;
   color: var(--color-cover-subtitle);
 
-  @media (--breakpoint-query-tablet) {
+  @media (--breakpoint-tablet) {
     font-size: 1.5em;
   }
 }
@@ -118,7 +118,7 @@
   color: var(--color-cover-author);
   margin: 1.65em 0;
 
-  @media (--breakpoint-query-tablet) {
+  @media (--breakpoint-tablet) {
     margin-top: 0.75em;
   }
 }
@@ -147,13 +147,13 @@
     border-top: 1px solid #bbb;
   }
 
-  @media (--breakpoint-query-tablet) {
+  @media (--breakpoint-tablet) {
     width: 75%;
     font-size: 1.25em;
     padding-bottom: 0;
   }
 
-  @media (--breakpoint-query-desktop) {
+  @media (--breakpoint-desktop) {
     order: 1;
     width: 50%;
     flex-basis: 100%;
@@ -168,12 +168,12 @@
     margin: 0.25em 0;
   }
 
-  @media (--breakpoint-query-tablet) {
+  @media (--breakpoint-tablet) {
     text-align: right;
     font-size: 1.1em;
   }
 
-  @media (--breakpoint-query-desktop) {
+  @media (--breakpoint-desktop) {
     order: 3;
   }
 }
@@ -212,7 +212,7 @@
   border-bottom: 1px solid #bbb;
   margin-bottom: 1.5em;
 
-  @media (--breakpoint-query-tablet) {
+  @media (--breakpoint-tablet) {
     padding: 0;
     border: none;
     margin-bottom: 1em;
@@ -271,7 +271,7 @@
   margin: 1em 0;
   line-height: 1.5;
 
-  @media (--breakpoint-query-tablet) {
+  @media (--breakpoint-tablet) {
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -283,7 +283,7 @@
     align-items: center;
     margin: 0.75em 0;
 
-    @media (--breakpoint-query-tablet) {
+    @media (--breakpoint-tablet) {
       justify-content: flex-end;
       align-items: flex-start;
 
@@ -330,7 +330,7 @@
     }
   }
 
-  @media (--breakpoint-query-desktop) {
+  @media (--breakpoint-desktop) {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
   }

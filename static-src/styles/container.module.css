@@ -5,12 +5,12 @@
   padding-left: var(--layout-min-side-padding-mobile);
   padding-right: var(--layout-min-side-padding-mobile);
 
-  @media (--breakpoint-query-tablet) {
+  @media (--breakpoint-tablet) {
     padding-left: calc((100% - var(--layout-max-content-size-tablet)) / 2);
     padding-right: calc((100% - var(--layout-max-content-size-tablet)) / 2);
   }
 
-  @media (--breakpoint-query-desktop) {
+  @media (--breakpoint-desktop) {
     padding-left: calc((100% - var(--layout-max-content-size-desktop)) / 2);
     padding-right: calc((100% - var(--layout-max-content-size-desktop)) / 2);
   }

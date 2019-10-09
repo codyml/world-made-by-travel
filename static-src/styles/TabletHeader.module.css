@@ -8,6 +8,7 @@
   height: 12em;
   display: flex;
   align-items: stretch;
+  margin-bottom: -1em;
 }
 
 .titlePanel {

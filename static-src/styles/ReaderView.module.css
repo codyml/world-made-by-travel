@@ -4,7 +4,6 @@
 @import './breakpoint.css';
 
 .ReaderView {
-  composes: container from './container.module.css';
   position: relative;
   flex-grow: 1;
   display: flex;
@@ -32,10 +31,11 @@
     transition: opacity var(--transition-duration-fade), visibility 0s var(--transition-duration-fade);
   }
 
-  @media (--breakpoint-query-desktop) {
+  @media (--breakpoint-desktop) {
     flex-direction: row;
     padding-top: 2rem;
     padding-bottom: 2rem;
+    padding-left: calc((100% - var(--layout-max-content-size-desktop)) / 2);
     transition: padding-bottom var(--transition-duration-slide);
 
     &.explorerOpen {

@@ -116,7 +116,7 @@ const sectionGroupMetaBySlug = (state = null, action) => {
   }
 };
 
-const sectionContentBySlug = (state = null, action) => {
+const sectionContentBySlug = (state = {}, action) => {
   switch (action.type) {
     case SECTION_CONTENT_REQUESTED:
       return {
@@ -230,6 +230,11 @@ const readerViewTransition = combineReducers({
         return {
           [action.startPosition]: state[POSITIONS.center],
           [POSITIONS.center]: action.nextSlug,
+        };
+
+      case FINISH_TRANSITION:
+        return {
+          [POSITIONS.center]: state[POSITIONS.center],
         };
 
       default:
