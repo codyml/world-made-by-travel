@@ -1,3 +1,5 @@
+@import './shadow.css';
+
 /*
 * Misc reusable component style.
 */
@@ -6,5 +8,5 @@
   display: block;
   background-color: white;
   border-radius: 2px;
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.35);
+  box-shadow: var(--shadow-panel);
 }

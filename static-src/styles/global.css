@@ -20,6 +20,7 @@ a {
   text-decoration: inherit;
   opacity: 1;
   transition: opacity 150ms;
+  cursor: pointer;
 
   &:hover {
     opacity: 0.85;

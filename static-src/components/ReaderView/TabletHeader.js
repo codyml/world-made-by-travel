@@ -5,7 +5,7 @@ import classNamesBind from 'classnames/bind';
 
 import TableOfContents from '../TableOfContents';
 import Tabbed from '../Tabbed';
-import { SET_EXPLORER_OPEN } from '../../constants';
+import { SET_EXPLORER_OPEN, EXPANDED_TOC } from '../../constants';
 import style from '../../styles/TabletHeader.module.css';
 
 const cx = classNamesBind.bind(style);
@@ -13,6 +13,10 @@ const cx = classNamesBind.bind(style);
 export default function TabletHeader() {
   const [tocExpanded, setTableOfContentsExpanded] = useState(false);
   const explorerOpen = useSelector((state) => state.explorerOpen);
+  const onTableOfContents = useSelector((state) => (
+    state.currentSectionSlug === EXPANDED_TOC.slug
+  ));
+
   const {
     backgroundImageUrl,
     coverTitle,
@@ -31,6 +35,8 @@ export default function TabletHeader() {
 
   return (
     <div className={style.TabletHeader}>
+
+      {/* Title panel */}
       <div className={style.titlePanel}>
         <div className={style.titlePanelInner}>
           <Link to="/">
@@ -39,11 +45,15 @@ export default function TabletHeader() {
           </Link>
         </div>
       </div>
+
+      {/* Header background */}
       <div
         className={style.bar}
         style={{ backgroundImage: `url(${backgroundImageUrl})` }}
       >
-        <div className={style.tocWrapper}>
+
+        {/* Table of Contents dropdown */}
+        <div className={cx(style.tocWrapper, { visible: !onTableOfContents })}>
           <div className={cx(style.panel, { tocExpanded })}>
             <Tabbed triangleClassName={style.triangle} isExpanded={tocExpanded}>
               <div className={style.tocButton} onClick={toggleTocExpanded}>
@@ -55,9 +65,12 @@ export default function TabletHeader() {
             </Tabbed>
           </div>
         </div>
+
+        {/* Explorer button */}
         <div className={style.explorerButton} onClick={toggleExplorerOpen}>
           {explorerOpen ? 'Close Explorer' : 'Open Explorer'}
         </div>
+
       </div>
     </div>
   );

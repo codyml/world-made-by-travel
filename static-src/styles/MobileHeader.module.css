@@ -1,9 +1,11 @@
+@import './shadow.css';
+
 .MobileHeader {
   composes: container from './container.module.css';
   height: 6em;
   background-size: cover;
   background-position: center;
-  box-shadow: 0 0 24px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--shadow-bottom-panel);
   display: flex;
   align-items: center;
   justify-content: space-between;

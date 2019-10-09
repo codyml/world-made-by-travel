@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
+import TableOfContents from '../TableOfContents';
 import useSetTitle from '../useSetTitle';
 import { EXPANDED_TOC } from '../../constants';
 
@@ -23,6 +24,7 @@ export default function Page({ contentSlug, isActive, ...props }) {
       Section Content:
       {' '}
       {contentSlug}
+      {contentSlug === EXPANDED_TOC.slug ? <TableOfContents /> : null}
     </div>
   );
 }

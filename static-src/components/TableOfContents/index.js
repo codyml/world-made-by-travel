@@ -8,6 +8,7 @@ import style from '../../styles/TableOfContents.module.css';
 
 
 export default function TableOfContents({
+  className,
   onLinkClick,
   minimized,
   white,
@@ -23,7 +24,7 @@ export default function TableOfContents({
   );
 
   return (
-    <div className={cx(style.TableOfContents)}>
+    <div className={cx(className, style.TableOfContents)}>
       {tableOfContents.map((slug) => (
         <TOCItem
           key={slug}
@@ -39,12 +40,14 @@ export default function TableOfContents({
 }
 
 TableOfContents.propTypes = {
+  className: PropTypes.string,
   minimized: PropTypes.bool,
   white: PropTypes.bool,
   onLinkClick: PropTypes.func,
 };
 
 TableOfContents.defaultProps = {
+  className: null,
   minimized: false,
   white: false,
   onLinkClick: null,

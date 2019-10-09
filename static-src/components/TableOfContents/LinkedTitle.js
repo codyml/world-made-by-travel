@@ -36,7 +36,7 @@ export default function LinkedTitle({
         onClick: onLinkClick,
       };
     } else {
-      Component = 'span';
+      Component = 'a';
       props = {
         onClick: (event) => {
           dispatch({ type: SET_EXPLORER_OPEN, explorerOpen: true });
@@ -51,7 +51,7 @@ export default function LinkedTitle({
       Component = Link;
       props = { to: EXPANDED_TOC.path, onClick: onLinkClick };
     } else {
-      Component = 'span';
+      Component = 'a';
       props = { onClick: setExpanded };
     }
   } else {

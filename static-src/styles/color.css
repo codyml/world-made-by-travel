@@ -47,4 +47,5 @@
   --color-table-of-contents-button: var(--color-rusted-chocolate-mid);
   --color-table-of-contents-button-triangle: var(--color-rusted-chocolate-light);
   --color-explorer-button: var(--color-nonexistent-blue-dark);
+  --color-explorer-button-triangle: var(--color-nonexistent-blue-mid-light);
 }

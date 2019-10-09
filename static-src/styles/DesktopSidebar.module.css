@@ -1,0 +1,166 @@
+@import './color.css';
+@import './transition.css';
+@import './shadow.css';
+
+.DesktopSidebar {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background-size: auto 100vh;
+  background-position: center top;
+  box-shadow: var(--shadow-bottom-panel);
+}
+
+.panel {
+  min-height: 0;
+  composes: panel from './ui.module.css';
+  z-index: 1;
+  margin: 0.5rem 1rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  display: flex;
+  flex-direction: column;
+
+  &:first-child {
+    margin-top: -2rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+
+    &::before {
+      content: '';
+      display: block;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid var(--color-ui-hr);
+    }
+  }
+
+  &:last-child {
+    margin-bottom: -2rem;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    &::after {
+      content: '';
+      display: block;
+      padding-top: 2rem;
+      border-top: 1px solid var(--color-ui-hr);
+    }
+  }
+}
+
+.panelInner {
+  min-height: 0;
+  overflow-y: scroll;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  max-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition:
+    max-height var(--transition-duration-slide),
+    padding-top var(--transition-duration-slide),
+    padding-bottom var(--transition-duration-slide);
+}
+
+.panelInner + .panelInner {
+  border-top: 1px solid var(--color-ui-hr);
+}
+
+.panelInner.collapsed {
+  max-height: 0;
+  overflow: hidden;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-top: none;
+}
+
+.panelTitle {
+  font-size: 2em;
+  font-weight: 300;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.titlePanel {
+  composes: panel;
+  flex-shrink: 0;
+}
+
+.titleAuthor {
+  composes: panelInner;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.bookTitle {
+  composes: bookTitle from './typography.module.css';
+  padding: 0 1em;
+}
+
+.bookAuthor {
+  composes: bookAuthor from './typography.module.css';
+  color: var(--color-author-link);
+  font-weight: 400;
+  margin-top: 0.25em;
+}
+
+.tocPanel {
+  composes: panel;
+  opacity: 0;
+  transition: opacity var(--transition-duration-page-transition);
+  margin-bottom: 1rem;
+}
+
+.tocPanel.visible {
+  opacity: 1;
+}
+
+.tocTitle {
+  composes: panelInner;
+  composes: panelTitle;
+  color: var(--color-table-of-contents-button);
+
+  &.explorerOpen {
+    cursor: pointer;
+  }
+}
+
+.toc {
+  font-size: 1.25em;
+}
+
+.explorerTab {
+  composes: panel;
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+.explorerButton {
+  composes: panelInner;
+  composes: panelTitle;
+  color: var(--color-explorer-button);
+  cursor: pointer;
+
+  &::before {
+    content: '▴';
+    color: var(--color-explorer-button-triangle);
+    transform: rotate(0deg) scaleX(2);
+    display: block;
+    font-size: 2em;
+    margin-top: -0.35em;
+    margin-bottom: -0.15em;
+    transition: transform var(--transition-duration-slide);
+  }
+}
+
+.explorerButton.expanded::before {
+  transform: rotate(180deg) scaleX(2);
+}

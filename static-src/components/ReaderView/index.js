@@ -6,7 +6,7 @@ import classNamesBind from 'classnames/bind';
 import useRouting from './useRouting';
 import MobileHeader from './MobileHeader';
 import TabletHeader from './TabletHeader';
-import Sidebar from './Sidebar';
+import DesktopSidebar from './DesktopSidebar';
 import PageContainer from './PageContainer';
 import { SET_MOBILE_MENU_OPEN } from '../../constants';
 import style from '../../styles/ReaderView.module.css';
@@ -22,6 +22,7 @@ const cx = classNamesBind.bind(style);
 export default function ReaderView() {
   const browserSize = useSelector((state) => state.browserSize);
   const mobileMenuOpen = useSelector((state) => state.mobileMenuOpen);
+  const explorerOpen = useSelector((state) => state.explorerOpen);
   const redirectTo = useRouting();
 
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ export default function ReaderView() {
 
   return (
     <div
-      className={cx(style.ReaderView, { mobileMenuOpen })}
+      className={cx(style.ReaderView, { mobileMenuOpen, explorerOpen })}
       onClick={mobileMenuOpen ? closeMobileMenu : null}
     >
 
@@ -53,7 +54,7 @@ export default function ReaderView() {
       {/* Desktop sidebar */}
       { browserSize === 'desktop' ? (
         <div className={style.sidebar}>
-          <Sidebar />
+          <DesktopSidebar />
         </div>
       ) : null }
 
