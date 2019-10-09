@@ -1,0 +1,56 @@
+@import './transition.css';
+@import './color.css';
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background-color: inherit;
+  border-radius: inherit;
+}
+
+.tab {
+  content: '';
+  position: absolute;
+  bottom: -1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3rem;
+  height: 3rem;
+  z-index: -3;
+  border-radius: 1.5rem;
+  background-color: inherit;
+  box-shadow: inherit;
+}
+
+.top.tab {
+  top: -1rem;
+}
+
+.triangle {
+  line-height: 1.15;
+  font-size: 1.75rem;
+  position: absolute;
+  bottom: -1.25rem;
+  left: 50%;
+  z-index: -1;
+  transform: translateX(-50%) rotate(180deg) scale(1.5, 0.75);
+  transition: transform var(--transition-duration-slide);
+}
+
+.top.triangle {
+  bottom: auto;
+  top: -1.25rem;
+  transform: translateX(-50%) rotate(0deg) scale(1.5, 0.75);
+}
+
+.isExpanded {
+  transform: translateX(-50%) rotate(0deg) scale(1.5, 0.75);
+}
+
+.top.isExpanded {
+  transform: translateX(-50%) rotate(180deg) scale(1.5, 0.75);
+}

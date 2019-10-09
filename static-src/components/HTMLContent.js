@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames/bind';
+import c from 'classnames';
 
-import styles from '../styles/HTMLContent.module.css';
+import style from '../styles/HTMLContent.module.css';
 
 
 /*
@@ -12,7 +12,7 @@ import styles from '../styles/HTMLContent.module.css';
 export default function HTMLContent({ className, children, ...props }) {
   return (
     <div
-      className={classNames(className, styles.HTMLContent)}
+      className={c(className, style.HTMLContent)}
       //  eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: children }}
       {...props}

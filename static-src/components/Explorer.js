@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import classNames from 'classnames/bind';
+import classNamesBind from 'classnames/bind';
 
 import { SET_EXPLORER_URL } from '../constants';
-import styles from '../styles/Explorer.module.css';
+import style from '../styles/Explorer.module.css';
 
-const cx = classNames.bind(styles);
+const cx = classNamesBind.bind(style);
 
 export default function Explorer() {
   const explorerOpen = useSelector((state) => state.explorerOpen);
@@ -15,8 +15,8 @@ export default function Explorer() {
   const setExplorerUrl = (url) => dispatch({ type: SET_EXPLORER_URL, explorerUrl: url });
 
   return (
-    <div className={cx(styles.Explorer, { explorerOpen })}>
-      <div className={styles.inner}>
+    <div className={cx(style.Explorer, { explorerOpen })}>
+      <div className={style.inner}>
         <div>{ explorerOpen ? 'open' : 'closed' }</div>
         <div>{ explorerUrl }</div>
         <button type="button" onClick={() => setExplorerUrl('/#/entries/114')}>Set URL to /#/entries/114</button>

@@ -67,11 +67,8 @@ const sectionMetaBySlug = (state = null, action) => {
             ...next.sections.map((section, index) => ({
               [section.slug]: {
                 ...section,
-
-                // Calculate the section's URL path.
+                group: next.slug,
                 path: `/${next.slug}/${section.slug}`,
-
-                // Calculate the section's order
                 index: Object.keys(accum).length + index,
               },
             })),
@@ -109,11 +106,7 @@ const sectionGroupMetaBySlug = (state = null, action) => {
           [sectionGroup.slug]: {
             ...sectionGroup,
             sections: sectionGroup.sections.map((item) => item.slug),
-
-            //  Calculate the section's URL path.
             path: `/${sectionGroup.slug}`,
-
-            //  Calculate the URL path that the section group redirects to
             redirectPath: `/${sectionGroup.slug}/${sectionGroup.sections[0].slug}`,
           },
         })));

@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouteMatch, Link } from 'react-router-dom';
-import classNames from 'classnames/bind';
+import classNamesBind from 'classnames/bind';
 
 import HTMLContent from './HTMLContent';
 import MarkdownContent from './MarkdownContent';
+import Tabbed from './Tabbed';
 import { EXPANDED_TOC } from '../constants';
-import styles from '../styles/Cover.module.css';
+import style from '../styles/Cover.module.css';
 
-const cx = classNames.bind(styles);
+const cx = classNamesBind.bind(style);
 
 
 /*
@@ -46,7 +47,7 @@ export default function Cover() {
   return (
 
     <div
-      className={cx(styles.Cover, { visible })}
+      className={cx(style.Cover, { visible })}
       style={{
         backgroundImage: `url(${backgroundImageUrl})`,
       }}
@@ -54,66 +55,70 @@ export default function Cover() {
       role="presentation"
     >
 
-      <div className={styles.coverContent}>
+      <div className={style.coverContent}>
 
-        <div className={styles.bookInformation}>
-          <div className={styles.title}>{coverTitle}</div>
-          <div className={styles.subtitle}>{coverSubtitle}</div>
-          <div className={styles.author}>{coverAuthor}</div>
-          <Link className={styles.enter} to={enterPath}>Enter</Link>
+        <div className={style.bookInformation}>
+          <div className={style.title}>{coverTitle}</div>
+          <div className={style.subtitle}>{coverSubtitle}</div>
+          <div className={style.author}>{coverAuthor}</div>
+          <Link className={style.enter} to={enterPath}>Enter</Link>
         </div>
 
-        <div className={styles.bookContent}>
+        <div className={style.bookContent}>
           <MarkdownContent>{coverContentMarkdown}</MarkdownContent>
           {browserSize === 'mobile' ? (
-            <HTMLContent className={styles.imgAttrib}>{backgroundImageAttribution}</HTMLContent>
+            <HTMLContent className={style.imgAttrib}>{backgroundImageAttribution}</HTMLContent>
           ) : null}
         </div>
 
         {browserSize !== 'mobile' ? (
-          <HTMLContent className={styles.imgAttrib}>{backgroundImageAttribution}</HTMLContent>
+          <HTMLContent className={style.imgAttrib}>{backgroundImageAttribution}</HTMLContent>
         ) : null}
 
       </div>
 
       {browserSize === 'mobile' ? (
 
+        //  Mobile Publication Information slide-up panel
         <div
-          className={cx(styles.infoSlider, { collapsed: sliderCollapsed })}
+          className={cx(style.infoSlider, { collapsed: sliderCollapsed })}
           onClick={(e) => e.stopPropagation()}
         >
-          <div
-            className={styles.copyright}
-            onClick={toggleSliderCollapsed}
-          >
-            <div className={styles.tab}>
-              <div className={cx(styles.triangle, { collapsed: sliderCollapsed })} />
+          <Tabbed isExpanded={!sliderCollapsed} tabSide="top">
+
+            <div
+              className={style.copyright}
+              onClick={toggleSliderCollapsed}
+            >
+              <strong className={style.publInfo}>Publication Information</strong>
+              <HTMLContent>{coverCopyright}</HTMLContent>
             </div>
-            <strong className={styles.publInfo}>Publication Information</strong>
-            <HTMLContent>{coverCopyright}</HTMLContent>
-          </div>
-          <HTMLContent className={styles.numbers}>{coverNumbers}</HTMLContent>
-          <div className={styles.credits}>
-            {coverCredits.map((credit, index) => (
-              // eslint-disable-next-line react/no-array-index-key
-              <a href={credit.link} key={index}>
-                <HTMLContent>{credit.text}</HTMLContent>
-                <img src={credit.image} alt={credit.text} />
-              </a>
-            ))}
-          </div>
+
+            <HTMLContent className={style.numbers}>{coverNumbers}</HTMLContent>
+            <div className={style.credits}>
+              {coverCredits.map((credit, index) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <a href={credit.link} key={index}>
+                  <HTMLContent>{credit.text}</HTMLContent>
+                  <img src={credit.image} alt={credit.text} />
+                </a>
+              ))}
+            </div>
+
+          </Tabbed>
         </div>
 
       ) : (
 
-        <div className={styles.infoBar}>
-          <div className={styles.leftColumn}>
-            <div className={styles.copyright}>
+        //  Tablet/desktop Publication Information bar
+        <div className={style.infoBar}>
+          <div className={style.leftColumn}>
+            <div className={style.copyright}>
               <HTMLContent>{coverCopyright}</HTMLContent>
             </div>
-            <HTMLContent className={styles.numbers}>{coverNumbers}</HTMLContent>
+            <HTMLContent className={style.numbers}>{coverNumbers}</HTMLContent>
           </div>
-          <div className={styles.credits}>
+          <div className={style.credits}>
             {coverCredits.map((credit, index) => (
               // eslint-disable-next-line react/no-array-index-key
               <a href={credit.link} key={index}>

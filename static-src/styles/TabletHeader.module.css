@@ -1,33 +1,20 @@
 @import './color.css';
+@import './transition.css';
 
 .TabletHeader {
   composes: container from './container.module.css';
   position: relative;
   height: 12em;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 11em;
-  background-size: cover;
-  background-position: center;
-  box-shadow: 0 0 24px rgba(0, 0, 0, 0.25);
-  z-index: -1;
+  align-items: stretch;
 }
 
 .titlePanel {
   composes: panel from './ui.module.css';
-  align-self: stretch;
-  flex-shrink: 0;
+  z-index: 1;
   display: flex;
-  justify-content: stretch;
   align-items: stretch;
+  justify-content: stretch;
   width: 15rem;
   padding: 1rem;
   font-size: 1.25em;
@@ -54,34 +41,84 @@
   margin-top: 0.25em;
 }
 
-.tocButton,
-.explorerButton {
+.bar {
+  composes: container from './container.module.css';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 11em;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.barItem {
+  --bar-item-height: 4.25rem;
+
+  height: var(--bar-item-height);
+  margin-left: 1rem;
+}
+
+.tocWrapper {
+  composes: barItem;
+  width: 18rem;
+  overflow-y: visible;
+}
+
+.panel {
   composes: panel from './ui.module.css';
-  height: 4.25em;
-  margin-bottom: 0.5em;
-  padding: 1rem;
+  position: relative;
+  z-index: 1;
+  transition: box-shadow var(--transition-duration-slide);
+}
+
+.panel.tocExpanded {
+  box-shadow: 0 0 24px rgba(0, 0, 0, 0.25);
+}
+
+.triangle {
+  color: var(--color-table-of-contents-button-triangle);
+}
+
+.button {
+  height: var(--bar-item-height);
+  padding: 0 0.5em;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
+  font-weight: 300;
+  cursor: pointer;
 }
 
 .tocButton {
-  font-size: 1.75em;
+  composes: button;
+  font-size: 1.8em;
   color: var(--color-table-of-contents-button);
-  width: 10rem;
 }
 
 .tocDropdown {
-  display: none;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height var(--transition-duration-slide);
+  padding: 0 1.25em;
 }
 
-.tocExpanded .tocDropdown {
-  display: block;
+.tocDropdown.tocExpanded {
+  border-top: 1px solid var(--color-ui-hr);
+  max-height: 40vh;
+  overflow: scroll;
 }
 
 .explorerButton {
-  font-size: 1.25em;
+  composes: barItem;
+  composes: panel;
+  composes: button;
+  width: 9rem;
+  font-size: 1.4em;
   color: var(--color-explorer-button);
-  width: 5rem;
 }

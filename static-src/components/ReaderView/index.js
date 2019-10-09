@@ -1,17 +1,17 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import classNames from 'classnames/bind';
+import classNamesBind from 'classnames/bind';
 
 import useRouting from './useRouting';
 import MobileHeader from './MobileHeader';
 import TabletHeader from './TabletHeader';
 import Sidebar from './Sidebar';
-import TransitioningReaderViewContent from './TransitioningReaderViewContent';
+import PageContainer from './PageContainer';
 import { SET_MOBILE_MENU_OPEN } from '../../constants';
-import styles from '../../styles/ReaderView.module.css';
+import style from '../../styles/ReaderView.module.css';
 
-const cx = classNames.bind(styles);
+const cx = classNamesBind.bind(style);
 
 
 /*
@@ -29,7 +29,7 @@ export default function ReaderView() {
 
   return (
     <div
-      className={cx(styles.ReaderView, { mobileMenuOpen })}
+      className={cx(style.ReaderView, { mobileMenuOpen })}
       onClick={mobileMenuOpen ? closeMobileMenu : null}
     >
 
@@ -38,28 +38,28 @@ export default function ReaderView() {
 
       {/* Mobile header */}
       { browserSize === 'mobile' ? (
-        <div className={styles.header}>
+        <div className={style.header}>
           <MobileHeader />
         </div>
       ) : null }
 
       {/* Tablet header */}
       { browserSize === 'tablet' ? (
-        <div className={styles.header}>
+        <div className={style.header}>
           <TabletHeader />
         </div>
       ) : null }
 
       {/* Desktop sidebar */}
       { browserSize === 'desktop' ? (
-        <div className={styles.sidebar}>
+        <div className={style.sidebar}>
           <Sidebar />
         </div>
       ) : null }
 
       {/* Section content */}
-      <div className={styles.content}>
-        <TransitioningReaderViewContent />
+      <div className={style.content}>
+        <PageContainer />
       </div>
 
     </div>

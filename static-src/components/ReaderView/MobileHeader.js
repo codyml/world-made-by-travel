@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import classNames from 'classnames/bind';
+import classNamesBind from 'classnames/bind';
 
 import { SET_MOBILE_MENU_OPEN } from '../../constants';
-import styles from '../../styles/MobileHeader.module.css';
+import style from '../../styles/MobileHeader.module.css';
 
-const cx = classNames.bind(styles);
+const cx = classNamesBind.bind(style);
 
 export default function MobileHeader() {
   const menuOpen = useSelector((state) => state.mobileMenuOpen);
@@ -26,14 +26,14 @@ export default function MobileHeader() {
 
   return (
     <div
-      className={styles.MobileHeader}
+      className={style.MobileHeader}
       style={{ backgroundImage: `url(${backgroundImageUrl})` }}
     >
-      <Link className={styles.titlePanel} to="/">
-        <div className={styles.bookTitle}>{coverTitle}</div>
+      <Link className={style.titlePanel} to="/">
+        <div className={style.bookTitle}>{coverTitle}</div>
       </Link>
       <div
-        className={cx(styles.menuTrigger, { menuOpen })}
+        className={cx(style.menuTrigger, { menuOpen })}
         onClick={toggleMobileMenuOpen}
       />
     </div>

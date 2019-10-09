@@ -1,7 +1,7 @@
 @import './transition.css';
 @import './layout.css';
 
-.TransitioningReaderViewContent {
+.PageContainer {
   position: absolute;
   top: 0;
   left: 0;

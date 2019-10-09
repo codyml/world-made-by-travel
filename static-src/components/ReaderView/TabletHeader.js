@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import classNames from 'classnames/bind';
+import classNamesBind from 'classnames/bind';
 
 import TableOfContents from '../TableOfContents';
+import Tabbed from '../Tabbed';
 import { SET_EXPLORER_OPEN } from '../../constants';
-import styles from '../../styles/TabletHeader.module.css';
+import style from '../../styles/TabletHeader.module.css';
 
-const cx = classNames.bind(styles);
+const cx = classNamesBind.bind(style);
 
 export default function TabletHeader() {
   const [tocExpanded, setTableOfContentsExpanded] = useState(false);
@@ -24,33 +25,39 @@ export default function TabletHeader() {
     explorerOpen: !explorerOpen,
   });
 
-  const toggleTableOfContentsExpanded = () => {
+  const toggleTocExpanded = () => {
     setTableOfContentsExpanded(!tocExpanded);
   };
 
   return (
-    <div className={styles.TabletHeader}>
-      <div
-        className={styles.background}
-        style={{ backgroundImage: `url(${backgroundImageUrl})` }}
-      />
-      <Link className={styles.titlePanel} to="/">
-        <div className={styles.titlePanelInner}>
-          <div className={styles.bookTitle}>{coverTitle}</div>
-          <div className={styles.bookAuthor}>{coverAuthor}</div>
-        </div>
-      </Link>
-      <div
-        className={cx(styles.tocButton, { tocExpanded })}
-        onClick={toggleTableOfContentsExpanded}
-      >
-        <div>Table of Contents</div>
-        <div className={styles.tocDropdown}>
-          <TableOfContents />
+    <div className={style.TabletHeader}>
+      <div className={style.titlePanel}>
+        <div className={style.titlePanelInner}>
+          <Link to="/">
+            <div className={style.bookTitle}>{coverTitle}</div>
+            <div className={style.bookAuthor}>{coverAuthor}</div>
+          </Link>
         </div>
       </div>
-      <div className={styles.explorerButton} onClick={toggleExplorerOpen}>
-        {explorerOpen ? 'Close Explorer' : 'Open Explorer'}
+      <div
+        className={style.bar}
+        style={{ backgroundImage: `url(${backgroundImageUrl})` }}
+      >
+        <div className={style.tocWrapper}>
+          <div className={cx(style.panel, { tocExpanded })}>
+            <Tabbed triangleClassName={style.triangle} isExpanded={tocExpanded}>
+              <div className={style.tocButton} onClick={toggleTocExpanded}>
+                Table of Contents
+              </div>
+              <div className={cx(style.tocDropdown, { tocExpanded })}>
+                <TableOfContents minimized onLinkClick={toggleTocExpanded} />
+              </div>
+            </Tabbed>
+          </div>
+        </div>
+        <div className={style.explorerButton} onClick={toggleExplorerOpen}>
+          {explorerOpen ? 'Close Explorer' : 'Open Explorer'}
+        </div>
       </div>
     </div>
   );

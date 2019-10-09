@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { SET_BROWSER_SIZE } from '../../constants';
-import styles from '../../styles/useBrowserSize.module.css';
+import style from '../../styles/useBrowserSize.module.css';
 
 export default function useBrowserSize() {
   const { current: breakpoints } = useRef({});
@@ -13,7 +13,7 @@ export default function useBrowserSize() {
   useEffect(() => {
     const element = document.createElement('div');
     document.body.appendChild(element);
-    Object.entries(styles).forEach(([size, className]) => {
+    Object.entries(style).forEach(([size, className]) => {
       element.className = className;
       breakpoints[size] = +getComputedStyle(element).width.slice(0, -2);
     });

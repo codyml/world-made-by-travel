@@ -1,5 +1,6 @@
 @import './font.css';
 @import './transition.css';
+@import './color.css';
 
 .TableOfContents {
   font-size: 1.15em;
@@ -12,6 +13,10 @@
   margin: 1em 0;
 }
 
+.title.current {
+  font-weight: bold;
+}
+
 .author {
   composes: bookAuthor from './typography.module.css';
   font-size: 0.9em;
@@ -20,6 +25,9 @@
 
 .authorLink {
   composes: authorLink from './typography.module.css';
+}
+
+.authorLink.white {
   color: white;
   font-weight: 600;
 }
@@ -28,9 +36,8 @@
   max-height: 0;
   overflow-y: scroll;
   transition: max-height var(--transition-duration-slide);
-  border-left: 1px solid rgba(255, 255, 255, 0.5);
+  border-left: 1px solid var(--color-ui-hr);
   padding-left: 1em;
-  margin: 0.75em 0;
 
   & .item {
     margin: 0.85em 0;
@@ -45,6 +52,11 @@
   }
 }
 
+.children.white {
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
+}
+
 .expanded {
   max-height: 300px;
+  margin: 0.75em 0;
 }

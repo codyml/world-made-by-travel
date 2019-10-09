@@ -1,10 +1,9 @@
 @import './font.css';
+@import 'normalize.css';
 
 /*
-* Global CSS styles.
+* Global CSS style.
 */
-
-@import 'normalize.css';
 
 html {
   font-size: 12px; /* 1 rem */
@@ -16,12 +15,6 @@ body {
   color: #333;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
 a {
   color: inherit;
   text-decoration: inherit;
@@ -29,10 +22,24 @@ a {
   transition: opacity 150ms;
 
   &:hover {
-    opacity: 0.9;
+    opacity: 0.85;
   }
 }
 
 strong {
   font-weight: bold;
+}
+
+button {
+  all: initial;
+  font: inherit;
+  color: inherit;
+  line-height: inherit;
+}
+
+*,
+*::before,
+*::after,
+button {
+  box-sizing: border-box;
 }

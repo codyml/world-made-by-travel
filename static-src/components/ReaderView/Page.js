@@ -10,7 +10,7 @@ import { EXPANDED_TOC } from '../../constants';
 * This component renders a reader view "page" of the book.
 */
 
-export default function ReaderViewContent({ contentSlug, isActive, ...props }) {
+export default function Page({ contentSlug, isActive, ...props }) {
   const sectionMetaBySlug = useSelector((state) => ({
     [EXPANDED_TOC.slug]: EXPANDED_TOC,
     ...state.sectionMetaBySlug,
@@ -27,11 +27,11 @@ export default function ReaderViewContent({ contentSlug, isActive, ...props }) {
   );
 }
 
-ReaderViewContent.propTypes = {
+Page.propTypes = {
   contentSlug: PropTypes.string.isRequired,
   isActive: PropTypes.bool,
 };
 
-ReaderViewContent.defaultProps = {
+Page.defaultProps = {
   isActive: false,
 };

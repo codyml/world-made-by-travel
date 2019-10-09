@@ -45,5 +45,6 @@
   --color-author-link: var(--color-unburnt-caramel-dark-mid);
   --color-ui-hr: var(--color-rusted-chocolate-light);
   --color-table-of-contents-button: var(--color-rusted-chocolate-mid);
+  --color-table-of-contents-button-triangle: var(--color-rusted-chocolate-light);
   --color-explorer-button: var(--color-nonexistent-blue-dark);
 }

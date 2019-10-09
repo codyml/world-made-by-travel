@@ -1,23 +1,6 @@
 /*
-* Misc reusable component styles.
+* Misc reusable component style.
 */
-
-.triangle {
-  display: block;
-  width: 0.5em;
-  height: 0.45em;
-  position: relative;
-
-  &::before {
-    content: '▴';
-    display: block;
-    line-height: 0;
-    font-size: 1.4em;
-    position: absolute;
-    top: 0.1em;
-    left: -0.09em;
-  }
-}
 
 .panel {
   display: block;

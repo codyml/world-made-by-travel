@@ -1,8 +1,8 @@
 import React, { useRef, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import classNames from 'classnames/bind';
+import classNamesBind from 'classnames/bind';
 
-import ReaderViewContent from './ReaderViewContent';
+import Page from './Page';
 import {
   EXPANDED_TOC,
   POSITIONS,
@@ -12,11 +12,11 @@ import {
   ENABLE_TRANSITION_CSS,
 } from '../../constants';
 
-import styles from '../../styles/TransitioningReaderViewContent.module.css';
+import style from '../../styles/PageContainer.module.css';
 
-const cx = classNames.bind(styles);
+const cx = classNamesBind.bind(style);
 
-export default function TransitioningReaderViewContent() {
+export default function PageContainer() {
   const canvasRef = useRef();
   const nextSlug = useSelector((state) => state.currentSectionSlug);
   const sectionMetaBySlug = useSelector((state) => ({
@@ -81,16 +81,16 @@ export default function TransitioningReaderViewContent() {
   }, [dispatch]);
 
   return (
-    <div className={styles.TransitioningReaderViewContent}>
+    <div className={style.PageContainer}>
       <div
-        className={cx(styles.canvas, { transitionCssEnabled })}
+        className={cx(style.canvas, { transitionCssEnabled })}
         data-current-position={currentPosition}
         ref={canvasRef}
       >
         {[POSITIONS.left, POSITIONS.center, POSITIONS.right].map(
           (position) => (slugsByPosition[position] ? (
-            <ReaderViewContent
-              className={cx(styles.content, {
+            <Page
+              className={cx(style.content, {
                 active: (
                   position === POSITIONS.center && (!transitionPrepared || transitionStarted)
                 ),

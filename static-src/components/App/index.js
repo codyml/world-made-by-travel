@@ -10,14 +10,14 @@ import Explorer from '../Explorer';
 import Modal from '../Modal';
 import MobileMenu from '../MobileMenu';
 
-import styles from '../../styles/App.module.css';
+import style from '../../styles/App.module.css';
 
 export default function App() {
   useBrowserSize();
   const contentLoaded = useLoadContent();
 
   return (
-    <div className={styles.App}>
+    <div className={style.App}>
       <LoadingMessage visible={!contentLoaded} />
       { contentLoaded ? (
         <BrowserRouter>

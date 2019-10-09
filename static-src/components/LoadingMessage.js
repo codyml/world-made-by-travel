@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames/bind';
+import classNamesBind from 'classnames/bind';
 
-import styles from '../styles/LoadingMessage.module.css';
+import style from '../styles/LoadingMessage.module.css';
 
-const cx = classNames.bind(styles);
+const cx = classNamesBind.bind(style);
 
 export default function LoadingMessage({ visible }) {
   const [textVisible, setTextVisible] = useState(false);
   useEffect(() => setTextVisible(true), []);
 
   return (
-    <div className={cx(styles.LoadingMessage, { visible })}>
-      <div className={cx(styles.text, { textVisible })}>
+    <div className={cx(style.LoadingMessage, { visible })}>
+      <div className={cx(style.text, { textVisible })}>
         Loading...
       </div>
     </div>
