@@ -3,10 +3,15 @@
 @import './shadow.css';
 
 .SectionContent {
-  composes: container from './container.module.css';
-  width: 100%;
+  composes: container-margin from './container.module.css';
+  position: relative;
   height: 100%;
-  overflow-y: scroll;
+  overflow: visible;
+
+  @media (--breakpoint-desktop) {
+    width: 100%;
+    margin: 0;
+  }
 }
 
 .instructions {
@@ -14,31 +19,10 @@
 }
 
 .paper {
-  &:not(:first-child) {
-    border-top: 1px solid var(--color-ui-hr);
-  }
-
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-ui-hr);
-  }
+  height: 100%;
+  overflow: scroll;
 
   @media (--breakpoint-tablet) {
-    &:first-child {
-      margin-top: 3rem;
-    }
-
-    &:not(:first-child) {
-      border-top: none;
-    }
-
-    &:last-child {
-      margin-bottom: 3rem;
-    }
-
-    &:not(:last-child) {
-      border-bottom: none;
-    }
-
     background-color: white;
     border-radius: 2px;
     box-shadow: var(--shadow-bottom-panel);

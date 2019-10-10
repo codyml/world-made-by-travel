@@ -76,18 +76,18 @@ export default function SectionContent({ sectionSlug }) {
       onScroll={scrollHandler}
     >
 
-      {/* Introduction content above mobile/tablet Table of Contents */}
-      {browserSize !== 'desktop' && isToc ? (
-        <Block>
-          <MarkdownContent className={style.instructions}>{instructionsMarkdown}</MarkdownContent>
-        </Block>
-      ) : null}
-
       {/* Hovering section title block */}
       <HoverTitleBlock ref={hoverTitleRef} visible={hoverTitleVisible} {...sectionMeta} />
 
       {/* Start of paper */}
       <div className={style.paper}>
+
+        {/* Introduction content above mobile/tablet Table of Contents */}
+        {browserSize !== 'desktop' && isToc ? (
+          <Block>
+            <MarkdownContent className={style.instructions}>{instructionsMarkdown}</MarkdownContent>
+          </Block>
+        ) : null}
 
         {/* Section title block */}
         <TitleBlock ref={titleRef} {...sectionMeta} />

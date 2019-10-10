@@ -16,6 +16,21 @@
   }
 }
 
+.container-margin {
+  margin-left: 0;
+  margin-right: 0;
+
+  @media (--breakpoint-tablet) {
+    margin-left: var(--layout-container-margin-tablet);
+    margin-right: var(--layout-container-margin-tablet);
+  }
+
+  @media (--breakpoint-desktop) {
+    margin-left: var(--layout-container-margin-desktop);
+    margin-right: var(--layout-container-margin-desktop);
+  }
+}
+
 .page-container {
   padding-left: var(--layout-page-padding);
   padding-right: var(--layout-page-padding);

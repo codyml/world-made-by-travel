@@ -39,4 +39,8 @@
   font-family: var(--font-serif);
   font-size: 1em;
   line-height: 1.65;
+
+  &:not(:first-child) {
+    margin-top: 1.25em;
+  }
 }

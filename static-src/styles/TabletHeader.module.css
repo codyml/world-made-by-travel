@@ -5,10 +5,10 @@
 .TabletHeader {
   composes: container from './container.module.css';
   position: relative;
-  height: 12em;
+  height: 12rem;
   display: flex;
   align-items: stretch;
-  margin-bottom: -1em;
+  margin-bottom: 2rem;
 }
 
 .titlePanel {

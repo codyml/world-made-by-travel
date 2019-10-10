@@ -4,6 +4,7 @@
 @import './breakpoint.css';
 
 .ReaderView {
+  composes: container from './container.module.css';
   position: relative;
   flex-grow: 1;
   display: flex;
