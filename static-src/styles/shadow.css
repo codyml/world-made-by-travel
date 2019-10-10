@@ -1,4 +1,4 @@
 :root {
   --shadow-panel: 0 0 4px rgba(0, 0, 0, 0.35);
-  --shadow-bottom-panel: 0 0 24px rgba(0, 0, 0, 0.25);
+  --shadow-bottom-panel: 0 0 24px rgba(0, 0, 0, 0.15);
 }

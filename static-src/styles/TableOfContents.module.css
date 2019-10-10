@@ -3,14 +3,13 @@
 @import './color.css';
 
 .TableOfContents {
-  font-size: 1.15em;
   font-family: var(--font-serif);
   font-weight: 400;
   line-height: 1.4;
 }
 
 .item {
-  margin: 1em 0;
+  margin: 1.5em 0;
 
   &:first-child {
     margin-top: 0;
@@ -23,6 +22,15 @@
 
 .title.current {
   font-weight: bold;
+}
+
+.title.explorerLink {
+  color: var(--color-explorer-link);
+  font-weight: bold;
+}
+
+.white.title.explorerLink {
+  color: white;
 }
 
 .author {
@@ -41,14 +49,13 @@
 }
 
 .children {
-  max-height: 0;
-  overflow-y: scroll;
-  transition: max-height var(--transition-duration-slide);
   border-left: 1px solid var(--color-ui-hr);
   padding-left: 1em;
+  margin: 0.75em 0;
 
   & .item {
-    margin: 0.85em 0;
+    font-size: 0.875em;
+    margin: 1em 0;
 
     &:first-child {
       margin-top: 0.25em;
@@ -60,11 +67,20 @@
   }
 }
 
-.children.white {
+.white.children {
   border-left: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.expanded {
-  max-height: 300px;
+.minimized.children {
+  max-height: 0;
+  margin: 0;
+  overflow-y: scroll;
+  transition:
+    margin var(--transition-duration-slide),
+    max-height var(--transition-duration-slide);
+}
+
+.minimized.children.expanded {
+  max-height: 15em;
   margin: 0.75em 0;
 }

@@ -2,16 +2,46 @@
 @import './breakpoint.css';
 
 .container {
-  padding-left: var(--layout-min-side-padding-mobile);
-  padding-right: var(--layout-min-side-padding-mobile);
+  padding-left: 0;
+  padding-right: 0;
 
   @media (--breakpoint-tablet) {
-    padding-left: calc((100% - var(--layout-max-content-size-tablet)) / 2);
-    padding-right: calc((100% - var(--layout-max-content-size-tablet)) / 2);
+    padding-left: var(--layout-container-margin-tablet);
+    padding-right: var(--layout-container-margin-tablet);
   }
 
   @media (--breakpoint-desktop) {
-    padding-left: calc((100% - var(--layout-max-content-size-desktop)) / 2);
-    padding-right: calc((100% - var(--layout-max-content-size-desktop)) / 2);
+    padding-left: var(--layout-container-margin-desktop);
+    padding-right: var(--layout-container-margin-desktop);
+  }
+}
+
+.page-container {
+  padding-left: var(--layout-page-padding);
+  padding-right: var(--layout-page-padding);
+
+  @media (--breakpoint-tablet) {
+    padding-left: var(--layout-page-padding-tablet);
+    padding-right: var(--layout-page-padding-tablet);
+  }
+
+  @media (--breakpoint-desktop) {
+    padding-left: var(--layout-page-padding-desktop);
+    padding-right: var(--layout-page-padding-desktop);
+  }
+}
+
+.container-mobile-page {
+  padding-left: var(--layout-page-padding);
+  padding-right: var(--layout-page-padding);
+
+  @media (--breakpoint-tablet) {
+    padding-left: var(--layout-container-margin-tablet);
+    padding-right: var(--layout-container-margin-tablet);
+  }
+
+  @media (--breakpoint-desktop) {
+    padding-left: var(--layout-container-margin-desktop);
+    padding-right: var(--layout-container-margin-desktop);
   }
 }

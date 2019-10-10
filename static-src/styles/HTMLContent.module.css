@@ -1,4 +1,6 @@
 .HTMLContent {
+  overflow-wrap: break-word;
+
   & > p:first-child {
     margin-top: 0;
   }

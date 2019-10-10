@@ -29,8 +29,8 @@ export default function TableOfContents({
         <TOCItem
           key={slug}
           cx={cx}
-          expanded={expandedGroupSlug === slug}
-          setExpanded={() => setExpandedGroupSlug(slug)}
+          expanded={!minimized || expandedGroupSlug === slug}
+          setExpanded={minimized ? () => setExpandedGroupSlug(slug) : null}
           slug={slug}
           onLinkClick={onLinkClick}
         />

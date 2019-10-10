@@ -2,7 +2,7 @@
 
 .Modal {
   composes: fading-overlay from './fading-overlay.module.css';
-  composes: container from './container.module.css';
+  composes: container-page from './container.module.css';
   z-index: var(--z-index-modal);
   flex-direction: column;
   background-color: #ffd;

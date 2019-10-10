@@ -127,7 +127,13 @@ const sectionContentBySlug = (state = {}, action) => {
     case SECTION_CONTENT_RECEIVED:
       return {
         ...state,
-        [action.sectionSlug]: action.sectionContent,
+        [action.sectionSlug]: {
+          ...action.sectionContent,
+          blocks: action.sectionContent.blocks.map((block, index) => ({
+            ...block,
+            index,
+          })),
+        },
       };
 
     default:

@@ -10,6 +10,12 @@ module.exports = {
     './static-src/index.js',
   ],
 
+  resolve: {
+    alias: {
+      styles: path.resolve(__dirname, 'static-src/styles/'),
+    },
+  },
+
   output: {
     filename: 'script.js',
     path: path.resolve(__dirname, 'wmt-custom-theme/static'),
@@ -24,7 +30,6 @@ module.exports = {
         loader: 'babel-loader',
         options: {
           presets: ['@babel/preset-env', '@babel/preset-react'],
-          plugins: ['babel-plugin-styled-components'],
         },
       },
       {

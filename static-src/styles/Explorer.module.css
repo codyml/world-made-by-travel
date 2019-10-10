@@ -2,7 +2,7 @@
 @import './breakpoint.css';
 
 .Explorer {
-  composes: container from './container.module.css';
+  composes: container-mobile-page from './container.module.css';
   height: 0%;
   background-color: #fdf;
   transition: height var(--transition-duration-slide);

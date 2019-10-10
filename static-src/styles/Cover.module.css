@@ -57,7 +57,7 @@
 }
 
 .coverContent {
-  composes: container from './container.module.css';
+  composes: container-mobile-page from './container.module.css';
   padding-top: 1.5em;
   padding-bottom: 5em;
   flex-grow: 1;
@@ -179,7 +179,7 @@
 }
 
 .infoSlider {
-  composes: container from './container.module.css';
+  composes: container-mobile-page from './container.module.css';
   position: absolute;
   top: 100%;
   left: 0;
@@ -220,34 +220,6 @@
     font-size: 1em;
     cursor: default;
   }
-}
-
-.tab {
-  position: absolute;
-  top: -1.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: -1;
-  background-color: var(--color-cover-publication-information-background);
-  width: 4rem;
-  height: 4rem;
-  border-radius: 2rem;
-  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.5);
-  font-size: 1.5em;
-  line-height: 0.7;
-  display: flex;
-  justify-content: center;
-  padding-top: 0.4em;
-}
-
-.triangle {
-  composes: triangle from './ui.module.css';
-  transform: rotate(180deg);
-  transition: transform var(--transition-duration-slide);
-}
-
-.triangle.collapsed {
-  transform: rotate(0deg);
 }
 
 .publInfo {
@@ -304,7 +276,7 @@
 }
 
 .infoBar {
-  composes: container from './container.module.css';
+  composes: container-mobile-page from './container.module.css';
   background-color: var(--color-cover-publication-information-background);
   box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.5);
   display: flex;

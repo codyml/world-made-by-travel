@@ -3,20 +3,33 @@
 */
 
 :root {
-  --layout-width-page: 612px;
-  --layout-width-sidebar: 300px;
-  --layout-width-gutter: 12px;
-  --layout-width-page-gutter: 36px;
+  --layout-page-padding: 18px;
+  --layout-page-padding-tablet: 72px;
+  --layout-page-padding-desktop: 72px;
 }
 
 :root {
-  --layout-max-content-size-mobile: 0;
-  --layout-max-content-size-tablet: var(--layout-width-page);
-  --layout-max-content-size-desktop: calc(var(--layout-width-sidebar) + var(--layout-width-gutter) + var(--layout-width-page));
+  --layout-page-width: 100%;
+  --layout-page-width-tablet: 612px;
+  --layout-page-width-desktop: 612px;
+  --layout-sidebar-width-desktop: 300px;
+  --layout-gutter-width-desktop: 12px;
 }
 
 :root {
-  --layout-min-side-padding-mobile: 18px;
-  --layout-min-side-padding-tablet: 36px;
-  --layout-min-side-padding-desktop: 72px;
+  --layout-container-width: var(--layout-page-width);
+  --layout-container-width-tablet: var(--layout-page-width-tablet);
+  --layout-container-width-desktop: calc(var(--layout-page-width-desktop) + var(--layout-sidebar-width-desktop) + var(--layout-gutter-width-desktop));
+}
+
+:root {
+  --layout-container-margin: 0;
+  --layout-container-margin-tablet: calc((100% - var(--layout-container-width-tablet)) / 2);
+  --layout-container-margin-desktop: calc((100% - var(--layout-container-width-desktop)) / 2);
+}
+
+:root {
+  --layout-min-container-margin: 0;
+  --layout-min-container-margin-tablet: 36px;
+  --layout-min-container-margin-desktop: 72px;
 }

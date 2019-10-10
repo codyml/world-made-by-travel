@@ -19,9 +19,12 @@ export default function MobileMenu() {
         <div className={style.bookTitle}>{coverTitle}</div>
         <div className={style.bookAuthor}>{coverAuthor}</div>
       </Link>
-      <div className={style.tableOfContents}>
-        <TableOfContents onLinkClick={closeMobileMenu} minimized white />
-      </div>
+      <TableOfContents
+        className={style.tableOfContents}
+        onLinkClick={closeMobileMenu}
+        minimized
+        white
+      />
     </div>
   );
 }

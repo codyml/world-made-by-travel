@@ -20,11 +20,11 @@
   }
 
   &[data-current-position="center"] {
-    right: calc(100% + var(--layout-width-page-gutter));
+    right: 100%;
   }
 
   &[data-current-position="right"] {
-    right: calc(200% + 2 * var(--layout-width-page-gutter));
+    right: 200%;
   }
 }
 
@@ -46,11 +46,11 @@
   }
 
   &[data-position="center"] {
-    left: calc(100% + var(--layout-width-page-gutter));
+    left: 100%;
   }
 
   &[data-position="right"] {
-    left: calc(200% + 2 * var(--layout-width-page-gutter));
+    left: 200%;
   }
 }
 

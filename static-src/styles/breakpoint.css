@@ -6,8 +6,8 @@
 
 :root {
   --breakpoint-mobile: 0;
-  --breakpoint-tablet: calc(var(--layout-max-content-size-tablet) + 2 * var(--layout-min-side-padding-tablet));
-  --breakpoint-desktop: calc(var(--layout-max-content-size-desktop) + 2 * var(--layout-min-side-padding-desktop));
+  --breakpoint-tablet: calc(var(--layout-container-width-tablet) + 2 * var(--layout-min-container-margin-tablet));
+  --breakpoint-desktop: calc(var(--layout-container-width-desktop) + 2 * var(--layout-min-container-margin-desktop));
 }
 
 /*

@@ -1,8 +1,8 @@
 @import './shadow.css';
 
 .MobileHeader {
-  composes: container from './container.module.css';
-  height: 6em;
+  composes: page-container from './container.module.css';
+  height: 6rem;
   background-size: cover;
   background-position: center;
   box-shadow: var(--shadow-bottom-panel);
@@ -14,7 +14,7 @@
 
 .titlePanel {
   composes: panel from './ui.module.css';
-  height: 3em;
+  height: 3rem;
   padding: 0 1em;
   display: flex;
   align-items: center;
@@ -28,11 +28,11 @@
 
 .menuTrigger {
   composes: panel from './ui.module.css';
-  width: 3em;
-  height: 3em;
+  width: 3rem;
+  height: 3rem;
   background-image: url(../images/mobile-hamburger.png);
   background-repeat: no-repeat;
-  background-size: auto 1.2em;
+  background-size: auto 1.2rem;
   background-position: center;
   cursor: pointer;
 }

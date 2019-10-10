@@ -112,7 +112,8 @@
 .tocDropdown {
   max-height: 0;
   overflow: hidden;
-  padding: 0 1.25em;
+  padding: 0 1.25rem;
+  font-size: 1.15rem;
   transition:
     max-height var(--transition-duration-slide),
     padding var(--transition-duration-slide);
@@ -122,7 +123,7 @@
   border-top: 1px solid var(--color-ui-hr);
   max-height: 40vh;
   overflow: scroll;
-  padding: 1.25em;
+  padding: 1.25rem;
 }
 
 .explorerButton {

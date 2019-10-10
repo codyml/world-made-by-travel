@@ -31,6 +31,7 @@ export default function TOCItem({
     <div className={cx(style.item)}>
       <LinkedTitle
         className={cx(style.title, { current })}
+        cx={cx}
         slug={slug}
         expanded={expanded}
         setExpanded={setExpanded}

@@ -3,7 +3,7 @@
 
 .LoadingMessage {
   composes: fading-overlay from './fading-overlay.module.css';
-  composes: container from './container.module.css';
+  composes: container-mobile-page from './container.module.css';
   z-index: var(--z-index-loading);
   display: flex;
   align-items: center;

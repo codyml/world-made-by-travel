@@ -1,0 +1,42 @@
+@import './font.css';
+@import './breakpoint.css';
+@import './color.css';
+
+.Block {
+  composes: page-container from './container.module.css';
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  line-height: 1.25;
+}
+
+.Block + .Block {
+  border-top: 1px solid var(--color-ui-hr);
+}
+
+.Block.isToc {
+  font-size: 1.5em;
+}
+
+.Block.isMini {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-ui-hr);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 2em;
+}
+
+.author {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.5em;
+  margin-top: 0.75em;
+}
+
+.content {
+  font-family: var(--font-serif);
+  font-size: 1em;
+  line-height: 1.65;
+}

@@ -8,6 +8,7 @@ import { SET_EXPLORER_OPEN, EXPANDED_TOC } from '../../constants';
 
 export default function LinkedTitle({
   className,
+  cx,
   slug,
   expanded,
   setExpanded,
@@ -59,11 +60,12 @@ export default function LinkedTitle({
     props = { to: path, onClick: onLinkClick };
   }
 
-  return <Component className={className} {...props}>{title}</Component>;
+  return <Component className={cx(className, { explorerLink })} {...props}>{title}</Component>;
 }
 
 LinkedTitle.propTypes = {
   className: PropTypes.string,
+  cx: PropTypes.func.isRequired,
   slug: PropTypes.string.isRequired,
   expanded: PropTypes.bool,
   setExpanded: PropTypes.func,
