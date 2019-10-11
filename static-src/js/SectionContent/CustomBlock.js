@@ -12,7 +12,7 @@ export default function CustomBlock({ title, author, content }) {
 CustomBlock.propTypes = {
   title: PropTypes.string.isRequired,
   author: PropTypes.string,
-  content: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  content: PropTypes.arrayOf(PropTypes.shape({ tag: PropTypes.string.isRequired })).isRequired,
 };
 
 CustomBlock.defaultProps = {

@@ -10,30 +10,7 @@ import normalizeTokens from './normalize';
 
 export const processMainContentMarkdown = (markdown) => {
   const tokens = parseMarkdown(markdown);
-  console.log(markdown, tokens);
-  const {
-    paragraphsByNumber,
-    figuresByNumber,
-    contentItems,
-    footnotesByIdentifier,
-    footnotes,
-  } = normalizeTokens(tokens);
-
-  console.log({
-    paragraphsByNumber,
-    figuresByNumber,
-    contentItems,
-    footnotesByIdentifier,
-    footnotes,
-  });
-
-  return {
-    paragraphsByNumber,
-    figuresByNumber,
-    contentItems,
-    footnotesByIdentifier,
-    footnotes,
-  };
+  return normalizeTokens(tokens);
 };
 
 

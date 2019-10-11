@@ -4,8 +4,6 @@
 
 const FIGURE_RULE_NAME = 'figure';
 export const FIGURE_OPEN_TOKEN_TYPE = 'figure_open';
-export const FIGURE_CONTENT_OPEN_TOKEN_TYPE = 'figure_content_open';
-export const FIGURE_CONTENT_CLOSE_TOKEN_TYPE = 'figure_content_close';
 export const FIGURE_CAPTION_OPEN_TOKEN_TYPE = 'figure_caption_open';
 export const FIGURE_CAPTION_CLOSE_TOKEN_TYPE = 'figure_caption_close';
 export const FIGURE_CLOSE_TOKEN_TYPE = 'figure_close';
@@ -62,26 +60,24 @@ export default function specializedLinkPlugin(md) {
       return false;
     }
 
-    state.push(FIGURE_OPEN_TOKEN_TYPE, '', 1);
-    state.push(FIGURE_CONTENT_OPEN_TOKEN_TYPE, '', 1);
+    state.push(FIGURE_OPEN_TOKEN_TYPE, 'figure', 1);
     const contentInlineToken = state.push('inline', '', 0);
     contentInlineToken.children = [];
     contentInlineToken.content = state.src.slice(
       figureContentStartPos,
       figureContentEndPos,
     ).trim();
-    state.push(FIGURE_CONTENT_CLOSE_TOKEN_TYPE, '', -1);
 
     //  If valid caption
     if (captionStartPos !== -1 && captionEndPos !== -1 && captionEndPos > captionStartPos) {
-      state.push(FIGURE_CAPTION_OPEN_TOKEN_TYPE, '', 1);
+      state.push(FIGURE_CAPTION_OPEN_TOKEN_TYPE, 'figcaption', 1);
       const captionInlineToken = state.push('inline', '', 0);
       captionInlineToken.children = [];
       captionInlineToken.content = state.src.slice(captionStartPos, captionEndPos).trim();
-      state.push(FIGURE_CAPTION_CLOSE_TOKEN_TYPE, '', -1);
+      state.push(FIGURE_CAPTION_CLOSE_TOKEN_TYPE, 'figcaption', -1);
     }
 
-    state.push(FIGURE_CLOSE_TOKEN_TYPE, '', -1);
+    state.push(FIGURE_CLOSE_TOKEN_TYPE, 'figure', -1);
     state.line = figureCloseLine + 1; // eslint-disable-line no-param-reassign
     return true;
   });
