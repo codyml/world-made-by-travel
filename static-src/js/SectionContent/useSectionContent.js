@@ -25,7 +25,7 @@ const parseSectionContent = ({
       [identifier]: {
         identifier,
         content: imageMarkdown
-          ? parseMarkdown(imageMarkdown, figureContentByIdentifier)
+          ? parseMarkdown(imageMarkdown)
           : [{ image }],
 
         download: imageDownload,
@@ -33,10 +33,10 @@ const parseSectionContent = ({
     }),
   ));
 
-  const mainContent = parseMainContentMarkdown(markdown, figureContentByIdentifier);
+  const mainContent = parseMainContentMarkdown(markdown);
   const parsedBlocks = blocks.map(({ markdown: blockMarkdown, ...block }, index) => ({
     index,
-    content: parseMarkdown(blockMarkdown, figureContentByIdentifier),
+    content: parseMarkdown(blockMarkdown),
     ...block,
   }));
 

@@ -39,6 +39,7 @@
   font-family: var(--font-serif);
   font-size: 1em;
   line-height: 1.65;
+  overflow-wrap: break-word;
 
   &:not(:first-child) {
     margin-top: 1.25em;
