@@ -9,13 +9,20 @@ const SPECIAL_LINK_TYPES = [
 ];
 
 export default function specializedLinkPlugin(md) {
-  md.inline.ruler.before('link', SPECIAL_LINK_MARKER_TOKEN_TYPE, (state) => {
+  md.inline.ruler.push(SPECIAL_LINK_MARKER_TOKEN_TYPE, (state) => {
+    let token;
     SPECIAL_LINK_TYPES.forEach(({ type, prefix }) => {
-      if (state.src.slice(state.pos, state.pos + prefix.length) === prefix) {
-        const token = state.push(SPECIAL_LINK_MARKER_TOKEN_TYPE);
+      if (!token && state.src.slice(state.pos, state.posMax).indexOf(prefix) === 0) {
+        token = state.push(SPECIAL_LINK_MARKER_TOKEN_TYPE, '', 0);
         token.meta = { type };
         state.pos += prefix.length; // eslint-disable-line no-param-reassign
       }
     });
+
+    if (token) {
+      return true;
+    }
+
+    return false;
   });
 }

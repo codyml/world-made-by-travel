@@ -1,28 +1,28 @@
 /*
-* Parses curly bracket references (used in figures) {explorer-link}.
+* Parses curly bracket references (used in figures).
 */
 
 const REFERENCE_RULE_NAME = 'reference';
 const REFERENCE_TOKEN_TYPE = 'reference';
 
-export default function specializedLinkPlugin(md) {
-  md.inline.ruler.before('link', SPECIAL_LINK_MARKER_TOKEN_TYPE, (state) => {
-
-    if (state.src.getCharAt(state.pos) !== '{') {
+export default function referencePlugin(md) {
+  md.inline.ruler.push(REFERENCE_RULE_NAME, (state) => {
+    if (state.src.charAt(state.pos) !== '{') {
       return false;
     }
 
-    const endPos = state.src.slice(state.pos + 1, state.posMax).indexOf('}');
-    if (endPos !== -1) {
-      const token = state.push(REFERENCE_TOKEN_TYPE);
-      token.meta = { reference}
+    const endPosRelative = state.src.slice(state.pos, state.posMax).indexOf('}');
+    if (endPosRelative !== -1) {
+      const endPos = state.pos + endPosRelative;
+      const text = state.src.slice(state.pos, endPos + 1);
+      const reference = state.src.slice(state.pos + 1, endPos);
+      const token = state.push(REFERENCE_TOKEN_TYPE, '', 0);
+      token.meta = { text, reference };
+
+      state.pos = endPos + 1; // eslint-disable-line no-param-reassign
+      return true;
     }
-    SPECIAL_LINK_TYPES.forEach(({ type, prefix }) => {
-      if (state.src.slice(state.pos, state.pos + prefix.length) === prefix) {
-        const token = state.push(SPECIAL_LINK_MARKER_TOKEN_TYPE);
-        token.meta = { type };
-        state.pos += prefix.length; // eslint-disable-line no-param-reassign
-      }
-    });
+
+    return false;
   });
 }

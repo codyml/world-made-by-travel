@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { parseMarkdown, parseMainContentMarkdown } from '../markdown';
+import { processMainContentMarkdown, processMarkdown } from '../markdown';
 import {
   SECTION_CONTENT_REQUESTED,
   SECTION_CONTENT_RECEIVED,
@@ -25,7 +25,7 @@ const parseSectionContent = ({
       [identifier]: {
         identifier,
         content: imageMarkdown
-          ? parseMarkdown(imageMarkdown)
+          ? processMarkdown(imageMarkdown)
           : [{ image }],
 
         download: imageDownload,
@@ -33,10 +33,10 @@ const parseSectionContent = ({
     }),
   ));
 
-  const mainContent = parseMainContentMarkdown(markdown);
+  const mainContent = processMainContentMarkdown(markdown);
   const parsedBlocks = blocks.map(({ markdown: blockMarkdown, ...block }, index) => ({
     index,
-    content: parseMarkdown(blockMarkdown),
+    content: processMarkdown(blockMarkdown),
     ...block,
   }));
 

@@ -2,25 +2,22 @@
 * Parses <figure>s.
 */
 
-const FIGURE_RULE_NAME = 'image';
-const FIGURE_OPEN_TOKEN_TYPE = 'figure_open';
-const FIGURE_CONTENT_OPEN_TOKEN_TYPE = 'figure_content_open';
-const FIGURE_CONTENT_CLOSE_TOKEN_TYPE = 'figure_content_close';
-const FIGURE_CAPTION_OPEN_TOKEN_TYPE = 'figure_caption_open';
-const FIGURE_CAPTION_CLOSE_TOKEN_TYPE = 'figure_caption_close';
-const INLINE_TOKEN_TYPE = 'inline';
-const FIGURE_CLOSE_TOKEN_TYPE = 'figure_close';
+const FIGURE_RULE_NAME = 'figure';
+export const FIGURE_OPEN_TOKEN_TYPE = 'figure_open';
+export const FIGURE_CONTENT_OPEN_TOKEN_TYPE = 'figure_content_open';
+export const FIGURE_CONTENT_CLOSE_TOKEN_TYPE = 'figure_content_close';
+export const FIGURE_CAPTION_OPEN_TOKEN_TYPE = 'figure_caption_open';
+export const FIGURE_CAPTION_CLOSE_TOKEN_TYPE = 'figure_caption_close';
+export const FIGURE_CLOSE_TOKEN_TYPE = 'figure_close';
 const FIGURE_OPEN = '<figure>';
 const CAPTION_OPEN = '<figcaption>';
 const CAPTION_CLOSE = '</figcaption>';
 const FIGURE_CLOSE = '</figure>';
 
 export default function specializedLinkPlugin(md) {
-  md.block.ruler.before('table', FIGURE_RULE_NAME, (state, startLine, endLine) => {
+  md.block.ruler.before('html_block', FIGURE_RULE_NAME, (state, startLine, endLine) => {
     let figureContentStartPos = -1;
-    let captionOpenLine = -1;
     let captionStartPos = -1;
-    let captionCloseLine = -1;
     let captionEndPos = -1;
     let figureCloseLine = -1;
     let figureContentEndPos = -1;
@@ -32,23 +29,20 @@ export default function specializedLinkPlugin(md) {
 
       //  Make sure the first line is <figure>
       if (line === startLine) {
-        if (lineStr.indexOf(FIGURE_OPEN) === -1) {
+        if (lineStr.indexOf(FIGURE_OPEN) !== 0) {
           return false;
         }
         figureContentStartPos = lineEndPos;
-        continue;
       }
 
       //  Check for <figcaption>
       if (lineStr.indexOf(CAPTION_OPEN) === 0) {
-        captionOpenLine = line;
         figureContentEndPos = lineStartPos;
         captionStartPos = lineEndPos;
       }
 
       //  Check for </figcaption>
       if (lineStr.indexOf(CAPTION_CLOSE) === 0) {
-        captionCloseLine = line;
         captionEndPos = lineStartPos;
       }
 
@@ -68,21 +62,26 @@ export default function specializedLinkPlugin(md) {
       return false;
     }
 
-    state.push(FIGURE_OPEN_TOKEN_TYPE);
-    state.push(FIGURE_CONTENT_OPEN_TOKEN_TYPE);
-    const contentInlineToken = state.push(INLINE_TOKEN_TYPE);
-    contentInlineToken.content = state.str.slice(figureContentStartPos, figureContentEndPos).trim();
-    state.push(FIGURE_CONTENT_CLOSE_TOKEN_TYPE);
+    state.push(FIGURE_OPEN_TOKEN_TYPE, '', 1);
+    state.push(FIGURE_CONTENT_OPEN_TOKEN_TYPE, '', 1);
+    const contentInlineToken = state.push('inline', '', 0);
+    contentInlineToken.children = [];
+    contentInlineToken.content = state.src.slice(
+      figureContentStartPos,
+      figureContentEndPos,
+    ).trim();
+    state.push(FIGURE_CONTENT_CLOSE_TOKEN_TYPE, '', -1);
 
     //  If valid caption
-    if (captionOpenLine !== -1 && captionCloseLine !== -1 && captionCloseLine > captionOpenLine) {
-      state.push(FIGURE_CAPTION_OPEN_TOKEN_TYPE);
-      const captionInlineToken = state.push(INLINE_TOKEN_TYPE);
-      captionInlineToken.content = state.str.slice(captionStartPos, captionEndPos).trim();
-      state.push(FIGURE_CAPTION_CLOSE_TOKEN_TYPE);
+    if (captionStartPos !== -1 && captionEndPos !== -1 && captionEndPos > captionStartPos) {
+      state.push(FIGURE_CAPTION_OPEN_TOKEN_TYPE, '', 1);
+      const captionInlineToken = state.push('inline', '', 0);
+      captionInlineToken.children = [];
+      captionInlineToken.content = state.src.slice(captionStartPos, captionEndPos).trim();
+      state.push(FIGURE_CAPTION_CLOSE_TOKEN_TYPE, '', -1);
     }
 
-    state.push(FIGURE_CLOSE_TOKEN_TYPE);
+    state.push(FIGURE_CLOSE_TOKEN_TYPE, '', -1);
     state.line = figureCloseLine + 1; // eslint-disable-line no-param-reassign
     return true;
   });
