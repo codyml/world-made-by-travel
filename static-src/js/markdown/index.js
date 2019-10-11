@@ -1,7 +1,19 @@
 import MarkdownIt from 'markdown-it';
 import MarkdownItFootnote from 'markdown-it-footnote';
 
+import htmlBlock from './html_block';
+import link from './link';
+
+
+/*
+* Initializes Markdown parser/renderer with additional rules.
+*/
+
 export const md = MarkdownIt({ html: true }).use(MarkdownItFootnote);
+md.block.ruler.at('html_block', htmlBlock);
+md.inline.ruler1.at('link', link);
+console.log(md);
+
 
 /*
 * Parses, normalizes and verifies a section's Markdown content.
