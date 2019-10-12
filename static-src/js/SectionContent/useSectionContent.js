@@ -55,8 +55,7 @@ const parseSectionContent = ({
 * when it arrives.
 */
 
-export default function useSectionContent() {
-  const sectionSlug = useSelector((state) => state.currentSectionSlug);
+export default function useSectionContent(sectionSlug) {
   const meta = useSelector((state) => state.sectionMetaBySlug[sectionSlug]);
   const content = useSelector((state) => state.sectionContentBySlug[sectionSlug]);
   const dispatch = useDispatch();

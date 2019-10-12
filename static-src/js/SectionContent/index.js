@@ -8,7 +8,7 @@ import useSectionScroll from './useSectionScroll';
 import Block from './Block';
 import TitleBlock from './TitleBlock';
 import HoverTitleBlock from './HoverTitleBlock';
-import LoadingBlock from './LoadingBlock';
+import LoadingMessage from '../LoadingMessage';
 import MainContentBlock from './MainContentBlock';
 import FootnotesBlock from './FootnotesBlock';
 import CustomBlock from './CustomBlock';
@@ -32,7 +32,7 @@ export default function SectionContent({ sectionSlug }) {
   const [
     contentLoaded,
     { preFootnotesBlocks, postFootnotesBlocks },
-  ] = useSectionContent();
+  ] = useSectionContent(sectionSlug);
 
   useSetTitle([sectionMeta.title]);
   const [scrollHandler, {
@@ -74,30 +74,36 @@ export default function SectionContent({ sectionSlug }) {
         ) : null}
 
         {/* Blocks for non-TOC sections with content received */}
-        {!isToc && contentLoaded ? (
+        {!isToc ? (
           <>
 
-            {/* Main content block */}
-            <MainContentBlock slug={sectionSlug} />
+            {contentLoaded ? (
+              <>
 
-            {/* Pre-Footnotes blocks */}
-            {preFootnotesBlocks.map((block) => (
-              <CustomBlock key={block.index} {...block} />
-            ))}
+                {/* Main content block */}
+                <MainContentBlock sectionSlug={sectionSlug} />
 
-            {/* Footnotes block */}
-            <FootnotesBlock />
+                {/* Pre-Footnotes blocks */}
+                {preFootnotesBlocks.map((block) => (
+                  <CustomBlock key={block.index} sectionSlug={sectionSlug} {...block} />
+                ))}
 
-            {/* Post-Footnotes blocks */}
-            {postFootnotesBlocks.map((block) => (
-              <CustomBlock key={block.index} {...block} />
-            ))}
+                {/* Footnotes block */}
+                <FootnotesBlock sectionSlug={sectionSlug} />
+
+                {/* Post-Footnotes blocks */}
+                {postFootnotesBlocks.map((block) => (
+                  <CustomBlock key={block.index} sectionSlug={sectionSlug} {...block} />
+                ))}
+
+              </>
+            ) : null}
+
+            {/* Loading message */}
+            <LoadingMessage visible={!contentLoaded} />
 
           </>
         ) : null}
-
-        {/* If loading */}
-        {!isToc && !contentLoaded ? <LoadingBlock /> : null}
 
       </div>
     </div>

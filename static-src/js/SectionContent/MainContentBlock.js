@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import useSectionContent from './useSectionContent';
 import Block from './Block';
@@ -8,8 +9,8 @@ import {
   useSpecialLinks,
 } from '../MarkdownContent';
 
-export default function MainContentBlock() {
-  const [, { mainContent, figureContentByIdentifier }] = useSectionContent();
+export default function MainContentBlock({ sectionSlug }) {
+  const [, { mainContent, figureContentByIdentifier }] = useSectionContent(sectionSlug);
   const referencesExtension = useReferences(figureContentByIdentifier);
   const specialLinksExtension = useSpecialLinks();
 
@@ -21,3 +22,7 @@ export default function MainContentBlock() {
     </Block>
   );
 }
+
+MainContentBlock.propTypes = {
+  sectionSlug: PropTypes.string.isRequired,
+};

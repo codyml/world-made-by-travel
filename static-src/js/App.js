@@ -22,7 +22,7 @@ const App = () => {
 
   return (
     <div className={style.App}>
-      <LoadingMessage visible={!contentLoaded} />
+      <LoadingMessage overlay visible={!contentLoaded} />
       { contentLoaded ? (
         <BrowserRouter>
           <CoverView />

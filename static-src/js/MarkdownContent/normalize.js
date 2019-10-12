@@ -21,84 +21,77 @@ export const ContentItemPropType = PropTypes.oneOfType([
 */
 
 export default function normalizeTokens(tokens) {
-  let lastParagraphNumber = 0;
-  let lastFigureNumber = 0;
-  const paragraphsByNumber = {};
-  const figuresByNumber = {};
-  const footnotesByIdentifier = {};
-  const footnotes = [];
+  const itemsByNumber = {};
+  const assignNumber = (item) => {
+    if (!itemsByNumber[item.tag]) {
+      itemsByNumber[item.tag] = { currentNumber: 0, itemsByNumber: {} };
+    }
+
+    const assignedNumber = itemsByNumber[item.tag].currentNumber + 1;
+    itemsByNumber[item.tag].currentNumber = assignedNumber;
+    return { ...item, assignedNumber };
+  };
 
   const normalizeCurrentTokens = (currentTokens, keyPrefix = 'root') => {
-    const itemsArrStack = [];
-    const pushItemsArr = itemsArrStack.push.bind(itemsArrStack);
-    const peekItemsArr = () => itemsArrStack[itemsArrStack.length - 1];
-    const popItemsArr = itemsArrStack.pop.bind(itemsArrStack);
+    const parents = [];
+    const pushParent = parents.push.bind(parents);
+    const peekParent = () => parents[parents.length - 1];
+    const popParent = parents.pop.bind(parents);
+
+    //  Creates a unique key for a token
     const getKey = () => [
       keyPrefix,
-      ...itemsArrStack.map((items) => items.length),
+      ...parents.map((parent) => parent.children.length),
     ].join(':');
 
-    const createItemFromToken = (token, children) => ({
-      key: getKey(),
-      tag: token.tag,
-      props: token.attrs ? Object.assign(
-        {},
-        ...token.attrs.map(([key, value]) => ({ [key]: value })),
-      ) : {},
-      children,
-    });
+    //  Creates a normalized content item object from a Markdown-It token
+    const createItemFromToken = ({ type, tag, attrs, content }) => {
+      if (type === 'text') {
+        return content;
+      }
 
-    pushItemsArr([]);
+      const props = attrs
+        ? Object.assign({}, ...attrs.map(([key, value]) => ({ [key]: value })))
+        : {};
+
+      const children = content ? [content] : [];
+      const item = {
+        key: getKey(),
+        tag,
+        props,
+        children,
+      };
+
+      assignNumber(item);
+      return item;
+    };
+
+    pushParent({ children: [] });
 
     for (let i = 0; i < currentTokens.length; i++) {
       const token = currentTokens[i];
       switch (token.nesting) {
         case 1: {
-          pushItemsArr([]);
+          const item = createItemFromToken(token);
+
+
+          pushParent(item);
           break;
         }
 
         case 0: {
-          switch (token.type) {
-            case 'inline': {
-              pushItemsArr(popItemsArr().concat(normalizeCurrentTokens(token.children, getKey())));
-              break;
-            }
-
-            case 'text': {
-              peekItemsArr().push(token.content);
-              break;
-            }
-
-            default: {
-              peekItemsArr().push(createItemFromToken(token));
-            }
+          if (token.children) {
+            peekParent().children.push(...normalizeCurrentTokens(token.children, getKey()));
+          } else {
+            peekParent().children.push(createItemFromToken(token));
           }
 
           break;
         }
 
         case -1: {
-          const item = createItemFromToken(token, popItemsArr());
-          switch (item.tag) {
-            case 'p': {
-              item.number = lastParagraphNumber + 1;
-              lastParagraphNumber = item.number;
-              paragraphsByNumber[item.number] = item;
-              break;
-            }
-
-            case 'figure': {
-              item.number = lastFigureNumber + 1;
-              lastFigureNumber = item.number;
-              figuresByNumber[item.number] = item;
-              break;
-            }
-
-            default:
-          }
-
-          peekItemsArr().push(item);
+          const item = popParent();
+          peekParent().children.push(item);
           break;
         }
 
@@ -108,15 +101,9 @@ export default function normalizeTokens(tokens) {
       }
     }
 
-    return popItemsArr();
+    return popParent().children;
   };
 
   const contentItems = normalizeCurrentTokens(tokens);
-  return {
-    paragraphsByNumber, // { number: { number, content: [content] }
-    figuresByNumber, // { number: { number, content: [identifier], caption: [content] } }
-    contentItems, // [content]
-    footnotesByIdentifier, // { identifier: { identifier, content: [content] } },
-    footnotes, // [identifier],
-  };
+  return { contentItems, itemsByNumber };
 }

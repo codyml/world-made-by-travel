@@ -44,6 +44,12 @@ module.exports = {
         message: '`with` is disallowed in strict mode because it makes code impossible to predict and optimize.',
       },
     ],
+    'object-curly-newline': ['error', {
+      ObjectExpression: { minProperties: 5, multiline: true, consistent: true },
+      ObjectPattern: { minProperties: 5, multiline: true, consistent: true },
+      ImportDeclaration: { minProperties: 5, multiline: true, consistent: true },
+      ExportDeclaration: { minProperties: 5, multiline: true, consistent: true },
+    }],
   },
   settings: {
     'import/resolver': 'webpack',

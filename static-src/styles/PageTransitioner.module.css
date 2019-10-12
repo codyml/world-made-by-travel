@@ -28,7 +28,7 @@
   }
 }
 
-.transitionCssEnabled {
+.canvas.transitionCssEnabled {
   transition: left var(--transition-duration-page-transition);
 }
 
@@ -39,7 +39,6 @@
   height: 100%;
   transform: scale(0.95);
   opacity: 0;
-  transition: transform var(--transition-duration-fade), opacity var(--transition-duration-fade);
 
   &[data-position="left"] {
     left: 0;
@@ -54,7 +53,11 @@
   }
 }
 
-.active {
+.transitionCssEnabled .content {
+  transition: transform var(--transition-duration-fade), opacity var(--transition-duration-fade);
+}
+
+.content.active {
   transform: scale(1);
   opacity: 1;
 }

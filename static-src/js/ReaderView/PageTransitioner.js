@@ -95,15 +95,17 @@ export default function PageTransitioner() {
         ref={canvasRef}
       >
         {[POSITIONS.left, POSITIONS.center, POSITIONS.right].map(
-          (position) => (slugsByPosition[position] ? (
+          (position) => (
             <div
               className={cx(style.content, { active: position === currentPosition })}
-              key={slugsByPosition[position]}
+              key={position}
               data-position={position}
             >
-              <SectionContent sectionSlug={slugsByPosition[position]} />
+              {slugsByPosition[position] ? (
+                <SectionContent sectionSlug={slugsByPosition[position]} />
+              ) : null}
             </div>
-          ) : null),
+          ),
         )}
       </div>
     </div>
