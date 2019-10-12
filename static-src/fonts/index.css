@@ -207,3 +207,38 @@
   font-style: italic;
   src: url(../fonts/source-serif-pro/900-italic.otf);
 }
+
+@font-face {
+  font-family: 'Source Serif Pro';
+  font-weight: 900;
+  font-style: italic;
+  src: url(../fonts/source-serif-pro/900-italic.otf);
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  font-weight: 400;
+  font-style: normal;
+  src: url(../fonts/source-code-pro/400-normal.ttf);
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  font-weight: 400;
+  font-style: italic;
+  src: url(../fonts/source-code-pro/400-italic.ttf);
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  font-weight: 700;
+  font-style: normal;
+  src: url(../fonts/source-code-pro/700-normal.ttf);
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  font-weight: 700;
+  font-style: italic;
+  src: url(../fonts/source-code-pro/700-italic.ttf);
+}

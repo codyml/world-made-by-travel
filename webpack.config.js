@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require('path'); // eslint-disable-line import/no-extraneous-dependencies
 const postcssImport = require('postcss-import');
 const postcssPresetEnv = require('postcss-preset-env');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -33,7 +33,7 @@ module.exports = {
         },
       },
       {
-        test: /\.otf$/,
+        test: /\.(otf|ttf)$/,
         loader: 'file-loader',
         options: {
           name: '[folder]/[name].[ext]',

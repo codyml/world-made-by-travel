@@ -7,6 +7,7 @@ module.exports = {
   ],
   rules: {
     'no-duplicate-selectors': null,
+    'selector-nested-pattern': '^&|^@nest',
     'csstools/value-no-unknown-custom-properties': [true, {
       importFrom: [
         path.resolve(__dirname, 'static-src/styles/breakpoint.css'),
