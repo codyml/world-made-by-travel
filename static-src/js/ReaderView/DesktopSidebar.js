@@ -40,7 +40,7 @@ export default function DesktopSidebar() {
         <div className={style.titleAuthor}>
           <Link to="/">
             <div className={style.bookTitle}>{coverTitle}</div>
-            <div className={style.bookAuthor}>{coverAuthor}</div>
+            <div className={style.author}>{coverAuthor}</div>
           </Link>
         </div>
         <div className={cx(style.instructions, { collapsed: !onTableOfContents })}>

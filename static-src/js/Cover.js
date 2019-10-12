@@ -60,11 +60,11 @@ export default function Cover() {
         <div className={style.bookInformation}>
           <div className={style.title}>{coverTitle}</div>
           <div className={style.subtitle}>{coverSubtitle}</div>
-          <div className={style.author}>{coverAuthor}</div>
+          <div className={style.bookAuthor}>{coverAuthor}</div>
           <Link className={style.enter} to={enterPath}>Enter</Link>
         </div>
 
-        <div className={style.bookContent}>
+        <div className={style.content}>
           <MarkdownContent>{coverContentMarkdown}</MarkdownContent>
           {browserSize === 'mobile' ? (
             <HTMLContent className={style.imgAttrib}>{backgroundImageAttribution}</HTMLContent>
@@ -90,7 +90,7 @@ export default function Cover() {
               className={style.copyright}
               onClick={toggleSliderCollapsed}
             >
-              <strong className={style.publInfo}>Publication Information</strong>
+              <div className={style.publInfo}>Publication Information</div>
               <HTMLContent>{coverCopyright}</HTMLContent>
             </div>
 
@@ -113,9 +113,7 @@ export default function Cover() {
         //  Tablet/desktop Publication Information bar
         <div className={style.infoBar}>
           <div className={style.leftColumn}>
-            <div className={style.copyright}>
-              <HTMLContent>{coverCopyright}</HTMLContent>
-            </div>
+            <HTMLContent className={style.copyright}>{coverCopyright}</HTMLContent>
             <HTMLContent className={style.numbers}>{coverNumbers}</HTMLContent>
           </div>
           <div className={style.credits}>

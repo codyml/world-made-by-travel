@@ -32,21 +32,34 @@
   }
 }
 
-.title.current {
+.sectionTitle {
+  composes: sectionTitle from './typography.module.css';
+  font-size: 1.2em;
+}
+
+a.sectionTitle {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.sectionTitle.current {
   font-weight: bold;
 }
 
-.title.explorerLink {
+.sectionTitle.explorerLink {
   color: var(--color-explorer-link);
   font-weight: bold;
 }
 
-.white.title.explorerLink {
+.white.sectionTitle.explorerLink {
   color: white;
 }
 
-.author {
-  composes: bookAuthor from './typography.module.css';
+.sectionAuthor {
+  composes: sectionAuthor from './typography.module.css';
   font-size: 0.9em;
   margin-top: 0.15em;
 }

@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { processMainContentMarkdown, processMarkdown } from '../markdown';
+import { processMainContentMarkdown, processMarkdown } from '../MarkdownContent';
 import {
   SECTION_CONTENT_REQUESTED,
   SECTION_CONTENT_RECEIVED,
@@ -55,7 +55,8 @@ const parseSectionContent = ({
 * when it arrives.
 */
 
-export default function useSectionContent(sectionSlug) {
+export default function useSectionContent() {
+  const sectionSlug = useSelector((state) => state.currentSectionSlug);
   const meta = useSelector((state) => state.sectionMetaBySlug[sectionSlug]);
   const content = useSelector((state) => state.sectionContentBySlug[sectionSlug]);
   const dispatch = useDispatch();
@@ -80,5 +81,6 @@ export default function useSectionContent(sectionSlug) {
     }
   }, [content, dispatch, meta, sectionSlug]);
 
-  return content && content !== REQUESTED ? content : null;
+  const contentLoaded = content && content !== REQUESTED;
+  return [contentLoaded, contentLoaded ? content : {}];
 }

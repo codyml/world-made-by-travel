@@ -12,7 +12,7 @@ const CAPTION_OPEN = '<figcaption>';
 const CAPTION_CLOSE = '</figcaption>';
 const FIGURE_CLOSE = '</figure>';
 
-export default function specializedLinkPlugin(md) {
+export const FiguresMarkdownItPlugin = (md) => {
   md.block.ruler.before('html_block', FIGURE_RULE_NAME, (state, startLine, endLine) => {
     let figureContentStartPos = -1;
     let captionStartPos = -1;
@@ -81,4 +81,15 @@ export default function specializedLinkPlugin(md) {
     state.line = figureCloseLine + 1; // eslint-disable-line no-param-reassign
     return true;
   });
-}
+};
+
+
+export const useFigures = () => (item) => {
+  if (item.tag === 'figure') {
+    return {
+      children: ['FIGURE', ...item.children],
+    };
+  }
+
+  return null;
+};

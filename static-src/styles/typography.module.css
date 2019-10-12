@@ -6,29 +6,50 @@
 */
 
 .bookTitle {
+  font-size: 1.5em;
   font-family: var(--font-display);
   font-weight: bold;
-  font-size: 1.5em;
   letter-spacing: -0.01em;
   color: var(--color-reader-view-title);
 }
 
-.bookAuthor {
+.sectionTitle {
+  font-size: 2em;
+  font-family: var(--font-display);
+}
+
+.author {
   font-family: var(--font-serif);
   font-style: italic;
+}
+
+.bookAuthor {
+  composes: author;
+  color: var(--color-author-link);
+}
+
+.sectionAuthor {
+  composes: author;
+  font-size: 1.5em;
 }
 
 .authorLink {
   color: var(--color-author-link);
 
-  &:hover {
-    text-decoration: underline;
+  @nest .content & {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
-.bookContent {
+.content {
+  font-size: 1em;
   font-family: var(--font-serif);
-  line-height: 1.45;
+  font-weight: 400;
+  line-height: 1.5;
   letter-spacing: 0.01em;
 
   & hr {
@@ -40,4 +61,27 @@
   & a {
     text-decoration: underline;
   }
+}
+
+.uiContent {
+  composes: content;
+  font-size: 1.25em;
+  font-family: var(--font-sans);
+  line-height: 1.35;
+  letter-spacing: 0;
+
+  & a {
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.uiTitle {
+  font-family: var(--font-sans);
+  font-size: 2em;
+  font-weight: 300;
+  text-align: center;
 }

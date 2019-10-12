@@ -31,11 +31,16 @@ strong {
   font-weight: bold;
 }
 
-button {
-  all: initial;
-  font: inherit;
-  color: inherit;
-  line-height: inherit;
+p {
+  overflow-wrap: break-word;
+
+  &:first-child {
+    margin-top: 0;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
 
 *,

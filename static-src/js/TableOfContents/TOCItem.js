@@ -30,7 +30,7 @@ export default function TOCItem({
   return (
     <div className={cx(style.item)}>
       <LinkedTitle
-        className={cx(style.title, { current })}
+        className={cx(style.sectionTitle, { current })}
         cx={cx}
         slug={slug}
         expanded={expanded}
@@ -39,7 +39,7 @@ export default function TOCItem({
       />
       {author ? (
         <LinkedAuthor
-          className={cx(style.author)}
+          className={cx(style.sectionAuthor)}
           linkClassName={cx(style.authorLink)}
           onLinkClick={onLinkClick}
         >

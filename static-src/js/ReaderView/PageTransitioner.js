@@ -33,18 +33,20 @@ export default function PageTransitioner() {
 
   const dispatch = useDispatch();
 
+  const currentSlug = slugsByPosition[POSITIONS.center];
+  const nextSlugStartPosition = React.useMemo(() => {
+    const currentIndex = currentSlug ? sectionMetaBySlug[currentSlug].index : -1;
+    const nextIndex = sectionMetaBySlug[nextSlug].index;
+    return nextIndex > currentIndex ? POSITIONS.right : POSITIONS.left;
+  }, [currentSlug, nextSlug, sectionMetaBySlug]);
+
   //  If transition not already prepared and slug changed, prepare
   //  transition.
   useEffect(() => {
-    if (!transitionPrepared && nextSlug !== slugsByPosition[POSITIONS.center]) {
-      const [currentIndex, nextIndex] = [slugsByPosition[POSITIONS.center], nextSlug].map(
-        (slug) => sectionMetaBySlug[slug].index,
-      );
-
-      const startPosition = nextIndex - currentIndex > 0 ? POSITIONS.left : POSITIONS.right;
-      dispatch({ type: PREPARE_TRANSITION, startPosition, nextSlug });
+    if (!transitionPrepared && nextSlug !== currentSlug) {
+      dispatch({ type: PREPARE_TRANSITION, nextSlug, nextSlugStartPosition });
     }
-  }, [dispatch, nextSlug, sectionMetaBySlug, slugsByPosition, transitionPrepared]);
+  }, [currentSlug, dispatch, nextSlug, nextSlugStartPosition, transitionPrepared]);
 
   //  If transition prepared but CSS not enabled, enable transition
   //  CSS.
@@ -62,22 +64,28 @@ export default function PageTransitioner() {
   //  start transition.
   useEffect(() => {
     if (transitionPrepared && transitionCssEnabled && !transitionStarted) {
-      dispatch({ type: START_TRANSITION });
+      dispatch({ type: START_TRANSITION, nextSlugStartPosition });
     }
-  }, [dispatch, transitionCssEnabled, transitionPrepared, transitionStarted]);
+  }, [
+    dispatch,
+    nextSlugStartPosition,
+    transitionCssEnabled,
+    transitionPrepared,
+    transitionStarted,
+  ]);
 
   //  Listen for transition end.
   useEffect(() => {
     const { current: canvas } = canvasRef;
     const handleTransitionEnd = (event) => {
-      if (event.propertyName === 'right') {
-        dispatch({ type: FINISH_TRANSITION });
+      if (event.propertyName === 'left') {
+        dispatch({ type: FINISH_TRANSITION, nextSlug });
       }
     };
 
     canvas.addEventListener('transitionend', handleTransitionEnd);
     return () => canvas.removeEventListener('transitionend', handleTransitionEnd);
-  }, [dispatch]);
+  }, [dispatch, nextSlug]);
 
   return (
     <div className={style.PageTransitioner}>
@@ -89,11 +97,7 @@ export default function PageTransitioner() {
         {[POSITIONS.left, POSITIONS.center, POSITIONS.right].map(
           (position) => (slugsByPosition[position] ? (
             <div
-              className={cx(style.content, {
-                active: (
-                  position === POSITIONS.center && (!transitionPrepared || transitionStarted)
-                ),
-              })}
+              className={cx(style.content, { active: position === currentPosition })}
               key={slugsByPosition[position]}
               data-position={position}
             >

@@ -38,8 +38,6 @@
 
 .bookAuthor {
   composes: bookAuthor from './typography.module.css';
-  color: var(--color-author-link);
-  font-weight: 400;
   margin-top: 0.25em;
 }
 
@@ -93,13 +91,12 @@
 }
 
 .button {
+  composes: uiTitle from './typography.module.css';
   height: var(--bar-item-height);
   padding: 0 0.5em;
   display: flex;
-  align-items: center;
   justify-content: center;
-  text-align: center;
-  font-weight: 300;
+  align-items: center;
   cursor: pointer;
 }
 
@@ -113,7 +110,7 @@
   max-height: 0;
   overflow: hidden;
   padding: 0 1.25rem;
-  font-size: 1.15rem;
+  font-size: 1em;
   transition:
     max-height var(--transition-duration-slide),
     padding var(--transition-duration-slide);

@@ -23,25 +23,26 @@
   border-bottom: 1px solid var(--color-ui-hr);
 }
 
-.title {
-  font-family: var(--font-display);
-  font-size: 2em;
+.sectionTitle {
+  composes: sectionTitle from './typography.module.css';
 }
 
-.author {
-  font-family: var(--font-serif);
-  font-style: italic;
-  font-size: 1.5em;
+.sectionAuthor {
+  composes: sectionAuthor from './typography.module.css';
+}
+
+.sectionTitle + .sectionAuthor {
   margin-top: 0.75em;
 }
 
 .content {
-  font-family: var(--font-serif);
-  font-size: 1em;
-  line-height: 1.65;
-  overflow-wrap: break-word;
+  composes: content from './typography.module.css';
+}
 
-  &:not(:first-child) {
-    margin-top: 1.25em;
-  }
+.sectionAuthor + .content {
+  margin-top: 1.25em;
+}
+
+.sectionTitle + .content {
+  margin-top: 1.25em;
 }

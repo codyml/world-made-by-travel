@@ -15,8 +15,8 @@ const Block = React.forwardRef(({
   isMini,
 }, ref) => (
   <div ref={ref} className={cx(style.Block, { isToc, isMini })}>
-    {title && <div className={style.title}>{title}</div>}
-    {author && <LinkedAuthor className={style.author}>{author}</LinkedAuthor>}
+    {title && <div className={style.sectionTitle}>{title}</div>}
+    {author && <LinkedAuthor className={style.sectionAuthor}>{author}</LinkedAuthor>}
     {children && <div className={style.content}>{children}</div>}
   </div>
 ));

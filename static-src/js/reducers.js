@@ -229,13 +229,13 @@ const readerViewTransition = combineReducers({
     switch (action.type) {
       case PREPARE_TRANSITION:
         return {
-          [action.startPosition]: state[POSITIONS.center],
-          [POSITIONS.center]: action.nextSlug,
+          ...state,
+          [action.nextSlugStartPosition]: action.nextSlug,
         };
 
       case FINISH_TRANSITION:
         return {
-          [POSITIONS.center]: state[POSITIONS.center],
+          [POSITIONS.center]: action.nextSlug,
         };
 
       default:
@@ -245,10 +245,10 @@ const readerViewTransition = combineReducers({
 
   currentPosition: (state = POSITIONS.center, action) => {
     switch (action.type) {
-      case PREPARE_TRANSITION:
-        return action.startPosition;
-
       case START_TRANSITION:
+        return action.nextSlugStartPosition;
+
+      case FINISH_TRANSITION:
         return POSITIONS.center;
 
       default:

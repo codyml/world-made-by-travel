@@ -29,14 +29,18 @@ export default function SectionContent({ sectionSlug }) {
     state.sectionMetaBySlug[sectionSlug] || EXPANDED_TOC
   ));
 
-  const sectionContent = useSectionContent(sectionSlug);
+  const [
+    contentLoaded,
+    { preFootnotesBlocks, postFootnotesBlocks },
+  ] = useSectionContent();
+
   useSetTitle([sectionMeta.title]);
   const [scrollHandler, {
     titleRef,
     hoverTitleRef,
   }, {
     hoverTitleVisible,
-  }] = useSectionScroll(sectionMeta, sectionContent);
+  }] = useSectionScroll();
 
   const isToc = sectionMeta.slug === EXPANDED_TOC.slug;
 
@@ -70,22 +74,22 @@ export default function SectionContent({ sectionSlug }) {
         ) : null}
 
         {/* Blocks for non-TOC sections with content received */}
-        {!isToc && sectionContent ? (
+        {!isToc && contentLoaded ? (
           <>
 
             {/* Main content block */}
-            <MainContentBlock content={sectionContent.mainContent} />
+            <MainContentBlock slug={sectionSlug} />
 
             {/* Pre-Footnotes blocks */}
-            {sectionContent.preFootnotesBlocks.map((block) => (
+            {preFootnotesBlocks.map((block) => (
               <CustomBlock key={block.index} {...block} />
             ))}
 
             {/* Footnotes block */}
-            {sectionContent.mainContent.footnotes.length ? <FootnotesBlock /> : null}
+            <FootnotesBlock />
 
             {/* Post-Footnotes blocks */}
-            {sectionContent.postFootnotesBlocks.map((block) => (
+            {postFootnotesBlocks.map((block) => (
               <CustomBlock key={block.index} {...block} />
             ))}
 
@@ -93,7 +97,7 @@ export default function SectionContent({ sectionSlug }) {
         ) : null}
 
         {/* If loading */}
-        {!isToc && !sectionContent ? <LoadingBlock /> : null}
+        {!isToc && !contentLoaded ? <LoadingBlock /> : null}
 
       </div>
     </div>

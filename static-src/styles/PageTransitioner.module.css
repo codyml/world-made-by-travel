@@ -16,20 +16,20 @@
   height: 100%;
 
   &[data-current-position="left"] {
-    right: 0;
+    left: 0;
   }
 
   &[data-current-position="center"] {
-    right: 100%;
+    left: -100%;
   }
 
   &[data-current-position="right"] {
-    right: 200%;
+    left: -200%;
   }
 }
 
 .transitionCssEnabled {
-  transition: right var(--transition-duration-page-transition);
+  transition: left var(--transition-duration-page-transition);
 }
 
 .content {

@@ -2,10 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Block from './Block';
+import { ContentItem, useSpecialLinks } from '../MarkdownContent';
 
 export default function CustomBlock({ title, author, content }) {
+  const specialLinksExtension = useSpecialLinks();
+
   return (
-    <Block title={title} author={author}>{JSON.stringify(content)}</Block>
+    <Block title={title} author={author}>
+      <ContentItem extensions={[specialLinksExtension]}>
+        {content.contentItems}
+      </ContentItem>
+    </Block>
   );
 }
 

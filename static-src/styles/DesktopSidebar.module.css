@@ -77,9 +77,7 @@
 }
 
 .panelTitle {
-  font-size: 2em;
-  font-weight: 300;
-  text-align: center;
+  composes: uiTitle from './typography.module.css';
   flex-shrink: 0;
 }
 
@@ -105,8 +103,8 @@
   padding: 0 1em;
 }
 
-.bookAuthor {
-  composes: bookAuthor from './typography.module.css';
+.author {
+  composes: author from './typography.module.css';
   color: var(--color-author-link);
   font-weight: 400;
   margin-top: 0.25em;
@@ -114,9 +112,8 @@
 
 .instructions {
   composes: panelInner;
+  composes: uiContent from './typography.module.css';
   font-size: 1.3em;
-  font-weight: 300;
-  line-height: 1.45;
   text-align: center;
 }
 

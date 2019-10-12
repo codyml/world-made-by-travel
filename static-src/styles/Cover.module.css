@@ -112,10 +112,9 @@
   }
 }
 
-.author {
+.bookAuthor {
   composes: bookAuthor from './typography.module.css';
   font-size: 1.25em;
-  color: var(--color-cover-author);
   margin: 1.65em 0;
 
   @media (--breakpoint-tablet) {
@@ -135,8 +134,8 @@
   }
 }
 
-.bookContent {
-  composes: bookContent from './typography.module.css';
+.content {
+  composes: content from './typography.module.css';
   position: relative;
   flex-grow: 1;
   overflow-y: scroll;
@@ -225,10 +224,10 @@
 }
 
 .publInfo {
-  font-size: 1.25em;
+  composes: uiContent from './typography.module.css';
   margin-top: -0.15em;
   margin-bottom: 0.35em;
-  font-family: var(--font-sans);
+  font-weight: bold;
 }
 
 .numbers {
