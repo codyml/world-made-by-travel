@@ -11,6 +11,8 @@ const FIGURE_OPEN = '<figure>';
 const CAPTION_OPEN = '<figcaption>';
 const CAPTION_CLOSE = '</figcaption>';
 const FIGURE_CLOSE = '</figure>';
+export const FIGURE_TAG = 'figure';
+export const CAPTION_TAG = 'figcaption';
 
 export const FiguresMarkdownItPlugin = (md) => {
   md.block.ruler.before('html_block', FIGURE_RULE_NAME, (state, startLine, endLine) => {
@@ -60,7 +62,7 @@ export const FiguresMarkdownItPlugin = (md) => {
       return false;
     }
 
-    state.push(FIGURE_OPEN_TOKEN_TYPE, 'figure', 1);
+    state.push(FIGURE_OPEN_TOKEN_TYPE, FIGURE_TAG, 1);
     const contentInlineToken = state.push('inline', '', 0);
     contentInlineToken.children = [];
     contentInlineToken.content = state.src.slice(
@@ -70,14 +72,14 @@ export const FiguresMarkdownItPlugin = (md) => {
 
     //  If valid caption
     if (captionStartPos !== -1 && captionEndPos !== -1 && captionEndPos > captionStartPos) {
-      state.push(FIGURE_CAPTION_OPEN_TOKEN_TYPE, 'figcaption', 1);
+      state.push(FIGURE_CAPTION_OPEN_TOKEN_TYPE, CAPTION_TAG, 1);
       const captionInlineToken = state.push('inline', '', 0);
       captionInlineToken.children = [];
       captionInlineToken.content = state.src.slice(captionStartPos, captionEndPos).trim();
-      state.push(FIGURE_CAPTION_CLOSE_TOKEN_TYPE, 'figcaption', -1);
+      state.push(FIGURE_CAPTION_CLOSE_TOKEN_TYPE, CAPTION_TAG, -1);
     }
 
-    state.push(FIGURE_CLOSE_TOKEN_TYPE, 'figure', -1);
+    state.push(FIGURE_CLOSE_TOKEN_TYPE, FIGURE_TAG, -1);
     state.line = figureCloseLine + 1; // eslint-disable-line no-param-reassign
     return true;
   });

@@ -10,7 +10,15 @@ import { ContentItemPropType } from './normalize';
 * false, entity will not be rendered.
 */
 
-export default function ContentItem({ ancestors, extensions, ...item }) {
+export default function ContentItem({
+  tag: itemTag,
+  props: itemProps,
+  children: itemChildren,
+  ancestors,
+  extensions,
+}) {
+  let item = { tag: itemTag, props: itemProps, children: itemChildren };
+
   //  Skip empty tags
   if (!item.tag) {
     return null;
@@ -19,11 +27,11 @@ export default function ContentItem({ ancestors, extensions, ...item }) {
   //  Apply extensions
   for (const extension of extensions) {
     const result = extension(item, ancestors);
-    if (result === false) {
+    if (!result) {
       return null;
     }
 
-    Object.assign(item, result);
+    item = { ...item, ...result };
   }
 
   const {

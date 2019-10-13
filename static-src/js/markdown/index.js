@@ -5,6 +5,7 @@ import parseMarkdown from './parse';
 import normalizeTokens, { ContentItemPropType } from './normalize';
 import ContentItem from './ContentItem';
 import { REFERENCE_TAG } from './references';
+import { FIGURE_TAG, CAPTION_TAG } from './figures';
 import {
   SPECIAL_LINK_TAG,
   EXPLORER_LINK_TYPE,
@@ -73,4 +74,6 @@ export {
   SPECIAL_LINK_TAG,
   EXPLORER_LINK_TYPE,
   BOOK_LINK_TYPE,
+  FIGURE_TAG,
+  CAPTION_TAG,
 };

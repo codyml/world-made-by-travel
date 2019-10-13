@@ -18,17 +18,17 @@ const parseSectionContent = ({
   const figureContentByIdentifier = Object.assign({}, ...figures.map(
     ({
       identifier,
-      markdown: imageMarkdown,
+      markdown: figureMarkdown,
       image,
-      download: imageDownload,
-    }) => ({
+      download: figureDownload,
+    }, index) => ({
       [identifier]: {
         identifier,
-        content: imageMarkdown
-          ? processMarkdown(imageMarkdown)
-          : [{ image }],
+        contentItems: figureMarkdown
+          ? processMarkdown(figureMarkdown)
+          : [{ key: `img:${index}`, tag: 'img', props: { src: image } }],
 
-        download: imageDownload,
+        download: figureDownload,
       },
     }),
   ));

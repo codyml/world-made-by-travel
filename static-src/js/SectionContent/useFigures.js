@@ -1,19 +1,35 @@
-import { REFERENCE_TAG } from '../markdown';
+import { useRef, useCallback } from 'react';
+import { REFERENCE_TAG, FIGURE_TAG } from '../markdown';
+
 
 /*
 * Custom hook that lets React component handle references.
 */
 
-const useFigures = () => (item) => {
-  if (item.tag === REFERENCE_TAG) {
-    return {
-      tag: 'span',
-      props: {},
-      children: ['REFERENCE'],
-    };
-  }
+export default function useFigures(figureContentByIdentifier) {
+  const currentFigure = useRef();
+  return useCallback(({ tag, props, children }) => {
+    switch (tag) {
+      case FIGURE_TAG: {
+        currentFigure.current = { tag, props, children };
+        return {};
+      }
 
-  return null;
-};
+      case REFERENCE_TAG: {
+        const referencedContent = figureContentByIdentifier[props.reference];
+        return {
+          tag: 'div',
+          props: {
+            // valid: !!content,
+            // figure: currentFigure.current,
+          },
+          children: referencedContent ? referencedContent.contentItems : [],
+        };
+      }
 
-export default useFigures;
+      default: {
+        return {};
+      }
+    }
+  }, [figureContentByIdentifier]);
+}

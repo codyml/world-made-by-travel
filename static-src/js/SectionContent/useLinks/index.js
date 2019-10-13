@@ -49,6 +49,6 @@ export default function useLinks() {
       default:
     }
 
-    return null;
+    return {};
   }, []);
 }
