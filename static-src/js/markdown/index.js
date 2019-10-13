@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 import parseMarkdown from './parse';
 import normalizeTokens, { ContentItemPropType } from './normalize';
-import { useSpecialLinks } from './specialLinks';
+import { useSpecialLinks } from './links';
 import { useReferences } from './references';
+import { useFootnotes } from './footnotes';
 
 
 /*
@@ -103,14 +104,14 @@ ContentItem.defaultProps = {
 * Re-parses every render, so not suitable for large documents.
 */
 
-export const MarkdownContent = ({ children: markdown, ...props }) => {
+export default function MarkdownContent({ children: markdown, ...props }) {
   const contentItems = useMemo(() => processMarkdown(markdown), [markdown]);
   return (
     <div {...props}>
       <ContentItem>{contentItems}</ContentItem>
     </div>
   );
-};
+}
 
 MarkdownContent.propTypes = {
   children: PropTypes.string,
@@ -121,8 +122,13 @@ MarkdownContent.defaultProps = {
 };
 
 
+/*
+* Exports tags for consumers of item objects.
+*/
+
 export {
   ContentItemPropType,
-  useSpecialLinks,
   useReferences,
+  useSpecialLinks,
+  useFootnotes,
 };

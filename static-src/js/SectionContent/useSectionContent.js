@@ -35,7 +35,7 @@ const parseSectionContent = ({
 
   const mainContent = processMainContentMarkdown(markdown);
   const parsedBlocks = blocks.map(({ markdown: blockMarkdown, ...block }, index) => ({
-    index,
+    number: index + 1,
     content: processMarkdown(blockMarkdown),
     ...block,
   }));

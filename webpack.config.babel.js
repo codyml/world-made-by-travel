@@ -6,6 +6,7 @@ module.exports = {
   entry: [
     'babel-polyfill',
     'whatwg-fetch',
+    'url-polyfill',
     './static-src/index.js',
   ],
 

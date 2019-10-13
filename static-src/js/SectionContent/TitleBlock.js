@@ -1,31 +1,21 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useContext } from 'react';
 
 import { EXPANDED_TOC } from '../constants';
 import Block from './Block';
+import CurrentSectionContext from '../CurrentSectionContext';
 
 
-const TitleBlock = React.forwardRef(({
-  slug,
-  title,
-  author,
-}, ref) => (
-  <Block
-    ref={ref}
-    title={title}
-    author={author}
-    isToc={slug === EXPANDED_TOC.slug}
-  />
-));
+const TitleBlock = React.forwardRef((props, ref) => {
+  const { title, author, slug } = useContext(CurrentSectionContext);
 
-TitleBlock.propTypes = {
-  slug: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  author: PropTypes.string,
-};
-
-TitleBlock.defaultProps = {
-  author: null,
-};
+  return (
+    <Block
+      ref={ref}
+      title={title}
+      author={author}
+      isToc={slug === EXPANDED_TOC.slug}
+    />
+  );
+});
 
 export default TitleBlock;

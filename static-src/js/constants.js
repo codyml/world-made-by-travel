@@ -24,7 +24,7 @@ export const AUTHOR_MODAL = 'AUTHOR_MODAL';
 export const FIGURE_MODAL = 'FIGURE_MODAL';
 export const CITATION_MODAL = 'CITATION_MODAL';
 
-//  Table of Contents
+//  Table of Contents meta
 export const EXPANDED_TOC = {
   slug: 'toc',
   path: '/toc',
@@ -32,9 +32,82 @@ export const EXPANDED_TOC = {
   index: -1,
 };
 
+//  Cover meta
+export const COVER = {
+  slug: 'cover',
+  path: '/',
+};
+
 //  Position constants
 export const POSITIONS = {
   left: 'left',
   center: 'center',
   right: 'right',
+};
+
+//  Recognized URL hash types and regexes
+const PARAGRAPH = 'PARAGRAPH';
+const FIGURE = 'FIGURE';
+const FOOTNOTE = 'FOOTNOTE';
+const BLOCK = 'BLOCK';
+const hashTypes = {
+  [PARAGRAPH]: /^paragraph-(\d+)$/,
+  [FIGURE]: /^figure-(\d+)$/,
+  [FOOTNOTE]: /^footnote-(\d+)$/,
+  [BLOCK]: /^block-(\d+)$/,
+};
+
+//  Returns the type of hash reference and referenced number/index.
+export const getHashReference = (hash) => {
+  for (const [type, regex] of Object.entries(hashTypes)) {
+    const match = hash.match(regex);
+    if (match) {
+      const [, number] = match;
+      return [type, +number];
+    }
+  }
+
+  return [];
+};
+
+//  Recognized Explorer link types
+const ROOT = 'ROOT';
+const PAGE = 'PAGE';
+const LIST = 'LIST';
+const ENTRY = 'ENTRY';
+const explorerLinkTypes = {
+  [ROOT]: /^\/?$/,
+  [PAGE]: /^\/?(about|search|explore|lists(?=\/$)|visualizations)/,
+  [LIST]: /^\/lists\/(\w+)/,
+  [ENTRY]: /^\/entries\/(\d+)/,
+};
+
+//  Returns the type of Explorer link with some description text.
+export const getExplorerLinkType = (path) => {
+  for (const [type, regex] of Object.entries(explorerLinkTypes)) {
+    const match = path.match(regex);
+    switch (match && type) {
+      case ROOT: {
+        return { root: true };
+      }
+
+      case PAGE: {
+        const [, page] = match;
+        return { page };
+      }
+
+      case LIST: {
+        return { list: true };
+      }
+
+      case ENTRY: {
+        const [, entryIndex] = match;
+        return { entry: true, entryIndex };
+      }
+
+      default:
+    }
+  }
+
+  return null;
 };

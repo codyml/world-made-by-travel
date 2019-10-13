@@ -16,6 +16,7 @@ import TableOfContents from '../TableOfContents';
 import { MarkdownContent } from '../markdown';
 import useSetTitle from '../useSetTitle';
 import { EXPANDED_TOC } from '../constants';
+import CurrentSectionContext from '../CurrentSectionContext';
 
 
 /*
@@ -31,7 +32,7 @@ export default function SectionContent({ sectionSlug }) {
 
   const [
     contentLoaded,
-    { preFootnotesBlocks, postFootnotesBlocks },
+    sectionContent,
   ] = useSectionContent(sectionSlug);
 
   useSetTitle([sectionMeta.title]);
@@ -49,63 +50,67 @@ export default function SectionContent({ sectionSlug }) {
       className={style.SectionContent}
       onScroll={scrollHandler}
     >
+      <CurrentSectionContext.Provider value={{ ...sectionMeta, ...sectionContent }}>
 
-      {/* Hovering section title block */}
-      <HoverTitleBlock ref={hoverTitleRef} visible={hoverTitleVisible} {...sectionMeta} />
+        {/* Hovering section title block */}
+        <HoverTitleBlock ref={hoverTitleRef} visible={hoverTitleVisible} {...sectionMeta} />
 
-      {/* Start of "paper" */}
-      <div className={style.paper}>
+        {/* Start of "paper" */}
+        <div className={style.paper}>
 
-        {/* Introduction content above mobile/tablet Table of Contents */}
-        {browserSize !== 'desktop' && isToc ? (
-          <Block>
-            <MarkdownContent className={style.instructions}>{instructionsMarkdown}</MarkdownContent>
-          </Block>
-        ) : null}
+          {/* Introduction content above mobile/tablet Table of Contents */}
+          {browserSize !== 'desktop' && isToc ? (
+            <Block>
+              <MarkdownContent className={style.instructions}>
+                {instructionsMarkdown}
+              </MarkdownContent>
+            </Block>
+          ) : null}
 
-        {/* Section title block */}
-        <TitleBlock ref={titleRef} {...sectionMeta} />
+          {/* Section title block */}
+          <TitleBlock ref={titleRef} />
 
-        {/* Expanded Table of Contents block */}
-        {isToc ? (
-          <Block isToc>
-            <TableOfContents className={style.tocBlock} />
-          </Block>
-        ) : null}
+          {/* Expanded Table of Contents block */}
+          {isToc ? (
+            <Block isToc>
+              <TableOfContents className={style.tocBlock} />
+            </Block>
+          ) : null}
 
-        {/* Blocks for non-TOC sections with content received */}
-        {!isToc ? (
-          <>
+          {/* Blocks for non-TOC sections with content received */}
+          {!isToc ? (
+            <>
 
-            {contentLoaded ? (
-              <>
+              {contentLoaded ? (
+                <>
 
-                {/* Main content block */}
-                <MainContentBlock sectionSlug={sectionSlug} />
+                  {/* Main content block */}
+                  <MainContentBlock />
 
-                {/* Pre-Footnotes blocks */}
-                {preFootnotesBlocks.map((block) => (
-                  <CustomBlock key={block.index} sectionSlug={sectionSlug} {...block} />
-                ))}
+                  {/* Pre-Footnotes blocks */}
+                  {sectionContent.preFootnotesBlocks.map((block) => (
+                    <CustomBlock key={block.number} {...block} />
+                  ))}
 
-                {/* Footnotes block */}
-                <FootnotesBlock sectionSlug={sectionSlug} />
+                  {/* Footnotes block */}
+                  <FootnotesBlock />
 
-                {/* Post-Footnotes blocks */}
-                {postFootnotesBlocks.map((block) => (
-                  <CustomBlock key={block.index} sectionSlug={sectionSlug} {...block} />
-                ))}
+                  {/* Post-Footnotes blocks */}
+                  {sectionContent.postFootnotesBlocks.map((block) => (
+                    <CustomBlock key={block.number} {...block} />
+                  ))}
 
-              </>
-            ) : null}
+                </>
+              ) : null}
 
-            {/* Loading message */}
-            <LoadingMessage visible={!contentLoaded} />
+              {/* Loading message */}
+              <LoadingMessage visible={!contentLoaded} />
 
-          </>
-        ) : null}
+            </>
+          ) : null}
 
-      </div>
+        </div>
+      </CurrentSectionContext.Provider>
     </div>
   );
 }
