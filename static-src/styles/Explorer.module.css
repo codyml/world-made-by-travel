@@ -1,8 +1,7 @@
 @import './transition.css';
-@import './breakpoint.css';
 
 .Explorer {
-  composes: container-mobile-page from './container.module.css';
+  composes: containerMobilePage from './container.module.css';
   height: 0%;
   background-color: #fdf;
   transition: height var(--transition-duration-slide);
@@ -12,7 +11,7 @@
 .explorerOpen {
   height: calc(50% - 5.5em);
 
-  @media (--breakpoint-desktop) {
+  @media (--desktop) {
     height: 50%;
   }
 }

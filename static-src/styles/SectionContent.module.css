@@ -1,14 +1,13 @@
 @import './color.css';
-@import './breakpoint.css';
 @import './shadow.css';
 
 .SectionContent {
-  composes: container-margin from './container.module.css';
+  composes: containerMargin from './container.module.css';
   position: relative;
   height: 100%;
   overflow: visible;
 
-  @media (--breakpoint-desktop) {
+  @media (--desktop) {
     width: 100%;
     margin: 0;
   }
@@ -23,7 +22,7 @@
   height: 100%;
   overflow: scroll;
 
-  @media (--breakpoint-tablet) {
+  @media (--tablet) {
     background-color: white;
     border-radius: 2px;
     box-shadow: var(--shadow-bottom-panel);

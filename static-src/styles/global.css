@@ -1,5 +1,6 @@
+@import '../fonts/index.css';
 @import './font.css';
-@import 'normalize.css';
+@import '~normalize.css';
 
 /*
 * Global CSS style.

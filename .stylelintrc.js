@@ -10,10 +10,8 @@ module.exports = {
     'selector-nested-pattern': '^&|^@nest',
     'csstools/value-no-unknown-custom-properties': [true, {
       importFrom: [
-        path.resolve(__dirname, 'static-src/styles/breakpoint.css'),
         path.resolve(__dirname, 'static-src/styles/color.css'),
         path.resolve(__dirname, 'static-src/styles/font.css'),
-        path.resolve(__dirname, 'static-src/styles/layout.css'),
         path.resolve(__dirname, 'static-src/styles/shadow.css'),
         path.resolve(__dirname, 'static-src/styles/transition.css'),
         path.resolve(__dirname, 'static-src/styles/z-index.css'),

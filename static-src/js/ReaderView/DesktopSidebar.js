@@ -6,7 +6,7 @@ import classNamesBind from 'classnames/bind';
 import style from 'styles/DesktopSidebar.module.css';
 import { SET_EXPLORER_OPEN, EXPANDED_TOC } from '../constants';
 import TableOfContents from '../TableOfContents';
-import MarkdownContent from '../MarkdownContent';
+import { MarkdownContent } from '../markdown';
 
 const cx = classNamesBind.bind(style);
 

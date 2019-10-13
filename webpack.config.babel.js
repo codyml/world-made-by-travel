@@ -1,7 +1,6 @@
-const path = require('path'); // eslint-disable-line import/no-extraneous-dependencies
-const postcssImport = require('postcss-import');
-const postcssPresetEnv = require('postcss-preset-env');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import path from 'path'; // eslint-disable-line import/no-extraneous-dependencies
+import postcssPresetEnv from 'postcss-preset-env';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 module.exports = {
   entry: [
@@ -28,9 +27,6 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env', '@babel/preset-react'],
-        },
       },
       {
         test: /\.(otf|ttf)$/,
@@ -58,7 +54,10 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               ident: 'postcss',
-              plugins: () => [postcssImport({ preserve: false }), postcssPresetEnv({ stage: 0 })],
+              plugins: () => [postcssPresetEnv({
+                stage: 0,
+                importFrom: 'static-src/styles/env.babel.js',
+              })],
             },
           },
         ],
@@ -78,7 +77,10 @@ module.exports = {
             loader: 'postcss-loader',
             options: {
               ident: 'postcss',
-              plugins: () => [postcssImport({ preserve: false }), postcssPresetEnv({ stage: 0 })],
+              plugins: () => [postcssPresetEnv({
+                stage: 0,
+                importFrom: 'static-src/styles/env.babel.js',
+              })],
             },
           },
         ],

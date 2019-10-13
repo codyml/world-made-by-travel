@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { processMainContentMarkdown, processMarkdown } from '../MarkdownContent';
+import { processMainContentMarkdown, processMarkdown } from '../markdown';
 import {
   SECTION_CONTENT_REQUESTED,
   SECTION_CONTENT_RECEIVED,

@@ -1,5 +1,4 @@
 @import './z-index.css';
-@import './breakpoint.css';
 @import './color.css';
 @import './font.css';
 @import './transition.css';
@@ -32,16 +31,16 @@
     background-size: cover;
   }
 
-  @media (--breakpoint-tablet) and (height < 670px) {
+  @media (--tablet) and (height < 670px) {
     background-size: cover;
   }
 
-  @media (--breakpoint-desktop) {
+  @media (--desktop) {
     background-size: auto 145%;
     background-position: center;
   }
 
-  @media (--breakpoint-desktop) and (
+  @media (--desktop) and (
     height < 605px
     or (width > 1200px and height < 705px)
     or (width > 1400px and height < 805px)
@@ -57,7 +56,7 @@
 }
 
 .coverContent {
-  composes: container-mobile-page from './container.module.css';
+  composes: containerMobilePage from './container.module.css';
   padding-top: 1.5em;
   padding-bottom: 5em;
   flex-grow: 1;
@@ -65,12 +64,12 @@
   flex-direction: column;
   min-height: 0;
 
-  @media (--breakpoint-tablet) {
+  @media (--tablet) {
     padding-top: 6em;
     padding-bottom: 1.5em;
   }
 
-  @media (--breakpoint-desktop) {
+  @media (--desktop) {
     flex-wrap: wrap;
     justify-content: space-between;
     padding-bottom: 1.75rem;
@@ -81,14 +80,14 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   margin: 1em 0;
 
-  @media (--breakpoint-tablet) {
+  @media (--tablet) {
     margin: 0;
     margin-bottom: 1rem;
     text-align: right;
     font-size: 1.25em;
   }
 
-  @media (--breakpoint-desktop) {
+  @media (--desktop) {
     order: 2;
   }
 }
@@ -107,7 +106,7 @@
   font-size: 1.2em;
   color: var(--color-cover-subtitle);
 
-  @media (--breakpoint-tablet) {
+  @media (--tablet) {
     font-size: 1.5em;
   }
 }
@@ -117,7 +116,7 @@
   font-size: 1.25em;
   margin: 1.65em 0;
 
-  @media (--breakpoint-tablet) {
+  @media (--tablet) {
     margin-top: 0.75em;
   }
 }
@@ -147,13 +146,13 @@
     border-top: 1px solid #bbb;
   }
 
-  @media (--breakpoint-tablet) {
+  @media (--tablet) {
     width: 75%;
     font-size: 1.25em;
     padding-bottom: 0;
   }
 
-  @media (--breakpoint-desktop) {
+  @media (--desktop) {
     order: 1;
     width: 50%;
     flex-basis: 100%;
@@ -169,18 +168,18 @@
     margin: 0.25em 0;
   }
 
-  @media (--breakpoint-tablet) {
+  @media (--tablet) {
     text-align: right;
     font-size: 1.1em;
   }
 
-  @media (--breakpoint-desktop) {
+  @media (--desktop) {
     order: 3;
   }
 }
 
 .infoSlider {
-  composes: container-mobile-page from './container.module.css';
+  composes: containerMobilePage from './container.module.css';
   position: absolute;
   top: 100%;
   left: 0;
@@ -213,7 +212,7 @@
   border-bottom: 1px solid #bbb;
   margin-bottom: 1.5em;
 
-  @media (--breakpoint-tablet) {
+  @media (--tablet) {
     padding: 0;
     border: none;
     margin-bottom: 1em;
@@ -244,7 +243,7 @@
   margin: 1em 0;
   line-height: 1.5;
 
-  @media (--breakpoint-tablet) {
+  @media (--tablet) {
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -256,7 +255,7 @@
     align-items: center;
     margin: 0.75em 0;
 
-    @media (--breakpoint-tablet) {
+    @media (--tablet) {
       justify-content: flex-end;
       align-items: flex-start;
 
@@ -277,7 +276,7 @@
 }
 
 .infoBar {
-  composes: container-mobile-page from './container.module.css';
+  composes: containerMobilePage from './container.module.css';
   background-color: var(--color-cover-publication-information-background);
   box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.5);
   display: flex;
@@ -303,7 +302,7 @@
     }
   }
 
-  @media (--breakpoint-desktop) {
+  @media (--desktop) {
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;
   }

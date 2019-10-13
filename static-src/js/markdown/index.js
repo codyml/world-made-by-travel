@@ -2,10 +2,9 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import parseMarkdown from './parse';
-import { useReferences } from './references';
-import { useSpecialLinks } from './specialLinks';
-import { useFootnotes } from './footnotes';
 import normalizeTokens, { ContentItemPropType } from './normalize';
+import { useSpecialLinks } from './specialLinks';
+import { useReferences } from './references';
 
 
 /*
@@ -104,14 +103,14 @@ ContentItem.defaultProps = {
 * Re-parses every render, so not suitable for large documents.
 */
 
-export default function MarkdownContent({ children: markdown, ...props }) {
+export const MarkdownContent = ({ children: markdown, ...props }) => {
   const contentItems = useMemo(() => processMarkdown(markdown), [markdown]);
   return (
     <div {...props}>
       <ContentItem>{contentItems}</ContentItem>
     </div>
   );
-}
+};
 
 MarkdownContent.propTypes = {
   children: PropTypes.string,
@@ -122,13 +121,8 @@ MarkdownContent.defaultProps = {
 };
 
 
-/*
-* Exports tags for consumers of item objects.
-*/
-
 export {
   ContentItemPropType,
-  useReferences,
   useSpecialLinks,
-  useFootnotes,
+  useReferences,
 };

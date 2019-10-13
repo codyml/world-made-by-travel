@@ -3,11 +3,7 @@ import PropTypes from 'prop-types';
 
 import useSectionContent from './useSectionContent';
 import Block from './Block';
-import {
-  ContentItem,
-  useReferences,
-  useSpecialLinks,
-} from '../MarkdownContent';
+import { ContentItem, useSpecialLinks, useReferences } from '../markdown';
 
 export default function MainContentBlock({ sectionSlug }) {
   const [, { mainContent, figureContentByIdentifier }] = useSectionContent(sectionSlug);

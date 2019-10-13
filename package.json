@@ -6,8 +6,8 @@
   "scripts": {
     "dev-watch": "rm -rf wmt-custom-theme/static && webpack --watch --mode=development --devtool=source-map",
     "prod-build": "rm -rf wmt-custom-theme/static && webpack --mode=production",
-    "lint:js": "eslint webpack.config.js static-src",
-    "lint:css": "stylelint 'static-src/**/*.js'"
+    "lint:js": "eslint webpack.config.babel.js static-src",
+    "lint:css": "stylelint 'static-src/**/*.css'"
   },
   "repository": {
     "type": "git",
@@ -20,9 +20,10 @@
   },
   "homepage": "https://github.com/codyml/world-made-by-travel#readme",
   "dependencies": {
-    "@babel/core": "^7.6.2",
+    "@babel/core": "^7.6.4",
     "@babel/preset-env": "^7.6.2",
     "@babel/preset-react": "^7.0.0",
+    "@babel/register": "^7.6.2",
     "babel-loader": "^8.0.6",
     "babel-polyfill": "^6.26.0",
     "classnames": "^2.2.6",

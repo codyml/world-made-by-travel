@@ -13,7 +13,7 @@ import MainContentBlock from './MainContentBlock';
 import FootnotesBlock from './FootnotesBlock';
 import CustomBlock from './CustomBlock';
 import TableOfContents from '../TableOfContents';
-import MarkdownContent from '../MarkdownContent';
+import { MarkdownContent } from '../markdown';
 import useSetTitle from '../useSetTitle';
 import { EXPANDED_TOC } from '../constants';
 

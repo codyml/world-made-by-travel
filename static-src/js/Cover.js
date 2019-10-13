@@ -5,7 +5,7 @@ import classNamesBind from 'classnames/bind';
 
 import style from 'styles/Cover.module.css';
 import HTMLContent from './HTMLContent';
-import MarkdownContent from './MarkdownContent';
+import { MarkdownContent } from './markdown';
 import Tabbed from './Tabbed';
 import { EXPANDED_TOC } from './constants';
 

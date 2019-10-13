@@ -1,7 +1,7 @@
 @import './shadow.css';
 
 .MobileHeader {
-  composes: page-container from './container.module.css';
+  composes: pageContainer from './container.module.css';
   height: 6rem;
   background-size: cover;
   background-position: center;

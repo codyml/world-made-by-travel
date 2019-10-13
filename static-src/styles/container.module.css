@@ -1,62 +1,65 @@
-@import './layout.css';
-@import './breakpoint.css';
+:root {
+  --container-margin: 0;
+  --container-margin-tablet: calc((100% - env(--container-width-tablet)) / 2);
+  --container-margin-desktop: calc((100% - env(--container-width-desktop)) / 2);
+}
 
 .container {
   padding-left: 0;
   padding-right: 0;
 
-  @media (--breakpoint-tablet) {
-    padding-left: var(--layout-container-margin-tablet);
-    padding-right: var(--layout-container-margin-tablet);
+  @media (--tablet) {
+    padding-left: var(--container-margin-tablet);
+    padding-right: var(--container-margin-tablet);
   }
 
-  @media (--breakpoint-desktop) {
-    padding-left: var(--layout-container-margin-desktop);
-    padding-right: var(--layout-container-margin-desktop);
+  @media (--desktop) {
+    padding-left: var(--container-margin-desktop);
+    padding-right: var(--container-margin-desktop);
   }
 }
 
-.container-margin {
+.containerMargin {
   margin-left: 0;
   margin-right: 0;
 
-  @media (--breakpoint-tablet) {
-    margin-left: var(--layout-container-margin-tablet);
-    margin-right: var(--layout-container-margin-tablet);
+  @media (--tablet) {
+    margin-left: var(--container-margin-tablet);
+    margin-right: var(--container-margin-tablet);
   }
 
-  @media (--breakpoint-desktop) {
-    margin-left: var(--layout-container-margin-desktop);
-    margin-right: var(--layout-container-margin-desktop);
-  }
-}
-
-.page-container {
-  padding-left: var(--layout-page-padding);
-  padding-right: var(--layout-page-padding);
-
-  @media (--breakpoint-tablet) {
-    padding-left: var(--layout-page-padding-tablet);
-    padding-right: var(--layout-page-padding-tablet);
-  }
-
-  @media (--breakpoint-desktop) {
-    padding-left: var(--layout-page-padding-desktop);
-    padding-right: var(--layout-page-padding-desktop);
+  @media (--desktop) {
+    margin-left: var(--container-margin-desktop);
+    margin-right: var(--container-margin-desktop);
   }
 }
 
-.container-mobile-page {
-  padding-left: var(--layout-page-padding);
-  padding-right: var(--layout-page-padding);
+.pageContainer {
+  padding-left: env(--page-padding);
+  padding-right: env(--page-padding);
 
-  @media (--breakpoint-tablet) {
-    padding-left: var(--layout-container-margin-tablet);
-    padding-right: var(--layout-container-margin-tablet);
+  @media (--tablet) {
+    padding-left: env(--page-padding-tablet);
+    padding-right: env(--page-padding-tablet);
   }
 
-  @media (--breakpoint-desktop) {
-    padding-left: var(--layout-container-margin-desktop);
-    padding-right: var(--layout-container-margin-desktop);
+  @media (--desktop) {
+    padding-left: env(--page-padding-desktop);
+    padding-right: env(--page-padding-desktop);
+  }
+}
+
+.containerMobilePage {
+  padding-left: env(--page-padding);
+  padding-right: env(--page-padding);
+
+  @media (--tablet) {
+    padding-left: var(--container-margin-tablet);
+    padding-right: var(--container-margin-tablet);
+  }
+
+  @media (--desktop) {
+    padding-left: var(--container-margin-desktop);
+    padding-right: var(--container-margin-desktop);
   }
 }

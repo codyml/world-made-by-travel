@@ -1,7 +1,5 @@
 @import './transition.css';
 @import './z-index.css';
-@import './layout.css';
-@import './breakpoint.css';
 
 .ReaderView {
   composes: container from './container.module.css';
@@ -32,12 +30,11 @@
     transition: opacity var(--transition-duration-fade), visibility 0s var(--transition-duration-fade);
   }
 
-  @media (--breakpoint-desktop) {
+  @media (--desktop) {
     flex-direction: row;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    padding-left: var(--layout-container-margin-desktop);
-    transition: padding-bottom var(--transition-duration-slide);
+    transition: padding var(--transition-duration-slide);
 
     &.explorerOpen {
       padding-bottom: 0;
@@ -61,8 +58,8 @@
 }
 
 .sidebar {
-  width: var(--layout-sidebar-width-desktop);
-  margin-right: var(--layout-gutter-width-desktop);
+  width: env(--sidebar-width-desktop);
+  margin-right: env(--gutter-width-desktop);
   z-index: 1;
 }
 

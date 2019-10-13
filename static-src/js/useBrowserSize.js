@@ -1,33 +1,21 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import style from 'styles/useBrowserSize.module.css';
+import { breakpoints } from 'styles/env.babel';
 import { SET_BROWSER_SIZE } from './constants';
 
 export default function useBrowserSize() {
-  const { current: breakpoints } = useRef({});
   const browserSize = useSelector((state) => state.browserSize);
   const dispatch = useDispatch();
-
-  //  Workaround to get CSS-defined breakpoints in JS
-  useEffect(() => {
-    const element = document.createElement('div');
-    document.body.appendChild(element);
-    Object.entries(style).forEach(([size, className]) => {
-      element.className = className;
-      breakpoints[size] = +getComputedStyle(element).width.slice(0, -2);
-    });
-    element.remove();
-  }, [breakpoints]);
 
   //  Updates context on browser size change.
   useEffect(() => {
     const handleResizeChange = () => {
       const width = window.innerWidth;
       let newBrowserSize = 'desktop';
-      if (width < breakpoints.tablet) {
+      if (width < breakpoints['--breakpoint-tablet']) {
         newBrowserSize = 'mobile';
-      } else if (width < breakpoints.desktop) {
+      } else if (width < breakpoints['--breakpoint-desktop']) {
         newBrowserSize = 'tablet';
       }
 
@@ -39,5 +27,5 @@ export default function useBrowserSize() {
     window.addEventListener('resize', handleResizeChange);
     handleResizeChange();
     return () => window.removeEventListener('resize', handleResizeChange);
-  }, [breakpoints.tablet, breakpoints.desktop, browserSize, dispatch]);
+  }, [browserSize, dispatch]);
 }
