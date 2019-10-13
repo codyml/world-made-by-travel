@@ -8,6 +8,7 @@
   background-color: white;
   font-size: 0.65em;
   opacity: 0;
+  z-index: 2;
   visibility: hidden;
   transition: opacity var(--transition-duration-fade), visibility 0s var(--transition-duration-fade);
 }

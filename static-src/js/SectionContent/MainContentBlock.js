@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
 
 import Block from './Block';
-import { ContentItem, useSpecialLinks, useReferences } from '../markdown';
+import useLinks from './useLinks';
+import useFigures from './useFigures';
+import { ContentItem } from '../markdown';
 import CurrentSectionContext from '../CurrentSectionContext';
 
 export default function MainContentBlock() {
@@ -10,12 +12,12 @@ export default function MainContentBlock() {
     figureContentByIdentifier,
   } = useContext(CurrentSectionContext);
 
-  const referencesExtension = useReferences(figureContentByIdentifier);
-  const specialLinksExtension = useSpecialLinks();
+  const figuresExtension = useFigures(figureContentByIdentifier);
+  const linksExtension = useLinks();
 
   return (
     <Block>
-      <ContentItem extensions={[referencesExtension, specialLinksExtension]}>
+      <ContentItem extensions={[figuresExtension, linksExtension]}>
         {contentItems}
       </ContentItem>
     </Block>

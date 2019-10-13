@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
@@ -44,13 +44,17 @@ export default function SectionContent({ sectionSlug }) {
   }] = useSectionScroll();
 
   const isToc = sectionMeta.slug === EXPANDED_TOC.slug;
+  const currentSectionContextValue = useMemo(
+    () => ({ ...sectionMeta, ...sectionContent }),
+    [sectionContent, sectionMeta],
+  );
 
   return (
     <div
       className={style.SectionContent}
       onScroll={scrollHandler}
     >
-      <CurrentSectionContext.Provider value={{ ...sectionMeta, ...sectionContent }}>
+      <CurrentSectionContext.Provider value={currentSectionContextValue}>
 
         {/* Hovering section title block */}
         <HoverTitleBlock ref={hoverTitleRef} visible={hoverTitleVisible} {...sectionMeta} />

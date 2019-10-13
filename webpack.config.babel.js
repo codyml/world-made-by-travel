@@ -1,6 +1,6 @@
-import path from 'path'; // eslint-disable-line import/no-extraneous-dependencies
-import postcssPresetEnv from 'postcss-preset-env';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+const path = require('path'); // eslint-disable-line import/no-extraneous-dependencies
+const postcssPresetEnv = require('postcss-preset-env');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   entry: [

@@ -29,20 +29,3 @@ export const ReferencesMarkdownItPlugin = (md) => {
     return false;
   });
 };
-
-
-/*
-* Custom hook that lets React component handle references.
-*/
-
-export const useReferences = () => (item) => {
-  if (item.tag === REFERENCE_TAG) {
-    return {
-      tag: 'span',
-      props: {},
-      children: ['REFERENCE'],
-    };
-  }
-
-  return null;
-};

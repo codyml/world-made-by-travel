@@ -1,0 +1,96 @@
+@import './color.css';
+@import './transition.css';
+
+.Link {
+  position: relative;
+  display: inline-block;
+  font-weight: 600;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.ExplorerLink {
+  composes: Link;
+  color: var(--color-explorer-link);
+}
+
+.BookLink {
+  composes: Link;
+  color: var(--color-book-link);
+}
+
+.Link.highlightInvalid:not(.valid) {
+  color: red;
+}
+
+.ExplorerLink:not(.highlightInvalid):not(.valid),
+.BookLink:not(.highlightInvalid):not(.valid) {
+  color: inherit;
+}
+
+.hoverTip {
+  font-weight: 300;
+  position: absolute;
+  width: 12em;
+  top: calc(100% + 1em);
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  background-color: var(--color-external-link);
+  padding: 0.5em 1em;
+  line-height: 1.25;
+  color: white;
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1;
+  transition:
+    opacity var(--transition-duration-fade),
+    visibility 0s var(--transition-duration-fade);
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    border-top-left-radius: 3px;
+    background-color: inherit;
+    top: 0;
+    left: 50%;
+    width: 1.25em;
+    height: 1.25em;
+    z-index: -1;
+    transform: translateY(-50%) translateX(-50%) rotate(45deg);
+  }
+
+  & strong {
+    font-weight: 600;
+  }
+}
+
+.ExplorerLink .hoverTip {
+  background-color: var(--color-explorer-link);
+}
+
+.BookLink .hoverTip {
+  background-color: var(--color-book-link);
+}
+
+.Link:hover .hoverTip {
+  opacity: 1;
+  visibility: visible;
+  transition:
+    opacity var(--transition-duration-fade),
+    visibility 0s;
+}
+
+.Link.highlightInvalid:not(.valid) .hoverTip {
+  background-color: red;
+}
+
+.Link:not(.highlightInvalid):not(.valid) .hoverTip {
+  display: none;
+}
