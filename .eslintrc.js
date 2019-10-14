@@ -50,6 +50,7 @@ module.exports = {
       ImportDeclaration: { minProperties: 5, multiline: true, consistent: true },
       ExportDeclaration: { minProperties: 5, multiline: true, consistent: true },
     }],
+    'react/jsx-one-expression-per-line': [0],
   },
   settings: {
     'import/resolver': 'webpack',

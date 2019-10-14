@@ -1,0 +1,7 @@
+.FigureContent {
+  background-color: transpaernt;
+}
+
+.FigureContent:not(.valid) {
+  background-color: red;
+}

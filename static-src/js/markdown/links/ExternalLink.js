@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNamesBind from 'classnames/bind';
 
-import style from 'styles/useLinks.module.css';
+import style from 'styles/Link.module.css';
 
 const cx = classNamesBind.bind(style);
 

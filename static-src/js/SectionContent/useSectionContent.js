@@ -21,13 +21,12 @@ const parseSectionContent = ({
       markdown: figureMarkdown,
       image,
       download: figureDownload,
-    }, index) => ({
+    }) => ({
       [identifier]: {
         identifier,
-        contentItems: figureMarkdown
+        contentNodes: figureMarkdown
           ? processMarkdown(figureMarkdown)
-          : [{ key: `img:${index}`, tag: 'img', props: { src: image } }],
-
+          : [{ tag: 'img', key: `figureContent:${identifier}`, props: { src: image }, children: [] }],
         download: figureDownload,
       },
     }),
@@ -36,7 +35,7 @@ const parseSectionContent = ({
   const mainContent = processMainContentMarkdown(markdown);
   const parsedBlocks = blocks.map(({ markdown: blockMarkdown, ...block }, index) => ({
     number: index + 1,
-    content: processMarkdown(blockMarkdown),
+    contentNodes: processMarkdown(blockMarkdown),
     ...block,
   }));
 

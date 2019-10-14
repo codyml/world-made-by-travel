@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { ContentItemPropType } from './normalize';
 
 /*
 * Basic component that renders itself and its children.  Calls the
@@ -10,35 +9,28 @@ import { ContentItemPropType } from './normalize';
 * false, entity will not be rendered.
 */
 
-export default function ContentItem({
-  tag: itemTag,
-  props: itemProps,
-  children: itemChildren,
-  ancestors,
-  extensions,
-}) {
-  let item = { tag: itemTag, props: itemProps, children: itemChildren };
-
+export const ContentNode = ({ extensions, ...node }) => {
   //  Skip empty tags
-  if (!item.tag) {
+  if (!node.tag) {
     return null;
   }
 
   //  Apply extensions
+  let updatedNode = node;
   for (const extension of extensions) {
-    const result = extension(item, ancestors);
+    const result = extension(updatedNode);
     if (!result) {
       return null;
     }
 
-    item = { ...item, ...result };
+    updatedNode = { ...updatedNode, ...result };
   }
 
   const {
     tag: Component,
     props,
     children,
-  } = item;
+  } = updatedNode;
 
   return (
     <Component {...props}>
@@ -47,29 +39,36 @@ export default function ContentItem({
           return child;
         }
 
-        const { children: childItemChildren, ...childItem } = child;
+        const { children: childNodeChildren, ...childNode } = child;
         return (
-          <ContentItem ancestors={[item, ...ancestors]} extensions={extensions} {...childItem}>
-            {childItemChildren}
-          </ContentItem>
+          <ContentNode extensions={extensions} {...childNode}>
+            {childNodeChildren}
+          </ContentNode>
         );
       }) : null}
     </Component>
   );
-}
+};
 
-ContentItem.propTypes = {
-  tag: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+const ContentNodePropType = {
+  tag: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.symbol]),
   props: PropTypes.shape({}),
-  children: PropTypes.arrayOf(ContentItemPropType),
-  ancestors: PropTypes.arrayOf(ContentItemPropType),
+  refNumber: PropTypes.number,
+  children: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})])),
   extensions: PropTypes.arrayOf(PropTypes.func),
 };
 
-ContentItem.defaultProps = {
+ContentNode.propTypes = ContentNodePropType;
+
+ContentNode.defaultProps = {
   tag: React.Fragment,
   props: {},
+  refNumber: 0,
   children: [],
-  ancestors: [],
   extensions: [],
 };
+
+export const ContentNodesPropType = PropTypes.arrayOf(PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.shape(ContentNodePropType),
+]));

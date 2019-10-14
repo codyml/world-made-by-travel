@@ -1,9 +1,8 @@
 import MarkdownIt from 'markdown-it';
 import FootnotesMarkdownItPlugin from 'markdown-it-footnote';
 
-import { ReferencesMarkdownItPlugin } from './references';
 import { SpecialLinksMarkdownItPlugin } from './links';
-import { FiguresMarkdownItPlugin } from './figures';
+import { FiguresMarkdownItPlugin, ReferencesMarkdownItPlugin } from './figures';
 
 
 /*

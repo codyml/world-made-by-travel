@@ -11,7 +11,7 @@ const SPECIAL_LINK_TYPES = [
   { type: BOOK_LINK_TYPE, prefix: '{book-link}' },
 ];
 
-export const SpecialLinksMarkdownItPlugin = (md) => {
+export default function SpecialLinksMarkdownItPlugin(md) {
   md.inline.ruler.push(SPECIAL_LINK_MARKER_TOKEN_TYPE, (state) => {
     let token;
     SPECIAL_LINK_TYPES.forEach(({ type, prefix }) => {
@@ -28,4 +28,4 @@ export const SpecialLinksMarkdownItPlugin = (md) => {
 
     return false;
   });
-};
+}

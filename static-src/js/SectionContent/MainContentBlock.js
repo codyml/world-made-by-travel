@@ -1,14 +1,12 @@
 import React, { useContext } from 'react';
 
 import Block from './Block';
-import useLinks from './useLinks';
-import useFigures from './useFigures';
-import { ContentItem } from '../markdown';
+import { ContentNode, useLinks, useFigures } from '../markdown';
 import CurrentSectionContext from '../CurrentSectionContext';
 
 export default function MainContentBlock() {
   const {
-    mainContent: { contentItems },
+    mainContent: { contentNodes },
     figureContentByIdentifier,
   } = useContext(CurrentSectionContext);
 
@@ -17,9 +15,9 @@ export default function MainContentBlock() {
 
   return (
     <Block>
-      <ContentItem extensions={[figuresExtension, linksExtension]}>
-        {contentItems}
-      </ContentItem>
+      <ContentNode extensions={[figuresExtension, linksExtension]}>
+        {contentNodes}
+      </ContentNode>
     </Block>
   );
 }

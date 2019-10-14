@@ -7,7 +7,7 @@ export const REFERENCE_TAG = 'reference';
 * Extends MarkdownIt to parse curly bracket references (used in figures).
 */
 
-export const ReferencesMarkdownItPlugin = (md) => {
+export default function ReferencesMarkdownItPlugin(md) {
   md.inline.ruler.push(REFERENCE_RULE_NAME, (state) => {
     if (state.src.charAt(state.pos) !== '{') {
       return false;
@@ -28,4 +28,4 @@ export const ReferencesMarkdownItPlugin = (md) => {
 
     return false;
   });
-};
+}

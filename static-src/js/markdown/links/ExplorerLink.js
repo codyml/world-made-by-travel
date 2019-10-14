@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import classNamesBind from 'classnames/bind';
 
-import style from 'styles/useLinks.module.css';
+import style from 'styles/Link.module.css';
 import { SET_EXPLORER_URL } from '../../constants';
 
 const cx = classNamesBind.bind(style);
@@ -21,40 +21,25 @@ const EXPLORER_LINK_TYPES = {
   [ROOT]: [/^\/#\/$/, () => <strong>The Grand Tour Explorer</strong>],
   [PAGE]: [
     /^\/#\/(about|search|explore|lists(?=\/$)|visualizations)/,
-    (page) => (
-      <>
-        <span>Link to </span>
-        <strong>{`${page.charAt(0).toUpperCase()}${page.slice(1)}`}</strong>
-        <span> in </span>
-        <strong>The Grand Tour Explorer</strong>
-      </>
-    ),
+    (page) => {
+      const pageTitle = `${page.charAt(0).toUpperCase()}${page.slice(1)}`;
+      return (
+        <>Link to <strong>{pageTitle}</strong> in <strong>The Grand Tour Explorer</strong></>
+      );
+    },
   ],
 
   [LIST]: [
     /^\/#\/lists\/(\w+)/,
     () => (
-      <>
-        <span>Link to a </span>
-        <strong>List</strong>
-        <span> in </span>
-        <strong>The Grand Tour Explorer</strong>
-      </>
+      <>Link to a <strong>List</strong> in <strong>The Grand Tour Explorer</strong></>
     ),
   ],
 
   [ENTRY]: [
     /^\/#\/entries\/(\d+)/,
     (entryIndex) => (
-      <>
-        <span>Link to </span>
-        <strong>
-          <span>Entry </span>
-          {entryIndex}
-        </strong>
-        <span> in </span>
-        <strong>The Grand Tour Explorer</strong>
-      </>
+      <>Link to <strong>Entry {entryIndex}</strong> in <strong>The Grand Tour Explorer</strong></>
     ),
   ],
 };

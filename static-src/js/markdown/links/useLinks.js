@@ -8,13 +8,13 @@ import {
   SPECIAL_LINK_TAG,
   EXPLORER_LINK_TYPE,
   BOOK_LINK_TYPE,
-} from '../../markdown';
+} from './SpecialLinksMarkdownItPlugin';
 
 
 /*
-* Custom hook allowing React components rendering ContentItems to
+* Custom hook allowing React components rendering contentNodes to
 * handle Explorer links and book links, plus render popup tooltips
-* for external links.  Returns a ContentItems extension.
+* for external links.  Returns a contentNodes extension.
 */
 
 export default function useLinks() {

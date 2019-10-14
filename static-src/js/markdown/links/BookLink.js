@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import classNamesBind from 'classnames/bind';
 
-import style from 'styles/useLinks.module.css';
+import style from 'styles/Link.module.css';
 import { EXPANDED_TOC, COVER } from '../../constants';
 import CurrentSectionContext from '../../CurrentSectionContext';
 
@@ -102,18 +102,12 @@ export default function BookLink({ href, children }) {
       <>
         <span>Link to </span>
         {hashDescription ? (
-          <>
-            <strong>{hashDescription}</strong>
-            <span> in </span>
-          </>
+          <><strong>{hashDescription}</strong> in </>
         ) : null}
         {slug === currentSectionSlug ? (
           <strong>this section</strong>
         ) : (
-          <>
-            <span>section </span>
-            <strong>{sectionMetaBySlug[slug].title}</strong>
-          </>
+          <>section <strong>{sectionMetaBySlug[slug].title}</strong></>
         )}
       </>
     );

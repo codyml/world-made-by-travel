@@ -2,15 +2,10 @@ import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import parseMarkdown from './parse';
-import normalizeTokens, { ContentItemPropType } from './normalize';
-import ContentItem from './ContentItem';
-import { REFERENCE_TAG } from './references';
-import { FIGURE_TAG, CAPTION_TAG } from './figures';
-import {
-  SPECIAL_LINK_TAG,
-  EXPLORER_LINK_TYPE,
-  BOOK_LINK_TYPE,
-} from './links';
+import normalizeTokenizedContent from './normalize';
+import { ContentNode, ContentNodesPropType } from './ContentNode';
+import { useLinks } from './links';
+import { useFigures } from './figures';
 
 
 /*
@@ -21,7 +16,7 @@ import {
 
 export const processMainContentMarkdown = (markdown) => {
   const tokens = parseMarkdown(markdown);
-  return normalizeTokens(tokens);
+  return normalizeTokenizedContent(tokens);
 };
 
 
@@ -35,8 +30,8 @@ export const processMainContentMarkdown = (markdown) => {
 
 export const processMarkdown = (markdown) => {
   const tokens = parseMarkdown(markdown);
-  const { contentItems } = normalizeTokens(tokens);
-  return contentItems;
+  const { contentNodes } = normalizeTokenizedContent(tokens);
+  return contentNodes;
 };
 
 
@@ -46,10 +41,10 @@ export const processMarkdown = (markdown) => {
 */
 
 export const MarkdownContent = ({ children: markdown, ...props }) => {
-  const contentItems = useMemo(() => processMarkdown(markdown), [markdown]);
+  const contentNodes = useMemo(() => processMarkdown(markdown), [markdown]);
   return (
     <div {...props}>
-      <ContentItem>{contentItems}</ContentItem>
+      <ContentNode>{contentNodes}</ContentNode>
     </div>
   );
 };
@@ -68,12 +63,8 @@ MarkdownContent.defaultProps = {
 */
 
 export {
-  ContentItem,
-  ContentItemPropType,
-  REFERENCE_TAG,
-  SPECIAL_LINK_TAG,
-  EXPLORER_LINK_TYPE,
-  BOOK_LINK_TYPE,
-  FIGURE_TAG,
-  CAPTION_TAG,
+  ContentNode,
+  ContentNodesPropType,
+  useLinks,
+  useFigures,
 };

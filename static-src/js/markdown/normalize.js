@@ -1,50 +1,39 @@
-import PropTypes from 'prop-types';
-
-//  PropTypes definition for a normalized item object.
-export const ContentItemPropType = PropTypes.oneOfType([
-  PropTypes.string,
-  PropTypes.shape({
-    tag: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
-    props: PropTypes.shape({}),
-    children: PropTypes.arrayOf(PropTypes.oneOfType([
-      PropTypes.string,
-      PropTypes.shape({}),
-    ])),
-  }),
-]);
-
-
 /*
 * Recursively calls a normalizing function that traverses the list
 * of tokens and returns the entities in a format ready to render
 * by React.
 */
 
-export default function normalizeTokens(tokens) {
-  const itemsByNumber = {};
-  const assignNumber = (item) => {
-    if (!itemsByNumber[item.tag]) {
-      itemsByNumber[item.tag] = { currentNumber: 0, itemsByNumber: {} };
+export default function normalizeTokenizedContent(contentTokens) {
+  const references = {};
+
+  //  Saves the item object under the item's tag name and a number
+  //  representing its order in the tree.
+  const saveReference = (item) => {
+    if (!references[item.tag]) {
+      references[item.tag] = { currentNumber: 0, refsByNumber: {} };
     }
 
-    const assignedNumber = itemsByNumber[item.tag].currentNumber + 1;
-    itemsByNumber[item.tag].currentNumber = assignedNumber;
-    return { ...item, assignedNumber };
+    const refNumber = references[item.tag].currentNumber + 1;
+    const refItem = { ...item, refNumber };
+    references[item.tag].refsByNumber[refNumber] = refItem;
+    references[item.tag].currentNumber = refNumber;
+    return refItem;
   };
 
-  const normalizeCurrentTokens = (currentTokens, keyPrefix = 'root') => {
+  const normalizeTokens = (tokens, keyPrefix = 'root') => {
     const parents = [];
     const pushParent = parents.push.bind(parents);
     const peekParent = () => parents[parents.length - 1];
     const popParent = parents.pop.bind(parents);
 
-    //  Creates a unique key for a token
+    //  Creates a unique key for a normalized content item
     const getKey = () => [
       keyPrefix,
       ...parents.map((parent) => parent.children.length),
     ].join(':');
 
-    //  Creates a normalized content item object from a Markdown-It token
+    //  Creates a normalized content item object from a token
     const createItemFromToken = ({ type, tag, attrs, content }) => {
       if (type === 'text') {
         return content;
@@ -55,21 +44,20 @@ export default function normalizeTokens(tokens) {
         : {};
 
       const children = content ? [content] : [];
-      const item = {
+      const item = saveReference({
         key: getKey(),
         tag,
         props,
         children,
-      };
+      }, references);
 
-      assignNumber(item);
       return item;
     };
 
     pushParent({ children: [] });
 
-    for (let i = 0; i < currentTokens.length; i++) {
-      const token = currentTokens[i];
+    for (let i = 0; i < tokens.length; i++) {
+      const token = tokens[i];
       switch (token.nesting) {
         case 1: {
           const item = createItemFromToken(token);
@@ -81,7 +69,7 @@ export default function normalizeTokens(tokens) {
 
         case 0: {
           if (token.children) {
-            peekParent().children.push(...normalizeCurrentTokens(token.children, getKey()));
+            peekParent().children.push(...normalizeTokens(token.children, getKey()));
           } else {
             peekParent().children.push(createItemFromToken(token));
           }
@@ -104,6 +92,6 @@ export default function normalizeTokens(tokens) {
     return popParent().children;
   };
 
-  const contentItems = normalizeCurrentTokens(tokens);
-  return { contentItems, itemsByNumber };
+  const contentNodes = normalizeTokens(contentTokens);
+  return { contentNodes, references };
 }

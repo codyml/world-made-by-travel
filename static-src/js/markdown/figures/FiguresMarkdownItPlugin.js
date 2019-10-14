@@ -14,7 +14,7 @@ const FIGURE_CLOSE = '</figure>';
 export const FIGURE_TAG = 'figure';
 export const CAPTION_TAG = 'figcaption';
 
-export const FiguresMarkdownItPlugin = (md) => {
+export default function FiguresMarkdownItPlugin(md) {
   md.block.ruler.before('html_block', FIGURE_RULE_NAME, (state, startLine, endLine) => {
     let figureContentStartPos = -1;
     let captionStartPos = -1;
@@ -83,15 +83,4 @@ export const FiguresMarkdownItPlugin = (md) => {
     state.line = figureCloseLine + 1; // eslint-disable-line no-param-reassign
     return true;
   });
-};
-
-
-export const useFigures = () => (item) => {
-  if (item.tag === 'figure') {
-    return {
-      children: ['FIGURE', ...item.children],
-    };
-  }
-
-  return null;
-};
+}

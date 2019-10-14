@@ -195,27 +195,10 @@ const modalOpen = (state = false, action) => {
   }
 };
 
-const modalContent = (state = null, action) => {
+const modalContent = (state = {}, action) => {
   switch (action.type) {
     case SET_MODAL_CONTENT: {
-      const {
-        modalType,
-        authorSlug,
-        sectionSlug,
-        paragraphNumber,
-        figureNumber,
-      } = action;
-      if (action.modalType) {
-        return {
-          modalType,
-          authorSlug,
-          sectionSlug,
-          paragraphNumber,
-          figureNumber,
-        };
-      }
-
-      return null;
+      return action.modalContent;
     }
 
     default:
