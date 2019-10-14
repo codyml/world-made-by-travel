@@ -1,5 +1,19 @@
+.Figure {
+  margin: 3.5em 1em;
+
+  & figcaption {
+    font-size: 0.9em;
+  }
+}
+
 .FigureContent {
-  background-color: transpaernt;
+  background-color: transparent;
+  text-align: center;
+  margin: 1.75em 0;
+
+  & img {
+    max-width: 100%;
+  }
 }
 
 .FigureContent:not(.valid) {

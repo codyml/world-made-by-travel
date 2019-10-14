@@ -5,7 +5,7 @@ import parseMarkdown from './parse';
 import normalizeTokenizedContent from './normalize';
 import { ContentNode, ContentNodesPropType } from './ContentNode';
 import { useLinks } from './links';
-import { useFigures } from './figures';
+import { useFigures, CAPTION_TAG } from './figures';
 
 
 /*
@@ -67,4 +67,5 @@ export {
   ContentNodesPropType,
   useLinks,
   useFigures,
+  CAPTION_TAG,
 };

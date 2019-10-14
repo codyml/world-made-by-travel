@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
@@ -32,10 +32,10 @@ export default function SectionContent({ sectionSlug }) {
 
   const [
     contentLoaded,
-    sectionContent,
+    currentSectionContext,
   ] = useSectionContent(sectionSlug);
 
-  useSetTitle([sectionMeta.title]);
+  useSetTitle([currentSectionContext.title]);
   const [scrollHandler, {
     titleRef,
     hoverTitleRef,
@@ -43,18 +43,12 @@ export default function SectionContent({ sectionSlug }) {
     hoverTitleVisible,
   }] = useSectionScroll();
 
-  const isToc = sectionMeta.slug === EXPANDED_TOC.slug;
-  const currentSectionContextValue = useMemo(
-    () => ({ ...sectionMeta, ...sectionContent }),
-    [sectionContent, sectionMeta],
-  );
-
   return (
     <div
       className={style.SectionContent}
       onScroll={scrollHandler}
     >
-      <CurrentSectionContext.Provider value={currentSectionContextValue}>
+      <CurrentSectionContext.Provider value={currentSectionContext}>
 
         {/* Hovering section title block */}
         <HoverTitleBlock ref={hoverTitleRef} visible={hoverTitleVisible} {...sectionMeta} />
@@ -63,7 +57,7 @@ export default function SectionContent({ sectionSlug }) {
         <div className={style.paper}>
 
           {/* Introduction content above mobile/tablet Table of Contents */}
-          {browserSize !== 'desktop' && isToc ? (
+          {browserSize !== 'desktop' && currentSectionContext.isToc ? (
             <Block>
               <MarkdownContent className={style.instructions}>
                 {instructionsMarkdown}
@@ -75,14 +69,14 @@ export default function SectionContent({ sectionSlug }) {
           <TitleBlock ref={titleRef} />
 
           {/* Expanded Table of Contents block */}
-          {isToc ? (
+          {currentSectionContext.isToc ? (
             <Block isToc>
               <TableOfContents className={style.tocBlock} />
             </Block>
           ) : null}
 
           {/* Blocks for non-TOC sections with content received */}
-          {!isToc ? (
+          {!currentSectionContext.isToc ? (
             <>
 
               {contentLoaded ? (
@@ -92,7 +86,7 @@ export default function SectionContent({ sectionSlug }) {
                   <MainContentBlock />
 
                   {/* Pre-Footnotes blocks */}
-                  {sectionContent.preFootnotesBlocks.map((block) => (
+                  {currentSectionContext.preFootnotesBlocks.map((block) => (
                     <CustomBlock key={block.number} {...block} />
                   ))}
 
@@ -100,7 +94,7 @@ export default function SectionContent({ sectionSlug }) {
                   <FootnotesBlock />
 
                   {/* Post-Footnotes blocks */}
-                  {sectionContent.postFootnotesBlocks.map((block) => (
+                  {currentSectionContext.postFootnotesBlocks.map((block) => (
                     <CustomBlock key={block.number} {...block} />
                   ))}
 
@@ -127,3 +121,6 @@ SectionContent.propTypes = {
 SectionContent.defaultProps = {
   isActive: false,
 };
+
+
+export { useSectionContent };

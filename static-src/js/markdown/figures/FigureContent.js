@@ -16,7 +16,9 @@ const cx = classNamesBind.bind(style);
 
 export default function FigureContent({
   valid,
-  captionContentRef,
+  figureNumber,
+  figureContentIdentifier,
+  captionNumberRef,
   children,
 }) {
   const { slug: sectionSlug } = useContext(CurrentSectionContext);
@@ -28,8 +30,9 @@ export default function FigureContent({
         modalContent: {
           modalType: FIGURE_MODAL,
           sectionSlug,
-          figureContent: children,
-          captionContent: captionContentRef.current,
+          figureNumber,
+          figureContentIdentifier,
+          captionNumber: captionNumberRef.current,
         },
       });
     }
@@ -47,6 +50,8 @@ export default function FigureContent({
 
 FigureContent.propTypes = {
   valid: PropTypes.bool.isRequired,
-  captionContentRef: PropTypes.shape({ current: ContentNodesPropType }).isRequired,
-  children: PropTypes.oneOfType([ContentNodesPropType]).isRequired,
+  figureNumber: PropTypes.number.isRequired,
+  figureContentIdentifier: PropTypes.string.isRequired,
+  captionNumberRef: PropTypes.shape({ current: PropTypes.number }).isRequired,
+  children: ContentNodesPropType.isRequired,
 };

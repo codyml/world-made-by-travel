@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 * false, entity will not be rendered.
 */
 
-export const ContentNode = ({ extensions, ...node }) => {
+export const ContentNode = ({ extensions, ancestors, ...node }) => {
   //  Skip empty tags
   if (!node.tag) {
     return null;
@@ -41,7 +41,11 @@ export const ContentNode = ({ extensions, ...node }) => {
 
         const { children: childNodeChildren, ...childNode } = child;
         return (
-          <ContentNode extensions={extensions} {...childNode}>
+          <ContentNode
+            extensions={extensions}
+            ancestors={[updatedNode, ...ancestors]}
+            {...childNode}
+          >
             {childNodeChildren}
           </ContentNode>
         );
@@ -56,6 +60,7 @@ const ContentNodePropType = {
   refNumber: PropTypes.number,
   children: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})])),
   extensions: PropTypes.arrayOf(PropTypes.func),
+  ancestors: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})])),
 };
 
 ContentNode.propTypes = ContentNodePropType;
@@ -66,6 +71,7 @@ ContentNode.defaultProps = {
   refNumber: 0,
   children: [],
   extensions: [],
+  ancestors: [],
 };
 
 export const ContentNodesPropType = PropTypes.arrayOf(PropTypes.oneOfType([

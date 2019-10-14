@@ -1,19 +1,29 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { ContentNode, useLinks } from '../markdown';
+import { useSectionContent } from '../SectionContent';
+import { ContentNode, useLinks, CAPTION_TAG } from '../markdown';
+import CurrentSectionContext from '../CurrentSectionContext';
 
 
 export const FigureModalBackground = () => {
-  const { figureContent } = useSelector((state) => state.modalContent);
-  const linksExtension = useLinks();
+  const { sectionSlug, figureContentIdentifier } = useSelector((state) => state.modalContent);
+  const [, { figureContentByIdentifier }] = useSectionContent(sectionSlug);
+  const figureContentNodes = figureContentByIdentifier[figureContentIdentifier].contentNodes;
 
-  return <ContentNode extensions={[linksExtension]}>{figureContent}</ContentNode>;
+  return <ContentNode>{figureContentNodes}</ContentNode>;
 };
 
 export const FigureModalForeground = () => {
-  const { captionContent } = useSelector((state) => state.modalContent);
+  const { sectionSlug, captionNumber } = useSelector((state) => state.modalContent);
+  const [, currentSectionContext] = useSectionContent(sectionSlug);
+  const { mainContent: { references } } = currentSectionContext;
+  const captionContentNodes = references[CAPTION_TAG].refsByNumber[captionNumber].children;
   const linksExtension = useLinks();
 
-  return <ContentNode extensions={[linksExtension]}>{captionContent}</ContentNode>;
+  return (
+    <CurrentSectionContext.Provider value={currentSectionContext}>
+      <ContentNode extensions={[linksExtension]}>{captionContentNodes}</ContentNode>
+    </CurrentSectionContext.Provider>
+  );
 };

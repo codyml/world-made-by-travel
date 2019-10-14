@@ -1,8 +1,9 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { processMainContentMarkdown, processMarkdown } from '../markdown';
 import {
+  EXPANDED_TOC,
   SECTION_CONTENT_REQUESTED,
   SECTION_CONTENT_RECEIVED,
   REQUESTED,
@@ -26,7 +27,7 @@ const parseSectionContent = ({
         identifier,
         contentNodes: figureMarkdown
           ? processMarkdown(figureMarkdown)
-          : [{ tag: 'img', key: `figureContent:${identifier}`, props: { src: image }, children: [] }],
+          : [{ tag: 'img', key: `figureContent:${identifier}`, props: { src: image } }],
         download: figureDownload,
       },
     }),
@@ -55,13 +56,17 @@ const parseSectionContent = ({
 */
 
 export default function useSectionContent(sectionSlug) {
-  const meta = useSelector((state) => state.sectionMetaBySlug[sectionSlug]);
+  const meta = useSelector((state) => (
+    state.sectionMetaBySlug[sectionSlug] || EXPANDED_TOC
+  ));
+
   const content = useSelector((state) => state.sectionContentBySlug[sectionSlug]);
   const dispatch = useDispatch();
+  const isToc = meta.slug === EXPANDED_TOC.slug;
 
   //  Initiates download of section content
   useEffect(() => {
-    if (meta && !content) {
+    if (!isToc && !content) {
       const fetchContent = async () => {
         dispatch({ type: SECTION_CONTENT_REQUESTED, sectionSlug });
         const response = await fetch(`/wp-json/wmt/section-content?slug=${sectionSlug}`);
@@ -77,8 +82,13 @@ export default function useSectionContent(sectionSlug) {
 
       fetchContent();
     }
-  }, [content, dispatch, meta, sectionSlug]);
+  }, [content, dispatch, isToc, sectionSlug]);
 
   const contentLoaded = content && content !== REQUESTED;
-  return [contentLoaded, contentLoaded ? content : {}];
+  const currentSectionContext = useMemo(
+    () => ({ isToc, ...meta, ...(contentLoaded ? content : {}) }),
+    [content, contentLoaded, isToc, meta],
+  );
+
+  return [contentLoaded, currentSectionContext];
 }
