@@ -51,4 +51,6 @@
   --color-explorer-link: var(--color-nonexistent-blue-dark);
   --color-book-link: var(--color-unburnt-caramel-dark-mid);
   --color-external-link: #444;
+  --color-table-header-background: var(--color-unburnt-caramel-light);
+  --color-table-alt-row-background: var(--color-nonexistent-blue-light);
 }

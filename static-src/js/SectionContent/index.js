@@ -37,16 +37,14 @@ export default function SectionContent({ sectionSlug }) {
 
   useSetTitle([currentSectionContext.title]);
   const [scrollHandler, {
+    paperRef,
     titleRef,
     hoverTitleRef,
-  }, {
-    hoverTitleVisible,
-  }] = useSectionScroll();
+  }, { hoverTitleVisible }] = useSectionScroll();
 
   return (
     <div
       className={style.SectionContent}
-      onScroll={scrollHandler}
     >
       <CurrentSectionContext.Provider value={currentSectionContext}>
 
@@ -54,7 +52,11 @@ export default function SectionContent({ sectionSlug }) {
         <HoverTitleBlock ref={hoverTitleRef} visible={hoverTitleVisible} {...sectionMeta} />
 
         {/* Start of "paper" */}
-        <div className={style.paper}>
+        <div
+          className={style.paper}
+          ref={paperRef}
+          onScroll={scrollHandler}
+        >
 
           {/* Introduction content above mobile/tablet Table of Contents */}
           {browserSize !== 'desktop' && currentSectionContext.isToc ? (

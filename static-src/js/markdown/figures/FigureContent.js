@@ -42,6 +42,7 @@ export default function FigureContent({
     <div
       className={cx(style.FigureContent, { valid })}
       onClick={openModal}
+      title="Click to view in fullscreen"
     >
       {children}
     </div>

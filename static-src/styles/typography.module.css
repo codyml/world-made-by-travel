@@ -112,6 +112,39 @@
     border: 1px solid #f0f0f0;
     margin: 0.25em 0;
   }
+
+  & img {
+    display: block;
+    max-width: 100%;
+  }
+
+  & table {
+    display: block;
+    font-family: var(--font-sans);
+    margin: 0 auto;
+    table-layout: fixed;
+    border-collapse: collapse;
+    font-size: 1.1em;
+    max-width: 100%;
+    overflow-x: scroll;
+
+    & th,
+    & td {
+      padding: 0.75em 0.75em;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    & th {
+      background-color: var(--color-table-header-background);
+      border-bottom: 1px solid #888;
+      min-width: 7.5em;
+    }
+
+    & tr:nth-child(2n + 1) td {
+      background-color: var(--color-table-alt-row-background);
+    }
+  }
 }
 
 .uiContent {

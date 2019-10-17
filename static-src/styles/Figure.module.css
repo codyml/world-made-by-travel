@@ -4,16 +4,19 @@
   & figcaption {
     font-size: 0.9em;
   }
+
+  & br {
+    display: none;
+  }
 }
 
 .FigureContent {
   background-color: transparent;
-  text-align: center;
   margin: 1.75em 0;
-
-  & img {
-    max-width: 100%;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
 }
 
 .FigureContent:not(.valid) {

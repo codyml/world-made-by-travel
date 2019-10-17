@@ -3,7 +3,6 @@
 
 .Link {
   position: relative;
-  display: inline-block;
   font-weight: 600;
 
   &:hover {
@@ -31,6 +30,7 @@
 }
 
 .hoverTip {
+  display: none;
   font-weight: 300;
   position: absolute;
   width: 12em;
@@ -68,6 +68,10 @@
 
   & strong {
     font-weight: 600;
+  }
+
+  @media (--tablet) {
+    display: block;
   }
 }
 

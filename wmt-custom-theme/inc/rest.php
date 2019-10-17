@@ -81,16 +81,20 @@ function wmt_get_section_content( $post ) {
 			function( $figure ) {
 				return array(
 					'identifier' => $figure['identifier'],
-					'image'      => $figure['image'] ?: null,
+					'image'      => (
+						'markdown' === $figure['type']
+						? null
+						: $figure['image']
+					),
 					'markdown'   => (
-						$figure['markdown']
+						'markdown' === $figure['type']
 						? wmt_get_file_contents( $figure['markdown'] )
 						: null
 					),
 					'download'   => (
 						$figure['downloadable']
 						? (
-							$figure['markdown']
+							'markdown' === $figure['type']
 							? $figure['pdf']
 							: $figure['image']
 						)
