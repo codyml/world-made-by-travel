@@ -9,6 +9,10 @@ export default function FootnotesBlock() {
   const marginLinksExtension = useMarginLinks();
   const { mainContent: { footnotesByNumber } } = useContext(CurrentSectionContext);
   const footnotes = Object.values(footnotesByNumber);
+  if (!footnotes.length) {
+    return null;
+  }
+
   footnotes.sort((a, b) => a - b);
 
   return (

@@ -1,20 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useRef } from 'react';
+import PropTypes from 'prop-types';
 import classNamesBind from 'classnames/bind';
 
 import style from 'styles/MarginLinks.module.css';
+import { REFERABLE_CONTENT_TYPES, CONTENT_TYPE_HASH } from '../../constants';
+import CurrentSectionContext from '../../CurrentSectionContext';
 
 
 const COPIED_TIMEOUT = 5000;
 const cx = classNamesBind.bind(style);
 
-export default function LinkLink() {
+export default function LinkLink({ contentType, contentNumber }) {
+  const textAreaRef = useRef();
   const [copied, setCopied] = useState(false);
-  const url = (
-    <span>http://localhost:12345....<strong>#lol</strong></span>
-  );
+  const { origin } = window.location;
+  const { path: sectionPath } = useContext(CurrentSectionContext);
+  const hash = CONTENT_TYPE_HASH[contentType]
+    ? CONTENT_TYPE_HASH[contentType].generate(contentNumber)
+    : '';
+
+  const url = [
+    origin,
+    sectionPath,
+    `#${hash}`,
+  ].join('');
 
   const copyUrl = () => {
-    console.log('copying link');
+    textAreaRef.current.select();
+    document.execCommand('copy');
     setCopied(true);
     setTimeout(() => setCopied(false), COPIED_TIMEOUT);
   };
@@ -26,7 +39,18 @@ export default function LinkLink() {
     >
       <span className={style.linkText}>Link</span>
       <div className={style.linkLinkTooltip}>
-        <div className={style.linkLinkUrl}>{url}</div>
+        <textarea
+          className={style.linkLinkHiddenTextArea}
+          ref={textAreaRef}
+          value={url}
+          readOnly
+        />
+        <a href={url} className={style.linkLinkUrl}>
+          {origin}
+          {sectionPath}
+          #
+          <strong>{hash}</strong>
+        </a>
         <div className={style.linkLinkClickToCopy}>
           {copied ? 'Copied!' : 'Click to copy URL'}
         </div>
@@ -34,3 +58,12 @@ export default function LinkLink() {
     </div>
   );
 }
+
+LinkLink.propTypes = {
+  contentType: PropTypes.oneOf(Object.values(REFERABLE_CONTENT_TYPES)).isRequired,
+  contentNumber: PropTypes.number,
+};
+
+LinkLink.defaultProps = {
+  contentNumber: null,
+};

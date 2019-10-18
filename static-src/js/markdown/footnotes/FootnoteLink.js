@@ -2,17 +2,15 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import style from 'styles/footnotes.module.css';
+import { CONTENT_TYPE_HASH, REFERABLE_CONTENT_TYPES } from '../../constants';
 
 
 export default function FootnoteLink({ label, footnoteNumber }) {
-  const scrollToFootnote = () => {
-    console.log(`scrolling to footnote ${footnoteNumber}`);
-  };
+  const hash = CONTENT_TYPE_HASH[REFERABLE_CONTENT_TYPES.footnote].generate(footnoteNumber);
 
   return (
     <a
-      href="#???"
-      onClick={scrollToFootnote}
+      href={`#${hash}`}
       className={style.FootnoteLink}
     >
       <sup>{label}</sup>

@@ -40,7 +40,7 @@ export default function useFootnotes() {
     return null;
   }, [currentSectionContext]);
 
-  return useCallback(({ tag, props }) => {
+  return useCallback(({ tag, props, refNumber }) => {
     if (!currentSectionContext) {
       return {};
     }
@@ -65,6 +65,7 @@ export default function useFootnotes() {
           tag: Footnote,
           props: {
             label: props.label,
+            footnoteNumber: refNumber,
             footnoteLinkNumber: footnoteLinksByLabel[props.label].refNumber,
           },
         };

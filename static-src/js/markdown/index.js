@@ -19,9 +19,9 @@ export const processMainContentMarkdown = (markdown) => {
   const { contentNodes, referencesByTag } = normalizeTokenizedContent(tokens);
   return {
     contentNodes,
-    figureCaptionsByNumber: referencesByTag[CAPTION_TAG],
-    footnoteLinksByNumber: referencesByTag[FOOTNOTE_REF_TAG],
-    footnotesByNumber: referencesByTag[FOOTNOTE_TAG],
+    figureCaptionsByNumber: referencesByTag[CAPTION_TAG] || {},
+    footnoteLinksByNumber: referencesByTag[FOOTNOTE_REF_TAG] || {},
+    footnotesByNumber: referencesByTag[FOOTNOTE_TAG] || {},
   };
 };
 

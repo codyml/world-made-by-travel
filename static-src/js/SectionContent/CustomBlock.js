@@ -6,9 +6,12 @@ import { MarginLinks } from './MarginLinks';
 import { Content, ContentNodesPropType } from '../markdown';
 import { REFERABLE_CONTENT_TYPES } from '../constants';
 
-export default function CustomBlock({ title, author, contentNodes }) {
+export default function CustomBlock({ title, author, download, contentNodes }) {
   return (
-    <MarginLinks contentType={REFERABLE_CONTENT_TYPES.block}>
+    <MarginLinks
+      contentType={REFERABLE_CONTENT_TYPES.block}
+      downloadAllowed={!!download}
+    >
       <Block title={title} author={author}>
         <Content nodes={contentNodes} />
       </Block>
@@ -19,9 +22,11 @@ export default function CustomBlock({ title, author, contentNodes }) {
 CustomBlock.propTypes = {
   title: PropTypes.string.isRequired,
   author: PropTypes.string,
+  download: PropTypes.string,
   contentNodes: ContentNodesPropType.isRequired,
 };
 
 CustomBlock.defaultProps = {
   author: null,
+  download: null,
 };

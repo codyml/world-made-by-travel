@@ -27,6 +27,7 @@ export default function useFigures() {
         captionNumberRefRef.current = {};
         return {
           tag: Figure,
+          props: { figureNumber: refNumber },
         };
       }
 

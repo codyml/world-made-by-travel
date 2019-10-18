@@ -5,22 +5,10 @@ import { Link } from 'react-router-dom';
 import classNamesBind from 'classnames/bind';
 
 import style from 'styles/links.module.css';
-import { EXPANDED_TOC, COVER, REFERABLE_CONTENT_TYPES } from '../../constants';
+import { EXPANDED_TOC, COVER, CONTENT_TYPE_HASH } from '../../constants';
 import CurrentSectionContext from '../../CurrentSectionContext';
 
 const cx = classNamesBind.bind(style);
-
-
-/*
-* Recognized URL hash types and regexes
-*/
-
-const HASH_TYPES = {
-  [REFERABLE_CONTENT_TYPES.paragraph]: [/^paragraph-(\d+)$/, (n) => `Paragraph ${n}`],
-  [REFERABLE_CONTENT_TYPES.figure]: [/^figure-(\d+)$/, (n) => `Figure ${n}`],
-  [REFERABLE_CONTENT_TYPES.footnote]: [/^footnote-(\d+)$/, (n) => `Footnote ${n}`],
-  [REFERABLE_CONTENT_TYPES.block]: [/^block-(\d+)$/, (n) => `Block ${n}`],
-};
 
 
 /*
@@ -28,7 +16,7 @@ const HASH_TYPES = {
 */
 
 const parseBookHash = (hash) => {
-  for (const [regex, getDescription] of Object.values(HASH_TYPES)) {
+  for (const { regex, getDescription } of Object.values(CONTENT_TYPE_HASH)) {
     const match = hash.match(regex);
     if (match) {
       const [, number] = match;
