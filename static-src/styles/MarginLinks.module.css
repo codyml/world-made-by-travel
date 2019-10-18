@@ -1,0 +1,66 @@
+@import './transition.css';
+@import './font.css';
+
+.MarginLinks {
+  position: relative;
+  background-color: #fff;
+  transition: background-color var(--transition-duration-fade);
+}
+
+.MarginLinks.insideBlock {
+  margin-left: calc(env(--page-padding) * -1);
+  margin-right: calc(env(--page-padding) * -1);
+  padding-left: env(--page-padding);
+  padding-right: env(--page-padding);
+
+  @media (--tablet) {
+    margin-left: calc(env(--page-padding-tablet) * -1);
+    margin-right: calc(env(--page-padding-tablet) * -1);
+    padding-left: env(--page-padding-tablet);
+    padding-right: env(--page-padding-tablet);
+  }
+
+  @media (--desktop) {
+    margin-left: calc(env(--page-padding-desktop) * -1);
+    margin-right: calc(env(--page-padding-desktop) * -1);
+    padding-left: env(--page-padding-desktop);
+    padding-right: env(--page-padding-desktop);
+  }
+}
+
+.MarginLinks:hover {
+  background-color: var(--color-margin-links-background);
+}
+
+.links {
+  font-size: 1rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  width: env(--page-padding);
+  z-index: 1;
+  background-color: var(--color-margin-links-background);
+  transition: opacity var(--transition-duration-fade);
+  border-bottom-left-radius: 4px;
+  display: none;
+
+  @nest .MarginLinks:hover & {
+    opacity: 1;
+  }
+
+  @media (--tablet) {
+    display: block;
+    width: env(--page-padding-tablet);
+  }
+
+  @media (--desktop) {
+    width: env(--page-padding-desktop);
+  }
+}
+
+.link {
+  color: #ccc;
+  text-transform: uppercase;
+  font-family: var(--font-monospace);
+}

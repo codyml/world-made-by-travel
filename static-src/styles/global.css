@@ -32,18 +32,6 @@ strong {
   font-weight: bold;
 }
 
-p {
-  overflow-wrap: break-word;
-
-  &:first-child {
-    margin-top: 0;
-  }
-
-  &:last-child {
-    margin-bottom: 0;
-  }
-}
-
 *,
 *::before,
 *::after,

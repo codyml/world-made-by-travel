@@ -3,13 +3,11 @@
 
 .Block {
   composes: pageContainer from './container.module.css';
+  position: relative;
   padding-top: 3rem;
   padding-bottom: 3rem;
   line-height: 1.25;
-}
-
-.Block + .Block {
-  border-top: 1px solid var(--color-ui-hr);
+  z-index: 1;
 }
 
 .Block.isToc {

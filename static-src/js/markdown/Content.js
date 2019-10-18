@@ -11,11 +11,11 @@ import { useFootnotes } from './footnotes';
 * Basic component that renders itself and its children.
 */
 
-export const ContentNode = ({ handlers, ...node }) => {
+export const ContentNode = ({ handlers, ancestors, ...node }) => {
   //  Handle special tag types
   let updatedNode = node;
   for (const handler of handlers) {
-    const result = handler(updatedNode);
+    const result = handler(updatedNode, ancestors);
     if (!result) {
       return null;
     }
@@ -38,7 +38,13 @@ export const ContentNode = ({ handlers, ...node }) => {
 
         const { children: childNodeChildren, ...childNode } = child;
         return (
-          <ContentNode handlers={handlers} {...childNode}>{childNodeChildren}</ContentNode>
+          <ContentNode
+            handlers={handlers}
+            ancestors={[updatedNode, ...ancestors]}
+            {...childNode}
+          >
+            {childNodeChildren}
+          </ContentNode>
         );
       }) : null}
     </Component>
@@ -46,11 +52,12 @@ export const ContentNode = ({ handlers, ...node }) => {
 };
 
 const ContentNodePropType = {
-  tag: PropTypes.oneOfType([PropTypes.element, PropTypes.string, PropTypes.symbol]),
+  tag: PropTypes.oneOfType([PropTypes.elementType, PropTypes.string, PropTypes.symbol]),
   props: PropTypes.shape({}),
   refNumber: PropTypes.number,
   children: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})])),
   handlers: PropTypes.arrayOf(PropTypes.func),
+  ancestors: PropTypes.arrayOf(PropTypes.shape({})),
 };
 
 ContentNode.propTypes = ContentNodePropType;
@@ -61,6 +68,7 @@ ContentNode.defaultProps = {
   refNumber: 0,
   children: [],
   handlers: [],
+  ancestors: [],
 };
 
 export const ContentNodesPropType = PropTypes.arrayOf(PropTypes.oneOfType([
@@ -69,8 +77,9 @@ export const ContentNodesPropType = PropTypes.arrayOf(PropTypes.oneOfType([
 ]));
 
 
-export const Content = ({ nodes }) => {
+export const Content = ({ nodes, extensions }) => {
   const handlers = [
+    ...extensions,
     useLinks(),
     useFigures(),
     useHTML(),
@@ -82,4 +91,9 @@ export const Content = ({ nodes }) => {
 
 Content.propTypes = {
   nodes: ContentNodesPropType.isRequired,
+  extensions: PropTypes.arrayOf(PropTypes.func),
+};
+
+Content.defaultProps = {
+  extensions: [],
 };

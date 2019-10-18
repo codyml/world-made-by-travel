@@ -1,5 +1,5 @@
 .Figure {
-  margin: 3.5em 1em;
+  margin: 2em 1em;
 
   & figcaption {
     font-size: 0.9em;
@@ -12,11 +12,14 @@
 
 .FigureContent {
   background-color: transparent;
-  margin: 1.75em 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+
+  &:not(:last-child) {
+    margin-bottom: 2em;
+  }
 }
 
 .FigureContent.invalid {

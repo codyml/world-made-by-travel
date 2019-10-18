@@ -9,7 +9,7 @@
   & p:first-child,
   & p:last-child {
     margin-top: 0;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
   }
 }
 

@@ -53,4 +53,5 @@
   --color-external-link: #444;
   --color-table-header-background: var(--color-unburnt-caramel-light);
   --color-table-alt-row-background: var(--color-nonexistent-blue-light);
+  --color-margin-links-background: var(--color-nonexistent-blue-light);
 }
