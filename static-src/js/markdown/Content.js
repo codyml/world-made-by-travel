@@ -79,11 +79,11 @@ export const ContentNodesPropType = PropTypes.arrayOf(PropTypes.oneOfType([
 
 export function Content({ nodes, extensions }) {
   const handlers = [
-    ...extensions,
     useLinks(),
     useFigures(),
     useHTML(),
     useFootnotes(),
+    ...extensions,
   ];
 
   return <ContentNode handlers={handlers}>{nodes}</ContentNode>;

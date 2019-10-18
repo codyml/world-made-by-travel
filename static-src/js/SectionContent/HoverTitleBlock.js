@@ -11,11 +11,15 @@ import CurrentSectionContext from '../CurrentSectionContext';
 const cx = classNamesBind.bind(style);
 
 const HoverTitleBlock = React.forwardRef(({ visible }, ref) => {
-  const { title, author, slug } = useContext(CurrentSectionContext);
+  const { title, author, slug, download } = useContext(CurrentSectionContext);
 
   return (
     <div ref={ref} className={cx(style.HoverTitleBlock, { visible })}>
-      <MarginLinks contentType={REFERABLE_CONTENT_TYPES.section} hoverTitle>
+      <MarginLinks
+        contentType={REFERABLE_CONTENT_TYPES.section}
+        downloadAllowed={!!download}
+        hoverTitle
+      >
         <Block
           title={title}
           author={author}

@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import parseMarkdown from './parse';
 import normalizeTokenizedContent from './normalize';
 import { Content, ContentNodesPropType } from './Content';
-import { FIGURE_TAG, CAPTION_TAG } from './figures';
-import { FOOTNOTE_TAG, FOOTNOTE_REF_TAG } from './footnotes';
+import { CAPTION_TAG, Figure, FigureContent } from './figures';
+import { FOOTNOTE_TAG, FOOTNOTE_REF_TAG, Footnote } from './footnotes';
 
 
 /*
@@ -69,8 +69,9 @@ MarkdownContent.defaultProps = {
 */
 
 export {
-  FIGURE_TAG,
-  FOOTNOTE_TAG,
+  Figure,
+  FigureContent,
+  Footnote,
   Content,
   ContentNodesPropType,
 };

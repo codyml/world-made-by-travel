@@ -1,54 +1,69 @@
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 
 import MarginLinks from './MarginLinks';
-import { FIGURE_TAG, FOOTNOTE_TAG } from '../../markdown';
+import { Footnote, Figure, FigureContent } from '../../markdown';
 import { REFERABLE_CONTENT_TYPES } from '../../constants';
 
 
 const PARAGRAPH_TAG = 'p';
 
 export default function useMarginLinks() {
+  const figureNumber = useRef();
+
   return useCallback((node, ancestors) => {
-    if (ancestors.length === 1) {
-      switch (node.tag) {
-        case PARAGRAPH_TAG: {
+    switch (node.tag) {
+      case PARAGRAPH_TAG: {
+        if (ancestors.length === 1) {
           return {
             tag: MarginLinks,
             props: {
               contentType: REFERABLE_CONTENT_TYPES.paragraph,
               contentNumber: node.refNumber,
-              insideBlock: true,
             },
             children: [{ ...node, key: 'marginLinksWrapped' }],
           };
         }
 
-        case FIGURE_TAG: {
+        break;
+      }
+
+      case Figure: {
+        figureNumber.current = node.refNumber;
+        break;
+      }
+
+      case FigureContent: {
+        if (ancestors[0].tag === Figure) {
           return {
             tag: MarginLinks,
             props: {
               contentType: REFERABLE_CONTENT_TYPES.figure,
-              contentNumber: node.refNumber,
-              insideBlock: true,
+              contentNumber: figureNumber.current,
+              downloadAllowed: node.props.downloadAllowed,
             },
             children: [{ ...node, key: 'marginLinksWrapped' }],
           };
         }
 
-        case FOOTNOTE_TAG: {
+        break;
+      }
+
+      case Footnote: {
+        if (ancestors.length === 1) {
           return {
             tag: MarginLinks,
             props: {
               contentType: REFERABLE_CONTENT_TYPES.footnote,
               contentNumber: node.refNumber,
-              insideBlock: true,
             },
             children: [{ ...node, key: 'marginLinksWrapped' }],
           };
         }
 
-        default:
+        break;
       }
+
+      default:
     }
 
     return {};

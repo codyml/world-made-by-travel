@@ -8,7 +8,6 @@
 }
 
 .MarginLinks.paragraph,
-.MarginLinks.figure,
 .MarginLinks.footnote {
   margin-left: calc(env(--page-padding) * -1);
   margin-right: calc(env(--page-padding) * -1);
@@ -27,6 +26,27 @@
     margin-right: calc(env(--page-padding-desktop) * -1);
     padding-left: env(--page-padding-desktop);
     padding-right: env(--page-padding-desktop);
+  }
+}
+
+.MarginLinks.figure {
+  margin-left: calc(-1em - env(--page-padding));
+  margin-right: calc(-1em - env(--page-padding));
+  padding-left: calc(1em + env(--page-padding));
+  padding-right: calc(1em + env(--page-padding));
+
+  @media (--tablet) {
+    margin-left: calc(-1em - env(--page-padding-tablet));
+    margin-right: calc(-1em - env(--page-padding-tablet));
+    padding-left: calc(1em + env(--page-padding-tablet));
+    padding-right: calc(1em + env(--page-padding-tablet));
+  }
+
+  @media (--desktop) {
+    margin-left: calc(-1em - env(--page-padding-desktop));
+    margin-right: calc(-1em - env(--page-padding-desktop));
+    padding-left: calc(1em + env(--page-padding-tablet));
+    padding-right: calc(1em + env(--page-padding-tablet));
   }
 }
 
@@ -50,10 +70,6 @@
 
   @nest .MarginLinks:hover & {
     opacity: 1;
-  }
-
-  @nest .MarginLinks.figure & {
-    padding-top: 2em;
   }
 
   @nest .MarginLinks.footnote & {

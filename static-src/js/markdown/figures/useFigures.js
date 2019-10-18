@@ -1,7 +1,7 @@
 import { useRef, useCallback, useContext } from 'react';
 
-import style from 'styles/figures.module.css';
 import FigureContent from './FigureContent';
+import Figure from './Figure';
 import { FIGURE_TAG, CAPTION_TAG } from './FiguresMarkdownItPlugin';
 import { REFERENCE_TAG } from './ReferencesMarkdownItPlugin';
 import CurrentSectionContext from '../../CurrentSectionContext';
@@ -26,7 +26,7 @@ export default function useFigures() {
         figureNumberRef.current = refNumber;
         captionNumberRefRef.current = {};
         return {
-          props: { ...props, className: style.Figure },
+          tag: Figure,
         };
       }
 
@@ -39,6 +39,7 @@ export default function useFigures() {
             figureNumber: figureNumberRef.current,
             figureContentIdentifier: props.reference,
             captionNumberRef: captionNumberRefRef.current,
+            downloadAllowed: figureContent ? !!figureContent.download : false,
           },
           children: figureContent ? figureContent.contentNodes : null,
         };

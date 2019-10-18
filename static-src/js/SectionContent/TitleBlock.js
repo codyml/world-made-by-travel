@@ -7,10 +7,13 @@ import CurrentSectionContext from '../CurrentSectionContext';
 
 
 const TitleBlock = React.forwardRef((props, ref) => {
-  const { title, author, slug } = useContext(CurrentSectionContext);
+  const { title, author, slug, download } = useContext(CurrentSectionContext);
 
   return (
-    <MarginLinks contentType={REFERABLE_CONTENT_TYPES.section}>
+    <MarginLinks
+      contentType={REFERABLE_CONTENT_TYPES.section}
+      downloadAllowed={!!download}
+    >
       <Block
         ref={ref}
         title={title}

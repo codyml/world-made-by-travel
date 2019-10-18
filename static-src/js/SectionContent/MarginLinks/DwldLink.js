@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import classNamesBind from 'classnames/bind';
 
 import style from 'styles/MarginLinks.module.css';
@@ -6,7 +7,11 @@ import style from 'styles/MarginLinks.module.css';
 
 const cx = classNamesBind.bind(style);
 
-export default function DwldLink() {
+export default function DwldLink({ downloadAllowed }) {
+  if (!downloadAllowed) {
+    return null;
+  }
+
   const startDownload = () => console.log('downloading');
 
   return (
@@ -18,3 +23,11 @@ export default function DwldLink() {
     </div>
   );
 }
+
+DwldLink.propTypes = {
+  downloadAllowed: PropTypes.bool,
+};
+
+DwldLink.defaultProps = {
+  downloadAllowed: false,
+};

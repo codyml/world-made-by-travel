@@ -1,8 +1,9 @@
 .Figure {
-  margin: 2em 1em;
+  margin: 1em;
 
   & figcaption {
     font-size: 0.9em;
+    margin-top: 1em;
   }
 
   & br {
@@ -16,10 +17,7 @@
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-
-  &:not(:last-child) {
-    margin-bottom: 2em;
-  }
+  padding: 1em 0;
 }
 
 .FigureContent.invalid {
