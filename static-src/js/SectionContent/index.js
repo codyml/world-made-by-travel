@@ -60,13 +60,11 @@ export default function SectionContent({ sectionSlug }) {
 
           {/* Introduction content above mobile/tablet Table of Contents */}
           {browserSize !== 'desktop' && currentSectionContext.isToc ? (
-            <Block
-              content={(
-                <MarkdownContent className={style.instructions}>
-                  {instructionsMarkdown}
-                </MarkdownContent>
-              )}
-            />
+            <Block>
+              <MarkdownContent className={style.instructions}>
+                {instructionsMarkdown}
+              </MarkdownContent>
+            </Block>
           ) : null}
 
           {/* Section title block */}
@@ -74,10 +72,9 @@ export default function SectionContent({ sectionSlug }) {
 
           {/* Expanded Table of Contents block */}
           {currentSectionContext.isToc ? (
-            <Block
-              isToc
-              content={<TableOfContents className={style.tocBlock} />}
-            />
+            <Block isToc>
+              <TableOfContents className={style.tocBlock} />
+            </Block>
           ) : null}
 
           {/* Blocks for non-TOC sections with content received */}
