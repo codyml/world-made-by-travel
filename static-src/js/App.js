@@ -16,7 +16,7 @@ import Modal from './Modal';
 import MobileMenu from './MobileMenu';
 
 
-const App = () => {
+function App() {
   useBrowserSize();
   const contentLoaded = useLoadContent();
 
@@ -34,7 +34,7 @@ const App = () => {
       ) : null }
     </div>
   );
-};
+}
 
 
 /*
@@ -43,9 +43,11 @@ const App = () => {
 
 const store = createStore(rootReducer, devToolsEnhancer());
 
-export default () => (
-  <Provider store={store}>
-    <App />
-  </Provider>
-  //  feelings u provide
-);
+export default function StatefulApp() {
+  return (
+    <Provider store={store}>
+      <App />
+    </Provider>
+    //  feelings u provide
+  );
+}

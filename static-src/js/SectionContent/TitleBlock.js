@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 
-import { EXPANDED_TOC } from '../constants';
+import { EXPANDED_TOC, REFERABLE_CONTENT_TYPES } from '../constants';
 import Block from './Block';
-import { MarginLinks, SECTION } from './MarginLinks';
+import { MarginLinks } from './MarginLinks';
 import CurrentSectionContext from '../CurrentSectionContext';
 
 
@@ -10,7 +10,7 @@ const TitleBlock = React.forwardRef((props, ref) => {
   const { title, author, slug } = useContext(CurrentSectionContext);
 
   return (
-    <MarginLinks recipientType={SECTION}>
+    <MarginLinks contentType={REFERABLE_CONTENT_TYPES.section}>
       <Block
         ref={ref}
         title={title}
@@ -20,5 +20,7 @@ const TitleBlock = React.forwardRef((props, ref) => {
     </MarginLinks>
   );
 });
+
+TitleBlock.displayName = 'TitleBlock';
 
 export default TitleBlock;

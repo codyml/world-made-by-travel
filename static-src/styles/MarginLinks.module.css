@@ -7,7 +7,9 @@
   transition: background-color var(--transition-duration-fade);
 }
 
-.MarginLinks.insideBlock {
+.MarginLinks.paragraph,
+.MarginLinks.figure,
+.MarginLinks.footnote {
   margin-left: calc(env(--page-padding) * -1);
   margin-right: calc(env(--page-padding) * -1);
   padding-left: env(--page-padding);
@@ -44,9 +46,22 @@
   transition: opacity var(--transition-duration-fade);
   border-bottom-left-radius: 4px;
   display: none;
+  padding: 1em;
 
   @nest .MarginLinks:hover & {
     opacity: 1;
+  }
+
+  @nest .MarginLinks.figure & {
+    padding-top: 2em;
+  }
+
+  @nest .MarginLinks.footnote & {
+    padding-top: 0.5em;
+  }
+
+  @nest .MarginLinks.section:not(.hoverTitle) & {
+    padding-top: 3em;
   }
 
   @media (--tablet) {
@@ -59,8 +74,119 @@
   }
 }
 
-.link {
+.marginLink {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+
+  &:not(:last-child) {
+    margin-bottom: 0.5em;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    width: 1em;
+    height: 1em;
+    border-radius: 0.15em;
+    background-color: #ccc;
+    background-size: 0.55em;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-color var(--transition-duration-fade);
+  }
+
+  &:hover::after {
+    background-color: #aaa;
+  }
+}
+
+.linkText {
   color: #ccc;
-  text-transform: uppercase;
   font-family: var(--font-monospace);
+  text-transform: uppercase;
+  font-size: 0.9em;
+  letter-spacing: 0.05em;
+  transition: color var(--transition-duration-fade);
+  line-height: 1;
+
+  @nest .marginLink:hover & {
+    color: #aaa;
+  }
+}
+
+.CiteLink::after {
+  background-image: url(../images/cite-white.png);
+}
+
+.LinkLink {
+  position: relative;
+
+  &::after {
+    background-image: url(../images/link-white.png);
+  }
+}
+
+.linkLinkTooltip {
+  position: absolute;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity var(--transition-duration-fade), visibility 0s var(--transition-duration-fade);
+  width: 12em;
+  right: calc(100% + 2em);
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: var(--color-book-link);
+  padding: 0.5em 1em;
+  line-height: 1.25;
+  color: white;
+  border-radius: 2px;
+  font-family: var(--font-sans);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.25);
+  overflow-wrap: break-word;
+  font-weight: 300;
+
+  & strong {
+    font-weight: 500;
+  }
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    border-top-right-radius: 3px;
+    background-color: inherit;
+    top: 50%;
+    right: 0;
+    width: 1.25em;
+    height: 1.25em;
+    z-index: -1;
+    transform: translateY(-50%) translateX(50%) rotate(45deg);
+  }
+
+  @nest .LinkLink:hover & {
+    visibility: visible;
+    opacity: 1;
+    transition: opacity var(--transition-duration-fade), visibility 0s;
+  }
+}
+
+.linkLinkUrl {
+  font-size: 1.1em;
+  line-height: 1.35em;
+  margin-bottom: 0.5em;
+}
+
+.linkLinkClickToCopy {
+  font-weight: bold;
+  font-size: 0.9em;
+}
+
+.DwldLink::after {
+  background-image: url(../images/dwld-white.png);
+}
+
+.ParaLink::after {
+  display: none;
 }

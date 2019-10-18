@@ -46,14 +46,14 @@ export const processMarkdown = (markdown) => {
 * Re-parses every render, so not suitable for large documents.
 */
 
-export const MarkdownContent = ({ children: markdown, ...props }) => {
+export function MarkdownContent({ children: markdown, ...props }) {
   const contentNodes = useMemo(() => processMarkdown(markdown), [markdown]);
   return (
     <div {...props}>
       <Content nodes={contentNodes} />
     </div>
   );
-};
+}
 
 MarkdownContent.propTypes = {
   children: PropTypes.string,

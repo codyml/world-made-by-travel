@@ -12,19 +12,25 @@ const cx = classNamesBind.bind(style);
 * a set background color that it's rendered inside of.
 */
 
-const Tabbed = ({
+export default function Tabbed({
   tabSide,
   isExpanded,
   triangleClassName,
   children,
-}) => (
-  <>
-    {children}
-    <div className={style.overlay} />
-    <div className={cx(style.tab, { [tabSide]: true })} />
-    <div className={cx(triangleClassName, style.triangle, { [tabSide]: true, isExpanded })}>▴</div>
-  </>
-);
+}) {
+  return (
+    <>
+      {children}
+      <div className={style.overlay} />
+      <div className={cx(style.tab, { [tabSide]: true })} />
+      <div
+        className={cx(triangleClassName, style.triangle, { [tabSide]: true, isExpanded })}
+      >
+        ▴
+      </div>
+    </>
+  );
+}
 
 Tabbed.propTypes = {
   tabSide: PropTypes.oneOf(['top', 'bottom']),
@@ -39,5 +45,3 @@ Tabbed.defaultProps = {
   triangleClassName: '',
   children: null,
 };
-
-export default Tabbed;

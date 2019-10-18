@@ -4,7 +4,7 @@
   "description": "Single-page JavaScript application for \"A World Made by Travel\" by Giovanna Ceserani.",
   "main": "static-src/index.js",
   "scripts": {
-    "dev-watch": "rm -rf wmt-custom-theme/static && webpack --watch --mode=development --devtool=source-map",
+    "dev-watch": "rm -rf wmt-custom-theme/static && webpack --watch --mode=development --devtool=cheap-module-eval-source-map",
     "prod-build": "rm -rf wmt-custom-theme/static && webpack --mode=production",
     "lint:js": "eslint webpack.config.babel.js static-src",
     "lint:css": "stylelint 'static-src/**/*.css'"

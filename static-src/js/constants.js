@@ -44,3 +44,12 @@ export const POSITIONS = {
   center: 'center',
   right: 'right',
 };
+
+//  Section content entity types
+export const REFERABLE_CONTENT_TYPES = {
+  section: 'section',
+  paragraph: 'paragraph',
+  figure: 'figure',
+  footnote: 'footnote',
+  block: 'block',
+};

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import classNamesBind from 'classnames/bind';
 
 import style from 'styles/links.module.css';
-import { EXPANDED_TOC, COVER } from '../../constants';
+import { EXPANDED_TOC, COVER, REFERABLE_CONTENT_TYPES } from '../../constants';
 import CurrentSectionContext from '../../CurrentSectionContext';
 
 const cx = classNamesBind.bind(style);
@@ -15,15 +15,11 @@ const cx = classNamesBind.bind(style);
 * Recognized URL hash types and regexes
 */
 
-const PARAGRAPH = 'PARAGRAPH';
-const FIGURE = 'FIGURE';
-const FOOTNOTE = 'FOOTNOTE';
-const BLOCK = 'BLOCK';
 const HASH_TYPES = {
-  [PARAGRAPH]: [/^paragraph-(\d+)$/, (n) => `Paragraph ${n}`],
-  [FIGURE]: [/^figure-(\d+)$/, (n) => `Figure ${n}`],
-  [FOOTNOTE]: [/^footnote-(\d+)$/, (n) => `Footnote ${n}`],
-  [BLOCK]: [/^block-(\d+)$/, (n) => `Block ${n}`],
+  [REFERABLE_CONTENT_TYPES.paragraph]: [/^paragraph-(\d+)$/, (n) => `Paragraph ${n}`],
+  [REFERABLE_CONTENT_TYPES.figure]: [/^figure-(\d+)$/, (n) => `Figure ${n}`],
+  [REFERABLE_CONTENT_TYPES.footnote]: [/^footnote-(\d+)$/, (n) => `Footnote ${n}`],
+  [REFERABLE_CONTENT_TYPES.block]: [/^block-(\d+)$/, (n) => `Block ${n}`],
 };
 
 

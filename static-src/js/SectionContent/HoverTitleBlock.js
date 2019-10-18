@@ -4,8 +4,8 @@ import classNamesBind from 'classnames/bind';
 
 import style from 'styles/HoverTitleBlock.module.css';
 import Block from './Block';
-import { MarginLinks, SECTION } from './MarginLinks';
-import { EXPANDED_TOC } from '../constants';
+import { MarginLinks } from './MarginLinks';
+import { EXPANDED_TOC, REFERABLE_CONTENT_TYPES } from '../constants';
 import CurrentSectionContext from '../CurrentSectionContext';
 
 const cx = classNamesBind.bind(style);
@@ -15,7 +15,7 @@ const HoverTitleBlock = React.forwardRef(({ visible }, ref) => {
 
   return (
     <div ref={ref} className={cx(style.HoverTitleBlock, { visible })}>
-      <MarginLinks recipientType={SECTION}>
+      <MarginLinks contentType={REFERABLE_CONTENT_TYPES.section} hoverTitle>
         <Block
           title={title}
           author={author}

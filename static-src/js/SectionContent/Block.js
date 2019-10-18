@@ -37,4 +37,6 @@ Block.defaultProps = {
   isMini: false,
 };
 
+Block.displayName = 'Block';
+
 export default Block;

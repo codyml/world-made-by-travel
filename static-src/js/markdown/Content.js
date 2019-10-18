@@ -11,7 +11,7 @@ import { useFootnotes } from './footnotes';
 * Basic component that renders itself and its children.
 */
 
-export const ContentNode = ({ handlers, ancestors, ...node }) => {
+export function ContentNode({ handlers, ancestors, ...node }) {
   //  Handle special tag types
   let updatedNode = node;
   for (const handler of handlers) {
@@ -49,7 +49,7 @@ export const ContentNode = ({ handlers, ancestors, ...node }) => {
       }) : null}
     </Component>
   );
-};
+}
 
 const ContentNodePropType = {
   tag: PropTypes.oneOfType([PropTypes.elementType, PropTypes.string, PropTypes.symbol]),
@@ -77,7 +77,7 @@ export const ContentNodesPropType = PropTypes.arrayOf(PropTypes.oneOfType([
 ]));
 
 
-export const Content = ({ nodes, extensions }) => {
+export function Content({ nodes, extensions }) {
   const handlers = [
     ...extensions,
     useLinks(),
@@ -87,7 +87,7 @@ export const Content = ({ nodes, extensions }) => {
   ];
 
   return <ContentNode handlers={handlers}>{nodes}</ContentNode>;
-};
+}
 
 Content.propTypes = {
   nodes: ContentNodesPropType.isRequired,
