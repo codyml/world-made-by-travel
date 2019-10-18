@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import classNamesBind from 'classnames/bind';
 
-import style from 'styles/Link.module.css';
+import style from 'styles/links.module.css';
 import { EXPANDED_TOC, COVER } from '../../constants';
 import CurrentSectionContext from '../../CurrentSectionContext';
 
@@ -95,9 +95,11 @@ export default function BookLink({ href, children }) {
     ];
   }, [bookBaseUrl, currentSectionSlug, href, sectionMetaBySlug, sectionSlugsByPath]);
 
-  const valid = !!slug;
+  const invalid = !slug;
   let tipText;
-  if (valid) {
+  if (invalid) {
+    tipText = <strong>Invalid link</strong>;
+  } else {
     tipText = (
       <>
         <span>Link to </span>
@@ -111,13 +113,11 @@ export default function BookLink({ href, children }) {
         )}
       </>
     );
-  } else {
-    tipText = <strong>Invalid link</strong>;
   }
 
   return (
     <Link
-      className={cx(style.BookLink, { valid, highlightInvalid })}
+      className={cx(style.BookLink, { invalid, highlightInvalid })}
       to={path}
     >
       {children}

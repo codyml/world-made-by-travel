@@ -19,6 +19,6 @@
   cursor: pointer;
 }
 
-.FigureContent:not(.valid) {
+.FigureContent.invalid {
   background-color: red;
 }

@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Block from './Block';
-import { ContentNode, ContentNodesPropType } from '../markdown';
+import { Content, ContentNodesPropType } from '../markdown';
 
 export default function CustomBlock({ title, author, contentNodes }) {
   return (
     <Block title={title} author={author}>
-      <ContentNode>
-        {contentNodes}
-      </ContentNode>
+      <Content nodes={contentNodes} />
     </Block>
   );
 }

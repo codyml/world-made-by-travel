@@ -1,24 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { useLinks } from './links';
+import { useFigures } from './figures';
+import useHTML from './useHTML';
+import { useFootnotes } from './footnotes';
+
 
 /*
-* Basic component that renders itself and its children.  Calls the
-* passed `extensions` functions before rendering with params and
-* renders the return value if provided.  If `extensions` returns
-* false, entity will not be rendered.
+* Basic component that renders itself and its children.
 */
 
-export const ContentNode = ({ extensions, ancestors, ...node }) => {
-  //  Skip empty tags
-  if (!node.tag) {
-    return null;
-  }
-
-  //  Apply extensions
+export const ContentNode = ({ handlers, ...node }) => {
+  //  Handle special tag types
   let updatedNode = node;
-  for (const extension of extensions) {
-    const result = extension(updatedNode);
+  for (const handler of handlers) {
+    const result = handler(updatedNode);
     if (!result) {
       return null;
     }
@@ -41,13 +38,7 @@ export const ContentNode = ({ extensions, ancestors, ...node }) => {
 
         const { children: childNodeChildren, ...childNode } = child;
         return (
-          <ContentNode
-            extensions={extensions}
-            ancestors={[updatedNode, ...ancestors]}
-            {...childNode}
-          >
-            {childNodeChildren}
-          </ContentNode>
+          <ContentNode handlers={handlers} {...childNode}>{childNodeChildren}</ContentNode>
         );
       }) : null}
     </Component>
@@ -59,8 +50,7 @@ const ContentNodePropType = {
   props: PropTypes.shape({}),
   refNumber: PropTypes.number,
   children: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})])),
-  extensions: PropTypes.arrayOf(PropTypes.func),
-  ancestors: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})])),
+  handlers: PropTypes.arrayOf(PropTypes.func),
 };
 
 ContentNode.propTypes = ContentNodePropType;
@@ -70,11 +60,26 @@ ContentNode.defaultProps = {
   props: {},
   refNumber: 0,
   children: [],
-  extensions: [],
-  ancestors: [],
+  handlers: [],
 };
 
 export const ContentNodesPropType = PropTypes.arrayOf(PropTypes.oneOfType([
   PropTypes.string,
   PropTypes.shape(ContentNodePropType),
 ]));
+
+
+export const Content = ({ nodes }) => {
+  const handlers = [
+    useLinks(),
+    useFigures(),
+    useHTML(),
+    useFootnotes(),
+  ];
+
+  return <ContentNode handlers={handlers}>{nodes}</ContentNode>;
+};
+
+Content.propTypes = {
+  nodes: ContentNodesPropType.isRequired,
+};

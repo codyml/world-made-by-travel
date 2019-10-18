@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNamesBind from 'classnames/bind';
 
-import style from 'styles/Link.module.css';
+import style from 'styles/links.module.css';
 
-const cx = classNamesBind.bind(style);
 
 /*
 * React element for rendering an external link.
@@ -12,7 +10,7 @@ const cx = classNamesBind.bind(style);
 
 export default function ExternalLink({ href, children }) {
   return (
-    <a className={cx(style.Link, style.valid)} href={href}>
+    <a className={style.Link} href={href}>
       {children}
       <span className={style.hoverTip}>
         <span>Link to </span>

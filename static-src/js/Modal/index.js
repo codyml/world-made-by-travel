@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import classNamesBind from 'classnames/bind';
 
 import style from 'styles/Modal.module.css';
+import CurrentSectionContext from '../CurrentSectionContext';
+import { useSectionContent } from '../SectionContent';
 import AuthorModalForeground from './AuthorModal';
 import { FigureModalBackground, FigureModalForeground } from './FigureModal';
 import CitationModalForeground from './CitationModal';
@@ -13,6 +15,8 @@ const cx = classNamesBind.bind(style);
 export default function Modal() {
   const visible = useSelector((state) => state.modalOpen);
   const { modalType } = useSelector((state) => state.modalContent);
+  const currentSectionSlug = useSelector((state) => state.currentSectionSlug);
+  const [, currentSectionContext] = useSectionContent(currentSectionSlug);
   const dispatch = useDispatch();
 
   let modalBackgroundContent = null;
@@ -40,14 +44,16 @@ export default function Modal() {
   const closeModal = () => dispatch({ type: SET_MODAL_OPEN, modalOpen: false });
 
   return (
-    <div className={cx(style.Modal, { visible })}>
-      <div className={style.background}>
-        <button type="button" onClick={closeModal}>Close Modal</button>
-        {modalBackgroundContent}
+    <CurrentSectionContext.Provider value={currentSectionContext}>
+      <div className={cx(style.Modal, { visible })}>
+        <div className={style.background}>
+          <button type="button" onClick={closeModal}>Close Modal</button>
+          {modalBackgroundContent}
+        </div>
+        <div className={style.foreground}>
+          {modalForegroundContent}
+        </div>
       </div>
-      <div className={style.foreground}>
-        {modalForegroundContent}
-      </div>
-    </div>
+    </CurrentSectionContext.Provider>
   );
 }

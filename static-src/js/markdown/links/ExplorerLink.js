@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import classNamesBind from 'classnames/bind';
 
-import style from 'styles/Link.module.css';
+import style from 'styles/links.module.css';
 import { SET_EXPLORER_URL } from '../../constants';
 
 const cx = classNamesBind.bind(style);
@@ -97,10 +97,10 @@ export default function ExplorerLink({ href, children }) {
     ];
   }, [explorerBaseUrl, href]);
 
-  const valid = !!description;
+  const invalid = !description;
 
   const handleClick = (event) => {
-    if (valid && browserSize !== 'mobile') {
+    if (!invalid && browserSize !== 'mobile') {
       event.preventDefault();
       dispatch({ type: SET_EXPLORER_URL, explorerUrl: path });
     }
@@ -108,13 +108,13 @@ export default function ExplorerLink({ href, children }) {
 
   return (
     <a
-      className={cx(style.ExplorerLink, { valid, highlightInvalid })}
+      className={cx(style.ExplorerLink, { invalid, highlightInvalid })}
       href={`${explorerBaseUrl}${path}`}
       onClick={handleClick}
     >
       {children}
       <span className={style.hoverTip}>
-        {valid ? description : <strong>Invalid link</strong>}
+        {invalid ? <strong>Invalid link</strong> : description}
       </span>
     </a>
   );

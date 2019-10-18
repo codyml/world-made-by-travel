@@ -20,12 +20,12 @@
   color: var(--color-book-link);
 }
 
-.Link.highlightInvalid:not(.valid) {
+.Link.invalid.highlightInvalid {
   color: red;
 }
 
-.ExplorerLink:not(.highlightInvalid):not(.valid),
-.BookLink:not(.highlightInvalid):not(.valid) {
+.ExplorerLink.invalid:not(.highlightInvalid),
+.BookLink.invalid:not(.highlightInvalid) {
   color: inherit;
 }
 
@@ -91,10 +91,10 @@
     visibility 0s;
 }
 
-.Link.highlightInvalid:not(.valid) .hoverTip {
+.Link.invalid.highlightInvalid .hoverTip {
   background-color: red;
 }
 
-.Link:not(.highlightInvalid):not(.valid) .hoverTip {
+.Link.invalid:not(.highlightInvalid) .hoverTip {
   display: none;
 }

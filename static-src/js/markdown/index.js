@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import parseMarkdown from './parse';
 import normalizeTokenizedContent from './normalize';
-import { ContentNode, ContentNodesPropType } from './ContentNode';
-import { useLinks } from './links';
-import { useFigures, CAPTION_TAG } from './figures';
+import { Content, ContentNodesPropType } from './Content';
+import { CAPTION_TAG } from './figures';
+import { FOOTNOTE_TAG, FOOTNOTE_REF_TAG } from './footnotes';
 
 
 /*
@@ -16,7 +16,13 @@ import { useFigures, CAPTION_TAG } from './figures';
 
 export const processMainContentMarkdown = (markdown) => {
   const tokens = parseMarkdown(markdown);
-  return normalizeTokenizedContent(tokens);
+  const { contentNodes, referencesByTag } = normalizeTokenizedContent(tokens);
+  return {
+    contentNodes,
+    figureCaptionsByNumber: referencesByTag[CAPTION_TAG],
+    footnoteLinksByNumber: referencesByTag[FOOTNOTE_REF_TAG],
+    footnotesByNumber: referencesByTag[FOOTNOTE_TAG],
+  };
 };
 
 
@@ -44,7 +50,7 @@ export const MarkdownContent = ({ children: markdown, ...props }) => {
   const contentNodes = useMemo(() => processMarkdown(markdown), [markdown]);
   return (
     <div {...props}>
-      <ContentNode>{contentNodes}</ContentNode>
+      <Content nodes={contentNodes} />
     </div>
   );
 };
@@ -63,9 +69,6 @@ MarkdownContent.defaultProps = {
 */
 
 export {
-  ContentNode,
+  Content,
   ContentNodesPropType,
-  useLinks,
-  useFigures,
-  CAPTION_TAG,
 };

@@ -1,19 +1,26 @@
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback, useContext } from 'react';
 
-import style from 'styles/Figure.module.css';
+import style from 'styles/figures.module.css';
 import FigureContent from './FigureContent';
-import FiguresMarkdownItPlugin, { FIGURE_TAG, CAPTION_TAG } from './FiguresMarkdownItPlugin';
-import ReferencesMarkdownItPlugin, { REFERENCE_TAG } from './ReferencesMarkdownItPlugin';
+import { FIGURE_TAG, CAPTION_TAG } from './FiguresMarkdownItPlugin';
+import { REFERENCE_TAG } from './ReferencesMarkdownItPlugin';
+import CurrentSectionContext from '../../CurrentSectionContext';
 
 
 /*
 * Custom hook that lets React component handle references.
 */
 
-export default function useFigures(figureContentByIdentifier) {
+export default function useFigures() {
   const figureNumberRef = useRef();
   const captionNumberRefRef = useRef();
+  const currentSectionContext = useContext(CurrentSectionContext);
+
   return useCallback(({ tag, props, refNumber }) => {
+    if (!currentSectionContext) {
+      return {};
+    }
+
     switch (tag) {
       case FIGURE_TAG: {
         figureNumberRef.current = refNumber;
@@ -24,16 +31,16 @@ export default function useFigures(figureContentByIdentifier) {
       }
 
       case REFERENCE_TAG: {
-        const referencedContent = figureContentByIdentifier[props.reference];
+        const { figureContentByIdentifier } = currentSectionContext;
+        const figureContent = figureContentByIdentifier[props.reference];
         return {
           tag: FigureContent,
           props: {
-            valid: !!referencedContent,
             figureNumber: figureNumberRef.current,
             figureContentIdentifier: props.reference,
             captionNumberRef: captionNumberRefRef.current,
           },
-          children: referencedContent ? referencedContent.contentNodes : [],
+          children: figureContent ? figureContent.contentNodes : null,
         };
       }
 
@@ -46,10 +53,5 @@ export default function useFigures(figureContentByIdentifier) {
     }
 
     return {};
-  }, [figureContentByIdentifier]);
+  }, [currentSectionContext]);
 }
-
-export {
-  FiguresMarkdownItPlugin,
-  ReferencesMarkdownItPlugin,
-};
