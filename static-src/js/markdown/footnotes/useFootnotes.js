@@ -40,18 +40,19 @@ export default function useFootnotes() {
     return null;
   }, [currentSectionContext]);
 
-  return useCallback(({ tag, props, refNumber }) => {
+  return useCallback(({ component, props, componentRef }) => {
     if (!currentSectionContext) {
       return {};
     }
 
-    switch (tag) {
+    switch (component) {
       case FOOTNOTE_REF_TAG: {
         return {
-          tag: FootnoteLink,
+          component: FootnoteLink,
           props: {
             label: props.label,
             footnoteNumber: footnotesByLabel[props.label].refNumber,
+            ref: componentRef,
           },
         };
       }
@@ -62,11 +63,11 @@ export default function useFootnotes() {
 
       case FOOTNOTE_TAG: {
         return {
-          tag: Footnote,
+          component: Footnote,
           props: {
             label: props.label,
-            footnoteNumber: refNumber,
             footnoteLinkNumber: footnoteLinksByLabel[props.label].refNumber,
+            ref: componentRef,
           },
         };
       }

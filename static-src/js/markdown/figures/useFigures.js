@@ -16,18 +16,17 @@ export default function useFigures() {
   const captionNumberRefRef = useRef();
   const currentSectionContext = useContext(CurrentSectionContext);
 
-  return useCallback(({ tag, props, refNumber }) => {
+  return useCallback(({ component, props, refNumber }) => {
     if (!currentSectionContext) {
       return {};
     }
 
-    switch (tag) {
+    switch (component) {
       case FIGURE_TAG: {
         figureNumberRef.current = refNumber;
         captionNumberRefRef.current = {};
         return {
-          tag: Figure,
-          props: { figureNumber: refNumber },
+          component: Figure,
         };
       }
 
@@ -35,7 +34,7 @@ export default function useFigures() {
         const { figureContentByIdentifier } = currentSectionContext;
         const figureContent = figureContentByIdentifier[props.reference];
         return {
-          tag: FigureContent,
+          component: FigureContent,
           props: {
             figureNumber: figureNumberRef.current,
             figureContentIdentifier: props.reference,

@@ -21,8 +21,8 @@ export default function useLinks() {
   const nextLinkType = useRef();
 
   return useCallback((item) => {
-    const { tag, props } = item;
-    switch (tag) {
+    const { component, props } = item;
+    switch (component) {
       case SPECIAL_LINK_TAG: {
         nextLinkType.current = props.linkType;
         return false;
@@ -33,15 +33,15 @@ export default function useLinks() {
         nextLinkType.current = null;
         switch (linkType) {
           case EXPLORER_LINK_TYPE: {
-            return { tag: ExplorerLink };
+            return { component: ExplorerLink };
           }
 
           case BOOK_LINK_TYPE: {
-            return { tag: BookLink };
+            return { component: BookLink };
           }
 
           default: {
-            return { tag: ExternalLink };
+            return { component: ExternalLink };
           }
         }
       }

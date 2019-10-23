@@ -8,21 +8,20 @@ export default function normalizeTokenizedContent(contentTokens) {
   const referencesByTag = {};
   const referenceCountsByTag = {};
 
-  //  Saves the item object under the item's tag name and a number
+  //  Saves the item object under the item's component name and a number
   //  representing its order in the tree.
   const saveReference = (node) => {
-    if (!referencesByTag[node.tag]) {
-      referencesByTag[node.tag] = {};
-      referenceCountsByTag[node.tag] = 0;
+    if (!referencesByTag[node.component]) {
+      referencesByTag[node.component] = {};
+      referenceCountsByTag[node.component] = 0;
     }
 
-    referenceCountsByTag[node.tag] += 1;
+    referenceCountsByTag[node.component] += 1;
     const referencedNode = {
       ...node,
-      refNumber: referenceCountsByTag[node.tag],
-      componentRef: {},
+      refNumber: referenceCountsByTag[node.component],
     };
-    referencesByTag[node.tag][referencedNode.refNumber] = referencedNode;
+    referencesByTag[node.component][referencedNode.refNumber] = referencedNode;
     return referencedNode;
   };
 
@@ -59,7 +58,7 @@ export default function normalizeTokenizedContent(contentTokens) {
       const children = content ? [content] : [];
       const node = saveReference({
         key: getKey(),
-        tag: tag || type,
+        component: tag || type,
         props,
         children,
       });

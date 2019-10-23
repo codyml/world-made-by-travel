@@ -5,7 +5,7 @@ import parseMarkdown from './parse';
 import normalizeTokenizedContent from './normalize';
 import { Content, ContentNodesPropType } from './Content';
 import { CAPTION_TAG, Figure, FigureContent } from './figures';
-import { FOOTNOTE_TAG, FOOTNOTE_REF_TAG, Footnote } from './footnotes';
+import { FOOTNOTE_TAG, FOOTNOTE_REF_TAG, Footnote, FootnoteLink } from './footnotes';
 
 
 /*
@@ -65,13 +65,14 @@ MarkdownContent.defaultProps = {
 
 
 /*
-* Exports tags for consumers of item objects.
+* Exports components for consumers of item objects.
 */
-
+export const PARAGRAPH_TAG = 'p';
 export {
   Figure,
   FigureContent,
   Footnote,
+  FootnoteLink,
   Content,
   ContentNodesPropType,
 };

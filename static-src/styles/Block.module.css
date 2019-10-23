@@ -35,10 +35,10 @@
   composes: content from './typography.module.css';
 }
 
-.sectionAuthor + .content {
+/* .sectionAuthor + .content {
   margin-top: 1.25em;
 }
 
 .sectionTitle + .content {
   margin-top: 1.25em;
-}
+} */

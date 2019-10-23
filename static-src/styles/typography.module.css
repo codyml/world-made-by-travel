@@ -55,14 +55,11 @@
   & > * {
     padding-top: 1px;
     padding-bottom: 1px;
+  }
 
-    &:first-child {
-      margin-top: -1em;
-    }
-
-    &:last-child {
-      margin-bottom: -1em;
-    }
+  & p {
+    margin: 0;
+    padding: 1em 0;
   }
 
   & h1 {

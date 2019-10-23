@@ -5,11 +5,10 @@
 
 .Footnote {
   display: flex;
+  margin: 0.5em 0;
 
-  & p:first-child,
-  & p:last-child {
-    margin-top: 0;
-    margin-bottom: 0.5em;
+  & p {
+    padding: 0;
   }
 }
 

@@ -1,21 +1,19 @@
 import { useCallback, useRef } from 'react';
 
 import MarginLinks from './MarginLinks';
-import { Footnote, Figure, FigureContent } from '../../markdown';
+import { Footnote, Figure, FigureContent, PARAGRAPH_TAG } from '../../markdown';
 import { REFERABLE_CONTENT_TYPES } from '../../constants';
 
-
-const PARAGRAPH_TAG = 'p';
 
 export default function useMarginLinks() {
   const figureNumber = useRef();
 
   return useCallback((node, ancestors) => {
-    switch (node.tag) {
+    switch (node.component) {
       case PARAGRAPH_TAG: {
         if (ancestors.length === 1) {
           return {
-            tag: MarginLinks,
+            component: MarginLinks,
             props: {
               contentType: REFERABLE_CONTENT_TYPES.paragraph,
               contentNumber: node.refNumber,
@@ -33,9 +31,9 @@ export default function useMarginLinks() {
       }
 
       case FigureContent: {
-        if (ancestors[0].tag === Figure) {
+        if (ancestors[0].component === Figure) {
           return {
-            tag: MarginLinks,
+            component: MarginLinks,
             props: {
               contentType: REFERABLE_CONTENT_TYPES.figure,
               contentNumber: figureNumber.current,
@@ -51,7 +49,7 @@ export default function useMarginLinks() {
       case Footnote: {
         if (ancestors.length === 1) {
           return {
-            tag: MarginLinks,
+            component: MarginLinks,
             props: {
               contentType: REFERABLE_CONTENT_TYPES.footnote,
               contentNumber: node.refNumber,

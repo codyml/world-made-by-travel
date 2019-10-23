@@ -12,7 +12,7 @@ import { useFootnotes } from './footnotes';
 */
 
 export function ContentNode({ handlers, ancestors, ...node }) {
-  //  Handle special tag types
+  //  Handle special component types
   let updatedNode = node;
   for (const handler of handlers) {
     const result = handler(updatedNode, ancestors);
@@ -24,7 +24,7 @@ export function ContentNode({ handlers, ancestors, ...node }) {
   }
 
   const {
-    tag: Component,
+    component: Component,
     props,
     children,
   } = updatedNode;
@@ -52,7 +52,7 @@ export function ContentNode({ handlers, ancestors, ...node }) {
 }
 
 const ContentNodePropType = {
-  tag: PropTypes.oneOfType([PropTypes.elementType, PropTypes.string, PropTypes.symbol]),
+  component: PropTypes.oneOfType([PropTypes.elementType, PropTypes.string, PropTypes.symbol]),
   props: PropTypes.shape({}),
   refNumber: PropTypes.number,
   children: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.shape({})])),
@@ -63,7 +63,7 @@ const ContentNodePropType = {
 ContentNode.propTypes = ContentNodePropType;
 
 ContentNode.defaultProps = {
-  tag: React.Fragment,
+  component: React.Fragment,
   props: {},
   refNumber: 0,
   children: [],

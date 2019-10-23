@@ -27,7 +27,7 @@ const parseSectionContent = ({
         identifier,
         contentNodes: figureMarkdown
           ? processMarkdown(figureMarkdown)
-          : [{ tag: 'img', key: `figureContent:${identifier}`, props: { src: image } }],
+          : [{ component: 'img', key: `figureContent:${identifier}`, props: { src: image } }],
         download: figureDownload,
       },
     }),
@@ -43,8 +43,7 @@ const parseSectionContent = ({
   return {
     mainContent,
     figureContentByIdentifier,
-    preFootnotesBlocks: parsedBlocks.filter((block) => !block.belowFootnotes),
-    postFootnotesBlocks: parsedBlocks.filter((block) => block.belowFootnotes),
+    blocks: parsedBlocks,
     download,
   };
 };

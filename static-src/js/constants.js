@@ -50,11 +50,12 @@ export const REFERABLE_CONTENT_TYPES = {
   section: 'section',
   paragraph: 'paragraph',
   figure: 'figure',
+  footnoteLink: 'footnoteLink',
   footnote: 'footnote',
   block: 'block',
 };
 
-//  Hash generators/matchrs for referable content types
+//  Hash generators/matchers for referable content types
 export const CONTENT_TYPE_HASH = {
   [REFERABLE_CONTENT_TYPES.paragraph]: {
     regex: /^paragraph-(\d+)$/,
@@ -66,6 +67,12 @@ export const CONTENT_TYPE_HASH = {
     regex: /^figure-(\d+)$/,
     getDescription: (n) => `Figure ${n}`,
     generate: (n) => `figure-${n}`,
+  },
+
+  [REFERABLE_CONTENT_TYPES.footnoteLink]: {
+    regex: /^footnote-link-(\d+)$/,
+    getDescription: (n) => `Footnote Link ${n}`,
+    generate: (n) => `footnote-link-${n}`,
   },
 
   [REFERABLE_CONTENT_TYPES.footnote]: {

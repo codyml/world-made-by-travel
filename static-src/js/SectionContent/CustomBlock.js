@@ -6,18 +6,16 @@ import { MarginLinks } from './MarginLinks';
 import { Content, ContentNodesPropType } from '../markdown';
 import { REFERABLE_CONTENT_TYPES } from '../constants';
 
-export default function CustomBlock({ title, author, download, contentNodes }) {
-  return (
-    <MarginLinks
-      contentType={REFERABLE_CONTENT_TYPES.block}
-      downloadAllowed={!!download}
-    >
-      <Block title={title} author={author}>
-        <Content nodes={contentNodes} />
-      </Block>
-    </MarginLinks>
-  );
-}
+const CustomBlock = React.forwardRef(({ title, author, download, contentNodes }, ref) => (
+  <MarginLinks
+    contentType={REFERABLE_CONTENT_TYPES.block}
+    downloadAllowed={!!download}
+  >
+    <Block ref={ref} title={title} author={author}>
+      <Content nodes={contentNodes} />
+    </Block>
+  </MarginLinks>
+));
 
 CustomBlock.propTypes = {
   title: PropTypes.string.isRequired,
@@ -30,3 +28,7 @@ CustomBlock.defaultProps = {
   author: null,
   download: null,
 };
+
+CustomBlock.displayName = 'CustomBlock';
+
+export default CustomBlock;
