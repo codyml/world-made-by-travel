@@ -3,7 +3,7 @@ import { useRef, useCallback, useContext } from 'react';
 import FigureContent from './FigureContent';
 import Figure from './Figure';
 import { FIGURE_TAG, CAPTION_TAG } from './FiguresMarkdownItPlugin';
-import { REFERENCE_TAG } from './ReferencesMarkdownItPlugin';
+import { FIGURE_CONTENT_TAG } from './FigureContentMarkdownItPlugin';
 import CurrentSectionContext from '../../CurrentSectionContext';
 
 
@@ -31,7 +31,7 @@ export default function useFigures() {
         };
       }
 
-      case REFERENCE_TAG: {
+      case FIGURE_CONTENT_TAG: {
         const { figureContentByIdentifier } = currentSectionContext;
         const figureContent = figureContentByIdentifier[props.reference];
         return {

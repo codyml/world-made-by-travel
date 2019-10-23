@@ -2,7 +2,7 @@ import MarkdownIt from 'markdown-it';
 import FootnotesMarkdownItPlugin from 'markdown-it-footnote';
 
 import { SpecialLinksMarkdownItPlugin } from './links';
-import { FiguresMarkdownItPlugin, ReferencesMarkdownItPlugin } from './figures';
+import { FiguresMarkdownItPlugin, FigureContentMarkdownItPlugin } from './figures';
 
 
 /*
@@ -12,7 +12,7 @@ import { FiguresMarkdownItPlugin, ReferencesMarkdownItPlugin } from './figures';
 export const md = MarkdownIt({ html: true })
   .use(FootnotesMarkdownItPlugin)
   .use(SpecialLinksMarkdownItPlugin)
-  .use(ReferencesMarkdownItPlugin)
+  .use(FigureContentMarkdownItPlugin)
   .use(FiguresMarkdownItPlugin);
 
 export default function parseMarkdown(markdown) {

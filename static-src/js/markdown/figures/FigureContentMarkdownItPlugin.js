@@ -1,14 +1,14 @@
-const REFERENCE_RULE_NAME = 'reference';
-const REFERENCE_TOKEN_TYPE = 'reference';
-export const REFERENCE_TAG = 'reference';
+const FIGURE_CONTENT_RULE_NAME = 'reference';
+const FIGURE_CONTENT_TOKEN_TYPE = 'reference';
+export const FIGURE_CONTENT_TAG = 'reference';
 
 
 /*
 * Extends MarkdownIt to parse curly bracket references (used in figures).
 */
 
-export default function ReferencesMarkdownItPlugin(md) {
-  md.inline.ruler.push(REFERENCE_RULE_NAME, (state) => {
+export default function FigureContentMarkdownItPlugin(md) {
+  md.inline.ruler.push(FIGURE_CONTENT_RULE_NAME, (state) => {
     if (state.src.charAt(state.pos) !== '{') {
       return false;
     }
@@ -18,7 +18,7 @@ export default function ReferencesMarkdownItPlugin(md) {
       const endPos = state.pos + endPosRelative;
       const text = state.src.slice(state.pos, endPos + 1);
       const reference = state.src.slice(state.pos + 1, endPos);
-      const token = state.push(REFERENCE_TOKEN_TYPE, REFERENCE_TAG, 0);
+      const token = state.push(FIGURE_CONTENT_TOKEN_TYPE, FIGURE_CONTENT_TAG, 0);
       token.attrSet('text', text);
       token.attrSet('reference', reference);
 

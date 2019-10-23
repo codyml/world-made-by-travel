@@ -17,7 +17,11 @@ export default function normalizeTokenizedContent(contentTokens) {
     }
 
     referenceCountsByTag[node.tag] += 1;
-    const referencedNode = { ...node, refNumber: referenceCountsByTag[node.tag] };
+    const referencedNode = {
+      ...node,
+      refNumber: referenceCountsByTag[node.tag],
+      componentRef: {},
+    };
     referencesByTag[node.tag][referencedNode.refNumber] = referencedNode;
     return referencedNode;
   };

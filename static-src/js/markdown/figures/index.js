@@ -1,5 +1,5 @@
 import FiguresMarkdownItPlugin, { FIGURE_TAG, CAPTION_TAG } from './FiguresMarkdownItPlugin';
-import ReferencesMarkdownItPlugin from './ReferencesMarkdownItPlugin';
+import FigureContentMarkdownItPlugin from './FigureContentMarkdownItPlugin';
 import useFigures from './useFigures';
 import FigureContent from './FigureContent';
 import Figure from './Figure';
@@ -7,7 +7,7 @@ import Figure from './Figure';
 
 export {
   FiguresMarkdownItPlugin,
-  ReferencesMarkdownItPlugin,
+  FigureContentMarkdownItPlugin,
   useFigures,
   FIGURE_TAG,
   CAPTION_TAG,

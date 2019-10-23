@@ -1,9 +1,10 @@
 .Figure {
-  margin: 1em;
+  margin: 0;
 
   & figcaption {
     font-size: 0.9em;
     margin-top: 1em;
+    padding: 0 1rem;
   }
 
   & br {
@@ -12,12 +13,13 @@
 }
 
 .FigureContent {
-  background-color: transparent;
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  padding: 1em 0;
+  padding: 0 1rem;
+  margin: 2rem 0;
+  background-color: #fff;
 }
 
 .FigureContent.invalid {
