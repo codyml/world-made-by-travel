@@ -1,8 +1,6 @@
-import { useRef, useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
-export default function useHoverTitle(contentAreaRef) {
-  const titleRef = useRef();
-  const hoverTitleRef = useRef();
+export default function useHoverTitle({ contentAreaRef, titleRef, hoverTitleRef }) {
   const [hoverTitleVisible, setHoverTitleVisible] = useState();
 
   //  Recalculates scroll reducers.
@@ -17,12 +15,10 @@ export default function useHoverTitle(contentAreaRef) {
           < hoverTitle.offsetTop + hoverTitle.offsetHeight,
       );
     }
-  }, [contentAreaRef]);
+  }, [contentAreaRef, hoverTitleRef, titleRef]);
 
   return [
     hoverTitleScrollHandler,
-    titleRef,
-    hoverTitleRef,
     hoverTitleVisible,
   ];
 }

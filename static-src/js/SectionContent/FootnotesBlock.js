@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 
 import Block from './Block';
 import { useMarginLinks } from './MarginLinks';
@@ -8,10 +7,10 @@ import { Content } from '../markdown';
 import CurrentSectionContext from '../CurrentSectionContext';
 import { REFERABLE_CONTENT_TYPES } from '../constants';
 
-export default function FootnotesBlock({ footnoteRefs }) {
-  const marginLinksExtension = useMarginLinks();
-  const footnoteRefsExtension = useContentRefs(footnoteRefs, REFERABLE_CONTENT_TYPES.footnote);
+export default function FootnotesBlock() {
   const { mainContent: { footnotesByNumber } } = useContext(CurrentSectionContext);
+  const marginLinksExtension = useMarginLinks();
+  const footnoteRefsExtension = useContentRefs(REFERABLE_CONTENT_TYPES.footnote);
   const footnotes = Object.values(footnotesByNumber);
   if (!footnotes.length) {
     return null;
@@ -25,7 +24,3 @@ export default function FootnotesBlock({ footnoteRefs }) {
     </Block>
   );
 }
-
-FootnotesBlock.propTypes = {
-  footnoteRefs: PropTypes.objectOf(PropTypes.object).isRequired,
-};

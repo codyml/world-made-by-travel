@@ -1,34 +1,35 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import Block from './Block';
 import { MarginLinks } from './MarginLinks';
-import { Content, ContentNodesPropType } from '../markdown';
+import { Content } from '../markdown';
+import CurrentSectionContext from '../CurrentSectionContext';
 import { REFERABLE_CONTENT_TYPES } from '../constants';
 
-const CustomBlock = React.forwardRef(({ title, author, download, contentNodes }, ref) => (
-  <MarginLinks
-    contentType={REFERABLE_CONTENT_TYPES.block}
-    downloadAllowed={!!download}
-  >
-    <Block ref={ref} title={title} author={author}>
-      <Content nodes={contentNodes} />
-    </Block>
-  </MarginLinks>
-));
+export default function CustomBlock({ blockNumber }) {
+  const { blocks, contentRefs: { blockRefs } } = useContext(CurrentSectionContext);
+  const {
+    title,
+    author,
+    download,
+    contentNodes,
+  } = blocks.filter((block) => block.number === blockNumber)[0];
+
+  const blockRef = blockRefs.current[blockNumber];
+
+  return (
+    <MarginLinks
+      contentType={REFERABLE_CONTENT_TYPES.block}
+      downloadAllowed={!!download}
+    >
+      <Block ref={blockRef} title={title} author={author}>
+        <Content nodes={contentNodes} />
+      </Block>
+    </MarginLinks>
+  );
+}
 
 CustomBlock.propTypes = {
-  title: PropTypes.string.isRequired,
-  author: PropTypes.string,
-  download: PropTypes.string,
-  contentNodes: ContentNodesPropType.isRequired,
+  blockNumber: PropTypes.number.isRequired,
 };
-
-CustomBlock.defaultProps = {
-  author: null,
-  download: null,
-};
-
-CustomBlock.displayName = 'CustomBlock';
-
-export default CustomBlock;

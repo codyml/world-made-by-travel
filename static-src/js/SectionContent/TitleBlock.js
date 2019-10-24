@@ -6,8 +6,14 @@ import { MarginLinks } from './MarginLinks';
 import CurrentSectionContext from '../CurrentSectionContext';
 
 
-const TitleBlock = React.forwardRef((props, ref) => {
-  const { title, author, slug, download } = useContext(CurrentSectionContext);
+export default function TitleBlock() {
+  const {
+    title,
+    author,
+    slug,
+    download,
+    contentRefs: { titleRef },
+  } = useContext(CurrentSectionContext);
 
   return (
     <MarginLinks
@@ -15,15 +21,11 @@ const TitleBlock = React.forwardRef((props, ref) => {
       downloadAllowed={!!download}
     >
       <Block
-        ref={ref}
+        ref={titleRef}
         title={title}
         author={author}
         isToc={slug === EXPANDED_TOC.slug}
       />
     </MarginLinks>
   );
-});
-
-TitleBlock.displayName = 'TitleBlock';
-
-export default TitleBlock;
+}

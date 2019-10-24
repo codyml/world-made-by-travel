@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
@@ -26,7 +26,6 @@ import CurrentSectionContext from '../CurrentSectionContext';
 */
 
 export default function SectionContent({ sectionSlug }) {
-  const contentAreaRef = useRef();
   const browserSize = useSelector((state) => state.browserSize);
   const { instructionsMarkdown } = useSelector((state) => state.config);
   const sectionMeta = useSelector((state) => (
@@ -45,24 +44,15 @@ export default function SectionContent({ sectionSlug }) {
   //  Enabled hovering title
   const [
     hoverTitleScrollHandler,
-    titleRef,
-    hoverTitleRef,
     hoverTitleVisible,
-  ] = useHoverTitle(contentAreaRef);
+  ] = useHoverTitle(currentSectionContext.contentRefs);
 
   //  Enables scrolling to content items
-  const [
-    scrollToContent,
-    paragraphRefs,
-    figureRefs,
-    footnoteLinkRefs,
-    footnoteRefs,
-    blockRefs,
-  ] = useScrollToContent(contentAreaRef, hoverTitleRef, currentSectionContext);
+  const scrollToContent = useScrollToContent(currentSectionContext.contentRefs);
   window.scrollToContent = scrollToContent;
 
-  //  Enables navigating section content by hash and updating hash
-  //  when navigating section content.
+  // //  Enables navigating section content by hash and updating hash
+  // //  when navigating section content.
   // const hashScrollHandler = useHashScrolling(scrollToContent);
 
   const handleScroll = (e) => {
@@ -71,18 +61,16 @@ export default function SectionContent({ sectionSlug }) {
   };
 
   return (
-    <div
-      className={style.SectionContent}
-    >
+    <div className={style.SectionContent}>
       <CurrentSectionContext.Provider value={currentSectionContext}>
 
         {/* Hovering section title block */}
-        <HoverTitleBlock ref={hoverTitleRef} visible={hoverTitleVisible} {...sectionMeta} />
+        <HoverTitleBlock visible={hoverTitleVisible} {...sectionMeta} />
 
         {/* Start of "paper" content area */}
         <div
           className={style.contentArea}
-          ref={contentAreaRef}
+          ref={currentSectionContext.contentRefs.contentAreaRef}
           onScroll={handleScroll}
         >
 
@@ -96,7 +84,7 @@ export default function SectionContent({ sectionSlug }) {
           ) : null}
 
           {/* Section title block */}
-          <TitleBlock ref={titleRef} />
+          <TitleBlock />
 
           {/* Expanded Table of Contents block */}
           {currentSectionContext.isToc ? (
@@ -113,35 +101,23 @@ export default function SectionContent({ sectionSlug }) {
                 <>
 
                   {/* Main content block */}
-                  <MainContentBlock
-                    paragraphRefs={paragraphRefs}
-                    figureRefs={figureRefs}
-                    footnoteLinkRefs={footnoteLinkRefs}
-                  />
+                  <MainContentBlock />
 
                   {/* Pre-Footnotes blocks */}
                   {currentSectionContext.blocks
                     .filter((block) => !block.belowFootnotes)
                     .map((block) => (
-                      <CustomBlock
-                        key={block.number}
-                        ref={blockRefs.current[block.number]}
-                        {...block}
-                      />
+                      <CustomBlock key={block.number} blockNumber={block.number} />
                     ))}
 
                   {/* Footnotes block */}
-                  <FootnotesBlock footnoteRefs={footnoteRefs} />
+                  <FootnotesBlock />
 
                   {/* Post-Footnotes blocks */}
                   {currentSectionContext.blocks
                     .filter((block) => block.belowFootnotes)
                     .map((block) => (
-                      <CustomBlock
-                        key={block.number}
-                        ref={blockRefs.current[block.number]}
-                        {...block}
-                      />
+                      <CustomBlock key={block.number} blockNumber={block.number} />
                     ))}
 
                 </>

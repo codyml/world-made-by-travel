@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { processMainContentMarkdown, processMarkdown } from '../markdown';
@@ -7,6 +7,7 @@ import {
   SECTION_CONTENT_REQUESTED,
   SECTION_CONTENT_RECEIVED,
   REQUESTED,
+  REFERABLE_CONTENT_TYPES,
 } from '../constants';
 
 
@@ -55,6 +56,14 @@ const parseSectionContent = ({
 */
 
 export default function useSectionContent(sectionSlug) {
+  const contentAreaRef = useRef();
+  const titleRef = useRef();
+  const hoverTitleRef = useRef();
+  const paragraphRefs = useRef({});
+  const figureRefs = useRef({});
+  const footnoteLinkRefs = useRef({});
+  const footnoteRefs = useRef({});
+  const blockRefs = useRef();
   const meta = useSelector((state) => (
     state.sectionMetaBySlug[sectionSlug] || EXPANDED_TOC
   ));
@@ -84,10 +93,29 @@ export default function useSectionContent(sectionSlug) {
   }, [content, dispatch, isToc, sectionSlug]);
 
   const contentLoaded = content && content !== REQUESTED;
-  const currentSectionContext = useMemo(
-    () => ({ isToc, ...meta, ...(contentLoaded ? content : {}) }),
-    [content, contentLoaded, isToc, meta],
-  );
+
+  if (!blockRefs.current && contentLoaded) {
+    blockRefs.current = Object.assign(
+      {},
+      ...content.blocks.map((block) => ({ [block.number]: React.createRef() })),
+    );
+  }
+
+  const currentSectionContext = useMemo(() => ({
+    isToc,
+    ...meta,
+    ...(contentLoaded ? content : {}),
+    contentRefs: {
+      contentAreaRef,
+      titleRef,
+      hoverTitleRef,
+      [REFERABLE_CONTENT_TYPES.paragraph]: paragraphRefs,
+      [REFERABLE_CONTENT_TYPES.figure]: figureRefs,
+      [REFERABLE_CONTENT_TYPES.footnoteLink]: footnoteLinkRefs,
+      [REFERABLE_CONTENT_TYPES.footnote]: footnoteRefs,
+      blockRefs,
+    },
+  }), [content, contentLoaded, isToc, meta]);
 
   return [contentLoaded, currentSectionContext];
 }

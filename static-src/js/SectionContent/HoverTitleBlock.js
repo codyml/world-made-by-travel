@@ -10,11 +10,17 @@ import CurrentSectionContext from '../CurrentSectionContext';
 
 const cx = classNamesBind.bind(style);
 
-const HoverTitleBlock = React.forwardRef(({ visible }, ref) => {
-  const { title, author, slug, download } = useContext(CurrentSectionContext);
+export default function HoverTitleBlock({ visible }) {
+  const {
+    title,
+    author,
+    slug,
+    download,
+    contentRefs: { hoverTitleRef },
+  } = useContext(CurrentSectionContext);
 
   return (
-    <div ref={ref} className={cx(style.HoverTitleBlock, { visible })}>
+    <div ref={hoverTitleRef} className={cx(style.HoverTitleBlock, { visible })}>
       <MarginLinks
         contentType={REFERABLE_CONTENT_TYPES.section}
         downloadAllowed={!!download}
@@ -29,7 +35,7 @@ const HoverTitleBlock = React.forwardRef(({ visible }, ref) => {
       </MarginLinks>
     </div>
   );
-});
+}
 
 HoverTitleBlock.propTypes = {
   visible: PropTypes.bool,
@@ -38,5 +44,3 @@ HoverTitleBlock.propTypes = {
 HoverTitleBlock.defaultProps = {
   visible: false,
 };
-
-export default HoverTitleBlock;

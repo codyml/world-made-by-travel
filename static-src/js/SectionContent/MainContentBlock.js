@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 
 import Block from './Block';
 import { useMarginLinks } from './MarginLinks';
@@ -9,18 +8,13 @@ import CurrentSectionContext from '../CurrentSectionContext';
 import { REFERABLE_CONTENT_TYPES } from '../constants';
 
 
-export default function MainContentBlock({ paragraphRefs, figureRefs, footnoteLinkRefs }) {
-  const {
-    mainContent: { contentNodes },
-  } = useContext(CurrentSectionContext);
+export default function MainContentBlock() {
+  const { mainContent: { contentNodes } } = useContext(CurrentSectionContext);
 
   const marginLinksExtension = useMarginLinks();
-  const paragraphRefsExtension = useContentRefs(paragraphRefs, REFERABLE_CONTENT_TYPES.paragraph);
-  const figureRefsExtension = useContentRefs(figureRefs, REFERABLE_CONTENT_TYPES.figure);
-  const footnoteLinkRefsExtension = useContentRefs(
-    footnoteLinkRefs,
-    REFERABLE_CONTENT_TYPES.footnoteLink,
-  );
+  const paragraphRefsExtension = useContentRefs(REFERABLE_CONTENT_TYPES.paragraph);
+  const figureRefsExtension = useContentRefs(REFERABLE_CONTENT_TYPES.figure);
+  const footnoteLinkRefsExtension = useContentRefs(REFERABLE_CONTENT_TYPES.footnoteLink);
 
   return (
     <Block>
@@ -36,9 +30,3 @@ export default function MainContentBlock({ paragraphRefs, figureRefs, footnoteLi
     </Block>
   );
 }
-
-MainContentBlock.propTypes = {
-  paragraphRefs: PropTypes.objectOf(PropTypes.object).isRequired,
-  figureRefs: PropTypes.objectOf(PropTypes.object).isRequired,
-  footnoteLinkRefs: PropTypes.objectOf(PropTypes.object).isRequired,
-};
