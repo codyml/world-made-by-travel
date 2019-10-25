@@ -113,7 +113,7 @@ export default function useSectionContent(sectionSlug) {
       [REFERABLE_CONTENT_TYPES.figure]: figureRefs,
       [REFERABLE_CONTENT_TYPES.footnoteLink]: footnoteLinkRefs,
       [REFERABLE_CONTENT_TYPES.footnote]: footnoteRefs,
-      blockRefs,
+      [REFERABLE_CONTENT_TYPES.block]: blockRefs,
     },
   }), [content, contentLoaded, isToc, meta]);
 

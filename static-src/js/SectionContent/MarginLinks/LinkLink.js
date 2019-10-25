@@ -16,13 +16,13 @@ export default function LinkLink({ contentType, contentNumber }) {
   const { origin } = window.location;
   const { path: sectionPath } = useContext(CurrentSectionContext);
   const hash = CONTENT_TYPE_HASH[contentType]
-    ? CONTENT_TYPE_HASH[contentType].generate(contentNumber)
+    ? `#${CONTENT_TYPE_HASH[contentType].generate(contentNumber)}`
     : '';
 
   const url = [
     origin,
     sectionPath,
-    `#${hash}`,
+    hash,
   ].join('');
 
   const copyUrl = () => {
@@ -48,7 +48,6 @@ export default function LinkLink({ contentType, contentNumber }) {
         <a href={url} className={style.linkLinkUrl}>
           {origin}
           {sectionPath}
-          #
           <strong>{hash}</strong>
         </a>
         <div className={style.linkLinkClickToCopy}>

@@ -6,7 +6,7 @@ import style from 'styles/SectionContent.module.css';
 import useSectionContent from './useSectionContent';
 import useHoverTitle from './useHoverTitle';
 import useScrollToContent from './useScrollToContent';
-// import useHashScrolling from './useHashScrolling';
+import useHashScrolling from './useHashScrolling';
 import Block from './Block';
 import TitleBlock from './TitleBlock';
 import HoverTitleBlock from './HoverTitleBlock';
@@ -51,13 +51,13 @@ export default function SectionContent({ sectionSlug }) {
   const scrollToContent = useScrollToContent(currentSectionContext.contentRefs);
   window.scrollToContent = scrollToContent;
 
-  // //  Enables navigating section content by hash and updating hash
-  // //  when navigating section content.
-  // const hashScrollHandler = useHashScrolling(scrollToContent);
+  //  Enables navigating section content by hash and updating hash
+  //  when navigating section content.
+  const hashScrollHandler = useHashScrolling(scrollToContent, currentSectionContext, contentLoaded);
 
   const handleScroll = (e) => {
     hoverTitleScrollHandler(e);
-    // hashScrollHandler(e);
+    hashScrollHandler(e);
   };
 
   return (

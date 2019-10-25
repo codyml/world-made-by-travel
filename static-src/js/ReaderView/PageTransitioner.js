@@ -102,7 +102,10 @@ export default function PageTransitioner() {
               data-position={position}
             >
               {slugsByPosition[position] ? (
-                <SectionContent sectionSlug={slugsByPosition[position]} />
+                <SectionContent
+                  sectionSlug={slugsByPosition[position]}
+                  key={slugsByPosition[position]}
+                />
               ) : null}
             </div>
           ),
