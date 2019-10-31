@@ -44,22 +44,14 @@ export default function SectionContent({ sectionSlug }) {
   useSetTitle([currentSectionContext.title]);
 
   //  Enabled hovering title
-  const [
-    hoverTitleScrollHandler,
-    hoverTitleVisible,
-  ] = useHoverTitle(currentSectionContext.contentRefs);
+  const hoverTitleVisible = useHoverTitle(currentSectionContext);
 
   //  Enables scrolling to content items
   const scrollToContent = useScrollToContent(currentSectionContext, contentReady, imagesLoaded);
 
   //  Enables navigating section content by hash and updating hash
   //  when navigating section content.
-  const hashScrollHandler = useHashScrolling(scrollToContent, currentSectionContext);
-
-  const handleScroll = (e) => {
-    hoverTitleScrollHandler(e);
-    hashScrollHandler(e);
-  };
+  useHashScrolling(scrollToContent, currentSectionContext);
 
   return (
     <div className={style.SectionContent}>
@@ -72,7 +64,6 @@ export default function SectionContent({ sectionSlug }) {
         <div
           className={style.contentArea}
           ref={currentSectionContext.contentRefs.contentAreaRef}
-          onScroll={handleScroll}
         >
 
           {/* Introduction content above mobile/tablet Table of Contents */}

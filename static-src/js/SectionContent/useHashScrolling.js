@@ -22,50 +22,133 @@ const parseHash = (hash) => {
 };
 
 
-//  Generates a hash value for a content item
-// const generateHash = (contentType, contentNumber) => {
-//   if (CONTENT_TYPE_HASH[contentType]) {
-//     return CONTENT_TYPE_HASH[contentType].generate(contentNumber);
-//   }
-//
-//   return null;
-// };
-
-
 /*
 * Custom hook that scrolls to indicated content when the hash changes
 * and updates the hash when user scrolls to different content.
 */
 
-export default function useHashScrolling(scrollToContent, { path: sectionPath }) {
-  const [[currentContentType, currentContentNumber], setCurrentContent] = useState([]);
-  const { pathname, hash } = useLocation();
+export default function useHashScrolling(scrollToContent, {
+  path: sectionPath,
+  contentRefs: {
+    titleRef,
+    hoverTitleRef,
+    contentAreaRef,
+    paragraphRefs,
+    figureRefs,
+    footnoteRefs,
+    blockRefs,
+  },
+}) {
+  const [previousHash, setPreviousHash] = useState(null);
+  const [nextHash, setNextHash] = useState(null);
+  const [scrolling, setScrolling] = useState(false);
+  const { pathname: currentPath, hash: currentHash } = useLocation();
+  const scrollableContentRefs = {
+    [REFERABLE_CONTENT_TYPES.paragraph]: paragraphRefs,
+    [REFERABLE_CONTENT_TYPES.figure]: figureRefs,
+    [REFERABLE_CONTENT_TYPES.footnote]: footnoteRefs,
+    [REFERABLE_CONTENT_TYPES.block]: blockRefs,
+  };
 
-  //  Scrolls to section when hash changes
-  useEffect(() => {
-    if (pathname === sectionPath) {
-      const [hashContentType, hashContentNumber] = parseHash(hash);
-      if (
-        hashContentType !== currentContentType
-        || hashContentNumber !== currentContentNumber
-      ) {
-        scrollToContent(hashContentType, hashContentNumber);
-        setCurrentContent([hashContentType, hashContentNumber]);
+
+  /*
+  * Returns whether the content area is scrolled to a given element.
+  */
+
+  const currentlyScrolledTo = useCallback((element) => {
+    let itemScrollStart;
+    let itemScrollEnd;
+    if (element === titleRef.current) {
+      itemScrollStart = 0;
+      itemScrollEnd = element.getBoundingClientRect().height;
+    } else {
+      itemScrollStart = (
+        element.getBoundingClientRect().top
+        + contentAreaRef.current.scrollTop
+        - contentAreaRef.current.getBoundingClientRect().top
+        - hoverTitleRef.current.getBoundingClientRect().height
+      );
+
+      itemScrollEnd = (
+        itemScrollStart + element.getBoundingClientRect().height
+      );
+    }
+
+    return (
+      contentAreaRef.current.scrollTop > itemScrollStart
+      && contentAreaRef.current.scrollTop < itemScrollEnd
+    );
+  }, [contentAreaRef, hoverTitleRef, titleRef]);
+
+
+  /*
+  * Queues the next hash when user scrolls to a new content item.
+  */
+
+  const handleScroll = useCallback(() => {
+    if (!scrolling) {
+      if (currentlyScrolledTo(titleRef.current)) {
+        setNextHash('');
+        return;
+      }
+
+      for (const [contentType, contentRefs] of Object.entries(scrollableContentRefs)) {
+        for (const [contentNumber, contentRef] of Object.entries(contentRefs.current)) {
+          if (currentlyScrolledTo(contentRef.current)) {
+            const hash = `#${CONTENT_TYPE_HASH[contentType].generate(contentNumber)}`;
+            if (hash !== currentHash) {
+              setNextHash(hash);
+            }
+
+            return;
+          }
+        }
       }
     }
-  }, [
-    currentContentNumber,
-    currentContentType,
-    hash,
-    pathname,
-    scrollToContent,
-    sectionPath,
-  ]);
+  }, [currentHash, currentlyScrolledTo, scrollableContentRefs, scrolling, titleRef]);
 
-  //  Updates hash on scroll
-  const handleScroll = useCallback(() => {
-    // console.log(event);
-  }, []);
 
-  return handleScroll;
+  /*
+  * Attaches scroll handler.
+  */
+
+  useEffect(() => {
+    const { current: contentArea } = contentAreaRef;
+    contentArea.addEventListener('scroll', handleScroll);
+    return () => contentArea.removeEventListener('scroll', handleScroll);
+  }, [contentAreaRef, handleScroll]);
+
+
+  /*
+  * Updates the hash to the queued value.
+  */
+
+  useEffect(() => {
+    if (nextHash !== null) {
+      setNextHash(null);
+      window.location.hash = nextHash;
+      setPreviousHash(nextHash);
+    }
+  }, [nextHash]);
+
+
+  /*
+  * Scrolls to section when hash changes of its own accord.
+  */
+
+  useEffect(() => {
+    if (
+      currentPath === sectionPath
+      && currentHash !== previousHash
+    ) {
+      const [hashContentType, hashContentNumber] = parseHash(currentHash);
+      if (hashContentType) {
+        setPreviousHash(currentHash);
+        setScrolling(true);
+        scrollToContent(hashContentType, hashContentNumber).then(() => {
+          setScrolling(false);
+        }).catch(() => null);
+      }
+    }
+  }, [currentHash, currentPath, previousHash, scrollToContent, sectionPath]);
 }
