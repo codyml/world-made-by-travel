@@ -1,11 +1,12 @@
 @import './z-index.css';
+@import './font.css';
 
 .Modal {
   composes: fading-overlay from './fading-overlay.module.css';
   composes: container-page from './container.module.css';
   z-index: var(--z-index-modal);
+  display: flex;
   flex-direction: column;
-  background-color: #ffd;
 }
 
 .visible {
@@ -13,9 +14,53 @@
 }
 
 .background {
-  flex-grow: 1;
+  composes: pageContainer from './container.module.css';
+  background-color: rgba(0, 0, 0, 0.65);
+  min-height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.closeButton {
+  composes: panel from './ui.module.css';
+  width: 3rem;
+  height: 3rem;
+  background-image: url(../images/modal-close.svg);
+  background-repeat: no-repeat;
+  background-size: auto 1.2rem;
+  background-position: center;
+  cursor: pointer;
 }
 
 .foreground {
-  display: block;
+  composes: pageContainer from './container.module.css';
+  background-color: #222;
+  box-shadow: -1px 2px 15px 0 rgba(0, 0, 0, 0.5);
+  flex-grow: 1;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  color: white;
+  min-height: 0;
+  overflow-y: scroll;
+}
+
+.authorName {
+  font-family: var(--font-display);
+  font-size: 1.85em;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.authorBiography {
+  font-family: var(--font-serif);
+  font-size: 1.1em;
+
+  & p:first-child {
+    margin-top: 0;
+  }
+
+  & p:last-child {
+    margin-bottom: 0;
+  }
 }

@@ -18,8 +18,10 @@ export default function LinkedAuthor({
   const handleAuthorClick = (event, authorSlug) => {
     dispatch({
       type: SET_MODAL_CONTENT,
-      modalType: AUTHOR_MODAL,
-      authorSlug,
+      modalContent: {
+        modalType: AUTHOR_MODAL,
+        authorSlug,
+      },
     });
 
     if (onLinkClick) {

@@ -47,7 +47,7 @@ export default function Modal() {
     <CurrentSectionContext.Provider value={currentSectionContext}>
       <div className={cx(style.Modal, { visible })}>
         <div className={style.background}>
-          <button type="button" onClick={closeModal}>Close Modal</button>
+          <div className={style.closeButton} onClick={closeModal} />
           {modalBackgroundContent}
         </div>
         <div className={style.foreground}>
