@@ -13,6 +13,7 @@ export default function LinkedAuthor({
   children,
 }) {
   const authorsBySlug = useSelector((state) => state.authorsBySlug);
+  const sectionSlug = useSelector((state) => state.currentSectionSlug);
   const dispatch = useDispatch();
 
   const handleAuthorClick = (event, authorSlug) => {
@@ -20,6 +21,7 @@ export default function LinkedAuthor({
       type: SET_MODAL_CONTENT,
       modalContent: {
         modalType: AUTHOR_MODAL,
+        sectionSlug,
         authorSlug,
       },
     });

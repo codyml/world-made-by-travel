@@ -6,7 +6,7 @@ import style from 'styles/HoverTitleBlock.module.css';
 import Block from './Block';
 import { MarginLinks } from './MarginLinks';
 import { EXPANDED_TOC, REFERABLE_CONTENT_TYPES } from '../constants';
-import CurrentSectionContext from '../CurrentSectionContext';
+import SectionContext from '../SectionContext';
 
 const cx = classNamesBind.bind(style);
 
@@ -17,7 +17,7 @@ export default function HoverTitleBlock({ visible }) {
     slug,
     download,
     contentRefs: { hoverTitleRef },
-  } = useContext(CurrentSectionContext);
+  } = useContext(SectionContext);
 
   return (
     <div ref={hoverTitleRef} className={cx(style.HoverTitleBlock, { visible })}>

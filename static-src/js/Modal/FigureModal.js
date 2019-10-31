@@ -3,25 +3,29 @@ import { useSelector } from 'react-redux';
 
 import style from 'styles/Modal.module.css';
 import { Content } from '../markdown';
-import CurrentSectionContext from '../CurrentSectionContext';
+import SectionContext from '../SectionContext';
 
 
 export function FigureModalBackground() {
   const { figureContentIdentifier } = useSelector((state) => state.modalContent);
-  const { figureContentByIdentifier } = useContext(CurrentSectionContext);
+  const { figureContentByIdentifier } = useContext(SectionContext);
   const figureContentNodes = figureContentByIdentifier[figureContentIdentifier].contentNodes;
 
   return (
-    <div className={style.figureContent}>
+    <figure className={style.figureContent}>
       <Content nodes={figureContentNodes} />
-    </div>
+    </figure>
   );
 }
 
 export function FigureModalForeground() {
   const { captionNumber } = useSelector((state) => state.modalContent);
-  const { mainContent: { figureCaptionsByNumber } } = useContext(CurrentSectionContext);
+  const { mainContent: { figureCaptionsByNumber } } = useContext(SectionContext);
   const captionContentNodes = figureCaptionsByNumber[captionNumber].children;
 
-  return <Content nodes={captionContentNodes} />;
+  return (
+    <figcaption className={style.figureCaption}>
+      <Content nodes={captionContentNodes} />
+    </figcaption>
+  );
 }

@@ -4,13 +4,13 @@ import Block from './Block';
 import { useMarginLinks } from './MarginLinks';
 import useContentRefs from './useContentRefs';
 import { Content, Footnote } from '../markdown';
-import CurrentSectionContext from '../CurrentSectionContext';
+import SectionContext from '../SectionContext';
 
 export default function FootnotesBlock() {
   const {
     mainContent: { footnotesByNumber },
     contentRefs: { footnoteRefs },
-  } = useContext(CurrentSectionContext);
+  } = useContext(SectionContext);
 
   const marginLinksExtension = useMarginLinks();
   const footnoteRefsExtension = useContentRefs(Footnote, footnoteRefs);

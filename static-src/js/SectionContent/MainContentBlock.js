@@ -4,7 +4,7 @@ import Block from './Block';
 import { useMarginLinks } from './MarginLinks';
 import useContentRefs from './useContentRefs';
 import { Content, PARAGRAPH_TAG, Figure, FootnoteLink } from '../markdown';
-import CurrentSectionContext from '../CurrentSectionContext';
+import SectionContext from '../SectionContext';
 
 
 const IMAGE_TAG = 'img';
@@ -17,7 +17,7 @@ export default function MainContentBlock() {
   const {
     mainContent: { contentNodes },
     contentRefs: { paragraphRefs, figureRefs, footnoteLinkRefs, imageRefs },
-  } = useContext(CurrentSectionContext);
+  } = useContext(SectionContext);
 
   const marginLinksExtension = useMarginLinks();
   const paragraphRefsExtension = useContentRefs(PARAGRAPH_TAG, paragraphRefs);

@@ -102,7 +102,8 @@ export default function useSectionContent(sectionSlug) {
     }
   }, [content, dispatch, isToc, sectionSlug]);
 
-  const contentReady = content && content !== REQUESTED && !transitioningTo;
+  const contentReceived = content && content !== REQUESTED;
+  const contentReady = contentReceived && !transitioningTo;
 
   useEffect(() => {
     if (contentReady && !imagesLoaded) {
@@ -134,7 +135,7 @@ export default function useSectionContent(sectionSlug) {
   const currentSectionContext = useMemo(() => ({
     isToc,
     ...meta,
-    ...(contentReady ? content : {}),
+    ...(contentReceived ? content : {}),
     contentRefs: {
       contentAreaRef,
       titleRef,
@@ -146,7 +147,7 @@ export default function useSectionContent(sectionSlug) {
       footnoteRefs,
       blockRefs,
     },
-  }), [content, contentReady, isToc, meta]);
+  }), [content, contentReceived, isToc, meta]);
 
   return [contentReady, imagesLoaded, currentSectionContext];
 }

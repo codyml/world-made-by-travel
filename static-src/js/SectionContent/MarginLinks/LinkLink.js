@@ -5,7 +5,7 @@ import classNamesBind from 'classnames/bind';
 
 import style from 'styles/MarginLinks.module.css';
 import { REFERABLE_CONTENT_TYPES, CONTENT_TYPE_HASH } from '../../constants';
-import CurrentSectionContext from '../../CurrentSectionContext';
+import SectionContext from '../../SectionContext';
 
 
 const COPIED_TIMEOUT = 5000;
@@ -15,7 +15,7 @@ export default function LinkLink({ contentType, contentNumber }) {
   const textAreaRef = useRef();
   const [copied, setCopied] = useState(false);
   const { origin } = window.location;
-  const { path: sectionPath } = useContext(CurrentSectionContext);
+  const { path: sectionPath } = useContext(SectionContext);
   const hash = CONTENT_TYPE_HASH[contentType]
     ? `#${CONTENT_TYPE_HASH[contentType].generate(contentNumber)}`
     : '';

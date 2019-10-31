@@ -18,7 +18,7 @@ import TableOfContents from '../TableOfContents';
 import { MarkdownContent } from '../markdown';
 import useSetTitle from '../useSetTitle';
 import { EXPANDED_TOC } from '../constants';
-import CurrentSectionContext from '../CurrentSectionContext';
+import SectionContext from '../SectionContext';
 
 
 /*
@@ -36,26 +36,26 @@ export default function SectionContent({ sectionSlug }) {
   const [
     contentReady,
     imagesLoaded,
-    currentSectionContext,
+    sectionContext,
   ] = useSectionContent(sectionSlug);
 
 
   //  Sets title
-  useSetTitle([currentSectionContext.title]);
+  useSetTitle([sectionContext.title]);
 
   //  Enabled hovering title
-  const hoverTitleVisible = useHoverTitle(currentSectionContext);
+  const hoverTitleVisible = useHoverTitle(sectionContext);
 
   //  Enables scrolling to content items
-  const scrollToContent = useScrollToContent(currentSectionContext, contentReady, imagesLoaded);
+  const scrollToContent = useScrollToContent(sectionContext, contentReady, imagesLoaded);
 
   //  Enables navigating section content by hash and updating hash
   //  when navigating section content.
-  useHashScrolling(scrollToContent, currentSectionContext);
+  useHashScrolling(scrollToContent, sectionContext);
 
   return (
     <div className={style.SectionContent}>
-      <CurrentSectionContext.Provider value={currentSectionContext}>
+      <SectionContext.Provider value={sectionContext}>
 
         {/* Hovering section title block */}
         <HoverTitleBlock visible={hoverTitleVisible} {...sectionMeta} />
@@ -63,11 +63,11 @@ export default function SectionContent({ sectionSlug }) {
         {/* Start of "paper" content area */}
         <div
           className={style.contentArea}
-          ref={currentSectionContext.contentRefs.contentAreaRef}
+          ref={sectionContext.contentRefs.contentAreaRef}
         >
 
           {/* Introduction content above mobile/tablet Table of Contents */}
-          {browserSize !== 'desktop' && currentSectionContext.isToc ? (
+          {browserSize !== 'desktop' && sectionContext.isToc ? (
             <Block>
               <MarkdownContent className={style.instructions}>
                 {instructionsMarkdown}
@@ -79,14 +79,14 @@ export default function SectionContent({ sectionSlug }) {
           <TitleBlock />
 
           {/* Expanded Table of Contents block */}
-          {currentSectionContext.isToc ? (
+          {sectionContext.isToc ? (
             <Block isToc>
               <TableOfContents className={style.tocBlock} />
             </Block>
           ) : null}
 
           {/* Blocks for non-TOC sections with content received */}
-          {!currentSectionContext.isToc ? (
+          {!sectionContext.isToc ? (
             <>
 
               {contentReady ? (
@@ -96,7 +96,7 @@ export default function SectionContent({ sectionSlug }) {
                   <MainContentBlock />
 
                   {/* Pre-Footnotes blocks */}
-                  {currentSectionContext.blocks
+                  {sectionContext.blocks
                     .filter((block) => !block.belowFootnotes)
                     .map((block) => (
                       <CustomBlock key={block.number} blockNumber={block.number} />
@@ -106,7 +106,7 @@ export default function SectionContent({ sectionSlug }) {
                   <FootnotesBlock />
 
                   {/* Post-Footnotes blocks */}
-                  {currentSectionContext.blocks
+                  {sectionContext.blocks
                     .filter((block) => block.belowFootnotes)
                     .map((block) => (
                       <CustomBlock key={block.number} blockNumber={block.number} />
@@ -122,7 +122,7 @@ export default function SectionContent({ sectionSlug }) {
           ) : null}
 
         </div>
-      </CurrentSectionContext.Provider>
+      </SectionContext.Provider>
     </div>
   );
 }

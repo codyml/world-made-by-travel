@@ -111,3 +111,7 @@
     max-width: 100%;
   }
 }
+
+.figureCaption {
+  composes: content from './typography.module.css';
+}

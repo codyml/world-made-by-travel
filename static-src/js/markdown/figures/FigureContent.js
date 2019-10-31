@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import classNamesBind from 'classnames/bind';
 
 import style from 'styles/figures.module.css';
+import SectionContext from '../../SectionContext';
 import { SET_MODAL_CONTENT, FIGURE_MODAL } from '../../constants';
 
 const cx = classNamesBind.bind(style);
@@ -19,6 +20,7 @@ export default function FigureContent({
   captionNumberRef,
   children,
 }) {
+  const { slug: sectionSlug } = useContext(SectionContext);
   const dispatch = useDispatch();
   const openModal = () => {
     if (children) {
@@ -26,6 +28,7 @@ export default function FigureContent({
         type: SET_MODAL_CONTENT,
         modalContent: {
           modalType: FIGURE_MODAL,
+          sectionSlug,
           figureNumber,
           figureContentIdentifier,
           captionNumber: captionNumberRef.current,

@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import classNamesBind from 'classnames/bind';
 
 import style from 'styles/Modal.module.css';
-import CurrentSectionContext from '../CurrentSectionContext';
+import SectionContext from '../SectionContext';
 import { useSectionContent } from '../SectionContent';
 import AuthorModalForeground from './AuthorModal';
 import { FigureModalBackground, FigureModalForeground } from './FigureModal';
@@ -14,9 +14,9 @@ const cx = classNamesBind.bind(style);
 
 export default function Modal() {
   const visible = useSelector((state) => state.modalOpen);
-  const { modalType } = useSelector((state) => state.modalContent);
+  const { modalType, sectionSlug } = useSelector((state) => state.modalContent);
   const currentSectionSlug = useSelector((state) => state.currentSectionSlug);
-  const [, , currentSectionContext] = useSectionContent(currentSectionSlug);
+  const [, , currentSectionContext] = useSectionContent(sectionSlug);
   const dispatch = useDispatch();
 
   let modalBackgroundContent = null;
@@ -41,15 +41,25 @@ export default function Modal() {
     default:
   }
 
-  const closeModal = () => dispatch({ type: SET_MODAL_OPEN, modalOpen: false });
+  const closeModal = useCallback(
+    () => dispatch({ type: SET_MODAL_OPEN, modalOpen: false }),
+    [dispatch],
+  );
+
   const handleBackgroundClick = (event) => {
     if (event.target === event.currentTarget) {
       closeModal();
     }
   };
 
+  useEffect(() => {
+    if (sectionSlug !== currentSectionSlug) {
+      closeModal();
+    }
+  }, [closeModal, currentSectionSlug, sectionSlug]);
+
   return (
-    <CurrentSectionContext.Provider value={currentSectionContext}>
+    <SectionContext.Provider value={currentSectionContext}>
       <div className={cx(style.Modal, { visible })}>
         <div className={style.background} onClick={handleBackgroundClick}>
           <div className={style.closeButton} onClick={closeModal} />
@@ -59,6 +69,6 @@ export default function Modal() {
           {modalForegroundContent}
         </div>
       </div>
-    </CurrentSectionContext.Provider>
+    </SectionContext.Provider>
   );
 }

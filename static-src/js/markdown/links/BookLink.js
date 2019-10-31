@@ -6,7 +6,7 @@ import classNamesBind from 'classnames/bind';
 
 import style from 'styles/links.module.css';
 import { EXPANDED_TOC, COVER, CONTENT_TYPE_HASH } from '../../constants';
-import CurrentSectionContext from '../../CurrentSectionContext';
+import SectionContext from '../../SectionContext';
 
 const cx = classNamesBind.bind(style);
 
@@ -40,7 +40,7 @@ export default function BookLink({ href, children }) {
     [COVER.slug]: COVER,
   }));
 
-  const { slug: currentSectionSlug } = useContext(CurrentSectionContext);
+  const { slug: currentSectionSlug } = useContext(SectionContext);
   const sectionSlugsByPath = useMemo(() => Object.assign(
     {},
     ...Object.values(sectionMetaBySlug).map(({ slug, path }) => ({ [path]: slug })),

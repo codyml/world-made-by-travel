@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import Block from './Block';
 import { MarginLinks } from './MarginLinks';
 import { Content } from '../markdown';
-import CurrentSectionContext from '../CurrentSectionContext';
+import SectionContext from '../SectionContext';
 import { REFERABLE_CONTENT_TYPES } from '../constants';
 
 export default function CustomBlock({ blockNumber }) {
-  const { blocks, contentRefs: { blockRefs } } = useContext(CurrentSectionContext);
+  const { blocks, contentRefs: { blockRefs } } = useContext(SectionContext);
   const {
     title,
     author,

@@ -4,7 +4,7 @@ import FigureContent from './FigureContent';
 import Figure from './Figure';
 import { FIGURE_TAG, CAPTION_TAG } from './FiguresMarkdownItPlugin';
 import { FIGURE_CONTENT_TAG } from './FigureContentMarkdownItPlugin';
-import CurrentSectionContext from '../../CurrentSectionContext';
+import SectionContext from '../../SectionContext';
 
 
 /*
@@ -14,7 +14,7 @@ import CurrentSectionContext from '../../CurrentSectionContext';
 export default function useFigures() {
   const figureNumberRef = useRef();
   const captionNumberRefRef = useRef();
-  const currentSectionContext = useContext(CurrentSectionContext);
+  const currentSectionContext = useContext(SectionContext);
 
   return useCallback(({ component, props, refNumber }) => {
     if (!currentSectionContext) {

@@ -2,7 +2,7 @@ import { useMemo, useCallback, useContext } from 'react';
 
 import FootnoteLink from './FootnoteLink';
 import Footnote from './Footnote';
-import CurrentSectionContext from '../../CurrentSectionContext';
+import SectionContext from '../../SectionContext';
 
 
 export const FOOTNOTE_REF_TAG = 'footnote_ref';
@@ -11,7 +11,7 @@ export const FOOTNOTE_TAG = 'footnote_open';
 const FOOTNOTE_ANCHOR_TAG = 'footnote_anchor';
 
 export default function useFootnotes() {
-  const currentSectionContext = useContext(CurrentSectionContext);
+  const currentSectionContext = useContext(SectionContext);
   const footnoteLinksByLabel = useMemo(() => {
     if (currentSectionContext && currentSectionContext.mainContent) {
       const { mainContent: { footnoteLinksByNumber } } = currentSectionContext;

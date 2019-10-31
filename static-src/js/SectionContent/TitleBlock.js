@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import { EXPANDED_TOC, REFERABLE_CONTENT_TYPES } from '../constants';
 import Block from './Block';
 import { MarginLinks } from './MarginLinks';
-import CurrentSectionContext from '../CurrentSectionContext';
+import SectionContext from '../SectionContext';
 
 
 export default function TitleBlock() {
@@ -13,7 +13,7 @@ export default function TitleBlock() {
     slug,
     download,
     contentRefs: { titleRef },
-  } = useContext(CurrentSectionContext);
+  } = useContext(SectionContext);
 
   return (
     <MarginLinks
