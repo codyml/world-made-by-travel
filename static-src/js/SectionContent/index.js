@@ -34,9 +34,11 @@ export default function SectionContent({ sectionSlug }) {
 
   //  Loads section content
   const [
-    contentLoaded,
+    contentReady,
+    imagesLoaded,
     currentSectionContext,
   ] = useSectionContent(sectionSlug);
+
 
   //  Sets title
   useSetTitle([currentSectionContext.title]);
@@ -48,12 +50,11 @@ export default function SectionContent({ sectionSlug }) {
   ] = useHoverTitle(currentSectionContext.contentRefs);
 
   //  Enables scrolling to content items
-  const scrollToContent = useScrollToContent(currentSectionContext.contentRefs);
-  window.scrollToContent = scrollToContent;
+  const scrollToContent = useScrollToContent(currentSectionContext, contentReady, imagesLoaded);
 
   //  Enables navigating section content by hash and updating hash
   //  when navigating section content.
-  const hashScrollHandler = useHashScrolling(scrollToContent, currentSectionContext, contentLoaded);
+  const hashScrollHandler = useHashScrolling(scrollToContent, currentSectionContext);
 
   const handleScroll = (e) => {
     hoverTitleScrollHandler(e);
@@ -97,7 +98,7 @@ export default function SectionContent({ sectionSlug }) {
           {!currentSectionContext.isToc ? (
             <>
 
-              {contentLoaded ? (
+              {contentReady ? (
                 <>
 
                   {/* Main content block */}
@@ -124,7 +125,7 @@ export default function SectionContent({ sectionSlug }) {
               ) : null}
 
               {/* Loading message */}
-              <LoadingMessage visible={!contentLoaded} />
+              <LoadingMessage visible={!contentReady} />
 
             </>
           ) : null}

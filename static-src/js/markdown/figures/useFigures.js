@@ -33,15 +33,22 @@ export default function useFigures() {
       case FIGURE_CONTENT_TAG: {
         const { figureContentByIdentifier } = currentSectionContext;
         const figureContent = figureContentByIdentifier[props.reference];
+        if (figureContent) {
+          return {
+            component: FigureContent,
+            props: {
+              figureNumber: figureNumberRef.current,
+              figureContentIdentifier: props.reference,
+              captionNumberRef: captionNumberRefRef.current,
+              downloadAllowed: !!figureContent.download,
+            },
+            children: figureContent.contentNodes,
+          };
+        }
+
         return {
-          component: FigureContent,
-          props: {
-            figureNumber: figureNumberRef.current,
-            figureContentIdentifier: props.reference,
-            captionNumberRef: captionNumberRefRef.current,
-            downloadAllowed: figureContent ? !!figureContent.download : false,
-          },
-          children: figureContent ? figureContent.contentNodes : null,
+          component: 'span',
+          children: [props.text],
         };
       }
 

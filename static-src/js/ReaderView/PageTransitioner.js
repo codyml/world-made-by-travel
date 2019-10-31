@@ -23,17 +23,14 @@ export default function PageTransitioner() {
     ...state.sectionMetaBySlug,
   }));
 
-  const {
-    slugsByPosition,
-    currentPosition,
-    transitionPrepared,
-    transitionCssEnabled,
-    transitionStarted,
-  } = useSelector((state) => state.readerViewTransition);
-
+  const slugsByTransitionPosition = useSelector((state) => state.slugsByTransitionPosition);
+  const currentTransitionPosition = useSelector((state) => state.currentTransitionPosition);
+  const transitionPrepared = useSelector((state) => state.transitionPrepared);
+  const transitionCssEnabled = useSelector((state) => state.transitionCssEnabled);
+  const transitionStarted = useSelector((state) => state.transitionStarted);
   const dispatch = useDispatch();
 
-  const currentSlug = slugsByPosition[POSITIONS.center];
+  const currentSlug = slugsByTransitionPosition[POSITIONS.center];
   const nextSlugStartPosition = React.useMemo(() => {
     const currentIndex = currentSlug ? sectionMetaBySlug[currentSlug].index : -1;
     const nextIndex = sectionMetaBySlug[nextSlug].index;
@@ -91,21 +88,18 @@ export default function PageTransitioner() {
     <div className={style.PageTransitioner}>
       <div
         className={cx(style.canvas, { transitionCssEnabled })}
-        data-current-position={currentPosition}
+        data-current-position={currentTransitionPosition}
         ref={canvasRef}
       >
         {[POSITIONS.left, POSITIONS.center, POSITIONS.right].map(
           (position) => (
             <div
-              className={cx(style.content, { active: position === currentPosition })}
-              key={position}
+              className={cx(style.content, { active: position === currentTransitionPosition })}
+              key={slugsByTransitionPosition[position] || position}
               data-position={position}
             >
-              {slugsByPosition[position] ? (
-                <SectionContent
-                  sectionSlug={slugsByPosition[position]}
-                  key={slugsByPosition[position]}
-                />
+              {slugsByTransitionPosition[position] ? (
+                <SectionContent sectionSlug={slugsByTransitionPosition[position]} />
               ) : null}
             </div>
           ),

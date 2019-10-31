@@ -1,12 +1,7 @@
-import { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import {
-  REFERABLE_CONTENT_TYPES,
-  CONTENT_TYPE_HASH,
-  SET_SECTION_SCROLLED_TO,
-} from '../constants';
+import { REFERABLE_CONTENT_TYPES, CONTENT_TYPE_HASH } from '../constants';
 
 
 //  Matches a URL hash value against the referable content types.
@@ -27,24 +22,26 @@ const parseHash = (hash) => {
 };
 
 
+//  Generates a hash value for a content item
+// const generateHash = (contentType, contentNumber) => {
+//   if (CONTENT_TYPE_HASH[contentType]) {
+//     return CONTENT_TYPE_HASH[contentType].generate(contentNumber);
+//   }
+//
+//   return null;
+// };
+
+
 /*
 * Custom hook that scrolls to indicated content when the hash changes
 * and updates the hash when user scrolls to different content.
 */
 
-export default function useHashScrolling(
-  scrollToContent,
-  { slug: sectionSlug, path: sectionPath },
-) {
-  const [
-    currentContentType,
-    currentContentNumber,
-  ] = useSelector((state) => state.scrolledToBySection[sectionSlug] || []);
-
-  const dispatch = useDispatch();
+export default function useHashScrolling(scrollToContent, { path: sectionPath }) {
+  const [[currentContentType, currentContentNumber], setCurrentContent] = useState([]);
   const { pathname, hash } = useLocation();
 
-  //  Updates redux store based on hash changes
+  //  Scrolls to section when hash changes
   useEffect(() => {
     if (pathname === sectionPath) {
       const [hashContentType, hashContentNumber] = parseHash(hash);
@@ -53,23 +50,22 @@ export default function useHashScrolling(
         || hashContentNumber !== currentContentNumber
       ) {
         scrollToContent(hashContentType, hashContentNumber);
-        dispatch({
-          type: SET_SECTION_SCROLLED_TO,
-          sectionSlug,
-          scrolledTo: [hashContentType, hashContentNumber],
-        });
+        setCurrentContent([hashContentType, hashContentNumber]);
       }
     }
   }, [
     currentContentNumber,
     currentContentType,
-    dispatch,
     hash,
     pathname,
     scrollToContent,
     sectionPath,
-    sectionSlug,
   ]);
 
-  return () => null;
+  //  Updates hash on scroll
+  const handleScroll = useCallback(() => {
+    // console.log(event);
+  }, []);
+
+  return handleScroll;
 }

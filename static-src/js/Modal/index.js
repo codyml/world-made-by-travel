@@ -16,7 +16,7 @@ export default function Modal() {
   const visible = useSelector((state) => state.modalOpen);
   const { modalType } = useSelector((state) => state.modalContent);
   const currentSectionSlug = useSelector((state) => state.currentSectionSlug);
-  const [, currentSectionContext] = useSectionContent(currentSectionSlug);
+  const [, , currentSectionContext] = useSectionContent(currentSectionSlug);
   const dispatch = useDispatch();
 
   let modalBackgroundContent = null;

@@ -146,6 +146,10 @@
       background-color: var(--color-table-alt-row-background);
     }
   }
+
+  & li > p {
+    padding: 0;
+  }
 }
 
 .uiContent {

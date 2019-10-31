@@ -206,78 +206,75 @@ const modalContent = (state = {}, action) => {
   }
 };
 
-//  Transition state reducers
-const readerViewTransition = combineReducers({
-  slugsByPosition: (state = { [POSITIONS.center]: EXPANDED_TOC.slug }, action) => {
-    switch (action.type) {
-      case PREPARE_TRANSITION:
-        return {
-          ...state,
-          [action.nextSlugStartPosition]: action.nextSlug,
-        };
+const slugsByTransitionPosition = (state = { [POSITIONS.center]: EXPANDED_TOC.slug }, action) => {
+  switch (action.type) {
+    case PREPARE_TRANSITION:
+      return {
+        ...state,
+        [action.nextSlugStartPosition]: action.nextSlug,
+      };
 
-      case FINISH_TRANSITION:
-        return {
-          [POSITIONS.center]: action.nextSlug,
-        };
+    case FINISH_TRANSITION:
+      return {
+        [POSITIONS.center]: action.nextSlug,
+      };
 
-      default:
-        return state;
-    }
-  },
+    default:
+      return state;
+  }
+};
 
-  currentPosition: (state = POSITIONS.center, action) => {
-    switch (action.type) {
-      case START_TRANSITION:
-        return action.nextSlugStartPosition;
+const currentTransitionPosition = (state = POSITIONS.center, action) => {
+  switch (action.type) {
+    case START_TRANSITION:
+      return action.nextSlugStartPosition;
 
-      case FINISH_TRANSITION:
-        return POSITIONS.center;
+    case FINISH_TRANSITION:
+      return POSITIONS.center;
 
-      default:
-        return state;
-    }
-  },
+    default:
+      return state;
+  }
+};
 
-  transitionPrepared: (state = false, action) => {
-    switch (action.type) {
-      case PREPARE_TRANSITION:
-        return true;
+const transitionPrepared = (state = false, action) => {
+  switch (action.type) {
+    case PREPARE_TRANSITION:
+      return true;
 
-      case FINISH_TRANSITION:
-        return false;
+    case FINISH_TRANSITION:
+      return false;
 
-      default:
-        return state;
-    }
-  },
+    default:
+      return state;
+  }
+};
 
-  transitionCssEnabled: (state = false, action) => {
-    switch (action.type) {
-      case ENABLE_TRANSITION_CSS:
-        return true;
+const transitionCssEnabled = (state = false, action) => {
+  switch (action.type) {
+    case ENABLE_TRANSITION_CSS:
+      return true;
 
-      case FINISH_TRANSITION:
-        return false;
+    case FINISH_TRANSITION:
+      return false;
 
-      default:
-        return state;
-    }
-  },
+    default:
+      return state;
+  }
+};
 
-  transitionStarted: (state = false, action) => {
-    switch (action.type) {
-      case START_TRANSITION:
-        return true;
+const transitionStarted = (state = false, action) => {
+  switch (action.type) {
+    case START_TRANSITION:
+      return true;
 
-      case FINISH_TRANSITION:
-        return false;
+    case FINISH_TRANSITION:
+      return false;
 
-      default:
-        return state;
-    }
-  },
-});
+    default:
+      return state;
+  }
+};
 
 const browserSize = (state = 'mobile', action) => {
   switch (action.type) {
@@ -316,7 +313,11 @@ export default combineReducers({
   explorerUrl,
   modalOpen,
   modalContent,
-  readerViewTransition,
+  slugsByTransitionPosition,
+  currentTransitionPosition,
+  transitionPrepared,
+  transitionCssEnabled,
+  transitionStarted,
   browserSize,
   mobileMenuOpen,
 });

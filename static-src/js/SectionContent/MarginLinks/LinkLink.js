@@ -1,4 +1,11 @@
-import React, { useState, useContext, useRef } from 'react';
+import React, {
+  useState,
+  useContext,
+  useRef,
+  useCallback,
+  useEffect,
+} from 'react';
+
 import PropTypes from 'prop-types';
 import classNamesBind from 'classnames/bind';
 
@@ -25,12 +32,20 @@ export default function LinkLink({ contentType, contentNumber }) {
     hash,
   ].join('');
 
-  const copyUrl = () => {
+  const copyUrl = useCallback(() => {
     textAreaRef.current.select();
     document.execCommand('copy');
     setCopied(true);
-    setTimeout(() => setCopied(false), COPIED_TIMEOUT);
-  };
+  }, []);
+
+  const copiedTimeoutId = useRef();
+  useEffect(() => {
+    if (copied) {
+      copiedTimeoutId.current = setTimeout(() => setCopied(false), COPIED_TIMEOUT);
+    }
+
+    return () => clearTimeout(copiedTimeoutId.current);
+  }, [copied]);
 
   return (
     <div

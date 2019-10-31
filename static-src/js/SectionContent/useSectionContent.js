@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { processMainContentMarkdown, processMarkdown } from '../markdown';
@@ -7,7 +7,6 @@ import {
   SECTION_CONTENT_REQUESTED,
   SECTION_CONTENT_RECEIVED,
   REQUESTED,
-  REFERABLE_CONTENT_TYPES,
 } from '../constants';
 
 
@@ -23,12 +22,17 @@ const parseSectionContent = ({
       markdown: figureMarkdown,
       image,
       download: figureDownload,
-    }) => ({
+    }, index) => ({
       [identifier]: {
         identifier,
         contentNodes: figureMarkdown
           ? processMarkdown(figureMarkdown)
-          : [{ component: 'img', key: `figureContent:${identifier}`, props: { src: image } }],
+          : [{
+            component: 'img',
+            key: `figureContent:${index}`,
+            props: { src: image },
+            refNumber: index,
+          }],
         download: figureDownload,
       },
     }),
@@ -59,16 +63,22 @@ export default function useSectionContent(sectionSlug) {
   const contentAreaRef = useRef();
   const titleRef = useRef();
   const hoverTitleRef = useRef();
+  const imageRefs = useRef({});
   const paragraphRefs = useRef({});
   const figureRefs = useRef({});
   const footnoteLinkRefs = useRef({});
   const footnoteRefs = useRef({});
   const blockRefs = useRef();
+  const [imagesLoaded, setImagesLoaded] = useState(false);
   const meta = useSelector((state) => (
     state.sectionMetaBySlug[sectionSlug] || EXPANDED_TOC
   ));
 
   const content = useSelector((state) => state.sectionContentBySlug[sectionSlug]);
+  const transitioningTo = useSelector((state) => (
+    state.currentSectionSlug === sectionSlug && state.transitionPrepared
+  ));
+
   const dispatch = useDispatch();
   const isToc = meta.slug === EXPANDED_TOC.slug;
 
@@ -92,9 +102,29 @@ export default function useSectionContent(sectionSlug) {
     }
   }, [content, dispatch, isToc, sectionSlug]);
 
-  const contentLoaded = content && content !== REQUESTED;
+  const contentReady = content && content !== REQUESTED && !transitioningTo;
 
-  if (!blockRefs.current && contentLoaded) {
+  useEffect(() => {
+    if (contentReady && !imagesLoaded) {
+      Promise.all(
+        Object.values(imageRefs.current).map(
+          ({ current: element }) => new Promise((resolve) => {
+            if (element.complete) {
+              resolve();
+            } else {
+              element.addEventListener('load', () => {
+                resolve();
+              });
+            }
+          }),
+        ),
+      ).then(() => {
+        setImagesLoaded(true);
+      });
+    }
+  }, [contentReady, imagesLoaded]);
+
+  if (!blockRefs.current && contentReady) {
     blockRefs.current = Object.assign(
       {},
       ...content.blocks.map((block) => ({ [block.number]: React.createRef() })),
@@ -104,18 +134,19 @@ export default function useSectionContent(sectionSlug) {
   const currentSectionContext = useMemo(() => ({
     isToc,
     ...meta,
-    ...(contentLoaded ? content : {}),
+    ...(contentReady ? content : {}),
     contentRefs: {
       contentAreaRef,
       titleRef,
       hoverTitleRef,
-      [REFERABLE_CONTENT_TYPES.paragraph]: paragraphRefs,
-      [REFERABLE_CONTENT_TYPES.figure]: figureRefs,
-      [REFERABLE_CONTENT_TYPES.footnoteLink]: footnoteLinkRefs,
-      [REFERABLE_CONTENT_TYPES.footnote]: footnoteRefs,
-      [REFERABLE_CONTENT_TYPES.block]: blockRefs,
+      imageRefs,
+      paragraphRefs,
+      figureRefs,
+      footnoteLinkRefs,
+      footnoteRefs,
+      blockRefs,
     },
-  }), [content, contentLoaded, isToc, meta]);
+  }), [content, contentReady, isToc, meta]);
 
-  return [contentLoaded, currentSectionContext];
+  return [contentReady, imagesLoaded, currentSectionContext];
 }

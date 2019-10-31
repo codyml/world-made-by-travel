@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import smoothscroll from 'smoothscroll-polyfill';
 
 import { REFERABLE_CONTENT_TYPES } from '../constants';
@@ -13,16 +13,29 @@ smoothscroll.polyfill();
 * item.
 */
 
-export default function useScrollToContent({ contentAreaRef, hoverTitleRef, ...contentRefs }) {
+export default function useScrollToContent({ contentRefs }, contentReady, imagesLoaded) {
+  const [nextScrolledContent, setNextScrolledContent] = useState(null);
+
   //  Returns the offset of the top of a content element from the
   //  top of the content area.
+  const { contentAreaRef, hoverTitleRef } = contentRefs;
+  const scrollableContentRefs = {
+    [REFERABLE_CONTENT_TYPES.paragraph]: contentRefs.paragraphRefs,
+    [REFERABLE_CONTENT_TYPES.figure]: contentRefs.figureRefs,
+    [REFERABLE_CONTENT_TYPES.footnoteLink]: contentRefs.footnoteLinkRefs,
+    [REFERABLE_CONTENT_TYPES.footnote]: contentRefs.footnoteRefs,
+    [REFERABLE_CONTENT_TYPES.block]: contentRefs.blockRefs,
+  };
+
+  //  Returns the offset from the top of the scrollable element for
+  //  a content item.
   const getScrollOffset = useCallback((contentType, contentNumber) => {
     if (contentType === REFERABLE_CONTENT_TYPES.section) {
       return 0;
     }
 
-    if (contentRefs[contentType]) {
-      const contentRef = contentRefs[contentType].current[contentNumber];
+    if (scrollableContentRefs[contentType]) {
+      const contentRef = scrollableContentRefs[contentType].current[contentNumber];
       if (contentRef && contentRef.current) {
         return (
           contentRef.current.getBoundingClientRect().top
@@ -34,10 +47,10 @@ export default function useScrollToContent({ contentAreaRef, hoverTitleRef, ...c
     }
 
     return null;
-  }, [contentAreaRef, contentRefs, hoverTitleRef]);
+  }, [contentAreaRef, hoverTitleRef, scrollableContentRefs]);
 
   //  Scrolls the content area to an element.
-  return useCallback((contentType, contentNumber) => {
+  const scrollToContent = useCallback((contentType, contentNumber) => {
     const scrollOffset = getScrollOffset(contentType, contentNumber);
     if (scrollOffset !== null) {
       contentAreaRef.current.scrollTo({
@@ -46,4 +59,18 @@ export default function useScrollToContent({ contentAreaRef, hoverTitleRef, ...c
       });
     }
   }, [contentAreaRef, getScrollOffset]);
+
+
+  //  Executes the queued scroll if content and images are loaded.
+  useEffect(() => {
+    if (nextScrolledContent && contentReady && imagesLoaded) {
+      setNextScrolledContent(null);
+      scrollToContent(...nextScrolledContent);
+    }
+  }, [contentReady, imagesLoaded, nextScrolledContent, scrollToContent]);
+
+  //  Queues content to be scrolled to.
+  return (contentType, contentNumber) => {
+    setNextScrolledContent([contentType, contentNumber]);
+  };
 }

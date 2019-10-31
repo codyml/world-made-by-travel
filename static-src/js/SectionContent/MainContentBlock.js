@@ -3,18 +3,27 @@ import React, { useContext } from 'react';
 import Block from './Block';
 import { useMarginLinks } from './MarginLinks';
 import useContentRefs from './useContentRefs';
-import { Content } from '../markdown';
+import { Content, PARAGRAPH_TAG, Figure, FootnoteLink } from '../markdown';
 import CurrentSectionContext from '../CurrentSectionContext';
-import { REFERABLE_CONTENT_TYPES } from '../constants';
 
+
+const IMAGE_TAG = 'img';
+
+/*
+* Renders the main content block of the section.
+*/
 
 export default function MainContentBlock() {
-  const { mainContent: { contentNodes } } = useContext(CurrentSectionContext);
+  const {
+    mainContent: { contentNodes },
+    contentRefs: { paragraphRefs, figureRefs, footnoteLinkRefs, imageRefs },
+  } = useContext(CurrentSectionContext);
 
   const marginLinksExtension = useMarginLinks();
-  const paragraphRefsExtension = useContentRefs(REFERABLE_CONTENT_TYPES.paragraph);
-  const figureRefsExtension = useContentRefs(REFERABLE_CONTENT_TYPES.figure);
-  const footnoteLinkRefsExtension = useContentRefs(REFERABLE_CONTENT_TYPES.footnoteLink);
+  const paragraphRefsExtension = useContentRefs(PARAGRAPH_TAG, paragraphRefs);
+  const figureRefsExtension = useContentRefs(Figure, figureRefs);
+  const footnoteLinkRefsExtension = useContentRefs(FootnoteLink, footnoteLinkRefs);
+  const imageRefsExtension = useContentRefs(IMAGE_TAG, imageRefs);
 
   return (
     <Block>
@@ -25,6 +34,7 @@ export default function MainContentBlock() {
           paragraphRefsExtension,
           figureRefsExtension,
           footnoteLinkRefsExtension,
+          imageRefsExtension,
         ]}
       />
     </Block>

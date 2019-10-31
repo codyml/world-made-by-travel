@@ -8,7 +8,7 @@ import CurrentSectionContext from '../CurrentSectionContext';
 import { REFERABLE_CONTENT_TYPES } from '../constants';
 
 export default function CustomBlock({ blockNumber }) {
-  const { blocks, contentRefs } = useContext(CurrentSectionContext);
+  const { blocks, contentRefs: { blockRefs } } = useContext(CurrentSectionContext);
   const {
     title,
     author,
@@ -16,7 +16,7 @@ export default function CustomBlock({ blockNumber }) {
     contentNodes,
   } = blocks.filter((block) => block.number === blockNumber)[0];
 
-  const blockRef = contentRefs[REFERABLE_CONTENT_TYPES.block].current[blockNumber];
+  const blockRef = blockRefs.current[blockNumber];
 
   return (
     <MarginLinks
