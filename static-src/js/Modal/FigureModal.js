@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { useSelector } from 'react-redux';
 
+import style from 'styles/Modal.module.css';
 import { Content } from '../markdown';
 import CurrentSectionContext from '../CurrentSectionContext';
 
@@ -10,7 +11,11 @@ export function FigureModalBackground() {
   const { figureContentByIdentifier } = useContext(CurrentSectionContext);
   const figureContentNodes = figureContentByIdentifier[figureContentIdentifier].contentNodes;
 
-  return <Content nodes={figureContentNodes} />;
+  return (
+    <div className={style.figureContent}>
+      <Content nodes={figureContentNodes} />
+    </div>
+  );
 }
 
 export function FigureModalForeground() {
