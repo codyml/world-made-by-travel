@@ -1,5 +1,6 @@
 @import './z-index.css';
 @import './font.css';
+@import './transition.css';
 
 .Modal {
   composes: fading-overlay from './fading-overlay.module.css';
@@ -14,12 +15,18 @@
 }
 
 .background {
-  composes: pageContainer from './container.module.css';
+  composes: containerMobilePage from './container.module.css';
   background-color: rgba(0, 0, 0, 0.65);
   min-height: 6rem;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  cursor: pointer;
+
+  @media (--tablet) {
+    background-color: rgba(0, 0, 0, 0.85);
+  }
 }
 
 .closeButton {
@@ -30,11 +37,28 @@
   background-repeat: no-repeat;
   background-size: auto 1.2rem;
   background-position: center;
-  cursor: pointer;
+  transition: opacity var(--transition-duration-fade);
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  @media (--tablet) {
+    background-color: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    background-size: cover;
+    background-image: url(../images/modal-close-tablet.svg);
+    width: 5rem;
+    height: 5rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    margin-right: -5.5rem;
+  }
 }
 
 .foreground {
-  composes: pageContainer from './container.module.css';
+  composes: containerMobilePage from './container.module.css';
   background-color: #222;
   box-shadow: -1px 2px 15px 0 rgba(0, 0, 0, 0.5);
   flex-grow: 1;
@@ -43,24 +67,31 @@
   color: white;
   min-height: 0;
   overflow-y: scroll;
+
+  @media (--tablet) {
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
 }
 
 .authorName {
   font-family: var(--font-display);
   font-size: 1.85em;
   font-weight: bold;
-  margin-bottom: 1.5rem;
+
+  @media (--tablet) {
+    font-size: 2em;
+  }
 }
 
 .authorBiography {
-  font-family: var(--font-serif);
-  font-size: 1.1em;
-
-  & p:first-child {
-    margin-top: 0;
-  }
+  composes: content from './typography.module.css';
 
   & p:last-child {
-    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  @media (--tablet) {
+    font-size: 1.25em;
   }
 }

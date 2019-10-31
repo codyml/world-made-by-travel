@@ -38,6 +38,7 @@
 
 .bookAuthor {
   composes: bookAuthor from './typography.module.css';
+  color: var(--color-author-link);
   margin-top: 0.25em;
 }
 

@@ -42,11 +42,16 @@ export default function Modal() {
   }
 
   const closeModal = () => dispatch({ type: SET_MODAL_OPEN, modalOpen: false });
+  const handleBackgroundClick = (event) => {
+    if (event.target === event.currentTarget) {
+      closeModal();
+    }
+  };
 
   return (
     <CurrentSectionContext.Provider value={currentSectionContext}>
       <div className={cx(style.Modal, { visible })}>
-        <div className={style.background}>
+        <div className={style.background} onClick={handleBackgroundClick}>
           <div className={style.closeButton} onClick={closeModal} />
           {modalBackgroundContent}
         </div>
