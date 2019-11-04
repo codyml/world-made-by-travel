@@ -4,11 +4,10 @@ import PropTypes from 'prop-types';
 import classNamesBind from 'classnames/bind';
 
 import style from 'styles/MarginLinks.module.css';
-import { REFERABLE_CONTENT_TYPES, GET_CONTENT_IDENTIFIER } from '../constants';
+import { REFERABLE_CONTENT_TYPES, GET_CONTENT_IDENTIFIER, COPIED_TIMEOUT } from '../constants';
 import SectionContext from '../SectionContext';
 
 
-const COPIED_TIMEOUT = 5000;
 const cx = classNamesBind.bind(style);
 
 export default function LinkLink({ contentType, contentNumber }) {

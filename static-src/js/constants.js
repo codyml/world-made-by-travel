@@ -45,6 +45,9 @@ export const POSITIONS = {
   right: 'right',
 };
 
+//  Timeout for resetting the Copied message
+export const COPIED_TIMEOUT = 5000;
+
 //  Section content entity types
 export const REFERABLE_CONTENT_TYPES = {
   section: 'section',

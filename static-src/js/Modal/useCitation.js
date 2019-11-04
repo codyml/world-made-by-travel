@@ -64,8 +64,10 @@ export default function useCitation() {
   }, [groupAuthor, groupCitedAuthor, groupTitle, parseAuthorString]);
 
   const bookCitation = useMemo(() => [
-    `${bookAuthor}, `,
-    { italic: true, str: `${bookTitle}: ${bookSubtitle}, ` },
+    `${bookAuthor}`,
+    ', ',
+    { italic: true, str: `${bookTitle}: ${bookSubtitle}` },
+    ', ',
     `${publisher} ${year}`,
     ...(contentType === REFERABLE_CONTENT_TYPES.section
       ? ['.']
@@ -108,17 +110,7 @@ export default function useCitation() {
     [citationBaseUrl, contentNumber, contentType, origin, path],
   );
 
-  const plainTextCitation = useMemo(
-    () => [
-      ...sectionCitation,
-      ...sectionGroupCitation,
-      ...bookCitation,
-      ...url,
-    ].map((str) => (typeof str === 'object' ? str.str : str)).join(''),
-    [bookCitation, sectionCitation, sectionGroupCitation, url],
-  );
-
-  const richTextCitation = useMemo(
+  const jsxCitation = useMemo(
     () => [
       ...sectionCitation,
       ...sectionGroupCitation,
@@ -142,5 +134,78 @@ export default function useCitation() {
     [bookCitation, sectionCitation, sectionGroupCitation, url],
   );
 
-  return [plainTextCitation, richTextCitation];
+  const plainTextCitation = useMemo(
+    () => [
+      ...sectionCitation,
+      ...sectionGroupCitation,
+      ...bookCitation,
+      ...url,
+    ].map((str) => (typeof str === 'object' ? str.str : str)).join(''),
+    [bookCitation, sectionCitation, sectionGroupCitation, url],
+  );
+
+  const txtUrl = useMemo(() => {
+    const blob = new Blob([plainTextCitation], { type: 'text/plain' });
+    return URL.createObjectURL(blob);
+  }, [plainTextCitation]);
+
+  const htmlUrl = useMemo(() => {
+    const html = [
+      ...sectionCitation,
+      ...sectionGroupCitation,
+      ...bookCitation,
+      ...url,
+    ].reduce((accum, str) => {
+      if (typeof str === 'object') {
+        if (str.italic) {
+          return `${accum}<em>${str.str}</em>`;
+        }
+
+        if (str.link) {
+          return `${accum}<a href=${str.str}>${str.str}</a>`;
+        }
+
+        return `${accum}${str.str}`;
+      }
+
+      return `${accum}${str}`;
+    }, '');
+
+    const blob = new Blob([html], { type: 'text/html' });
+    return URL.createObjectURL(blob);
+  }, [bookCitation, sectionCitation, sectionGroupCitation, url]);
+
+  const mdUrl = useMemo(() => {
+    const md = [
+      ...sectionCitation,
+      ...sectionGroupCitation,
+      ...bookCitation,
+      ...url,
+    ].reduce((accum, str) => {
+      if (typeof str === 'object') {
+        if (str.italic) {
+          return `${accum}*${str.str}*`;
+        }
+
+        if (str.link) {
+          return `${accum}[${str.str}](${str.str})`;
+        }
+
+        return `${accum}${str.str}`;
+      }
+
+      return `${accum}${str}`;
+    }, '');
+
+    const blob = new Blob([md], { type: 'text/plain' });
+    return URL.createObjectURL(blob);
+  }, [bookCitation, sectionCitation, sectionGroupCitation, url]);
+
+  return [
+    jsxCitation,
+    plainTextCitation,
+    txtUrl,
+    htmlUrl,
+    mdUrl,
+  ];
 }
