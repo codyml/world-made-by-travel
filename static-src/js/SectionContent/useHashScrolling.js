@@ -1,7 +1,11 @@
 import { useEffect, useState, useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { REFERABLE_CONTENT_TYPES, CONTENT_TYPE_HASH } from '../constants';
+import {
+  REFERABLE_CONTENT_TYPES,
+  MATCH_CONTENT_IDENTIFIER,
+  GET_CONTENT_IDENTIFIER,
+} from '../constants';
 
 
 //  Matches a URL hash value against the referable content types.
@@ -10,7 +14,7 @@ const parseHash = (hash) => {
     return [REFERABLE_CONTENT_TYPES.section];
   }
 
-  for (const [contentType, { regex }] of Object.entries(CONTENT_TYPE_HASH)) {
+  for (const [contentType, regex] of Object.entries(MATCH_CONTENT_IDENTIFIER)) {
     const match = hash.slice(1).match(regex);
     if (match) {
       const [, contentNumber] = match;
@@ -95,7 +99,7 @@ export default function useHashScrolling(scrollToContent, {
       for (const [contentType, contentRefs] of Object.entries(scrollableContentRefs)) {
         for (const [contentNumber, contentRef] of Object.entries(contentRefs.current)) {
           if (currentlyScrolledTo(contentRef.current)) {
-            const hash = `#${CONTENT_TYPE_HASH[contentType].generate(contentNumber)}`;
+            const hash = `#${GET_CONTENT_IDENTIFIER[contentType](contentNumber)}`;
             if (hash !== currentHash) {
               setNextHash(hash);
             }

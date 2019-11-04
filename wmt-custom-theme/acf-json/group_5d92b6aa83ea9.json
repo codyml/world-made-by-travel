@@ -3,6 +3,25 @@
     "title": "Section Settings",
     "fields": [
         {
+            "key": "field_5dbfb7d19955d",
+            "label": "Numeral",
+            "name": "numeral",
+            "type": "text",
+            "instructions": "Enter the numeral for this section, if relevant.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_5d92b6cf0a47f",
             "label": "Author",
             "name": "author",
@@ -17,6 +36,25 @@
             },
             "default_value": "",
             "placeholder": "Co-edited with [sample-author]",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5dbfb5eb9fa4b",
+            "label": "Cited Author",
+            "name": "cited_author",
+            "type": "text",
+            "instructions": "Enter the author line for the section as it will appear in a citation, if different from the normal author line.  To add a link to an author, put the author's slug in square brackets.  An author's slug can be found on the Author's Edit page.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
             "prepend": "",
             "append": "",
             "maxlength": ""
@@ -477,5 +515,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1570056310
+    "modified": 1572845539
 }

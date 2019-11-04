@@ -1,17 +1,22 @@
-import React, { useContext } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 
-import SectionContext from '../SectionContext';
+import useCitation from './useCitation';
+
 
 export default function CitationModalForeground() {
-  const { contentType, contentNumber } = useSelector((state) => state.modalContent);
-  const { slug: sectionSlug } = useContext(SectionContext);
+  const [plainTextCitation, richTextCitation] = useCitation();
 
   return (
     <>
-      <div>sectionSlug: {sectionSlug}</div>
-      <div>contentType: {contentType}</div>
-      <div>contentNumber: {contentNumber}</div>
+      <div>citation:</div>
+      <div>{richTextCitation}</div>
+      <div>plain text citation:</div>
+      <textarea
+        // className={style.hiddenTextArea}
+        // ref={textAreaRef}
+        value={plainTextCitation}
+        readOnly
+      />
     </>
   );
 }

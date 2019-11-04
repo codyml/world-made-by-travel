@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import style from 'styles/footnotes.module.css';
-import { CONTENT_TYPE_HASH, REFERABLE_CONTENT_TYPES } from '../../constants';
+import { GET_CONTENT_IDENTIFIER, REFERABLE_CONTENT_TYPES } from '../../constants';
 
 
 const Footnote = React.forwardRef(({ label, footnoteLinkNumber, children }, ref) => {
   const footnoteLinkId = (
-    CONTENT_TYPE_HASH[REFERABLE_CONTENT_TYPES.footnoteLink].generate(footnoteLinkNumber)
+    GET_CONTENT_IDENTIFIER[REFERABLE_CONTENT_TYPES.footnoteLink](footnoteLinkNumber)
   );
 
   return (

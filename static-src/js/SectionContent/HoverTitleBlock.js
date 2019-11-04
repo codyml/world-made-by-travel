@@ -13,6 +13,7 @@ const cx = classNamesBind.bind(style);
 
 export default function HoverTitleBlock({ visible }) {
   const {
+    numeral,
     title,
     author,
     slug,
@@ -28,7 +29,7 @@ export default function HoverTitleBlock({ visible }) {
         className={marginLinksStyle.hoverTitle}
       >
         <Block
-          title={title}
+          title={`${numeral ? `${numeral}. ` : ''}${title}`}
           author={author}
           isToc={slug === EXPANDED_TOC.slug}
           isMini

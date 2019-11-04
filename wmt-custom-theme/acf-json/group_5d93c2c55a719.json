@@ -55,6 +55,25 @@
                     "display": "block",
                     "sub_fields": [
                         {
+                            "key": "field_5dbfb75d752dc",
+                            "label": "Group Numeral",
+                            "name": "numeral",
+                            "type": "text",
+                            "instructions": "Enter the numeral for this group, if relevant.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
                             "key": "field_5d93c508d58ff",
                             "label": "Group Title",
                             "name": "title",
@@ -79,6 +98,25 @@
                             "name": "author",
                             "type": "text",
                             "instructions": "Enter the author line to this Section Group.  To add a link to an author, put the author's slug in square brackets. An author's slug can be found on the Author's Edit page.",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "50",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "placeholder": "Co-edited with [sample-author]",
+                            "prepend": "",
+                            "append": "",
+                            "maxlength": ""
+                        },
+                        {
+                            "key": "field_5dbfb70e752da",
+                            "label": "Cited Group Author",
+                            "name": "cited_author",
+                            "type": "text",
+                            "instructions": "Enter the author line for this Section Group as it would appear in a citation, if different from the normal author line.  To add a link to an author, put the author's slug in square brackets. An author's slug can be found on the Author's Edit page.",
                             "required": 0,
                             "conditional_logic": 0,
                             "wrapper": {
@@ -163,5 +201,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1569978690
+    "modified": 1572845725
 }

@@ -18,6 +18,7 @@ export default function LinkedTitle({
   const explorerBaseUrl = useSelector((state) => state.config.explorerBaseUrl);
   const {
     path,
+    numeral,
     title,
     sections,
     explorer_link: explorerLink,
@@ -60,7 +61,11 @@ export default function LinkedTitle({
     props = { to: path, onClick: onLinkClick };
   }
 
-  return <Component className={cx(className, { explorerLink })} {...props}>{title}</Component>;
+  return (
+    <Component className={cx(className, { explorerLink })} {...props}>
+      {numeral ? `${numeral}. ` : ''}{title}
+    </Component>
+  );
 }
 
 LinkedTitle.propTypes = {

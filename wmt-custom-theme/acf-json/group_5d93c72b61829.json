@@ -73,23 +73,42 @@
             "placeholder": ""
         },
         {
-            "key": "field_5d93c9a062e93",
-            "label": "Enable \"Print\" Margin Link",
-            "name": "enable_print_margin_link",
-            "type": "true_false",
-            "instructions": "Enable this option to add a \"Print\" margin link to all items that can be downloaded.  This link will open the printable view and trigger the browser's Print command, from which point the user can create a PDF of the entity.  This option should be left disabled except when creating new PDFs of updated content.",
-            "required": 0,
+            "key": "field_5dbfb65f25f96",
+            "label": "Cited Publisher",
+            "name": "book_cited_publisher",
+            "type": "text",
+            "instructions": "Enter the publisher as it will appear in a citation.",
+            "required": 1,
             "conditional_logic": 0,
             "wrapper": {
                 "width": "",
                 "class": "",
                 "id": ""
             },
-            "message": "",
-            "default_value": 0,
-            "ui": 1,
-            "ui_on_text": "",
-            "ui_off_text": ""
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
+            "key": "field_5dbfb69825f97",
+            "label": "Cited Publication Year",
+            "name": "book_cited_publication_year",
+            "type": "text",
+            "instructions": "Enter the publication year as it will appear in a citation.",
+            "required": 1,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
         },
         {
             "key": "field_5d93ca6462e94",
@@ -128,5 +147,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1570056707
+    "modified": 1572845294
 }

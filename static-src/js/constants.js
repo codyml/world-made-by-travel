@@ -55,35 +55,31 @@ export const REFERABLE_CONTENT_TYPES = {
   block: 'block',
 };
 
-//  Hash generators/matchers for referable content types
-export const CONTENT_TYPE_HASH = {
-  [REFERABLE_CONTENT_TYPES.paragraph]: {
-    regex: /^paragraph-(\d+)$/,
-    getDescription: (n) => `Paragraph ${n}`,
-    generate: (n) => `paragraph-${n}`,
-  },
+//  Regex to match a machine-readable string identifier for a content,
+//  with the number in the first capturing group.
+export const MATCH_CONTENT_IDENTIFIER = {
+  [REFERABLE_CONTENT_TYPES.paragraph]: /^paragraph-(\d+)$/,
+  [REFERABLE_CONTENT_TYPES.figure]: /^figure-(\d+)$/,
+  [REFERABLE_CONTENT_TYPES.footnoteLink]: /^footnote-link-(\d+)$/,
+  [REFERABLE_CONTENT_TYPES.footnote]: /^footnote-(\d+)$/,
+  [REFERABLE_CONTENT_TYPES.block]: /^block-(\d+)$/,
+};
 
-  [REFERABLE_CONTENT_TYPES.figure]: {
-    regex: /^figure-(\d+)$/,
-    getDescription: (n) => `Figure ${n}`,
-    generate: (n) => `figure-${n}`,
-  },
+//  Returns a machine-readable string identifier for a content type
+//  and number.
+export const GET_CONTENT_IDENTIFIER = {
+  [REFERABLE_CONTENT_TYPES.paragraph]: (n) => `paragraph-${n}`,
+  [REFERABLE_CONTENT_TYPES.figure]: (n) => `figure-${n}`,
+  [REFERABLE_CONTENT_TYPES.footnoteLink]: (n) => `footnote-link-${n}`,
+  [REFERABLE_CONTENT_TYPES.footnote]: (n) => `footnote-${n}`,
+  [REFERABLE_CONTENT_TYPES.block]: (n) => `block-${n}`,
+};
 
-  [REFERABLE_CONTENT_TYPES.footnoteLink]: {
-    regex: /^footnote-link-(\d+)$/,
-    getDescription: (n) => `Footnote Link ${n}`,
-    generate: (n) => `footnote-link-${n}`,
-  },
-
-  [REFERABLE_CONTENT_TYPES.footnote]: {
-    regex: /^footnote-(\d+)$/,
-    getDescription: (n) => `Footnote ${n}`,
-    generate: (n) => `footnote-${n}`,
-  },
-
-  [REFERABLE_CONTENT_TYPES.block]: {
-    regex: /^block-(\d+)$/,
-    getDescription: (n) => `Block ${n}`,
-    generate: (n) => `block-${n}`,
-  },
+//  Returns a human-readable description for a content type and number.
+export const GET_CONTENT_DESCRIPTION = {
+  [REFERABLE_CONTENT_TYPES.paragraph]: (n) => `paragraph ${n}`,
+  [REFERABLE_CONTENT_TYPES.figure]: (n) => `figure ${n}`,
+  [REFERABLE_CONTENT_TYPES.footnoteLink]: (n) => `footnote link ${n}`,
+  [REFERABLE_CONTENT_TYPES.footnote]: (n) => `footnote ${n}`,
+  [REFERABLE_CONTENT_TYPES.block]: (n) => `block ${n}`,
 };

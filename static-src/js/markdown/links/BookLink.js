@@ -5,7 +5,12 @@ import { Link } from 'react-router-dom';
 import classNamesBind from 'classnames/bind';
 
 import style from 'styles/links.module.css';
-import { EXPANDED_TOC, COVER, CONTENT_TYPE_HASH } from '../../constants';
+import {
+  EXPANDED_TOC,
+  COVER,
+  MATCH_CONTENT_IDENTIFIER,
+  GET_CONTENT_DESCRIPTION,
+} from '../../constants';
 import SectionContext from '../../SectionContext';
 
 const cx = classNamesBind.bind(style);
@@ -16,11 +21,11 @@ const cx = classNamesBind.bind(style);
 */
 
 const parseBookHash = (hash) => {
-  for (const { regex, getDescription } of Object.values(CONTENT_TYPE_HASH)) {
+  for (const [contentType, regex] of Object.entries(MATCH_CONTENT_IDENTIFIER)) {
     const match = hash.match(regex);
     if (match) {
       const [, number] = match;
-      return getDescription(number);
+      return GET_CONTENT_DESCRIPTION[contentType](number);
     }
   }
 
@@ -46,7 +51,7 @@ export default function BookLink({ href, children }) {
     ...Object.values(sectionMetaBySlug).map(({ slug, path }) => ({ [path]: slug })),
   ), [sectionMetaBySlug]);
 
-  const bookBaseUrl = window.location.origin;
+  const { origin: bookBaseUrl } = window.location;
   const [path, slug, hashDescription] = useMemo(() => {
     let url;
     let linkHashDescription;

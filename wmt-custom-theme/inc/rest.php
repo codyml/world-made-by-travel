@@ -34,6 +34,7 @@ function wmt_get_authors_for_rest() {
 			return array(
 				'slug'              => $author->post_name,
 				'name'              => $author->post_title,
+				'citedName'         => get_field( 'cited_name', $author ) ?: null,
 				'biographyMarkdown' => wmt_get_file_contents(
 					get_field( 'markdown', $author )
 				),
@@ -54,8 +55,10 @@ function wmt_get_section_meta( $id ) {
 	if ( get_post_status( $post ) === 'publish' ) {
 		return array(
 			'slug'          => $post->post_name,
+			'numeral'       => get_field( 'numeral', $id ) ?: null,
 			'title'         => $post->post_title,
 			'author'        => get_field( 'author', $id ) ?: null,
+			'citedAuthor'   => get_field( 'cited_author', $id ) ?: null,
 			'explorer_link' => get_field( 'explorer_link', $id ) ?: false,
 		);
 	}
@@ -140,7 +143,8 @@ function wmt_get_config_for_rest() {
 
 		'explorerBaseUrl'                 => get_field( 'explorer_base_url', 'options' ),
 		'bookCitationBaseUrl'             => get_field( 'book_citation_base_url', 'options' ) ?: null,
-		'enablePrintMarginLink'           => get_field( 'enable_print_margin_link', 'options' ) ?: false,
+		'bookCitedPublisher'              => get_field( 'book_cited_publisher', 'options' ),
+		'bookCitedPublicationYear'        => get_field( 'book_cited_publication_year', 'options' ),
 		'highlightInvalidLinksAndFigures' => get_field( 'highlight_invalid_links_and_figures', 'options' ) ?: false,
 
 		// From Cover Options page.
@@ -169,10 +173,12 @@ function wmt_get_table_of_contents_for_rest() {
 		function( $toc_item ) {
 			if ( 'section_group' === $toc_item['acf_fc_layout'] ) {
 				return array(
-					'slug'     => $toc_item['slug'],
-					'title'    => $toc_item['title'],
-					'author'   => $toc_item['author'] ?: null,
-					'sections' => array_map(
+					'slug'        => $toc_item['slug'],
+					'numeral'     => $toc_item['numeral'] ?: null,
+					'title'       => $toc_item['title'],
+					'author'      => $toc_item['author'] ?: null,
+					'citedAuthor' => $toc_item['cited_author'] ?: null,
+					'sections'    => array_map(
 						'wmt_get_section_meta',
 						$toc_item['sections']
 					),

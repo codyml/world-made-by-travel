@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import classNamesBind from 'classnames/bind';
 
 import style from 'styles/MarginLinks.module.css';
-import { REFERABLE_CONTENT_TYPES, CONTENT_TYPE_HASH } from '../constants';
+import { REFERABLE_CONTENT_TYPES, GET_CONTENT_IDENTIFIER } from '../constants';
 import SectionContext from '../SectionContext';
 
 
@@ -16,8 +16,8 @@ export default function LinkLink({ contentType, contentNumber }) {
   const [copied, setCopied] = useState(false);
   const { origin } = window.location;
   const { path: sectionPath } = useContext(SectionContext);
-  const hash = CONTENT_TYPE_HASH[contentType]
-    ? `#${CONTENT_TYPE_HASH[contentType].generate(contentNumber)}`
+  const hash = GET_CONTENT_IDENTIFIER[contentType]
+    ? `#${GET_CONTENT_IDENTIFIER[contentType](contentNumber)}`
     : '';
 
   const url = [

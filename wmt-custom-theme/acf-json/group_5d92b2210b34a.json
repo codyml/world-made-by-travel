@@ -3,6 +3,25 @@
     "title": "Author Settings",
     "fields": [
         {
+            "key": "field_5dbfb56662c63",
+            "label": "Cited Name",
+            "name": "cited_name",
+            "type": "text",
+            "instructions": "Enter the author's name as it will appear in citations, if different from how it will appear elsewhere on the site.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": "",
+            "maxlength": ""
+        },
+        {
             "key": "field_5d92b25428097",
             "label": "Biography Markdown",
             "name": "markdown",
@@ -39,5 +58,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1569975090
+    "modified": 1572845136
 }

@@ -8,6 +8,7 @@ import SectionContext from '../SectionContext';
 
 export default function TitleBlock() {
   const {
+    numeral,
     title,
     author,
     slug,
@@ -22,7 +23,7 @@ export default function TitleBlock() {
     >
       <Block
         ref={titleRef}
-        title={title}
+        title={`${numeral ? `${numeral}. ` : ''}${title}`}
         author={author}
         isToc={slug === EXPANDED_TOC.slug}
       />
