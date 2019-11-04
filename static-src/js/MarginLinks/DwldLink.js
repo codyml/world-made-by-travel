@@ -7,27 +7,26 @@ import style from 'styles/MarginLinks.module.css';
 
 const cx = classNamesBind.bind(style);
 
-export default function DwldLink({ downloadAllowed }) {
-  if (!downloadAllowed) {
+export default function DwldLink({ downloadLink }) {
+  if (!downloadLink) {
     return null;
   }
 
-  const startDownload = () => console.log('downloading');
-
   return (
-    <div
-      onClick={startDownload}
+    <a
+      href={downloadLink}
+      download
       className={cx(style.marginLink, style.DwldLink)}
     >
       <span className={style.linkText}>Dwld</span>
-    </div>
+    </a>
   );
 }
 
 DwldLink.propTypes = {
-  downloadAllowed: PropTypes.bool,
+  downloadLink: PropTypes.string,
 };
 
 DwldLink.defaultProps = {
-  downloadAllowed: false,
+  downloadLink: null,
 };

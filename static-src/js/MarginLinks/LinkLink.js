@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import classNamesBind from 'classnames/bind';
 
 import style from 'styles/MarginLinks.module.css';
-import { REFERABLE_CONTENT_TYPES, CONTENT_TYPE_HASH } from '../../constants';
-import SectionContext from '../../SectionContext';
+import { REFERABLE_CONTENT_TYPES, CONTENT_TYPE_HASH } from '../constants';
+import SectionContext from '../SectionContext';
 
 
 const COPIED_TIMEOUT = 5000;

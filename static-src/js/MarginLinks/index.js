@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNamesBind from 'classnames/bind';
 
 import style from 'styles/MarginLinks.module.css';
-import { REFERABLE_CONTENT_TYPES } from '../../constants';
+import { REFERABLE_CONTENT_TYPES } from '../constants';
 import CiteLink from './CiteLink';
 import LinkLink from './LinkLink';
 import DwldLink from './DwldLink';
@@ -23,9 +23,9 @@ const LINKS_BY_RECIPIENT_TYPE = {
 
 
 //  React component that renders the applicable links
-export default function MarginLinks({ contentType, hoverTitle, children, ...props }) {
+export default function MarginLinks({ contentType, children, className, ...props }) {
   return (
-    <div className={cx(style.MarginLinks, { hoverTitle, [contentType]: true })}>
+    <div className={cx(className, style.MarginLinks, { [contentType]: true })}>
       <div className={style.links}>
         {LINKS_BY_RECIPIENT_TYPE[contentType].map((Component) => (
           <Component key={Component.name} {...{ contentType, ...props }} />
@@ -38,11 +38,11 @@ export default function MarginLinks({ contentType, hoverTitle, children, ...prop
 
 MarginLinks.propTypes = {
   contentType: PropTypes.oneOf(Object.keys(LINKS_BY_RECIPIENT_TYPE)).isRequired,
-  hoverTitle: PropTypes.bool,
   children: PropTypes.node,
+  className: PropTypes.string,
 };
 
 MarginLinks.defaultProps = {
-  hoverTitle: false,
   children: null,
+  className: null,
 };

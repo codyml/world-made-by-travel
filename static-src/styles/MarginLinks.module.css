@@ -5,33 +5,37 @@
   position: relative;
   background-color: #fff;
   transition: background-color var(--transition-duration-fade);
-}
 
-.MarginLinks.paragraph,
-.MarginLinks.footnote,
-.MarginLinks.figure {
-  margin-left: calc(env(--page-padding) * -1);
-  margin-right: calc(env(--page-padding) * -1);
-  padding-left: env(--page-padding);
-  padding-right: env(--page-padding);
-
-  @media (--tablet) {
-    margin-left: calc(env(--page-padding-tablet) * -1);
-    margin-right: calc(env(--page-padding-tablet) * -1);
-    padding-left: env(--page-padding-tablet);
-    padding-right: env(--page-padding-tablet);
+  &:hover {
+    background-color: var(--color-margin-links-background);
   }
 
-  @media (--desktop) {
-    margin-left: calc(env(--page-padding-desktop) * -1);
-    margin-right: calc(env(--page-padding-desktop) * -1);
-    padding-left: env(--page-padding-desktop);
-    padding-right: env(--page-padding-desktop);
-  }
-}
+  &.paragraph,
+  &.footnote,
+  &.figure {
+    margin-left: calc(env(--page-padding) * -1);
+    margin-right: calc(env(--page-padding) * -1);
+    padding-left: env(--page-padding);
+    padding-right: env(--page-padding);
 
-.MarginLinks:hover {
-  background-color: var(--color-margin-links-background);
+    @media (--tablet) {
+      margin-left: calc(env(--page-padding-tablet) * -1);
+      margin-right: calc(env(--page-padding-tablet) * -1);
+      padding-left: env(--page-padding-tablet);
+      padding-right: env(--page-padding-tablet);
+    }
+
+    @media (--desktop) {
+      margin-left: calc(env(--page-padding-desktop) * -1);
+      margin-right: calc(env(--page-padding-desktop) * -1);
+      padding-left: env(--page-padding-desktop);
+      padding-right: env(--page-padding-desktop);
+    }
+  }
+
+  &.figureModal {
+    background-color: transparent;
+  }
 }
 
 .links {
@@ -66,6 +70,13 @@
   .MarginLinks.block & {
     padding-top: 3.5em;
     padding-bottom: 3.5em;
+  }
+
+  @nest .MarginLinks.figureModal & {
+    opacity: 1;
+    background-color: transparent;
+    padding-top: 0.65em;
+    padding-bottom: 0.65em;
   }
 
   @media (--tablet) {
@@ -104,6 +115,16 @@
   &:hover::after {
     background-color: #aaa;
   }
+
+  @nest .MarginLinks.figureModal & {
+    &::after {
+      background-color: #fff;
+    }
+
+    &:hover::after {
+      background-color: #aaa;
+    }
+  }
 }
 
 .linkText {
@@ -118,10 +139,22 @@
   @nest .marginLink:hover & {
     color: #aaa;
   }
+
+  @nest .MarginLinks.figureModal & {
+    color: #fff;
+  }
+
+  @nest .MarginLinks.figureModal .marginLink:hover & {
+    color: #aaa;
+  }
 }
 
 .CiteLink::after {
   background-image: url(../images/cite-white.png);
+
+  @nest .MarginLinks.figureModal & {
+    background-image: url(../images/cite-black.png);
+  }
 }
 
 .LinkLink {
@@ -129,6 +162,10 @@
 
   &::after {
     background-image: url(../images/link-white.png);
+
+    @nest .MarginLinks.figureModal & {
+      background-image: url(../images/link-black.png);
+    }
   }
 }
 
@@ -193,8 +230,16 @@
   font-size: 0.9em;
 }
 
-.DwldLink::after {
-  background-image: url(../images/dwld-white.png);
+a.DwldLink {
+  text-decoration: none;
+
+  &::after {
+    background-image: url(../images/dwld-white.png);
+
+    @nest .MarginLinks.figureModal & {
+      background-image: url(../images/dwld-black.png);
+    }
+  }
 }
 
 .ParaLink::after {

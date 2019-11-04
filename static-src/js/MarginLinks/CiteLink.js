@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import classNamesBind from 'classnames/bind';
 
 import style from 'styles/MarginLinks.module.css';
-import SectionContext from '../../SectionContext';
-import { SET_MODAL_CONTENT, CITATION_MODAL, REFERABLE_CONTENT_TYPES } from '../../constants';
+import SectionContext from '../SectionContext';
+import { SET_MODAL_CONTENT, CITATION_MODAL, REFERABLE_CONTENT_TYPES } from '../constants';
 
 
 const cx = classNamesBind.bind(style);

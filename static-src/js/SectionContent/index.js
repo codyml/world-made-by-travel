@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
 import style from 'styles/SectionContent.module.css';
-import useSectionContent from './useSectionContent';
+import useSectionContent from '../useSectionContent';
 import useHoverTitle from './useHoverTitle';
 import useScrollToContent from './useScrollToContent';
 import useHashScrolling from './useHashScrolling';
@@ -135,6 +135,3 @@ SectionContent.propTypes = {
 SectionContent.defaultProps = {
   isActive: false,
 };
-
-
-export { useSectionContent };

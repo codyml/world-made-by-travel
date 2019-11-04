@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import Block from './Block';
-import { useMarginLinks } from './MarginLinks';
+import useMarginLinks from './useMarginLinks';
 import useContentRefs from './useContentRefs';
 import { Content, PARAGRAPH_TAG, Figure, FootnoteLink } from '../markdown';
 import SectionContext from '../SectionContext';

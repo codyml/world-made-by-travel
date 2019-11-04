@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import { EXPANDED_TOC, REFERABLE_CONTENT_TYPES } from '../constants';
 import Block from './Block';
-import { MarginLinks } from './MarginLinks';
+import MarginLinks from '../MarginLinks';
 import SectionContext from '../SectionContext';
 
 

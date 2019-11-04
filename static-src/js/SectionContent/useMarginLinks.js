@@ -1,8 +1,8 @@
 import { useCallback, useRef } from 'react';
 
-import MarginLinks from './MarginLinks';
-import { Footnote, Figure, FigureContent, PARAGRAPH_TAG } from '../../markdown';
-import { REFERABLE_CONTENT_TYPES } from '../../constants';
+import MarginLinks from '../MarginLinks';
+import { Footnote, Figure, FigureContent, PARAGRAPH_TAG } from '../markdown';
+import { REFERABLE_CONTENT_TYPES } from '../constants';
 
 
 export default function useMarginLinks() {
@@ -37,7 +37,7 @@ export default function useMarginLinks() {
             props: {
               contentType: REFERABLE_CONTENT_TYPES.figure,
               contentNumber: figureNumber.current,
-              downloadAllowed: node.props.downloadAllowed,
+              downloadLink: node.props.downloadLink,
             },
             children: [{ ...node, key: 'marginLinksWrapped' }],
           };

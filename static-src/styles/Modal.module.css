@@ -59,7 +59,12 @@
     background-image: url(../images/modal-close-tablet.svg);
     width: 5rem;
     height: 5rem;
-    margin: -1rem -6.5rem 0 1.5rem;
+    margin: -1rem -6.5rem -1rem 1.5rem;
+
+    &:first-child:last-child {
+      margin-left: auto;
+      margin-right: -5.5rem;
+    }
   }
 }
 
@@ -131,4 +136,5 @@
 
 .figureCaption {
   composes: content from './typography.module.css';
+  font-size: 1.25em;
 }

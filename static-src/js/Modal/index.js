@@ -4,7 +4,7 @@ import classNamesBind from 'classnames/bind';
 
 import style from 'styles/Modal.module.css';
 import SectionContext from '../SectionContext';
-import { useSectionContent } from '../SectionContent';
+import useSectionContent from '../useSectionContent';
 import AuthorModalForeground from './AuthorModal';
 import { FigureModalBackground, FigureModalForeground } from './FigureModal';
 import CitationModalForeground from './CitationModal';

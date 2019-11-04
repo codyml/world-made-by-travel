@@ -1,13 +1,13 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { processMainContentMarkdown, processMarkdown } from '../markdown';
+import { processMainContentMarkdown, processMarkdown } from './markdown';
 import {
   EXPANDED_TOC,
   SECTION_CONTENT_REQUESTED,
   SECTION_CONTENT_RECEIVED,
   REQUESTED,
-} from '../constants';
+} from './constants';
 
 
 const parseSectionContent = ({
@@ -21,7 +21,7 @@ const parseSectionContent = ({
       identifier,
       markdown: figureMarkdown,
       image,
-      download: figureDownload,
+      download: figureContentDownloadLink,
     }, index) => ({
       [identifier]: {
         identifier,
@@ -33,7 +33,7 @@ const parseSectionContent = ({
             props: { src: image },
             refNumber: index,
           }],
-        download: figureDownload,
+        downloadLink: figureContentDownloadLink || null,
       },
     }),
   ));

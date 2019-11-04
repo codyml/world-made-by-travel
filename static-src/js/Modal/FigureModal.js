@@ -3,8 +3,11 @@ import { useSelector } from 'react-redux';
 import classNamesBind from 'classnames/bind';
 
 import style from 'styles/Modal.module.css';
+import marginLinksStyle from 'styles/MarginLinks.module.css';
 import { Content } from '../markdown';
 import SectionContext from '../SectionContext';
+import { REFERABLE_CONTENT_TYPES } from '../constants';
+import MarginLinks from '../MarginLinks';
 
 
 const cx = classNamesBind.bind(style);
@@ -23,13 +26,30 @@ export function FigureModalBackground() {
 }
 
 export function FigureModalForeground() {
-  const { captionNumber } = useSelector((state) => state.modalContent);
-  const { mainContent: { figureCaptionsByNumber } } = useContext(SectionContext);
+  const {
+    figureNumber,
+    figureContentIdentifier,
+    captionNumber,
+  } = useSelector((state) => state.modalContent);
+
+  const {
+    mainContent: { figureCaptionsByNumber },
+    figureContentByIdentifier,
+  } = useContext(SectionContext);
+
   const captionContentNodes = figureCaptionsByNumber[captionNumber].children;
+  const figureContentDownloadLink = figureContentByIdentifier[figureContentIdentifier].downloadLink;
 
   return (
-    <figcaption className={style.figureCaption}>
-      <Content nodes={captionContentNodes} />
-    </figcaption>
+    <MarginLinks
+      contentType={REFERABLE_CONTENT_TYPES.figure}
+      contentNumber={figureNumber}
+      downloadLink={figureContentDownloadLink}
+      className={marginLinksStyle.figureModal}
+    >
+      <figcaption className={style.figureCaption}>
+        <Content nodes={captionContentNodes} />
+      </figcaption>
+    </MarginLinks>
   );
 }

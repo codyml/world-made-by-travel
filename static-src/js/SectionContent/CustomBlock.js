@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 
 import Block from './Block';
-import { MarginLinks } from './MarginLinks';
+import MarginLinks from '../MarginLinks';
 import { Content } from '../markdown';
 import SectionContext from '../SectionContext';
 import { REFERABLE_CONTENT_TYPES } from '../constants';

@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import classNamesBind from 'classnames/bind';
 
 import style from 'styles/HoverTitleBlock.module.css';
+import marginLinksStyle from 'styles/MarginLinks.module.css';
 import Block from './Block';
-import { MarginLinks } from './MarginLinks';
+import MarginLinks from '../MarginLinks';
 import { EXPANDED_TOC, REFERABLE_CONTENT_TYPES } from '../constants';
 import SectionContext from '../SectionContext';
 
@@ -24,7 +25,7 @@ export default function HoverTitleBlock({ visible }) {
       <MarginLinks
         contentType={REFERABLE_CONTENT_TYPES.section}
         downloadAllowed={!!download}
-        hoverTitle
+        className={marginLinksStyle.hoverTitle}
       >
         <Block
           title={title}
