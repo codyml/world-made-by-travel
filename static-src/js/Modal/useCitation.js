@@ -40,7 +40,7 @@ export default function useCitation() {
   } = useSelector((state) => state.sectionGroupMetaBySlug[groupSlug] || {});
 
   const sectionCitation = useMemo(() => {
-    const resolvedSectionCitedAuthor = parseAuthorString(sectionAuthor || sectionCitedAuthor)
+    const resolvedSectionCitedAuthor = parseAuthorString(sectionCitedAuthor || sectionAuthor)
       .map((s) => (s.author ? s.author.citedName || s.author.name : s.str))
       .join('');
 
@@ -49,7 +49,7 @@ export default function useCitation() {
 
   const sectionGroupCitation = useMemo(() => {
     if (groupTitle) {
-      const resolvedCitedGroupAuthor = parseAuthorString(groupAuthor || groupCitedAuthor)
+      const resolvedCitedGroupAuthor = parseAuthorString(groupCitedAuthor || groupAuthor)
         .map((s) => (s.author ? s.author.citedName || s.author.name : s.str))
         .join('');
 

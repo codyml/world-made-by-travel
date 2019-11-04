@@ -1,0 +1,66 @@
+@import './font.css';
+@import './color.css';
+@import './transition.css';
+
+.title {
+  font-weight: bold;
+  font-size: 2em;
+  margin-bottom: 1em;
+}
+
+.citation {
+  font-family: var(--font-serif);
+  line-height: 1.5;
+  font-weight: 300;
+  font-size: 1.25em;
+
+  & a {
+    color: var(--color-citation-modal-link);
+    transition: opacity var(--transition-duration-fade);
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.9;
+      text-decoration: underline;
+    }
+  }
+}
+
+.copyLink {
+  color: var(--color-citation-modal-link);
+  transition: opacity var(--transition-duration-fade);
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 0.5em;
+
+  &:hover {
+    opacity: 0.9;
+    text-decoration: underline;
+  }
+}
+
+.hiddenTextArea {
+  position: absolute;
+  opacity: 0;
+}
+
+.downloadLinks {
+  margin-top: 1.5em;
+  font-size: 1.25em;
+
+  & > .downloadAs {
+    font-weight: bold;
+  }
+
+  & > .downloadLink {
+    color: var(--color-citation-modal-link);
+    transition: opacity var(--transition-duration-fade);
+    cursor: pointer;
+    margin-left: 1em;
+
+    &:hover {
+      opacity: 0.9;
+      text-decoration: underline;
+    }
+  }
+}

@@ -46,9 +46,9 @@ export default function CitationModalForeground() {
       />
       <div className={style.downloadLinks}>
         <span className={style.downloadAs}>Download as:</span>
-        <a href={txtUrl} download="citation.txt">TXT</a>
-        <a href={htmlUrl} download="citation.html">HTML</a>
-        <a href={mdUrl} download="citation.md">Markdown</a>
+        <a className={style.downloadLink} href={txtUrl} download="citation.txt">TXT</a>
+        <a className={style.downloadLink} href={htmlUrl} download="citation.html">HTML</a>
+        <a className={style.downloadLink} href={mdUrl} download="citation.md">Markdown</a>
       </div>
     </>
   );
