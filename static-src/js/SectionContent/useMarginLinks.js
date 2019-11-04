@@ -37,7 +37,7 @@ export default function useMarginLinks() {
             props: {
               contentType: REFERABLE_CONTENT_TYPES.figure,
               contentNumber: figureNumber.current,
-              downloadLink: node.props.downloadLink,
+              downloadUrl: node.props.downloadUrl,
             },
             children: [{ ...node, key: 'marginLinksWrapped' }],
           };

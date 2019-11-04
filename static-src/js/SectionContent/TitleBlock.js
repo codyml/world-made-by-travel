@@ -11,14 +11,14 @@ export default function TitleBlock() {
     title,
     author,
     slug,
-    download,
+    downloadUrl,
     contentRefs: { titleRef },
   } = useContext(SectionContext);
 
   return (
     <MarginLinks
       contentType={REFERABLE_CONTENT_TYPES.section}
-      downloadAllowed={!!download}
+      downloadUrl={downloadUrl}
     >
       <Block
         ref={titleRef}

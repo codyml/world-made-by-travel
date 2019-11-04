@@ -40,7 +40,7 @@ export default function useFigures() {
               figureNumber: figureNumberRef.current,
               figureContentIdentifier: props.reference,
               captionNumberRef: captionNumberRefRef.current,
-              downloadLink: figureContent.downloadLink,
+              downloadUrl: figureContent.downloadUrl,
             },
             children: figureContent.contentNodes,
           };

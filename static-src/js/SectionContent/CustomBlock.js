@@ -12,7 +12,7 @@ export default function CustomBlock({ blockNumber }) {
   const {
     title,
     author,
-    download,
+    downloadUrl,
     contentNodes,
   } = blocks.filter((block) => block.number === blockNumber)[0];
 
@@ -21,7 +21,7 @@ export default function CustomBlock({ blockNumber }) {
   return (
     <MarginLinks
       contentType={REFERABLE_CONTENT_TYPES.block}
-      downloadAllowed={!!download}
+      downloadUrl={downloadUrl}
     >
       <Block ref={blockRef} title={title} author={author}>
         <Content nodes={contentNodes} />

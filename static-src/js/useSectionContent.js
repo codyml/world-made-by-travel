@@ -14,14 +14,14 @@ const parseSectionContent = ({
   markdown,
   figures,
   blocks,
-  download,
+  download: sectionDownloadUrl,
 }) => {
   const figureContentByIdentifier = Object.assign({}, ...figures.map(
     ({
       identifier,
       markdown: figureMarkdown,
       image,
-      download: figureContentDownloadLink,
+      download: figureContentDownloadUrl,
     }, index) => ({
       [identifier]: {
         identifier,
@@ -33,15 +33,19 @@ const parseSectionContent = ({
             props: { src: image },
             refNumber: index,
           }],
-        downloadLink: figureContentDownloadLink || null,
+        downloadUrl: figureContentDownloadUrl || null,
       },
     }),
   ));
 
   const mainContent = processMainContentMarkdown(markdown);
-  const parsedBlocks = blocks.map(({ markdown: blockMarkdown, ...block }, index) => ({
+  const parsedBlocks = blocks.map((
+    { markdown: blockMarkdown, download: blockDownloadUrl, ...block },
+    index,
+  ) => ({
     number: index + 1,
     contentNodes: processMarkdown(blockMarkdown),
+    downloadUrl: blockDownloadUrl || null,
     ...block,
   }));
 
@@ -49,7 +53,7 @@ const parseSectionContent = ({
     mainContent,
     figureContentByIdentifier,
     blocks: parsedBlocks,
-    download,
+    downloadUrl: sectionDownloadUrl,
   };
 };
 

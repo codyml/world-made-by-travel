@@ -38,13 +38,13 @@ export function FigureModalForeground() {
   } = useContext(SectionContext);
 
   const captionContentNodes = figureCaptionsByNumber[captionNumber].children;
-  const figureContentDownloadLink = figureContentByIdentifier[figureContentIdentifier].downloadLink;
+  const figureContentDownloadUrl = figureContentByIdentifier[figureContentIdentifier].downloadUrl;
 
   return (
     <MarginLinks
       contentType={REFERABLE_CONTENT_TYPES.figure}
       contentNumber={figureNumber}
-      downloadLink={figureContentDownloadLink}
+      downloadUrl={figureContentDownloadUrl}
       className={marginLinksStyle.figureModal}
     >
       <figcaption className={style.figureCaption}>

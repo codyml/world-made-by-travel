@@ -16,7 +16,7 @@ export default function HoverTitleBlock({ visible }) {
     title,
     author,
     slug,
-    download,
+    downloadUrl,
     contentRefs: { hoverTitleRef },
   } = useContext(SectionContext);
 
@@ -24,7 +24,7 @@ export default function HoverTitleBlock({ visible }) {
     <div ref={hoverTitleRef} className={cx(style.HoverTitleBlock, { visible })}>
       <MarginLinks
         contentType={REFERABLE_CONTENT_TYPES.section}
-        downloadAllowed={!!download}
+        downloadUrl={downloadUrl}
         className={marginLinksStyle.hoverTitle}
       >
         <Block

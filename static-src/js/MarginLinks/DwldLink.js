@@ -7,14 +7,14 @@ import style from 'styles/MarginLinks.module.css';
 
 const cx = classNamesBind.bind(style);
 
-export default function DwldLink({ downloadLink }) {
-  if (!downloadLink) {
+export default function DwldLink({ downloadUrl }) {
+  if (!downloadUrl) {
     return null;
   }
 
   return (
     <a
-      href={downloadLink}
+      href={downloadUrl}
       download
       className={cx(style.marginLink, style.DwldLink)}
     >
@@ -24,9 +24,9 @@ export default function DwldLink({ downloadLink }) {
 }
 
 DwldLink.propTypes = {
-  downloadLink: PropTypes.string,
+  downloadUrl: PropTypes.string,
 };
 
 DwldLink.defaultProps = {
-  downloadLink: null,
+  downloadUrl: null,
 };
