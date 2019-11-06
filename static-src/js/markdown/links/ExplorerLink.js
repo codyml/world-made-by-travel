@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import classNamesBind from 'classnames/bind';
 
 import style from 'styles/links.module.css';
-import { SET_EXPLORER_URL } from '../../constants';
+import { SET_EXPLORER_PATH } from '../../constants';
 
 const cx = classNamesBind.bind(style);
 
@@ -49,7 +49,7 @@ const EXPLORER_LINK_TYPES = {
 * Returns the Explorer link text if valid link.
 */
 
-const parseExplorerUrl = (path) => {
+const parseExplorerPath = (path) => {
   for (const [regex, getLinkDescription] of Object.values(EXPLORER_LINK_TYPES)) {
     const match = path.match(regex);
     if (match) {
@@ -88,7 +88,7 @@ export default function ExplorerLink({ href, children }) {
     }
 
     if (url) {
-      linkDescription = parseExplorerUrl(`${url.pathname}${url.hash}`);
+      linkDescription = parseExplorerPath(`${url.pathname}${url.hash}`);
     }
 
     return [
@@ -102,7 +102,7 @@ export default function ExplorerLink({ href, children }) {
   const handleClick = (event) => {
     if (!invalid && browserSize !== 'mobile') {
       event.preventDefault();
-      dispatch({ type: SET_EXPLORER_URL, explorerUrl: path });
+      dispatch({ type: SET_EXPLORER_PATH, explorerPath: path });
     }
   };
 

@@ -7,7 +7,7 @@ import {
   SET_CURRENT_SECTION,
   SET_SECTION_SCROLLED_TO,
   SET_EXPLORER_OPEN,
-  SET_EXPLORER_URL,
+  SET_EXPLORER_PATH,
   SET_MODAL_OPEN,
   SET_MODAL_CONTENT,
   REQUESTED,
@@ -164,7 +164,7 @@ const explorerOpen = (state = false, action) => {
     case SET_EXPLORER_OPEN:
       return action.explorerOpen;
 
-    case SET_EXPLORER_URL:
+    case SET_EXPLORER_PATH:
       return true;
 
     default:
@@ -172,10 +172,10 @@ const explorerOpen = (state = false, action) => {
   }
 };
 
-const explorerUrl = (state = '/', action) => {
+const explorerPath = (state = '/', action) => {
   switch (action.type) {
-    case SET_EXPLORER_URL:
-      return action.explorerUrl;
+    case SET_EXPLORER_PATH:
+      return action.explorerPath;
 
     default:
       return state;
@@ -310,7 +310,7 @@ export default combineReducers({
   currentSectionSlug,
   scrolledToBySection,
   explorerOpen,
-  explorerUrl,
+  explorerPath,
   modalOpen,
   modalContent,
   slugsByTransitionPosition,
