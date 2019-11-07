@@ -1,38 +1,46 @@
-//  Padding between "paper" page and the text it contains
-const pagePadding = {
-  '--page-padding': 18,
-  '--page-padding-tablet': 72,
-  '--page-padding-desktop': 72,
+//  Root font size
+const rootFontSize = {
+  '--root-font-size': 12,
+  '--root-font-size-desktop-hd': 16,
 };
 
-//  Width of "paper" page (outside of padding)
-const pageWidth = {
-  '--page-width': '100%',
-  '--page-width-tablet': 612,
-  '--page-width-desktop': 612,
+//  Width of the section content area
+const contentAreaWidth = {
+  '--content-area-width': '100%',
+  '--content-area-width-tablet': 8.5 * rootFontSize['--root-font-size'],
+  '--content-area-width-desktop-hd': 8.5 * rootFontSize['--root-font-size-desktop-hd'],
 };
 
-//  Width of desktop sidebar and gutter between sidebar and page
-const desktopElementWidth = {
-  '--sidebar-width-desktop': 300,
-  '--gutter-width-desktop': 12,
+//  Width of sidebar
+const desktopSidebarWidth = {
+  '--sidebar-width': 300,
 };
 
-//  Width of the "paper" page plus desktop elements (if desktop)
-const containerWidth = {
-  '--container-width': pageWidth['--page-width'],
-  '--container-width-tablet': pageWidth['--page-width-tablet'],
-  '--container-width-desktop':
-    pageWidth['--page-width-desktop']
-    + desktopElementWidth['--sidebar-width-desktop']
-    + desktopElementWidth['--gutter-width-desktop'],
+//  Width of gutter between sidebar and content area
+const desktopSidebarGutterWidth = {
+  '--sidebar-gutter-width': 12,
 };
 
 //  Minimum margin between the container and the browser window
 const minContainerMargin = {
-  '--min-container-margin': '0',
+  '--min-container-margin': 18,
   '--min-container-margin-tablet': 36,
   '--min-container-margin-desktop': 72,
+};
+
+//  Width of a standard .container element, defined as the contentAreaWidth
+//  plus the width and gutter of the sidebar, if applicable
+const containerWidth = {
+  '--container-width': `calc(${contentAreaWidth['--content-area-width']} - ${minContainerMargin['--min-container-margin']}px)`,
+  '--container-width-tablet': contentAreaWidth['--content-area-width-tablet'],
+  '--container-width-desktop':
+    contentAreaWidth['--content-area-width-desktop']
+    + desktopSidebarWidth['--sidebar-width']
+    + desktopSidebarGutterWidth['--sidebar-gutter-width'],
+  '--container-width-desktop-hd':
+    contentAreaWidth['--content-area-width-desktop-hd']
+    + desktopSidebarWidth['--sidebar-width']
+    + desktopSidebarGutterWidth['--sidebar-gutter-width'],
 };
 
 //  Breakpoints
@@ -44,20 +52,26 @@ export const breakpoints = {
   '--breakpoint-desktop':
     containerWidth['--container-width-desktop']
     + 2 * minContainerMargin['--min-container-margin-desktop'],
+  '--breakpoint-desktop-hd':
+    containerWidth['--container-width-desktop-hd']
+    + 2 * minContainerMargin['--min-container-margin-desktop'],
 };
 
-//  Media queries
+//  Export constants as environmental variables
+export const environmentVariables = Object.assign({}, ...Object.entries({
+  ...rootFontSize,
+  ...contentAreaWidth,
+  ...desktopSidebarWidth,
+  ...desktopSidebarGutterWidth,
+  ...containerWidth,
+  ...minContainerMargin,
+  ...breakpoints,
+}).map(([property, value]) => ({ [property]: typeof value === 'number' ? `${value}px` : value })));
+
+//  Export custom media queries
 export const customMedia = {
   '--mobile': '(min-width: 0)',
   '--tablet': `(min-width: ${breakpoints['--breakpoint-tablet']}px)`,
   '--desktop': `(min-width: ${breakpoints['--breakpoint-desktop']}px)`,
+  '--desktop-hd': `(min-width: ${breakpoints['--breakpoint-desktop-hd']}px)`,
 };
-
-export const environmentVariables = Object.assign({}, ...Object.entries({
-  ...pagePadding,
-  ...pageWidth,
-  ...desktopElementWidth,
-  ...containerWidth,
-  ...minContainerMargin,
-  ...breakpoints,
-}).map(([property, value]) => ({ [property]: `${value}px` })));

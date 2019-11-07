@@ -4,16 +4,16 @@
 @import './transition.css';
 
 .Cover {
-  composes: fading-overlay from './fading-overlay.module.css';
+  composes: segment from './App.module.css';
   z-index: var(--z-index-cover);
+}
+
+.coverContent {
+  composes: segment from './App.module.css';
   background-color: white;
   background-size: auto 115.8%;
   background-position: 35.37% 22.22%;
   background-repeat: no-repeat;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
 
   &::before {
     content: '';
@@ -51,12 +51,9 @@
   }
 }
 
-.visible {
-  composes: visible from './fading-overlay.module.css';
-}
-
-.coverContent {
-  composes: containerMobilePage from './container.module.css';
+.coverContentContainer {
+  composes: container from './App.module.css';
+  color: white;
   padding-top: 1.5em;
   padding-bottom: 5em;
   flex-grow: 1;
@@ -178,20 +175,32 @@
   }
 }
 
+.publicationInformation {
+  composes: segment from './App.module.css';
+  background-color: var(--color-cover-publication-information-background);
+  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  font-size: 1.25em;
+  font-family: var(--font-serif);
+}
+
+.mobileTabContainer {
+  composes: container from './App.module.css';
+}
+
+.publicationInformationContainer {
+  composes: container from './App.module.css';
+}
+
 .infoSlider {
   composes: containerMobilePage from './container.module.css';
   position: absolute;
   top: 100%;
   left: 0;
   width: 100%;
-  background-color: var(--color-cover-publication-information-background);
-  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.5);
-  z-index: 1;
   transform: translateY(-100%);
   transition: transform var(--transition-duration-slide);
-  padding-bottom: 1em;
-  font-size: 1.25em;
-  font-family: var(--font-serif);
+
 }
 
 .infoSlider.collapsed {

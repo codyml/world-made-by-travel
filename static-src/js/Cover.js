@@ -4,6 +4,7 @@ import { useRouteMatch, Link } from 'react-router-dom';
 import classNamesBind from 'classnames/bind';
 
 import style from 'styles/Cover.module.css';
+import Overlay from './Overlay';
 import HTMLContent from './HTMLContent';
 import { MarkdownContent } from './markdown';
 import Tabbed from './Tabbed';
@@ -18,7 +19,7 @@ const cx = classNamesBind.bind(style);
 */
 
 export default function Cover() {
-  const [sliderCollapsed, setSliderCollapsed] = useState(true);
+  const [mobileSliderCollapsed, setMobileSliderCollapsed] = useState(true);
   const visible = useRouteMatch('/').isExact;
   const browserSize = useSelector((state) => state.browserSize);
   const enterPath = useSelector((state) => ({
@@ -40,79 +41,70 @@ export default function Cover() {
 
   const toggleSliderCollapsed = (
     browserSize === 'mobile'
-      ? () => setSliderCollapsed(!sliderCollapsed)
+      ? () => setMobileSliderCollapsed(!mobileSliderCollapsed)
       : null
   );
 
   return (
 
-    <div
-      className={cx(style.Cover, { visible })}
+    <Overlay
+      visible={visible}
+      className={style.Cover}
       style={{
         backgroundImage: `url(${backgroundImageUrl})`,
       }}
-      onClick={() => setSliderCollapsed(true)}
-      role="presentation"
+      onClick={() => setMobileSliderCollapsed(true)}
     >
 
       <div className={style.coverContent}>
+        <div className={style.coverContentContainer}>
 
-        <div className={style.bookInformation}>
-          <div className={style.title}>{coverTitle}</div>
-          <div className={style.subtitle}>{coverSubtitle}</div>
-          <div className={style.bookAuthor}>{coverAuthor}</div>
-          <Link className={style.enter} to={enterPath}>Enter</Link>
-        </div>
+          {/* Book meta info */}
+          <div className={style.bookInformation}>
+            <div className={style.title}>{coverTitle}</div>
+            <div className={style.subtitle}>{coverSubtitle}</div>
+            <div className={style.bookAuthor}>{coverAuthor}</div>
+            <Link className={style.enter} to={enterPath}>Enter</Link>
+          </div>
 
-        <div className={style.content}>
-          <MarkdownContent>{coverContentMarkdown}</MarkdownContent>
-          {browserSize === 'mobile' ? (
+          {/* Book introduction */}
+          <div className={style.content}>
+            <MarkdownContent>{coverContentMarkdown}</MarkdownContent>
+            {browserSize === 'mobile' ? (
+              <HTMLContent className={style.imgAttrib}>{backgroundImageAttribution}</HTMLContent>
+            ) : null}
+          </div>
+
+          {browserSize !== 'mobile' ? (
             <HTMLContent className={style.imgAttrib}>{backgroundImageAttribution}</HTMLContent>
           ) : null}
+
         </div>
-
-        {browserSize !== 'mobile' ? (
-          <HTMLContent className={style.imgAttrib}>{backgroundImageAttribution}</HTMLContent>
-        ) : null}
-
       </div>
 
-      {browserSize === 'mobile' ? (
+      {/* Publication information */}
+      <div
+        className={cx(style.publicationInformation, {
+          tablet: browserSize !== 'mobile',
+          mobileSliderCollapsed,
+        })}
+        onClick={(e) => e.stopPropagation()}
+      >
 
-        //  Mobile Publication Information slide-up panel
+        {/* Mobile expandable tab */}
         <div
-          className={cx(style.infoSlider, { collapsed: sliderCollapsed })}
-          onClick={(e) => e.stopPropagation()}
+          className={style.mobileTabContainer}
+          onClick={toggleSliderCollapsed}
         >
-          <Tabbed isExpanded={!sliderCollapsed} tabSide="top">
-
-            <div
-              className={style.copyright}
-              onClick={toggleSliderCollapsed}
-            >
-              <div className={style.publInfo}>Publication Information</div>
-              <HTMLContent>{coverCopyright}</HTMLContent>
-            </div>
-
-            <HTMLContent className={style.numbers}>{coverNumbers}</HTMLContent>
-            <div className={style.credits}>
-              {coverCredits.map((credit, index) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <a href={credit.link} key={index}>
-                  <HTMLContent>{credit.text}</HTMLContent>
-                  <img src={credit.image} alt={credit.text} />
-                </a>
-              ))}
-            </div>
-
+          <Tabbed isExpanded={!mobileSliderCollapsed} tabSide="top">
+            <div className={style.publInfoTitle}>Publication Information</div>
+            <HTMLContent>{coverCopyright}</HTMLContent>
           </Tabbed>
         </div>
 
-      ) : (
-
-        //  Tablet/desktop Publication Information bar
-        <div className={style.infoBar}>
-          <div className={style.leftColumn}>
+        {/* Publication information content */}
+        <div className={style.publicationInformationContainer}>
+          <div className={style.copyrightAndNumbers}>
             <HTMLContent className={style.copyright}>{coverCopyright}</HTMLContent>
             <HTMLContent className={style.numbers}>{coverNumbers}</HTMLContent>
           </div>
@@ -127,8 +119,7 @@ export default function Cover() {
           </div>
         </div>
 
-      ) }
-
-    </div>
+      </div>
+    </Overlay>
   );
 }

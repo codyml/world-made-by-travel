@@ -10,7 +10,7 @@ import {
 } from './constants';
 
 
-const parseSectionContent = ({
+const parseSection = ({
   markdown,
   figures,
   blocks,
@@ -97,7 +97,7 @@ export default function useSectionContent(sectionSlug) {
           dispatch({
             type: SECTION_CONTENT_RECEIVED,
             sectionSlug,
-            sectionContent: parseSectionContent(jsonResponse),
+            sectionContent: parseSection(jsonResponse),
           });
         }
       };

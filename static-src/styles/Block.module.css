@@ -7,6 +7,10 @@
   padding-top: 3rem;
   padding-bottom: 3rem;
   line-height: 1.25;
+
+  &:not(:last-child) {
+    border-bottom: 1px solid var(--color-ui-hr);
+  }
 }
 
 .Block.isToc {
@@ -34,6 +38,9 @@
 .content {
   composes: content from './typography.module.css';
 }
+
+
+
 
 /* .sectionAuthor + .content {
   margin-top: 1.25em;

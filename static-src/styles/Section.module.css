@@ -1,7 +1,7 @@
 @import './color.css';
 @import './shadow.css';
 
-.SectionContent {
+.Section {
   composes: containerMargin from './container.module.css';
   position: relative;
   height: 100%;

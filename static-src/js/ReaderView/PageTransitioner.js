@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import classNamesBind from 'classnames/bind';
 
 import style from 'styles/PageTransitioner.module.css';
-import SectionContent from '../SectionContent';
+import Section from '../Section';
 import {
   EXPANDED_TOC,
   POSITIONS,
@@ -99,7 +99,7 @@ export default function PageTransitioner() {
               data-position={position}
             >
               {slugsByTransitionPosition[position] ? (
-                <SectionContent sectionSlug={slugsByTransitionPosition[position]} />
+                <Section sectionSlug={slugsByTransitionPosition[position]} />
               ) : null}
             </div>
           ),

@@ -2,20 +2,11 @@
 @import './z-index.css';
 
 .LoadingMessage {
-  composes: fading-overlay from './fading-overlay.module.css';
-  composes: containerMobilePage from './container.module.css';
   z-index: var(--z-index-loading);
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #fff;
-  transition-delay:
-    var(--transition-delay-loading-fade),
-    calc(var(--transition-delay-loading-fade) + var(--transition-duration-fade));
-}
-
-.visible {
-  composes: visible from './fading-overlay.module.css';
 }
 
 .text {

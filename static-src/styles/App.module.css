@@ -1,12 +1,56 @@
+/*
+* The top-level element of the application, containing only .segment
+* elements.
+*/
+
 .App {
   position: relative;
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: stretch;
-  background-clip: content-box;
 }
+
+/*
+* Direct descendents of the .App element; represents a full-width
+* vertical span of the app.  Can also be used inside another .segment
+* element.
+*/
+
+.segment {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*
+* Direct descendents of .segment elements; represents a vertical
+* span of a section at the standard width for the screen size centered
+* in the middle of the screen.
+*/
+
+.container {
+  position: relative;
+  width: env(--container-width);
+
+  @media (--tablet) {
+    width: env(--container-width-tablet);
+  }
+
+  @media (--desktop) {
+    width: env(--container-width-desktop);
+  }
+
+  @media (--desktop-hd) {
+    width: env(--container-width-desktop-hd);
+  }
+}
+
+/*
+* Accounts for the WP admin bar.
+*/
 
 :global(.admin-bar-showing) .App {
   height: calc(100vh - 32px);

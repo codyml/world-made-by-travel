@@ -9,7 +9,7 @@ import rootReducer from './reducers';
 import useLoadContent from './useLoadContent';
 import useBrowserSize from './useBrowserSize';
 import LoadingMessage from './LoadingMessage';
-import CoverView from './Cover';
+import Cover from './Cover';
 import ReaderView from './ReaderView';
 import Explorer from './Explorer';
 import Modal from './Modal';
@@ -22,10 +22,10 @@ function App() {
 
   return (
     <div className={style.App}>
-      <LoadingMessage overlay visible={!contentLoaded} />
+      <LoadingMessage visible={!contentLoaded} />
       { contentLoaded ? (
         <BrowserRouter>
-          <CoverView />
+          <Cover />
           <ReaderView />
           <Explorer />
           <Modal />

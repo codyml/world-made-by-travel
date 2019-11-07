@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
-import style from 'styles/SectionContent.module.css';
+import style from 'styles/Section.module.css';
 import useSectionContent from '../useSectionContent';
 import useHoverTitle from './useHoverTitle';
 import useScrollToContent from './useScrollToContent';
@@ -25,7 +25,7 @@ import SectionContext from '../SectionContext';
 * This component renders a reader view "page" of the book.
 */
 
-export default function SectionContent({ sectionSlug }) {
+export default function Section({ sectionSlug }) {
   const browserSize = useSelector((state) => state.browserSize);
   const { instructionsMarkdown } = useSelector((state) => state.config);
   const sectionMeta = useSelector((state) => (
@@ -54,7 +54,7 @@ export default function SectionContent({ sectionSlug }) {
   useHashScrolling(scrollToContent, sectionContext);
 
   return (
-    <div className={style.SectionContent}>
+    <div className={style.Section}>
       <SectionContext.Provider value={sectionContext}>
 
         {/* Hovering section title block */}
@@ -127,11 +127,11 @@ export default function SectionContent({ sectionSlug }) {
   );
 }
 
-SectionContent.propTypes = {
+Section.propTypes = {
   sectionSlug: PropTypes.string.isRequired,
   isActive: PropTypes.bool,
 };
 
-SectionContent.defaultProps = {
+Section.defaultProps = {
   isActive: false,
 };
