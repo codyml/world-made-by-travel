@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import classNamesBind from 'classnames/bind';
 
 import style from 'styles/Explorer.module.css';
-import { SET_EXPLORER_PATH } from './constants';
+import { SET_EXPLORER_PATH, SET_EXPLORER_OPEN } from './constants';
 
 
 const cx = classNamesBind.bind(style);
@@ -85,6 +85,11 @@ export default function Explorer() {
   const explorerOpen = useSelector((state) => state.explorerOpen);
   const explorerPath = useSelector((state) => state.explorerPath);
   const explorerBaseUrl = useSelector((state) => state.config.explorerBaseUrl);
+  const dispatch = useDispatch();
+  const toggleExplorerOpen = () => dispatch({
+    type: SET_EXPLORER_OPEN,
+    explorerOpen: !explorerOpen,
+  });
 
   const [
     frameRef,
@@ -95,29 +100,42 @@ export default function Explorer() {
 
   return (
     <div className={cx(style.Explorer, { explorerOpen })}>
+
+      {/* Explorer tab */}
+      <div className={style.tabWrapper}>
+        <div className={style.tab}>
+          <div
+            className={style.button}
+            onClick={toggleExplorerOpen}
+          >
+            Explorer
+          </div>
+        </div>
+      </div>
+
       <div className={style.inner}>
+
+        {/* Navbar */}
         <div className={style.navBar}>
           <div className={style.backForwardButtons}>
-            <button
-              type="button"
+            <a
               className={style.backButton}
-              onClick={() => navigateToPath(backPath)}
-              disabled={backPath}
+              onClick={() => backPath && navigateToPath(backPath)}
+              disabled={!backPath}
               title={backPath}
             >
-              ▶︎
-            </button>
-            <button
-              type="button"
+              ◀︎
+            </a>
+            <a
               className={style.forwardButton}
-              onClick={() => navigateToPath(forwardPath)}
-              disabled={forwardPath}
-              title={backPath}
+              onClick={() => forwardPath && navigateToPath(forwardPath)}
+              disabled={!forwardPath}
+              title={forwardPath}
             >
               ▶︎
-            </button>
+            </a>
           </div>
-          <div className={style.urlBar}>{explorerPath}</div>
+          <div className={style.pathBar}>{explorerPath}</div>
           <a
             className={style.openButton}
             href={`${explorerBaseUrl}${explorerPath}`}
@@ -126,12 +144,15 @@ export default function Explorer() {
             Open in New Tab
           </a>
         </div>
+
+        {/* Frame */}
         <iframe
-          className={style.embeddedExplorer}
+          className={style.frame}
           title="Explorer"
           src={explorerBaseUrl}
           ref={frameRef}
         />
+
       </div>
     </div>
   );

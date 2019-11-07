@@ -15,6 +15,7 @@ module.exports = {
         path.resolve(__dirname, 'static-src/styles/shadow.css'),
         path.resolve(__dirname, 'static-src/styles/transition.css'),
         path.resolve(__dirname, 'static-src/styles/z-index.css'),
+        path.resolve(__dirname, 'static-src/styles/container.module.css'),
       ]
     }],
   },

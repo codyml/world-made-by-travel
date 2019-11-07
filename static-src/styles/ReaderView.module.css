@@ -36,9 +36,9 @@
     padding-bottom: 2rem;
     transition: padding var(--transition-duration-slide);
 
-    &.explorerOpen {
+    /* &.explorerOpen {
       padding-bottom: 0;
-    }
+    } */
   }
 }
 

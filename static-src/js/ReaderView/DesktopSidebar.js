@@ -1,10 +1,10 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import classNamesBind from 'classnames/bind';
 
 import style from 'styles/DesktopSidebar.module.css';
-import { SET_EXPLORER_OPEN, EXPANDED_TOC } from '../constants';
+import { EXPANDED_TOC } from '../constants';
 import TableOfContents from '../TableOfContents';
 import { MarkdownContent } from '../markdown';
 
@@ -23,12 +23,6 @@ export default function DesktopSidebar() {
     state.currentSectionSlug === EXPANDED_TOC.slug
   ));
 
-  const dispatch = useDispatch();
-  const toggleExplorerOpen = () => dispatch({
-    type: SET_EXPLORER_OPEN,
-    explorerOpen: !explorerOpen,
-  });
-
   return (
     <div
       className={style.DesktopSidebar}
@@ -36,7 +30,7 @@ export default function DesktopSidebar() {
     >
 
       {/* Title panel */}
-      <div className={style.titlePanel}>
+      <div className={cx(style.titlePanel, style.firstPanel)}>
         <div className={style.titleAuthor}>
           <Link to="/">
             <div className={style.bookTitle}>{coverTitle}</div>
@@ -50,24 +44,11 @@ export default function DesktopSidebar() {
 
       {/* Table of Contents panel */}
       <div className={cx(style.tocPanel, { visible: !onTableOfContents })}>
-        <div
-          className={cx(style.tocTitle, { explorerOpen })}
-          onClick={explorerOpen ? toggleExplorerOpen : null}
-        >
+        <div className={cx(style.tocTitle, { explorerOpen })}>
           Table of Contents
         </div>
         <div className={cx(style.panelInner, { collapsed: explorerOpen })}>
           <TableOfContents className={style.toc} minimized />
-        </div>
-      </div>
-
-      {/* Explorer tab */}
-      <div className={style.explorerTab}>
-        <div
-          className={cx(style.explorerButton, { expanded: explorerOpen })}
-          onClick={toggleExplorerOpen}
-        >
-          Explorer
         </div>
       </div>
 

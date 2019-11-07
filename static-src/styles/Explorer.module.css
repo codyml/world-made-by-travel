@@ -1,14 +1,16 @@
 @import './transition.css';
+@import './shadow.css';
+@import './z-index.css';
+@import './container.module.css';
 
 .Explorer {
-  composes: containerMobilePage from './container.module.css';
   height: 0%;
-  background-color: #fdf;
   transition: height var(--transition-duration-slide);
-  overflow: hidden;
+  box-shadow: var(--shadow-bottom-panel);
+  z-index: var(--z-index-explorer);
 }
 
-.explorerOpen {
+.Explorer.explorerOpen {
   height: calc(50% - 5.5em);
 
   @media (--desktop) {
@@ -16,6 +18,143 @@
   }
 }
 
+.tabWrapper {
+  display: none;
+  position: absolute;
+  left: var(--container-margin-desktop);
+  width: 300px;
+  transform: translateY(-100%);
+  z-index: -1;
+
+  @media (--desktop) {
+    display: block;
+  }
+}
+
+.tab {
+  composes: panel from './DesktopSidebar.module.css';
+  composes: lastPanel from './DesktopSidebar.module.css';
+  margin-top: auto;
+  flex-shrink: 0;
+}
+
+.Explorer:not(.explorerOpen) .tab::after {
+  border: none;
+}
+
+.button {
+  composes: panelInner from './DesktopSidebar.module.css';
+  composes: panelTitle from './DesktopSidebar.module.css';
+  color: var(--color-explorer-button);
+  cursor: pointer;
+  align-items: center;
+
+  &::before {
+    content: '▴';
+    width: 1em;
+    color: var(--color-explorer-button-triangle);
+    transform: rotate(0deg) scaleX(2);
+    display: block;
+    font-size: 2em;
+    margin-top: -0.35em;
+    margin-bottom: -0.15em;
+    transition: transform var(--transition-duration-slide);
+  }
+}
+
+.Explorer.explorerOpen .button::before {
+  transform: rotate(180deg) scaleX(2);
+}
+
 .inner {
-  height: 50%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  background-color: white;
+}
+
+.navBar {
+  composes: containerMobilePage from './container.module.css';
+  display: flex;
+  padding-top: 1em;
+  padding-bottom: 1em;
+
+  & > *:not(:last-child) {
+    margin-right: 1rem;
+  }
+}
+
+.backForwardButtons {
+  display: flex;
+}
+
+.navBarItem {
+  background-color: var(--color-explorer-nav-background);
+  font-size: 1.35em;
+  font-weight: 300;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.backButton,
+.forwardButton {
+  composes: navBarItem;
+  font-size: 1.75em;
+  color: #666;
+
+  &[disabled] {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.backButton {
+  border-right: 1px solid white;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.forwardButton {
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
+}
+
+.pathBar {
+  composes: navBarItem;
+  flex-grow: 1;
+  flex-shrink: 1;
+  border-radius: 4px;
+  overflow-x: hidden;
+  position: relative;
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10em;
+    height: 100%;
+    background-image:
+      linear-gradient(
+        to right,
+        var(--color-explorer-nav-background-transparent) 0%,
+        var(--color-explorer-nav-background) 100%
+      );
+  }
+}
+
+.openButton {
+  composes: navBarItem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: 4px;
+}
+
+.frame {
+  flex-grow: 1;
+  border: none;
 }

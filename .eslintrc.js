@@ -26,7 +26,8 @@ module.exports = {
     'react/jsx-filename-extension': [1, {extensions: ['.js'] }],
     'react/jsx-props-no-spreading': [0],
     'jsx-a11y/click-events-have-key-events': [0],
-    'jsx-a11y/no-static-element-interactions' : [0],
+    'jsx-a11y/no-static-element-interactions': [0],
+    'jsx-a11y/anchor-is-valid': [0],
     'no-plusplus': [1, { allowForLoopAfterthoughts: true }],
     'no-continue': [0],
     'no-restricted-syntax': [

@@ -22,6 +22,7 @@
   --color-nonexistent-blue-dark: #405980;
   --color-nonexistent-blue-mid: #99a9bf;
   --color-nonexistent-blue-mid-light: #e5e9ef;
+  --color-nonexistent-blue-mid-light-transparent: rgba(229, 233, 239, 0);
   --color-nonexistent-blue-light: #f7f9fc;
 }
 
@@ -55,4 +56,6 @@
   --color-table-alt-row-background: var(--color-nonexistent-blue-light);
   --color-margin-links-background: var(--color-nonexistent-blue-light);
   --color-citation-modal-link: var(--color-nonexistent-blue-mid);
+  --color-explorer-nav-background: var(--color-nonexistent-blue-mid-light);
+  --color-explorer-nav-background-transparent: var(--color-nonexistent-blue-mid-light-transparent);
 }

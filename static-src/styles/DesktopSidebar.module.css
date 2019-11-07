@@ -11,6 +11,7 @@
   background-size: auto 100vh;
   background-position: center top;
   box-shadow: var(--shadow-bottom-panel);
+  border-radius: 2px;
 }
 
 .panel {
@@ -22,31 +23,31 @@
   padding-right: 1.5rem;
   display: flex;
   flex-direction: column;
+}
 
-  &:first-child {
-    margin-top: -2rem;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+.firstPanel {
+  margin-top: -2rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 
-    &::before {
-      content: '';
-      display: block;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid var(--color-ui-hr);
-    }
+  &::before {
+    content: '';
+    display: block;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--color-ui-hr);
   }
+}
 
-  &:last-child {
-    margin-bottom: -2rem;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+.lastPanel {
+  margin-bottom: -2rem;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 
-    &::after {
-      content: '';
-      display: block;
-      padding-top: 2rem;
-      border-top: 1px solid var(--color-ui-hr);
-    }
+  &::after {
+    content: '';
+    display: block;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-ui-hr);
   }
 }
 
@@ -140,32 +141,4 @@
 
 .toc {
   font-size: 1.25em;
-}
-
-.explorerTab {
-  composes: panel;
-  margin-top: auto;
-  flex-shrink: 0;
-}
-
-.explorerButton {
-  composes: panelInner;
-  composes: panelTitle;
-  color: var(--color-explorer-button);
-  cursor: pointer;
-
-  &::before {
-    content: '▴';
-    color: var(--color-explorer-button-triangle);
-    transform: rotate(0deg) scaleX(2);
-    display: block;
-    font-size: 2em;
-    margin-top: -0.35em;
-    margin-bottom: -0.15em;
-    transition: transform var(--transition-duration-slide);
-  }
-}
-
-.explorerButton.expanded::before {
-  transform: rotate(180deg) scaleX(2);
 }
