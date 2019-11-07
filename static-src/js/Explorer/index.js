@@ -25,8 +25,8 @@ export default function Explorer() {
   const dispatch = useDispatch();
   const [
     frameRef,
-    backPath,
-    forwardPath,
+    goBack,
+    goForward,
   ] = useFrameNavigation();
 
   const setExplorerPath = useCallback((path) => dispatch({
@@ -71,17 +71,15 @@ export default function Explorer() {
           <div className={style.backForwardButtons}>
             <a
               className={style.backButton}
-              onClick={() => backPath && setExplorerPath(backPath)}
-              disabled={!backPath}
-              title={backPath}
+              onClick={goBack}
+              disabled={!goBack}
             >
               ◀︎
             </a>
             <a
               className={style.forwardButton}
-              onClick={() => forwardPath && setExplorerPath(forwardPath)}
-              disabled={!forwardPath}
-              title={forwardPath}
+              onClick={goForward}
+              disabled={!goForward}
             >
               ▶︎
             </a>

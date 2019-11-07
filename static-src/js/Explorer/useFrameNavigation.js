@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { SET_EXPLORER_PATH } from '../constants';
@@ -15,35 +15,24 @@ export default function useFrameNavigation() {
   const frameRef = useRef();
   const explorerBaseUrl = useSelector((state) => state.config.explorerBaseUrl);
   const explorerPath = useSelector((state) => state.explorerPath);
-  const [{
-    backPath,
-    currentPath,
-    forwardPath,
-  }, setFrameNavState] = useState({ currentPath: explorerPath });
-
+  const backHistory = useRef([]);
+  const forwardHistory = useRef([]);
+  const previousExplorerPath = useRef(explorerPath);
   const dispatch = useDispatch();
 
-  //  Updates Redux state when frame sends location update.
+  //  Saves new frame path when frame sends location change message
   useEffect(() => {
     const handleMessage = (event) => {
-      //  Only accept messages from explorerBaseUrl with a navState property
-      if (explorerBaseUrl.startsWith(event.origin) && event.data.navState) {
-        console.log('message received:', event);
-        try {
-          const { back, current, forward } = event.data.navState;
-
-          //  Save nav state update
-          setFrameNavState({
-            backPath: back,
-            currentPath: current,
-            forwardPath: forward,
-          });
-
-          //  Update Redux state
-          if (current !== explorerPath) {
-            dispatch({ type: SET_EXPLORER_PATH, explorerPath: current });
-          }
-        } catch (e) { console.error(e); } // eslint-disable-line no-console
+      //  Only accept messages from explorerBaseUrl with a navigatedPath property
+      if (
+        explorerBaseUrl.startsWith(event.origin)
+        && event.data.navigatedPath
+        && event.data.navigatedPath !== explorerPath
+      ) {
+        previousExplorerPath.current = event.data.navigatedPath;
+        dispatch({ type: SET_EXPLORER_PATH, explorerPath: event.data.navigatedPath });
+        backHistory.current.push(explorerPath);
+        forwardHistory.current = [];
       }
     };
 
@@ -51,17 +40,35 @@ export default function useFrameNavigation() {
     return () => window.removeEventListener('message', handleMessage);
   }, [dispatch, explorerBaseUrl, explorerPath]);
 
-  //  Updates frame location when Redux state changes
+  //  Updates frame location when frame path in Redux changes
   useEffect(() => {
-    if (currentPath !== explorerPath) {
-      console.log('redux location changed, updating frame location:', explorerPath);
+    if (explorerPath !== previousExplorerPath.current) {
+      previousExplorerPath.current = explorerPath;
       frameRef.current.contentWindow.location = `${explorerBaseUrl}${explorerPath}`;
     }
-  }, [currentPath, explorerBaseUrl, explorerPath]);
+  }, [explorerBaseUrl, explorerPath]);
+
+  //  Goes back one history step
+  const goBack = useCallback(() => {
+    if (backHistory.current.length) {
+      const backPath = backHistory.current.pop();
+      dispatch({ type: SET_EXPLORER_PATH, explorerPath: backPath });
+      forwardHistory.current.push(explorerPath);
+    }
+  }, [dispatch, explorerPath]);
+
+  //  Goes forward one history step
+  const goForward = useCallback(() => {
+    if (forwardHistory.current.length) {
+      const forwardPath = forwardHistory.current.pop();
+      dispatch({ type: SET_EXPLORER_PATH, explorerPath: forwardPath });
+      backHistory.current.push(explorerPath);
+    }
+  }, [dispatch, explorerPath]);
 
   return [
     frameRef,
-    backPath,
-    forwardPath,
+    backHistory.current.length ? goBack : null,
+    forwardHistory.current.length ? goForward : null,
   ];
 }
