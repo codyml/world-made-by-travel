@@ -41,12 +41,12 @@ export default function LinkLink({ contentType, contentNumber }) {
   }, [copied]);
 
   return (
-    <div
+    <span
       onClick={copyUrl}
       className={cx(style.marginLink, style.LinkLink)}
     >
       <span className={style.linkText}>Link</span>
-      <div className={style.linkLinkTooltip}>
+      <span className={style.linkLinkTooltip}>
         <textarea
           className={style.linkLinkHiddenTextArea}
           ref={textAreaRef}
@@ -58,11 +58,11 @@ export default function LinkLink({ contentType, contentNumber }) {
           {sectionPath}
           <strong>{hash}</strong>
         </a>
-        <div className={style.linkLinkClickToCopy}>
+        <span className={style.linkLinkClickToCopy}>
           {copied ? 'Copied!' : 'Click to copy URL'}
-        </div>
-      </div>
-    </div>
+        </span>
+      </span>
+    </span>
   );
 }
 

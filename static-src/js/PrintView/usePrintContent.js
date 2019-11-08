@@ -12,10 +12,13 @@ import { parseHash, REFERABLE_CONTENT_TYPES } from '../constants';
 * specified by the hash.
 */
 
-export default function usePrintContent(contentReady, { path: sectionPath }) {
+export default function usePrintContent(
+  contentReady,
+  { path: sectionPath, isToc },
+) {
   const { pathname, hash } = useLocation();
   const [contentType, contentNumber] = parseHash(hash);
-  if (sectionPath === pathname && contentReady) {
+  if (sectionPath === pathname && (contentReady || isToc)) {
     switch (contentType) {
       case REFERABLE_CONTENT_TYPES.figure: {
         return <PrintFigure number={contentNumber} />;

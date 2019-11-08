@@ -46,3 +46,22 @@ MarginLinks.defaultProps = {
   children: null,
   className: null,
 };
+
+
+//  React component that renders just a ParaLink for printing.
+export function MarginParagraphNumber({ contentNumber, className }) {
+  return (
+    <span className={cx(className, style.links)}>
+      <ParaLink contentNumber={contentNumber} />
+    </span>
+  );
+}
+
+MarginParagraphNumber.propTypes = {
+  contentNumber: PropTypes.number.isRequired,
+  className: PropTypes.string,
+};
+
+MarginParagraphNumber.defaultProps = {
+  className: null,
+};

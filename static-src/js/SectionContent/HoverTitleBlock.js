@@ -6,7 +6,7 @@ import style from 'styles/HoverTitleBlock.module.css';
 import marginLinksStyle from 'styles/MarginLinks.module.css';
 import Block from './Block';
 import MarginLinks from '../MarginLinks';
-import { EXPANDED_TOC, REFERABLE_CONTENT_TYPES } from '../constants';
+import { REFERABLE_CONTENT_TYPES } from '../constants';
 import SectionContext from '../SectionContext';
 
 const cx = classNamesBind.bind(style);
@@ -16,7 +16,7 @@ export default function HoverTitleBlock({ visible }) {
     numeral,
     title,
     author,
-    slug,
+    isToc,
     downloadUrl,
     contentRefs: { hoverTitleRef },
   } = useContext(SectionContext);
@@ -31,7 +31,7 @@ export default function HoverTitleBlock({ visible }) {
         <Block
           title={`${numeral ? `${numeral}. ` : ''}${title}`}
           author={author}
-          isToc={slug === EXPANDED_TOC.slug}
+          isToc={isToc}
           isMini
         />
       </MarginLinks>

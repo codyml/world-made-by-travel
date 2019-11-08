@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import parseMarkdown from './parse';
 import normalizeTokenizedContent from './normalize';
 import { Content, ContentNodesPropType } from './Content';
-import { CAPTION_TAG, Figure, FigureContent } from './figures';
+import { FIGURE_TAG, CAPTION_TAG, Figure, FigureContent } from './figures';
 import { FOOTNOTE_TAG, FOOTNOTE_REF_TAG, Footnote, FootnoteLink } from './footnotes';
 
 
@@ -19,6 +19,7 @@ export const processMainContentMarkdown = (markdown) => {
   const { contentNodes, referencesByTag } = normalizeTokenizedContent(tokens);
   return {
     contentNodes,
+    figuresByNumber: referencesByTag[FIGURE_TAG] || {},
     figureCaptionsByNumber: referencesByTag[CAPTION_TAG] || {},
     footnoteLinksByNumber: referencesByTag[FOOTNOTE_REF_TAG] || {},
     footnotesByNumber: referencesByTag[FOOTNOTE_TAG] || {},

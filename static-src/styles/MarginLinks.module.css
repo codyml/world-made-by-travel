@@ -170,6 +170,7 @@
 }
 
 .linkLinkTooltip {
+  display: block;
   position: absolute;
   visibility: hidden;
   opacity: 0;
@@ -226,6 +227,7 @@
 }
 
 .linkLinkClickToCopy {
+  display: block;
   font-weight: bold;
   font-size: 0.9em;
 }

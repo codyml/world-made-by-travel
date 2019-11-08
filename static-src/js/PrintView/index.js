@@ -20,6 +20,7 @@ export default function PrintView() {
   const sectionSlug = useSelector((state) => state.currentSectionSlug);
   const [contentReady, , sectionContext] = useSectionContent(sectionSlug);
   const {
+    isToc,
     group: sectionGroupSlug,
     numeral: sectionNumeral,
     title: sectionTitle,
@@ -41,7 +42,7 @@ export default function PrintView() {
       <MarkdownContent className={style.introduction}>
         {introductionMarkdown}
       </MarkdownContent>
-      {contentReady ? (
+      {(contentReady || isToc) ? (
         <SectionContext.Provider value={sectionContext}>
           <div className={style.letterPage}>
             <div className={style.header}>

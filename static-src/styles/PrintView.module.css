@@ -81,6 +81,28 @@
 
 .printContent {
   margin: 4rem 0;
+  overflow-x: hidden;
+
+  & > :not(:last-child) {
+    border-bottom: 1px solid var(--color-ui-hr);
+  }
+}
+
+.content {
+  composes: content from './typography.module.css';
+}
+
+.content p.paragraph {
+  position: relative;
+  padding-right: 6rem;
+}
+
+.paragraphNumber {
+  display: block;
+  width: 6rem;
+  opacity: 1;
+  padding-right: 1rem;
+  background-color: transparent;
 }
 
 .footer {

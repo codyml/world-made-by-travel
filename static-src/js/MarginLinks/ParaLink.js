@@ -9,10 +9,10 @@ const cx = classNamesBind.bind(style);
 
 export default function ParaLink({ contentNumber }) {
   return (
-    <div className={cx(style.marginLink, style.ParaLink)}>
+    <span className={cx(style.marginLink, style.ParaLink)}>
       <span className={style.linkText}>Para</span>
       <span className={style.paragraphNumber}>{contentNumber}</span>
-    </div>
+    </span>
   );
 }
 

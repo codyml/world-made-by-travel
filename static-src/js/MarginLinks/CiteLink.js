@@ -24,12 +24,12 @@ export default function CiteLink({ contentType, contentNumber }) {
   });
 
   return (
-    <div
+    <span
       onClick={openCitationModal}
       className={cx(style.marginLink, style.CiteLink)}
     >
       <span className={style.linkText}>Cite</span>
-    </div>
+    </span>
   );
 }
 

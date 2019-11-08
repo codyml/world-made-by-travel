@@ -7,16 +7,17 @@ import useSectionContent from '../useSectionContent';
 import useHoverTitle from './useHoverTitle';
 import useScrollToContent from './useScrollToContent';
 import useHashScrolling from './useHashScrolling';
+import useContentRefs from './useContentRefs';
 import Block from './Block';
 import TitleBlock from './TitleBlock';
 import HoverTitleBlock from './HoverTitleBlock';
-import LoadingMessage from '../LoadingMessage';
 import MainContentBlock from './MainContentBlock';
 import FootnotesBlock from './FootnotesBlock';
 import CustomBlock from './CustomBlock';
+import useSetTitle from '../useSetTitle';
+import LoadingMessage from '../LoadingMessage';
 import TableOfContents from '../TableOfContents';
 import { MarkdownContent } from '../markdown';
-import useSetTitle from '../useSetTitle';
 import { EXPANDED_TOC } from '../constants';
 import SectionContext from '../SectionContext';
 
@@ -136,4 +137,4 @@ SectionContent.defaultProps = {
   isActive: false,
 };
 
-export { Block };
+export { Block, useContentRefs };
