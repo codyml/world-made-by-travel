@@ -9,4 +9,5 @@
   --z-index-modal: 500;
   --z-index-cover: 1000;
   --z-index-loading: 1500;
+  --z-index-print-view: 2000;
 }

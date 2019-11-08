@@ -1,0 +1,99 @@
+@import './z-index.css';
+
+.PrintView {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  z-index: var(--z-index-print-view);
+
+  @media print {
+    display: block;
+  }
+}
+
+@page {
+  size: letter;
+  margin: 1in;
+}
+
+.letterPage {
+  min-height: 9in;
+  overflow: auto;
+}
+
+.introduction {
+  composes: content from './typography.module.css';
+  composes: letterPage;
+}
+
+.header {
+  display: flex;
+  align-items: flex-end;
+}
+
+.headerImage {
+  width: 15em;
+  height: 20em;
+  object-position: top center;
+  object-fit: cover;
+  margin-right: 1em;
+}
+
+.headerText {
+  flex-grow: 1;
+}
+
+.headerTitle {
+  color: #333;
+  font-size: 2em;
+  margin-top: 1em;
+}
+
+.headerAuthor {
+  color: #333;
+  font-size: 1.25em;
+  margin-top: 0.5em;
+}
+
+.bookTitle {
+  composes: bookTitle from './typography.module.css';
+  composes: headerTitle;
+}
+
+.bookAuthor {
+  composes: bookAuthor from './typography.module.css';
+  composes: headerAuthor;
+}
+
+.sectionGroupTitle {
+  composes: sectionTitle from './typography.module.css';
+  composes: headerTitle;
+}
+
+.sectionGroupAuthor {
+  composes: author from './typography.module.css';
+  composes: headerAuthor;
+}
+
+.printContent {
+  margin: 4rem 0;
+}
+
+.footer {
+  font-size: 0.6em;
+}
+
+.sectionTitle {
+  composes: sectionTitle from './typography.module.css';
+  composes: headerTitle;
+}
+
+.sectionAuthor {
+  composes: author from './typography.module.css';
+  composes: headerAuthor;
+  font-size: 1.5em;
+}

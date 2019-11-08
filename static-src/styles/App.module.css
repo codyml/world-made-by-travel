@@ -6,6 +6,11 @@
   flex-direction: column;
   align-items: stretch;
   background-clip: content-box;
+  overflow: hidden;
+
+  @media print {
+    display: none;
+  }
 }
 
 :global(.admin-bar-showing) .App {

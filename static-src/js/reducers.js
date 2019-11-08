@@ -5,7 +5,6 @@ import {
   SECTION_CONTENT_REQUESTED,
   SECTION_CONTENT_RECEIVED,
   SET_CURRENT_SECTION,
-  SET_SECTION_SCROLLED_TO,
   SET_EXPLORER_OPEN,
   SET_EXPLORER_PATH,
   SET_MODAL_OPEN,
@@ -140,19 +139,6 @@ const currentSectionSlug = (state = EXPANDED_TOC.slug, action) => {
   switch (action.type) {
     case SET_CURRENT_SECTION:
       return action.sectionSlug;
-
-    default:
-      return state;
-  }
-};
-
-const scrolledToBySection = (state = {}, action) => {
-  switch (action.type) {
-    case SET_SECTION_SCROLLED_TO:
-      return {
-        ...state,
-        [action.sectionSlug]: action.scrolledTo,
-      };
 
     default:
       return state;
@@ -308,7 +294,6 @@ export default combineReducers({
   sectionGroupMetaBySlug,
   sectionContentBySlug,
   currentSectionSlug,
-  scrolledToBySection,
   explorerOpen,
   explorerPath,
   modalOpen,

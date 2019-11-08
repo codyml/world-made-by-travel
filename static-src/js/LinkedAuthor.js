@@ -59,7 +59,7 @@ export default function LinkedAuthor({
       {authorStringSegments.map(({ index, str, author }) => (author ? (
         //  eslint-disable-next-line jsx-a11y/anchor-is-valid
         <a
-          className={linkClassName || authorLink}
+          className={linkClassName}
           key={`${index}-${str}`}
           onClick={(e) => handleAuthorClick(e, str)}
         >
@@ -81,7 +81,7 @@ LinkedAuthor.propTypes = {
 
 LinkedAuthor.defaultProps = {
   className: null,
-  linkClassName: null,
+  linkClassName: authorLink,
   onLinkClick: null,
   children: null,
 };

@@ -14,6 +14,7 @@ import ReaderView from './ReaderView';
 import Explorer from './Explorer';
 import Modal from './Modal';
 import MobileMenu from './MobileMenu';
+import PrintView from './PrintView';
 
 
 function App() {
@@ -21,18 +22,21 @@ function App() {
   const contentLoaded = useLoadContent();
 
   return (
-    <div className={style.App}>
-      <LoadingMessage overlay visible={!contentLoaded} />
-      { contentLoaded ? (
-        <BrowserRouter>
-          <CoverView />
-          <ReaderView />
-          <Explorer />
-          <Modal />
-          <MobileMenu />
-        </BrowserRouter>
-      ) : null }
-    </div>
+    <BrowserRouter>
+      <div className={style.App}>
+        <LoadingMessage overlay visible={!contentLoaded} />
+        { contentLoaded ? (
+          <>
+            <CoverView />
+            <ReaderView />
+            <Explorer />
+            <Modal />
+            <MobileMenu />
+          </>
+        ) : null }
+      </div>
+      { contentLoaded ? <PrintView /> : null }
+    </BrowserRouter>
   );
 }
 

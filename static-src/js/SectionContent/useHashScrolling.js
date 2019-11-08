@@ -3,27 +3,9 @@ import { useLocation } from 'react-router-dom';
 
 import {
   REFERABLE_CONTENT_TYPES,
-  MATCH_CONTENT_IDENTIFIER,
+  parseHash,
   GET_CONTENT_IDENTIFIER,
 } from '../constants';
-
-
-//  Matches a URL hash value against the referable content types.
-const parseHash = (hash) => {
-  if (!hash) {
-    return [REFERABLE_CONTENT_TYPES.section];
-  }
-
-  for (const [contentType, regex] of Object.entries(MATCH_CONTENT_IDENTIFIER)) {
-    const match = hash.slice(1).match(regex);
-    if (match) {
-      const [, contentNumber] = match;
-      return [contentType, contentNumber];
-    }
-  }
-
-  return [null, null];
-};
 
 
 /*

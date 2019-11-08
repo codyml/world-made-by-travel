@@ -3,7 +3,6 @@ export const BOOK_CONTENT_RECEIVED = 'BOOK_CONTENT_RECEIVED';
 export const SECTION_CONTENT_REQUESTED = 'SECTION_CONTENT_REQUESTED';
 export const SECTION_CONTENT_RECEIVED = 'SECTION_CONTENT_RECEIVED';
 export const SET_CURRENT_SECTION = 'SET_CURRENT_SECTION';
-export const SET_SECTION_SCROLLED_TO = 'SET_SECTION_SCROLLED_TO';
 export const SET_EXPLORER_OPEN = 'SET_EXPLORER_OPEN';
 export const SET_EXPLORER_PATH = 'SET_EXPLORER_PATH';
 export const SET_MODAL_OPEN = 'SET_MODAL_OPEN';
@@ -85,4 +84,21 @@ export const GET_CONTENT_DESCRIPTION = {
   [REFERABLE_CONTENT_TYPES.footnoteLink]: (n) => `footnote link ${n}`,
   [REFERABLE_CONTENT_TYPES.footnote]: (n) => `footnote ${n}`,
   [REFERABLE_CONTENT_TYPES.block]: (n) => `block ${n}`,
+};
+
+//  Matches a URL hash value against the referable content types.
+export const parseHash = (hash) => {
+  if (!hash) {
+    return [REFERABLE_CONTENT_TYPES.section];
+  }
+
+  for (const [contentType, regex] of Object.entries(MATCH_CONTENT_IDENTIFIER)) {
+    const match = hash.slice(1).match(regex);
+    if (match) {
+      const [, contentNumber] = match;
+      return [contentType, contentNumber];
+    }
+  }
+
+  return [null, null];
 };
