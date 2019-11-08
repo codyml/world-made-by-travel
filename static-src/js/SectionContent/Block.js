@@ -13,8 +13,9 @@ const Block = React.forwardRef(({
   children,
   isToc,
   isMini,
+  print,
 }, ref) => (
-  <div ref={ref} className={cx(style.Block, { isToc, isMini })}>
+  <div ref={ref} className={cx(style.Block, { isToc, isMini, print })}>
     {title && <div className={style.sectionTitle}>{title}</div>}
     {author && <LinkedAuthor className={style.sectionAuthor}>{author}</LinkedAuthor>}
     {children && <div className={style.content}>{children}</div>}
@@ -27,6 +28,7 @@ Block.propTypes = {
   children: PropTypes.node,
   isToc: PropTypes.bool,
   isMini: PropTypes.bool,
+  print: PropTypes.bool,
 };
 
 Block.defaultProps = {
@@ -35,6 +37,7 @@ Block.defaultProps = {
   children: null,
   isToc: false,
   isMini: false,
+  print: false,
 };
 
 Block.displayName = 'Block';

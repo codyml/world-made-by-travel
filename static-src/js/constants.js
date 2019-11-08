@@ -96,7 +96,7 @@ export const parseHash = (hash) => {
     const match = hash.slice(1).match(regex);
     if (match) {
       const [, contentNumber] = match;
-      return [contentType, contentNumber];
+      return [contentType, contentNumber ? +contentNumber : null];
     }
   }
 

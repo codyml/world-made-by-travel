@@ -135,3 +135,5 @@ SectionContent.propTypes = {
 SectionContent.defaultProps = {
   isActive: false,
 };
+
+export { Block };
