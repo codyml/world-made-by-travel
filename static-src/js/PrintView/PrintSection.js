@@ -17,18 +17,21 @@ export default function PrintSection() {
     author,
     isToc,
     blocks,
-    mainContent: { contentNodes, footnotesByNumber },
-    contentRefs: { paragraphRefs },
+    mainContent,
+    contentRefs,
   } = useContext(SectionContext);
 
   const printMarginLinksExtension = usePrintMarginLinks();
-  const paragraphRefsExtension = useContentRefs(PARAGRAPH_TAG, paragraphRefs);
-  const footnotes = Object.values(footnotesByNumber);
-  if (!footnotes.length) {
-    return null;
-  }
+  const paragraphRefsExtension = useContentRefs(PARAGRAPH_TAG, contentRefs.paragraphRefs || {});
+  let footnotes;
+  if (mainContent) {
+    footnotes = Object.values(mainContent.footnotesByNumber);
+    if (!footnotes.length) {
+      return null;
+    }
 
-  footnotes.sort((a, b) => a - b);
+    footnotes.sort((a, b) => a - b);
+  }
 
   return (
     <>
@@ -54,7 +57,7 @@ export default function PrintSection() {
           {/* Main section content */}
           <Block contentClassName={style.content} print>
             <Content
-              nodes={contentNodes}
+              nodes={mainContent.contentNodes}
               extensions={[
                 printMarginLinksExtension,
                 paragraphRefsExtension,

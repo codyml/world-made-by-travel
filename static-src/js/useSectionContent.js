@@ -139,7 +139,7 @@ export default function useSectionContent(sectionSlug) {
   const currentSectionContext = useMemo(() => ({
     isToc,
     ...meta,
-    ...(contentReceived ? content : {}),
+    ...((contentReceived && content) || {}),
     contentRefs: {
       contentAreaRef,
       titleRef,
