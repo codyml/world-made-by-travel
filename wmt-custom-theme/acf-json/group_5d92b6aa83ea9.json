@@ -81,7 +81,7 @@
                 "id": ""
             },
             "return_format": "id",
-            "library": "uploadedTo",
+            "library": "all",
             "min_size": "",
             "max_size": "",
             "mime_types": ".md"
@@ -140,7 +140,7 @@
                 "id": ""
             },
             "return_format": "url",
-            "library": "uploadedTo",
+            "library": "all",
             "min_size": "",
             "max_size": "",
             "mime_types": ".pdf"
@@ -515,5 +515,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1572845539
+    "modified": 1573971771
 }
