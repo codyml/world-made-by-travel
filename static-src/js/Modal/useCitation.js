@@ -44,7 +44,10 @@ export default function useCitation() {
       .map((s) => (s.author ? s.author.citedName || s.author.name : s.str))
       .join('');
 
-    return [`${resolvedSectionCitedAuthor}. "${title}."`, ' '];
+    return [
+      resolvedSectionCitedAuthor ? `${resolvedSectionCitedAuthor}. ` : '',
+      `"${title}." `,
+    ];
   }, [parseAuthorString, sectionAuthor, sectionCitedAuthor, title]);
 
   const sectionGroupCitation = useMemo(() => {
