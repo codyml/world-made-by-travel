@@ -14,7 +14,7 @@ services:
      - ./dev-rsc/setup-dev-db.sql:/setup-dev-db.sql
 
   wp:
-    image: wordpress:5.2.3
+    image: wordpress:5.3-php7.2
     environment:
      - WORDPRESS_DB_HOST=db
      - WORDPRESS_DB_USER=wordpress
