@@ -11,7 +11,7 @@ define( 'AUTHOR_POST_TYPE', 'wmt_author' );
 define( 'REST_API_NAMESPACE', 'wmt' );
 
 // Configures WordPress to be a headless CMS for a single-page application.
-require_once 'inc/headless.php';
+require_once 'inc/requests.php';
 
 // Registers custom post types used by the content model.
 require_once 'inc/custom-post-types.php';

@@ -128,6 +128,25 @@
             "ui": 1,
             "ui_on_text": "",
             "ui_off_text": ""
+        },
+        {
+            "key": "field_5dd0a71a3766c",
+            "label": "Maintenance Mode",
+            "name": "maintenance_mode",
+            "type": "true_false",
+            "instructions": "Turn Maintenance Mode on to display an \"Under Construction\" message unless the user is logged in to WordPress.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui": 1,
+            "ui_on_text": "On",
+            "ui_off_text": "Off"
         }
     ],
     "location": [
@@ -147,5 +166,5 @@
     "hide_on_screen": "",
     "active": 1,
     "description": "",
-    "modified": 1572845294
+    "modified": 1573955444
 }

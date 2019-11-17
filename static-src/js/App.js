@@ -19,12 +19,12 @@ import PrintView from './PrintView';
 
 function App() {
   useBrowserSize();
-  const contentLoaded = useLoadContent();
+  const [contentLoaded, errorMessage] = useLoadContent();
 
   return (
     <BrowserRouter>
       <div className={style.App}>
-        <LoadingMessage overlay visible={!contentLoaded} />
+        <LoadingMessage visible={!contentLoaded} errorMessage={errorMessage} />
         { contentLoaded ? (
           <>
             <CoverView />

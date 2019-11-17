@@ -33,8 +33,6 @@ register_post_type(
 		'public'        => false,
 		'show_ui'       => true,
 		'supports'      => array( 'title' ),
-		'show_in_rest'  => true,
-		'rest_base'     => 'authors',
 		'menu_position' => '30.1',
 		'menu_icon'     => 'dashicons-businessperson',
 	)
@@ -68,8 +66,6 @@ register_post_type(
 		'public'        => false,
 		'show_ui'       => true,
 		'supports'      => array( 'title' ),
-		'show_in_rest'  => true,
-		'rest_base'     => 'sections',
 		'menu_position' => '31.1',
 		'menu_icon'     => 'dashicons-media-document',
 	)

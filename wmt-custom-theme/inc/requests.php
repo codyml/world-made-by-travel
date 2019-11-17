@@ -1,16 +1,14 @@
 <?php
 /**
- * Disables WordPress's automatic redirects and configures it to
- * return the SPA template with a 200 response code for all page
- * requests except those starting with "wp-".
+ * Configures server request handling for use as a headless CMS.
  *
- * @package Imagined San Francisco Custom Theme
+ * @package WMT
  */
 
 // Disables WordPress's automatic redirects to existing DB objects.
 remove_filter( 'remplate_redirect', 'redirect_canonical' );
 
-// Forces WordPress to return 200 status code for URLs not matching
+// Forces WordPress to return 200 status code even for URLs not matching
 // a database object.
 add_filter(
 	'template_redirect',
@@ -29,7 +27,7 @@ add_action(
 	'template_include',
 	function() {
 		$url_path = wp_parse_url( add_query_arg( array() ), PHP_URL_PATH );
-		if ( ! preg_match( '/wp-/', $url_path ) ) {
+		if ( strpos( $url_path, 'wp-' ) !== 0 ) {
 			locate_template( 'index.php', true );
 		}
 	}

@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { BOOK_CONTENT_RECEIVED } from './constants';
 
 export default function useLoadContent() {
+  const [errorMessage, setErrorMesssage] = useState(null);
   const [bookContentLoaded, setBookContentLoaded] = useState(false);
   const [backgroundImageLoaded, setBackgroundImageLoaded] = useState(false);
 
@@ -27,6 +28,9 @@ export default function useLoadContent() {
         });
 
         setBookContentLoaded(true);
+      } else {
+        const { message } = await response.json();
+        setErrorMesssage(message);
       }
     };
 
@@ -41,5 +45,5 @@ export default function useLoadContent() {
     }
   }, [backgroundImageUrl]);
 
-  return bookContentLoaded && backgroundImageLoaded;
+  return [bookContentLoaded && backgroundImageLoaded, errorMessage];
 }

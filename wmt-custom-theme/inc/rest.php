@@ -244,3 +244,24 @@ add_action(
 		);
 	}
 );
+
+
+/**
+ * Disables the REST API if Maintenance Mode is on and the user is
+ * not logged in.
+ */
+add_filter(
+	'rest_authentication_errors',
+	function( $result ) {
+
+		if ( ! empty( $result ) ) {
+			return $result;
+		}
+
+		if ( get_field( 'maintenance_mode', 'options' ) && ! is_user_logged_in() ) {
+			return new WP_Error( 'under_construction', 'Under Construction', array( 'status' => 404 ) );
+		}
+
+		return $result;
+	}
+);
