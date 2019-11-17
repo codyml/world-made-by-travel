@@ -10,6 +10,8 @@ services:
      - MYSQL_PASSWORD=wordpress
     volumes:
      - ./dev-env/db-mysql:/var/lib/mysql
+     - ./dev-env/db-dumps:/dumps
+     - ./dev-rsc/setup-dev-db.sql:/setup-dev-db.sql
 
   wp:
     image: wordpress:5.2.3

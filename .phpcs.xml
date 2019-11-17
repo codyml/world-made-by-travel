@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="A World Made By Travel">
-    <rule ref="WordPress"/>
+<ruleset name="A World Made by Travel">
+  <rule ref="Generic.PHP.Syntax"/>
+  <rule ref="WordPress"/>
 </ruleset>
