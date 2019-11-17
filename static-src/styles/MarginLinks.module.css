@@ -66,10 +66,16 @@
     padding-bottom: 0.5em;
   }
 
-  @nest .MarginLinks.section:not(.hoverTitle) &,
-  .MarginLinks.block & {
+  @nest .MarginLinks.block & {
     padding-top: 3.5em;
     padding-bottom: 3.5em;
+  }
+
+  @nest .MarginLinks.section & {
+    padding-top: 0;
+    padding-bottom: 0;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   @nest .MarginLinks.figureModal & {
